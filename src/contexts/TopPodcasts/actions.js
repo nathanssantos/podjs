@@ -5,12 +5,24 @@ import { GET_TOP_PODCASTS, RESET_TOP_PODCASTS } from './types';
 const getTopPodcasts = async () => {
   try {
     const response = await axios.get(
-      'https://rss.itunes.apple.com/api/v1/br/podcasts/top-podcasts/all/100/explicit.json',
-      { crossdomain: true },
+      'https://cors-anywhere.herokuapp.com/https://rss.itunes.apple.com/api/v1/br/podcasts/top-podcasts/all/100/explicit.json',
     );
 
-    if (response) {
-      console.log(response);
+    if (
+      response &&
+      response.data &&
+      response.data.feed &&
+      response.data.feed.results &&
+      response.data.feed.results.length
+    ) {
+      // console.log(response.data.feed.results);
+      return {
+        topPodcasts: response.data.feed.results.map((podcast) => ({
+          author: podcast.artistName,
+          title: podcast.name,
+          image: podcast.artworkUrl100,
+        })),
+      };
     }
 
     return {};

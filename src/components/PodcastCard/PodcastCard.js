@@ -5,9 +5,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import { CardActionArea } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   root: {
+    width: '190px',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -19,7 +21,8 @@ const useStyles = makeStyles(() => ({
     flex: '1 0 auto',
   },
   cover: {
-    width: 100,
+    width: '190px',
+    height: '190px',
   },
 }));
 
@@ -28,17 +31,19 @@ const PodcastCard = ({ title, author, image }) => {
 
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.cover} image={image} title={title} />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {title}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {author}
-          </Typography>
-        </CardContent>
-      </div>
+      <CardActionArea>
+        <CardMedia className={classes.cover} image={image} title={title} />
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <Typography component="h5" variant="h6">
+              {title}
+            </Typography>
+            <Typography variant="subtitle2" color="textSecondary">
+              {author}
+            </Typography>
+          </CardContent>
+        </div>
+      </CardActionArea>
     </Card>
   );
 };

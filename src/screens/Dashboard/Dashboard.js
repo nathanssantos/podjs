@@ -2,9 +2,14 @@ import { CircularProgress } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import PodcastCard from '../../components/PodcastCard/PodcastCard';
 import useTopPodcastsContext from '../../hooks/useTopPodcastsContext';
+import './styles.scss';
 
 const DashBoard = () => {
   const [{ ui, topPodcasts }, { getTopPodcasts }] = useTopPodcastsContext();
+
+  useEffect(() => {
+    console.log(topPodcasts);
+  }, [topPodcasts]);
 
   useEffect(() => {
     getTopPodcasts();
@@ -12,13 +17,18 @@ const DashBoard = () => {
 
   if (ui.requesting) return <CircularProgress />;
 
-  return topPodcasts.map((podcast) => (
-    <PodcastCard
-      title={podcast.title}
-      author={podcast.author}
-      image={podcast.image}
-    />
-  ));
+  return (
+    <div className="podcast-list">
+      {topPodcasts.map((podcast) => (
+        <PodcastCard
+          key="podcast.title"
+          title={podcast.title}
+          author={podcast.author}
+          image={podcast.image}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default DashBoard;
