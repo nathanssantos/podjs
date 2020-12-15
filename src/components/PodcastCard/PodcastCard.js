@@ -24,6 +24,9 @@ const useStyles = makeStyles(() => ({
     width: '190px',
     height: '190px',
   },
+  title: {
+    fontSize: '18px',
+  },
 }));
 
 const PodcastCard = ({ title, author, image }) => {
@@ -35,7 +38,7 @@ const PodcastCard = ({ title, author, image }) => {
         <CardMedia className={classes.cover} image={image} title={title} />
         <div className={classes.details}>
           <CardContent className={classes.content}>
-            <Typography component="h5" variant="h6">
+            <Typography component="h5" variant="h6" className={classes.title}>
               {title}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">

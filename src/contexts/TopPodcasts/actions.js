@@ -15,13 +15,17 @@ const getTopPodcasts = async () => {
       response.data.feed.results &&
       response.data.feed.results.length
     ) {
-      // console.log(response.data.feed.results);
       return {
-        topPodcasts: response.data.feed.results.map((podcast) => ({
-          author: podcast.artistName,
-          title: podcast.name,
-          image: podcast.artworkUrl100,
-        })),
+        topPodcasts: response.data.feed.results.map((podcast) => {
+          const { artistName, name, artworkUrl100, id } = podcast;
+
+          return {
+            author: artistName,
+            title: name,
+            image: artworkUrl100,
+            id,
+          };
+        }),
       };
     }
 

@@ -23,7 +23,6 @@ const TopPodcastsProvider = ({ children }) => {
       const response = await dispatch({ type, payload });
 
       if (response) {
-        console.log(response);
         setState((prevState) => ({
           ...prevState,
           ...response,

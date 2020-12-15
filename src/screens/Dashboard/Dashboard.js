@@ -8,10 +8,6 @@ const DashBoard = () => {
   const [{ ui, topPodcasts }, { getTopPodcasts }] = useTopPodcastsContext();
 
   useEffect(() => {
-    console.log(topPodcasts);
-  }, [topPodcasts]);
-
-  useEffect(() => {
     getTopPodcasts();
   }, []);
 
@@ -21,7 +17,7 @@ const DashBoard = () => {
     <div className="podcast-list">
       {topPodcasts.map((podcast) => (
         <PodcastCard
-          key="podcast.title"
+          key={podcast.id}
           title={podcast.title}
           author={podcast.author}
           image={podcast.image}
