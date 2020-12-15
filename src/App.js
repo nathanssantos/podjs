@@ -1,12 +1,13 @@
 import React from 'react';
-import './App.scss';
+import DarkThemeProvider from './components/DarkThemeProvider/DarkThemeProvider';
+import Drawer from './layout/Drawer/Drawer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">PodJS</header>
-    </div>
-  );
-}
+const App = () => (
+  <div className="App">
+    <DarkThemeProvider>
+      <Drawer />
+    </DarkThemeProvider>
+  </div>
+);
 
 export default App;
