@@ -61,7 +61,9 @@ const PodcastDetail = () => {
                 {item.title}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                {item.itunes.summary}
+                {item.itunes.summary && item.itunes.summary.length
+                  ? item.itunes.summary
+                  : item.content}
               </Typography>
             </CardContent>
           </Card>
