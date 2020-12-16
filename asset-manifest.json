@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/podjs/static/css/main.51d7e67b.chunk.css",
-    "main.js": "/podjs/static/js/main.3a1da9f2.chunk.js",
-    "main.js.map": "/podjs/static/js/main.3a1da9f2.chunk.js.map",
+    "main.js": "/podjs/static/js/main.dd80b302.chunk.js",
+    "main.js.map": "/podjs/static/js/main.dd80b302.chunk.js.map",
     "runtime-main.js": "/podjs/static/js/runtime-main.ea0c5d82.js",
     "runtime-main.js.map": "/podjs/static/js/runtime-main.ea0c5d82.js.map",
     "static/css/2.45e26527.chunk.css": "/podjs/static/css/2.45e26527.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.45e26527.chunk.css",
     "static/js/2.c9ac5750.chunk.js",
     "static/css/main.51d7e67b.chunk.css",
-    "static/js/main.3a1da9f2.chunk.js"
+    "static/js/main.dd80b302.chunk.js"
   ]
 }
