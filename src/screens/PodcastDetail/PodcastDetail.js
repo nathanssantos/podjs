@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CircularProgress } from '@material-ui/core';
+import { LinearProgress } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -22,7 +22,7 @@ const PodcastDetail = () => {
     loadDetail();
   }, []);
 
-  if (ui.requesting) return <CircularProgress />;
+  if (ui.requesting) return <LinearProgress />;
 
   if (
     fetched &&

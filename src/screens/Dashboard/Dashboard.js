@@ -1,4 +1,4 @@
-import { CircularProgress } from '@material-ui/core';
+import { LinearProgress } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import PodcastCard from '../../components/PodcastCard/PodcastCard';
 import usePodcastsContext from '../../hooks/usePodcastsContext';
@@ -11,7 +11,7 @@ const DashBoard = () => {
     if (!topPodcasts.length) getTopPodcasts();
   }, []);
 
-  if (ui.requesting && !topPodcasts.length) return <CircularProgress />;
+  if (ui.requesting && !topPodcasts.length) return <LinearProgress />;
 
   return (
     <div className="podcast-list">
