@@ -38,7 +38,7 @@ const PodcastCard = ({ id, title, author, image }) => {
   const classes = useStyles();
 
   return (
-    <Link to={`podjs/podcast/${id}`}>
+    <Link to={`/podjs/podcast/${id}`}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia className={classes.cover} image={image} title={title} />
