@@ -158,7 +158,7 @@ const Navigator = ({ children }) => {
           </div>
           <Divider />
           <List>
-            <Link to="/">
+            <Link to="/podjs">
               <ListItem button>
                 <ListItemIcon>
                   <HomeIcon />
@@ -174,7 +174,7 @@ const Navigator = ({ children }) => {
             <Route path="/podcast-detail/:id">
               <PodcastDetail />
             </Route>
-            <Route path="/">
+            <Route path="/podjs">
               <Dashboard />
             </Route>
           </Switch>
