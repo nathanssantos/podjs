@@ -1,0 +1,15 @@
+.podcast-detail {
+  &__card {
+    width: 240px;
+    margin-bottom: 40px;
+  }
+
+  &__image {
+    height: 240px;
+    width: 240px;
+  }
+
+  &__item-card {
+    margin-bottom: 20px;
+  }
+}

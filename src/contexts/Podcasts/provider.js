@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback, useMemo, useState } from 'react';
 import {
-  TopPodcastsContext,
-  TopPodcastsActionsContext,
-  TopPodcastsInitialState,
+  PodcastsContext,
+  PodcastsActionsContext,
+  PodcastsInitialState,
 } from './context';
-import { GET_TOP_PODCASTS, RESET_TOP_PODCASTS } from './types';
+import { GET_TOP_PODCASTS, GET_PODCAST_DETAIL, RESET_PODCASTS } from './types';
 import dispatch from './actions';
 
-const TopPodcastsProvider = ({ children }) => {
-  const [state, setState] = useState({ ...TopPodcastsInitialState });
+const PodcastsProvider = ({ children }) => {
+  const [state, setState] = useState({ ...PodcastsInitialState });
 
   const dispatchFactory = useCallback(async (type, payload) => {
     try {
@@ -30,7 +30,7 @@ const TopPodcastsProvider = ({ children }) => {
         }));
       }
     } catch (error) {
-      console.log(`TopPodcastsProvider - dispatchFactory() ${type} error`);
+      console.log(`PodcastsProvider - dispatchFactory() ${type} error`);
       console.log(error);
       setState((prevState) => ({
         ...prevState,
@@ -42,23 +42,25 @@ const TopPodcastsProvider = ({ children }) => {
   const actions = useMemo(
     () => ({
       getTopPodcasts: async () => {
-        const response = await dispatchFactory(GET_TOP_PODCASTS);
-        return response;
+        await dispatchFactory(GET_TOP_PODCASTS);
       },
-      resetTopPodcasts: async () => {
-        await dispatchFactory(RESET_TOP_PODCASTS);
+      getPodcastDetail: async (payload) => {
+        await dispatchFactory(GET_PODCAST_DETAIL, payload);
+      },
+      resetPodcasts: async () => {
+        await dispatchFactory(RESET_PODCASTS);
       },
     }),
     [],
   );
 
   return (
-    <TopPodcastsContext.Provider value={state}>
-      <TopPodcastsActionsContext.Provider value={actions}>
+    <PodcastsContext.Provider value={state}>
+      <PodcastsActionsContext.Provider value={actions}>
         {children}
-      </TopPodcastsActionsContext.Provider>
-    </TopPodcastsContext.Provider>
+      </PodcastsActionsContext.Provider>
+    </PodcastsContext.Provider>
   );
 };
 
-export default TopPodcastsProvider;
+export default PodcastsProvider;

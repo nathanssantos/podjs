@@ -1,15 +1,15 @@
 import React from 'react';
 import DarkThemeProvider from './components/DarkThemeProvider/DarkThemeProvider';
 import Navigator from './components/Navigator/Navigator';
-import TopPodcastsProvider from './contexts/TopPodcasts/provider';
+import PodcastsProvider from './contexts/Podcasts/provider';
 
 const App = () => (
   <div className="App">
-    <TopPodcastsProvider>
+    <PodcastsProvider>
       <DarkThemeProvider>
         <Navigator />
       </DarkThemeProvider>
-    </TopPodcastsProvider>
+    </PodcastsProvider>
   </div>
 );
 
