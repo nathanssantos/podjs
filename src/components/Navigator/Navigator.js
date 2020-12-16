@@ -171,7 +171,7 @@ const Navigator = ({ children }) => {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path="/podcastDetail/:id">
+            <Route path="/podcast-detail/:id">
               <PodcastDetail />
             </Route>
             <Route path="/">
