@@ -67,11 +67,17 @@ const PodcastDetail = () => {
               <Typography gutterBottom variant="h6">
                 {item.title}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {item.itunes.summary && item.itunes.summary.length
-                  ? item.itunes.summary
-                  : item.content}
-              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    item.itunes.summary && item.itunes.summary.length
+                      ? item.itunes.summary
+                      : item.content,
+                }}
+              />
             </CardContent>
           </Card>
         ))}
