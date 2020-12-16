@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
@@ -11,14 +11,21 @@ import './styles.scss';
 const PodcastDetail = () => {
   const [{ ui, podcastDetail }, { getPodcastDetail }] = usePodcastsContext();
   const { id } = useParams();
+  const [fetched, setFetched] = useState(false);
+
+  const loadDetail = async () => {
+    await getPodcastDetail(id);
+    setFetched(true);
+  };
 
   useEffect(() => {
-    getPodcastDetail(id);
+    loadDetail();
   }, []);
 
   if (ui.requesting) return <CircularProgress />;
 
   if (
+    fetched &&
     !ui.requesting &&
     !ui.error &&
     podcastDetail.artworkUrl600 &&
