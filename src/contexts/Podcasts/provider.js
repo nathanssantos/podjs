@@ -5,7 +5,12 @@ import {
   PodcastsActionsContext,
   PodcastsInitialState,
 } from './context';
-import { GET_TOP_PODCASTS, GET_PODCAST_DETAIL, RESET_PODCASTS } from './types';
+import {
+  GET_TOP_PODCASTS,
+  GET_PODCAST_DETAIL,
+  RESET_PODCASTS,
+  PLAY_PODCAST_ITEM,
+} from './types';
 import dispatch from './actions';
 
 const PodcastsProvider = ({ children }) => {
@@ -46,6 +51,9 @@ const PodcastsProvider = ({ children }) => {
       },
       getPodcastDetail: async (payload) => {
         await dispatchFactory(GET_PODCAST_DETAIL, payload);
+      },
+      playPodcastItem: async (payload) => {
+        await dispatchFactory(PLAY_PODCAST_ITEM, payload);
       },
       resetPodcasts: async () => {
         await dispatchFactory(RESET_PODCASTS);

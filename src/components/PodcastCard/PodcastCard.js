@@ -12,7 +12,7 @@ import {
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: '190px',
+    width: '150px',
     display: 'flex',
     flexDirection: 'column',
     cursor: 'pointer',
@@ -25,8 +25,8 @@ const useStyles = makeStyles(() => ({
     flex: '1 0 auto',
   },
   cover: {
-    width: '190px',
-    height: '190px',
+    width: '150px',
+    height: '150px',
   },
   title: {
     fontSize: '16px',

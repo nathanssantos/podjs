@@ -3,6 +3,9 @@ import { createContext } from 'react';
 const PodcastsInitialState = {
   topPodcasts: [],
   podcastDetail: {},
+  player: {
+    playing: null,
+  },
   ui: {
     requesting: false,
     error: false,
@@ -16,6 +19,7 @@ const PodcastsContext = createContext({
 const PodcastsActionsContext = createContext({
   getTopPodcasts: () => {},
   getPodcastDetail: () => {},
+  playPodcastItem: () => {},
   resetPodcasts: () => {},
 });
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { LinearProgress } from '@material-ui/core';
+import { CardActionArea, LinearProgress } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,7 +9,10 @@ import usePodcastsContext from '../../hooks/usePodcastsContext';
 import './styles.scss';
 
 const PodcastDetail = () => {
-  const [{ ui, podcastDetail }, { getPodcastDetail }] = usePodcastsContext();
+  const [
+    { ui, podcastDetail },
+    { getPodcastDetail, playPodcastItem },
+  ] = usePodcastsContext();
   const { id } = useParams();
   const [fetched, setFetched] = useState(false);
 
@@ -62,23 +65,31 @@ const PodcastDetail = () => {
         </Card>
 
         {podcastDetail.items.map((item) => (
-          <Card className="podcast-detail__item-card" key={item.title}>
-            <CardContent>
-              <Typography gutterBottom variant="h6">
-                {item.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                dangerouslySetInnerHTML={{
-                  __html:
-                    item.itunes.summary && item.itunes.summary.length
-                      ? item.itunes.summary
-                      : item.content,
-                }}
-              />
-            </CardContent>
+          <Card
+            className="podcast-detail__item-card"
+            key={item.title}
+            onClick={() => {
+              playPodcastItem(item.enclosure.url);
+            }}
+          >
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom variant="h6">
+                  {item.title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      item.itunes.summary && item.itunes.summary.length
+                        ? item.itunes.summary
+                        : item.content,
+                  }}
+                />
+              </CardContent>
+            </CardActionArea>
           </Card>
         ))}
       </div>

@@ -1,7 +1,12 @@
 import axios from 'axios';
 import parseRSS from '../../utils/parseRSS';
 import { PodcastsInitialState } from './context';
-import { GET_TOP_PODCASTS, GET_PODCAST_DETAIL, RESET_PODCASTS } from './types';
+import {
+  GET_TOP_PODCASTS,
+  GET_PODCAST_DETAIL,
+  PLAY_PODCAST_ITEM,
+  RESET_PODCASTS,
+} from './types';
 
 const getTopPodcasts = async () => {
   try {
@@ -52,11 +57,13 @@ const getPodcastDetail = async (id) => {
       response.data.results[0].feedUrl &&
       response.data.results[0].feedUrl.length
     ) {
-      console.log(response.data.results[0]);
+      // console.log(response.data.results[0]);
 
       const feed = await parseRSS(
         `https://cors-anywhere.herokuapp.com/${response.data.results[0].feedUrl}`,
       );
+
+      // console.log(feed);
 
       return {
         podcastDetail: { ...response.data.results[0], ...feed },
@@ -65,6 +72,23 @@ const getPodcastDetail = async (id) => {
     return {};
   } catch (error) {
     console.log(`Pocasts getPodcastDetail() error`);
+    console.log(error);
+    return {};
+  }
+};
+
+const playPodcastItem = async (url = '') => {
+  try {
+    if (url && url.length) {
+      console.log(url);
+
+      return {
+        player: { playing: url },
+      };
+    }
+    return {};
+  } catch (error) {
+    console.log(`Pocasts playPodcastItem() error`);
     console.log(error);
     return {};
   }
@@ -85,6 +109,10 @@ const dispatch = async (action) => {
 
       case GET_PODCAST_DETAIL: {
         return await getPodcastDetail(payload);
+      }
+
+      case PLAY_PODCAST_ITEM: {
+        return await playPodcastItem(payload);
       }
 
       case RESET_PODCASTS: {
