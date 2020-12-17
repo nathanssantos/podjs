@@ -9,6 +9,10 @@ const PodcastCard = () => {
   const [{ player }] = usePodcastsContext();
 
   const imageSize = () => (player.playing.image.length ? '100px' : '0px');
+  const imageMarginLeft = () => {
+    if (window.innerWidth < 600) return '0px';
+    return player.playing.image.length ? '-20px' : '0px';
+  };
 
   return (
     <div className="player-wrapper">
@@ -17,6 +21,7 @@ const PodcastCard = () => {
         style={{
           width: imageSize(),
           minWidth: imageSize(),
+          marginLeft: imageMarginLeft(),
         }}
       >
         <img src={player.playing.image} alt="" className="player-image" />
