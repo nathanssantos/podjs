@@ -5,7 +5,7 @@
     cursor: pointer;
     background-color: transparent !important;
     box-shadow: none !important;
-    width: calc(100vw - 48px);
+    width: calc(50vw - 34px);
 
     @media screen and(min-width: 600px) {
       width: 150px;
@@ -28,8 +28,8 @@
   }
 
   &__cover {
-    width: calc(100vw - 48px);
-    height: calc(100vw - 48px);
+    width: calc(50vw - 34px);
+    height: calc(50vw - 34px);
 
     @media screen and(min-width: 600px) {
       height: 150px;
