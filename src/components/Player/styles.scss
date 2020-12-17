@@ -5,9 +5,15 @@
   right: 0;
   z-index: 9999;
   background-color: #333;
-  padding: 0 20px;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  transition: all 200ms ease-in-out;
+
+  padding: 10px 0 0;
+
+  @media screen and(min-width: 600px) {
+    padding: 10px 20px 0;
+  }
 
   .rhap_container {
     background-color: #333;
@@ -15,6 +21,11 @@
 
     .rhap_repeat-button {
       display: none;
+    }
+
+    .rhap_time {
+      color: #868686;
+      font-family: Roboto;
     }
   }
 }
