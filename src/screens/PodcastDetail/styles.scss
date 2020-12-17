@@ -1,4 +1,5 @@
 .podcast-detail {
+  padding-bottom: 80px;
   @media screen and(min-width: 1200px) {
     display: flex;
     align-items: flex-start;
@@ -21,12 +22,16 @@
   }
 
   &__list {
-    margin-bottom: 130px;
+    margin-bottom: 50px;
     position: relative;
     flex: 1;
 
+    @media screen and(min-width: 600px) {
+      margin-bottom: 60px;
+    }
+
     @media screen and(min-width: 1200px) {
-      margin-bottom: 120px;
+      margin-bottom: 40px;
     }
 
     &:after {
