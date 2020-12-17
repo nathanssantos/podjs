@@ -46,9 +46,7 @@ const PodcastDetail = () => {
             title={podcastDetail.collectionName}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5">
-              {podcastDetail.collectionName}
-            </Typography>
+            <Typography variant="h5">{podcastDetail.collectionName}</Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               {podcastDetail.artistName}
             </Typography>
@@ -69,14 +67,19 @@ const PodcastDetail = () => {
             className="podcast-detail__item-card"
             key={item.title}
             onClick={() => {
-              playPodcastItem(item.enclosure.url);
+              playPodcastItem(item);
             }}
           >
-            <CardActionArea>
+            <CardActionArea className="podcast-detail__action-area">
+              {item.itunes && item.itunes.image && item.itunes.image.length && (
+                <CardMedia
+                  className="podcast-detail__item-image"
+                  image={item.itunes.image}
+                  title={item.title}
+                />
+              )}
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  {item.title}
-                </Typography>
+                <Typography gutterBottom>{item.title}</Typography>
                 <Typography
                   variant="body2"
                   color="textSecondary"

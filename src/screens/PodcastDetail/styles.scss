@@ -1,15 +1,42 @@
 .podcast-detail {
   &__card {
-    width: 240px;
     margin-bottom: 40px;
+    overflow: hidden;
+    width: calc(100vw - 65px);
+
+    @media screen and(min-width: 600px) {
+      width: 240px;
+    }
   }
 
   &__image {
-    height: 240px;
-    width: 240px;
+    width: calc(100vw - 65px);
+    height: calc(100vw - 65px);
+
+    @media screen and(min-width: 600px) {
+      height: 240px;
+      width: 240px;
+    }
   }
 
   &__item-card {
     margin-bottom: 20px;
+  }
+
+  &__item-image {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    align-self: flex-start;
+    display: none !important;
+
+    @media screen and(min-width: 600px) {
+      display: flex !important;
+    }
+  }
+
+  &__action-area {
+    display: flex !important;
+    justify-content: flex-start !important;
   }
 }

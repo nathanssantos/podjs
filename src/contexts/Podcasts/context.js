@@ -4,7 +4,10 @@ const PodcastsInitialState = {
   topPodcasts: [],
   podcastDetail: {},
   player: {
-    playing: null,
+    playing: {
+      src: '',
+      image: '',
+    },
   },
   ui: {
     requesting: false,

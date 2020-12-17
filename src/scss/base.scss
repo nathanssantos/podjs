@@ -14,13 +14,16 @@ code {
 
 .App {
   min-height: 100vh;
+  background-color: #2a2a2a;
 }
 
 a {
   text-decoration: none;
+  color: #868686;
 }
 
 p {
   margin-block-start: 0;
   margin-block-end: 0;
+  word-break: break-word;
 }

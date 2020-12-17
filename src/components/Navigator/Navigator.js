@@ -92,6 +92,11 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: '#fff',
   },
+  title: {
+    // color: '#868686',
+    fontWeight: '700',
+    fontSize: '18px',
+  },
 }));
 
 const Navigator = ({ children }) => {
@@ -118,23 +123,25 @@ const Navigator = ({ children }) => {
           })}
         >
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, {
-                [classes.hide]: open,
-              })}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
+            <Link to="/podjs">
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                // onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, {
+                  [classes.hide]: open,
+                })}
+              >
+                <HomeIcon />
+              </IconButton>
+            </Link>
+            <Typography variant="h6" noWrap className={classes.title}>
               PodJS
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer
+        {/* <Drawer
           variant="permanent"
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
@@ -167,7 +174,7 @@ const Navigator = ({ children }) => {
               </ListItem>
             </Link>
           </List>
-        </Drawer>
+        </Drawer> */}
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>

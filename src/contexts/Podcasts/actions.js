@@ -77,13 +77,17 @@ const getPodcastDetail = async (id) => {
   }
 };
 
-const playPodcastItem = async (url = '') => {
+const playPodcastItem = async (item) => {
   try {
-    if (url && url.length) {
-      console.log(url);
-
+    if (item) {
+      console.log(item.itunes.image);
       return {
-        player: { playing: url },
+        player: {
+          playing: {
+            src: item.enclosure.url,
+            image: item.itunes.image,
+          },
+        },
       };
     }
     return {};
