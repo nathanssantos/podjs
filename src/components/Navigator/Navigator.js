@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: '#333',
+    backgroundColor: '#2a2a2a',
+    opacity: '0.97',
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -93,9 +94,10 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   title: {
-    // color: '#868686',
-    fontWeight: '700',
+    fontWeight: '100',
     fontSize: '18px',
+    letterSpacing: '2px',
+    color: '#868686',
   },
 }));
 
@@ -126,7 +128,7 @@ const Navigator = ({ children }) => {
             <Link to="/podjs">
               <IconButton
                 color="inherit"
-                aria-label="open drawer"
+                aria-label="Home"
                 // onClick={handleDrawerOpen}
                 edge="start"
                 className={clsx(classes.menuButton, {
@@ -137,7 +139,7 @@ const Navigator = ({ children }) => {
               </IconButton>
             </Link>
             <Typography variant="h6" noWrap className={classes.title}>
-              PodJS
+              pod.js
             </Typography>
           </Toolbar>
         </AppBar>

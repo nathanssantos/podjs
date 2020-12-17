@@ -63,7 +63,7 @@ const getPodcastDetail = async (id) => {
         `https://cors-anywhere.herokuapp.com/${response.data.results[0].feedUrl}`,
       );
 
-      // console.log(feed);
+      console.log(feed);
 
       return {
         podcastDetail: { ...response.data.results[0], ...feed },

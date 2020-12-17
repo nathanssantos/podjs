@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   z-index: 9999;
-  background-color: #333;
+  background-color: rgba(#2a2a2a, 0.97);
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   transition: all 200ms ease-in-out;
@@ -18,7 +18,7 @@
 
   .rhap {
     &_container {
-      background-color: #333;
+      background-color: transparent;
       box-shadow: none;
     }
 
@@ -29,6 +29,7 @@
     &_time {
       color: #868686;
       font-family: Roboto;
+      font-size: 14px;
     }
   }
 
