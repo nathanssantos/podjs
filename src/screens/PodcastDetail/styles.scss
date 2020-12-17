@@ -2,7 +2,7 @@
   &__card {
     margin-bottom: 40px;
     overflow: hidden;
-    width: calc(100vw - 65px);
+    width: calc(100vw - 48px);
 
     @media screen and(min-width: 600px) {
       width: 240px;
@@ -10,8 +10,8 @@
   }
 
   &__image {
-    width: calc(100vw - 65px);
-    height: calc(100vw - 65px);
+    width: calc(100vw - 48px);
+    height: calc(100vw - 48px);
 
     @media screen and(min-width: 600px) {
       height: 240px;
