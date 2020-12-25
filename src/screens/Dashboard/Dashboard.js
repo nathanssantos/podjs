@@ -11,7 +11,8 @@ const DashBoard = () => {
     if (!topPodcasts.length) getTopPodcasts();
   }, []);
 
-  if (ui.requesting && !topPodcasts.length) return <LinearProgress />;
+  if (ui.requesting && !topPodcasts.length)
+    return <LinearProgress className="screen-loader" />;
 
   return (
     <div className="podcast-list">

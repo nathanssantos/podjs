@@ -7,6 +7,7 @@ const PodcastsInitialState = {
     playing: {
       src: '',
       image: '',
+      title: '',
     },
   },
   ui: {

@@ -25,7 +25,7 @@ const PodcastDetail = () => {
     loadDetail();
   }, []);
 
-  if (ui.requesting) return <LinearProgress />;
+  if (ui.requesting) return <LinearProgress className="screen-loader" />;
 
   if (
     fetched &&

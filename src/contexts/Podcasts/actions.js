@@ -86,6 +86,7 @@ const playPodcastItem = async (item) => {
           playing: {
             src: item.enclosure.url,
             image: item.itunes.image,
+            title: item.title,
           },
         },
       };

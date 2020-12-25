@@ -16,6 +16,28 @@
     padding: 0 20px;
   }
 
+  .player-controls {
+    flex: 1;
+  }
+
+  .player-title {
+    padding: 10px 15px;
+    color: #868686;
+  }
+
+  .player-loader {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .player-progress-bar {
+    opacity: 0.1;
+    height: 100%;
+  }
+
   .rhap {
     &_container {
       background-color: transparent;
@@ -36,9 +58,9 @@
   .player-image-wrapper {
     overflow: hidden;
     transition: all 200ms ease-in-out;
-    width: 100px;
-    min-width: 100px;
-    height: 100px;
+    width: 128px;
+    min-width: 128px;
+    height: 128px;
     display: none;
 
     @media screen and(min-width: 600px) {
