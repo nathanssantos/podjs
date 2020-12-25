@@ -102,6 +102,7 @@ const Navigator = () => {
   const classes = useStyles();
   const location = useLocation();
   const isHome = location.pathname.split('/').length === 2;
+  const isFavorites = location.pathname.includes('favorites');
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -117,11 +118,13 @@ const Navigator = () => {
           <Typography variant="h6" noWrap className={classes.title}>
             pod.js
           </Typography>
-          <Link to="/podjs/favorites" className={classes.favoriteButton}>
-            <IconButton color="inherit" aria-label="Home" edge="start">
-              <StarIcon />
-            </IconButton>
-          </Link>
+          {isFavorites ? null : (
+            <Link to="/podjs/favorites" className={classes.favoriteButton}>
+              <IconButton color="inherit" aria-label="Home" edge="start">
+                <StarIcon />
+              </IconButton>
+            </Link>
+          )}
         </Toolbar>
       </AppBar>
 
