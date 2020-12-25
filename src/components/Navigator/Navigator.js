@@ -1,108 +1,43 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Switch, Route, Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Switch, Route, Link, useLocation, useHistory } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
   CssBaseline,
   Typography,
   IconButton,
+  Paper,
+  InputBase,
 } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import StarIcon from '@material-ui/icons/Star';
+import SearchIcon from '@material-ui/icons/Search';
 
 import Dashboard from '../../screens/Dashboard/Dashboard';
 import PodcastDetail from '../../screens/PodcastDetail/PodcastDetail';
 import Favorites from '../../screens/Favorites/Favorites';
-
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    backgroundColor: '#2a2a2a',
-    opacity: '0.97',
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  link: {
-    textDecoration: 'none',
-    color: '#fff',
-  },
-  title: {
-    fontWeight: '100',
-    fontSize: '18px',
-    letterSpacing: '2px',
-    color: '#868686',
-    flex: 1,
-  },
-  homeButton: {
-    marginRight: 36,
-  },
-  favoriteButton: {
-    marginLeft: 36,
-  },
-}));
+import SearchResult from '../../screens/SearchResult/SearchResult';
+import useStyles from './styles';
 
 const Navigator = () => {
   const classes = useStyles();
   const location = useLocation();
+  const history = useHistory();
+  const [searchKey, setSearchKey] = useState('');
+
   const isHome =
     location.pathname === '/podjs' || location.pathname === '/podjs/';
   const isFavorites = location.pathname.includes('favorites');
+
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      history.push(`/podjs/search/${searchKey}`);
+      if (location.pathname.includes('search')) history.go(0);
+    }
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -118,6 +53,30 @@ const Navigator = () => {
           <Typography variant="h6" noWrap className={classes.title}>
             pod.js
           </Typography>
+          <Paper className={classes.search}>
+            <InputBase
+              onKeyDown={handleEnter}
+              className={classes.searchInput}
+              placeholder="Search"
+              inputProps={{ 'aria-label': 'search' }}
+              onInput={(event) => {
+                setSearchKey(event.target.value);
+              }}
+            />
+            <Link
+              to={`/podjs/search/${searchKey}`}
+              onClick={() => {
+                history.go(0);
+              }}
+            >
+              <IconButton
+                className={classes.searchIconButton}
+                aria-label="search"
+              >
+                <SearchIcon />
+              </IconButton>
+            </Link>
+          </Paper>
           {isFavorites ? null : (
             <Link to="/podjs/favorites" className={classes.favoriteButton}>
               <IconButton color="inherit" aria-label="Home" edge="start">
@@ -133,6 +92,9 @@ const Navigator = () => {
         <Switch>
           <Route path="/podjs/podcast/:id">
             <PodcastDetail />
+          </Route>
+          <Route path="/podjs/search/:key">
+            <SearchResult />
           </Route>
           <Route path="/podjs/favorites">
             <Favorites />

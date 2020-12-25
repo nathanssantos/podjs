@@ -11,6 +11,7 @@ const PodcastsInitialState = {
     },
   },
   favorites: [],
+  searchResult: [],
   ui: {
     requesting: false,
     error: false,

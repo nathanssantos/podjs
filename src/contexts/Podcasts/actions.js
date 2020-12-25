@@ -11,6 +11,7 @@ import {
   GET_FAVORITES,
   ADD_FAVORITE,
   REMOVE_FAVORITE,
+  SEARCH,
   RESET_PODCASTS,
 } from './types';
 
@@ -155,6 +156,36 @@ const removeFavorite = (id) => {
   }
 };
 
+const search = async (key) => {
+  try {
+    const response = await axios.get(
+      `https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?term=${key}&entity=podcast`,
+    );
+
+    if (
+      response &&
+      response.data &&
+      response.data.results &&
+      response.data.results.length
+    ) {
+      const searchResult = response.data.results.map((result) => ({
+        id: result.collectionId,
+        title: result.collectionName,
+        author: result.artistName,
+        image: result.artworkUrl600,
+      }));
+
+      return { searchResult };
+    }
+
+    return {};
+  } catch (error) {
+    console.log(`Pocasts search() error`);
+    console.log(error);
+    return {};
+  }
+};
+
 const resetTopPocasts = () => ({
   ...PodcastsInitialState,
 });
@@ -186,6 +217,10 @@ const dispatch = async (action) => {
 
       case REMOVE_FAVORITE: {
         return removeFavorite(payload);
+      }
+
+      case SEARCH: {
+        return await search(payload);
       }
 
       case RESET_PODCASTS: {

@@ -12,6 +12,7 @@ import {
   PLAY_PODCAST_ITEM,
   GET_FAVORITES,
   REMOVE_FAVORITE,
+  SEARCH,
   ADD_FAVORITE,
 } from './types';
 import dispatch from './actions';
@@ -66,6 +67,9 @@ const PodcastsProvider = ({ children }) => {
       },
       removeFavorite: async (payload) => {
         await dispatchFactory(REMOVE_FAVORITE, payload);
+      },
+      search: async (payload) => {
+        await dispatchFactory(SEARCH, payload);
       },
       resetPodcasts: async () => {
         await dispatchFactory(RESET_PODCASTS);
