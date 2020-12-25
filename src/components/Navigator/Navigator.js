@@ -11,8 +11,8 @@ import {
   Typography,
   IconButton,
 } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/HomeOutlined';
-import StarIcon from '@material-ui/icons/StarOutlined';
+import HomeIcon from '@material-ui/icons/Home';
+import StarIcon from '@material-ui/icons/Star';
 
 import Dashboard from '../../screens/Dashboard/Dashboard';
 import PodcastDetail from '../../screens/PodcastDetail/PodcastDetail';
