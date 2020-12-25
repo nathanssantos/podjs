@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/podjs/static/css/main.02d03a6a.chunk.css",
-    "main.js": "/podjs/static/js/main.260df6c9.chunk.js",
-    "main.js.map": "/podjs/static/js/main.260df6c9.chunk.js.map",
-    "runtime-main.js": "/podjs/static/js/runtime-main.d04da286.js",
-    "runtime-main.js.map": "/podjs/static/js/runtime-main.d04da286.js.map",
-    "static/css/2.7b55380b.chunk.css": "/podjs/static/css/2.7b55380b.chunk.css",
-    "static/js/2.c8a46510.chunk.js": "/podjs/static/js/2.c8a46510.chunk.js",
-    "static/js/2.c8a46510.chunk.js.map": "/podjs/static/js/2.c8a46510.chunk.js.map",
-    "static/js/3.bac471e1.chunk.js": "/podjs/static/js/3.bac471e1.chunk.js",
-    "static/js/3.bac471e1.chunk.js.map": "/podjs/static/js/3.bac471e1.chunk.js.map",
+    "main.css": "/podjs/static/css/main.fa0029d4.chunk.css",
+    "main.js": "/podjs/static/js/main.5cbaf954.chunk.js",
+    "main.js.map": "/podjs/static/js/main.5cbaf954.chunk.js.map",
+    "runtime-main.js": "/podjs/static/js/runtime-main.c16ad3da.js",
+    "runtime-main.js.map": "/podjs/static/js/runtime-main.c16ad3da.js.map",
+    "static/css/2.aa168e1f.chunk.css": "/podjs/static/css/2.aa168e1f.chunk.css",
+    "static/js/2.3eddebab.chunk.js": "/podjs/static/js/2.3eddebab.chunk.js",
+    "static/js/2.3eddebab.chunk.js.map": "/podjs/static/js/2.3eddebab.chunk.js.map",
+    "static/js/3.c1f4cdfc.chunk.js": "/podjs/static/js/3.c1f4cdfc.chunk.js",
+    "static/js/3.c1f4cdfc.chunk.js.map": "/podjs/static/js/3.c1f4cdfc.chunk.js.map",
     "index.html": "/podjs/index.html",
-    "static/css/2.7b55380b.chunk.css.map": "/podjs/static/css/2.7b55380b.chunk.css.map",
-    "static/css/main.02d03a6a.chunk.css.map": "/podjs/static/css/main.02d03a6a.chunk.css.map",
-    "static/js/2.c8a46510.chunk.js.LICENSE.txt": "/podjs/static/js/2.c8a46510.chunk.js.LICENSE.txt",
+    "static/css/2.aa168e1f.chunk.css.map": "/podjs/static/css/2.aa168e1f.chunk.css.map",
+    "static/css/main.fa0029d4.chunk.css.map": "/podjs/static/css/main.fa0029d4.chunk.css.map",
+    "static/js/2.3eddebab.chunk.js.LICENSE.txt": "/podjs/static/js/2.3eddebab.chunk.js.LICENSE.txt",
     "static/media/index.css": "/podjs/static/media/roboto-vietnamese-400-normal.52cebac0.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.d04da286.js",
-    "static/css/2.7b55380b.chunk.css",
-    "static/js/2.c8a46510.chunk.js",
-    "static/css/main.02d03a6a.chunk.css",
-    "static/js/main.260df6c9.chunk.js"
+    "static/js/runtime-main.c16ad3da.js",
+    "static/css/2.aa168e1f.chunk.css",
+    "static/js/2.3eddebab.chunk.js",
+    "static/css/main.fa0029d4.chunk.css",
+    "static/js/main.5cbaf954.chunk.js"
   ]
 }
