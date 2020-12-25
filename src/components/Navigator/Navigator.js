@@ -1,29 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import {
-  Drawer,
   AppBar,
   Toolbar,
   CssBaseline,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Typography,
-  Divider,
   IconButton,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
+import StarIcon from '@material-ui/icons/StarOutlined';
 
 import Dashboard from '../../screens/Dashboard/Dashboard';
 import PodcastDetail from '../../screens/PodcastDetail/PodcastDetail';
+import Favorites from '../../screens/Favorites/Favorites';
 
 const drawerWidth = 240;
 
@@ -47,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginRight: 36,
   },
   hide: {
     display: 'none',
@@ -98,98 +88,58 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
     letterSpacing: '2px',
     color: '#868686',
+    flex: 1,
+  },
+  homeButton: {
+    marginRight: 36,
+  },
+  favoriteButton: {
+    marginLeft: 36,
   },
 }));
 
-const Navigator = ({ children }) => {
+const Navigator = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
+  const location = useLocation();
+  const isHome = location.pathname.split('/').length === 2;
   return (
-    <Router>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <Toolbar>
-            <Link to="/podjs">
-              <IconButton
-                color="inherit"
-                aria-label="Home"
-                // onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, {
-                  [classes.hide]: open,
-                })}
-              >
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          {isHome ? null : (
+            <Link to="/podjs" className={classes.homeButton}>
+              <IconButton color="inherit" aria-label="Home" edge="start">
                 <HomeIcon />
               </IconButton>
             </Link>
-            <Typography variant="h6" noWrap className={classes.title}>
-              pod.js
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        {/* <Drawer
-          variant="permanent"
-          className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          })}
-          classes={{
-            paper: clsx({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
-            }),
-          }}
-        >
-          <div className={classes.toolbar}>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
+          )}
+          <Typography variant="h6" noWrap className={classes.title}>
+            pod.js
+          </Typography>
+          <Link to="/podjs/favorites" className={classes.favoriteButton}>
+            <IconButton color="inherit" aria-label="Home" edge="start">
+              <StarIcon />
             </IconButton>
-          </div>
-          <Divider />
-          <List>
-            <Link to="/podjs">
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Darshboard" className={classes.link} />
-              </ListItem>
-            </Link>
-          </List>
-        </Drawer> */}
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Switch>
-            <Route path="/podjs/podcast/:id">
-              <PodcastDetail />
-            </Route>
-            <Route path="/podjs">
-              <Dashboard />
-            </Route>
-          </Switch>
-        </main>
-      </div>
-    </Router>
+          </Link>
+        </Toolbar>
+      </AppBar>
+
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Switch>
+          <Route path="/podjs/podcast/:id">
+            <PodcastDetail />
+          </Route>
+          <Route path="/podjs/favorites">
+            <Favorites />
+          </Route>
+          <Route path="/podjs">
+            <Dashboard />
+          </Route>
+        </Switch>
+      </main>
+    </div>
   );
 };
 

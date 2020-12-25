@@ -1,10 +1,16 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import parseRSS from '../../utils/parseRSS';
 import { PodcastsInitialState } from './context';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import {
   GET_TOP_PODCASTS,
   GET_PODCAST_DETAIL,
   PLAY_PODCAST_ITEM,
+  GET_FAVORITES,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
   RESET_PODCASTS,
 } from './types';
 
@@ -63,7 +69,7 @@ const getPodcastDetail = async (id) => {
         `https://cors-anywhere.herokuapp.com/${response.data.results[0].feedUrl}`,
       );
 
-      console.log(feed);
+      // console.log(feed);
 
       return {
         podcastDetail: { ...response.data.results[0], ...feed },
@@ -77,10 +83,9 @@ const getPodcastDetail = async (id) => {
   }
 };
 
-const playPodcastItem = async (item) => {
+const playPodcastItem = (item) => {
   try {
     if (item) {
-      console.log(item.itunes.image);
       return {
         player: {
           playing: {
@@ -99,7 +104,58 @@ const playPodcastItem = async (item) => {
   }
 };
 
-const resetTopPocasts = async () => ({
+const getFavorites = () => {
+  try {
+    const [favorites] = useLocalStorage('favorites');
+
+    return { favorites };
+  } catch (error) {
+    console.log(`Pocasts getFavorites() error`);
+    console.log(error);
+    return {};
+  }
+};
+
+const addFavorite = (newFavorite) => {
+  try {
+    const [favorites, setFavorites] = useLocalStorage('favorites');
+
+    const newFavorites = [...favorites];
+    let newFavoriteFound = false;
+
+    favorites.forEach((favorite) => {
+      if (favorite.id === newFavorite.id) newFavoriteFound = true;
+    });
+
+    if (!newFavoriteFound) newFavorites.push(newFavorite);
+
+    setFavorites(newFavorites);
+
+    return { favorites: newFavorites };
+  } catch (error) {
+    console.log(`Pocasts addFavorite() error`);
+    console.log(error);
+    return {};
+  }
+};
+
+const removeFavorite = (id) => {
+  try {
+    const [favorites, setFavorites] = useLocalStorage('favorites');
+
+    const newFavorites = favorites.filter((favorite) => favorite.id !== id);
+
+    setFavorites(newFavorites);
+
+    return { favorites: newFavorites };
+  } catch (error) {
+    console.log(`Pocasts removeFavorite() error`);
+    console.log(error);
+    return {};
+  }
+};
+
+const resetTopPocasts = () => ({
   ...PodcastsInitialState,
 });
 
@@ -117,11 +173,23 @@ const dispatch = async (action) => {
       }
 
       case PLAY_PODCAST_ITEM: {
-        return await playPodcastItem(payload);
+        return playPodcastItem(payload);
+      }
+
+      case GET_FAVORITES: {
+        return getFavorites();
+      }
+
+      case ADD_FAVORITE: {
+        return addFavorite(payload);
+      }
+
+      case REMOVE_FAVORITE: {
+        return removeFavorite(payload);
       }
 
       case RESET_PODCASTS: {
-        return await resetTopPocasts();
+        return resetTopPocasts();
       }
 
       default: {

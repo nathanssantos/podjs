@@ -10,6 +10,7 @@ const PodcastsInitialState = {
       title: '',
     },
   },
+  favorites: [],
   ui: {
     requesting: false,
     error: false,

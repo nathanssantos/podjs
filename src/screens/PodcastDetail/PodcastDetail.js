@@ -1,27 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { CardActionArea, LinearProgress } from '@material-ui/core';
+import { CardActionArea, LinearProgress, Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
+import StarIcon from '@material-ui/icons/Star';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import usePodcastsContext from '../../hooks/usePodcastsContext';
+
 import './styles.scss';
 
 const PodcastDetail = () => {
   const [
-    { ui, podcastDetail },
-    { getPodcastDetail, playPodcastItem },
+    { ui, podcastDetail, favorites },
+    { getPodcastDetail, playPodcastItem, addFavorite, removeFavorite },
   ] = usePodcastsContext();
   const { id } = useParams();
   const [fetched, setFetched] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const loadDetail = async () => {
     await getPodcastDetail(id);
     setFetched(true);
   };
 
+  const addFavoritePodcast = () => {
+    setIsFavorite(true);
+    addFavorite({
+      id,
+      title: podcastDetail.collectionName,
+      author: podcastDetail.artistName,
+      image: podcastDetail.artworkUrl600,
+    });
+    return null;
+  };
+
+  const removeFavoritePodcast = () => {
+    removeFavorite(id);
+    setIsFavorite(false);
+    return null;
+  };
+
   useEffect(() => {
+    favorites.forEach((favorite) => {
+      if (favorite.id === id) setIsFavorite(true);
+    });
     loadDetail();
   }, []);
 
@@ -50,16 +74,26 @@ const PodcastDetail = () => {
               <Typography variant="body2" color="textSecondary" component="p">
                 {podcastDetail.artistName}
               </Typography>
+              {isFavorite ? (
+                <Button
+                  color="default"
+                  className="bt-favorite"
+                  onClick={removeFavoritePodcast}
+                >
+                  <StarIcon className="bt-favorite__icon" />
+                  Remover dos favoritos
+                </Button>
+              ) : (
+                <Button
+                  color="default"
+                  className="bt-favorite"
+                  onClick={addFavoritePodcast}
+                >
+                  <StarOutlineIcon className="bt-favorite__icon" />
+                  Adicionar aos favoritos
+                </Button>
+              )}
             </CardContent>
-
-            {/* <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
-        </CardActions> */}
           </Card>
 
           <Card className="podcast-detail__card description">

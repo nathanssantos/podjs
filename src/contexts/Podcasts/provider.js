@@ -10,6 +10,9 @@ import {
   GET_PODCAST_DETAIL,
   RESET_PODCASTS,
   PLAY_PODCAST_ITEM,
+  GET_FAVORITES,
+  REMOVE_FAVORITE,
+  ADD_FAVORITE,
 } from './types';
 import dispatch from './actions';
 
@@ -54,6 +57,15 @@ const PodcastsProvider = ({ children }) => {
       },
       playPodcastItem: async (payload) => {
         await dispatchFactory(PLAY_PODCAST_ITEM, payload);
+      },
+      getFavorites: async () => {
+        await dispatchFactory(GET_FAVORITES);
+      },
+      addFavorite: async (payload) => {
+        await dispatchFactory(ADD_FAVORITE, payload);
+      },
+      removeFavorite: async (payload) => {
+        await dispatchFactory(REMOVE_FAVORITE, payload);
       },
       resetPodcasts: async () => {
         await dispatchFactory(RESET_PODCASTS);

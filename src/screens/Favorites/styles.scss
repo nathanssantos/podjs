@@ -1,0 +1,11 @@
+.podcast-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding-bottom: 100px;
+}
+
+.empty-state {
+  color: #868686;
+}
