@@ -100,7 +100,8 @@ const useStyles = makeStyles((theme) => ({
 const Navigator = () => {
   const classes = useStyles();
   const location = useLocation();
-  const isHome = location.pathname.split('/').length === 2;
+  const isHome =
+    location.pathname === '/podjs' || location.pathname === '/podjs/';
   const isFavorites = location.pathname.includes('favorites');
   return (
     <div className={classes.root}>
