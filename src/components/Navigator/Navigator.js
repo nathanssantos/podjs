@@ -34,7 +34,6 @@ const Navigator = () => {
   const handleEnter = (event) => {
     if (event.key === 'Enter') {
       history.push(`/podjs/search/${searchKey}`);
-      if (location.pathname.includes('search')) history.go(0);
     }
   };
 
@@ -63,12 +62,7 @@ const Navigator = () => {
                 setSearchKey(event.target.value);
               }}
             />
-            <Link
-              to={`/podjs/search/${searchKey}`}
-              onClick={() => {
-                history.go(0);
-              }}
-            >
+            <Link to={`/podjs/search/${searchKey}`}>
               <IconButton
                 className={classes.searchIconButton}
                 aria-label="search"
