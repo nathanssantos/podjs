@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/podjs/static/css/main.fa0029d4.chunk.css",
-    "main.js": "/podjs/static/js/main.b7ad4834.chunk.js",
-    "main.js.map": "/podjs/static/js/main.b7ad4834.chunk.js.map",
+    "main.css": "/podjs/static/css/main.e0396271.chunk.css",
+    "main.js": "/podjs/static/js/main.d571aa09.chunk.js",
+    "main.js.map": "/podjs/static/js/main.d571aa09.chunk.js.map",
     "runtime-main.js": "/podjs/static/js/runtime-main.c16ad3da.js",
     "runtime-main.js.map": "/podjs/static/js/runtime-main.c16ad3da.js.map",
     "static/css/2.aa168e1f.chunk.css": "/podjs/static/css/2.aa168e1f.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.c1f4cdfc.chunk.js.map": "/podjs/static/js/3.c1f4cdfc.chunk.js.map",
     "index.html": "/podjs/index.html",
     "static/css/2.aa168e1f.chunk.css.map": "/podjs/static/css/2.aa168e1f.chunk.css.map",
-    "static/css/main.fa0029d4.chunk.css.map": "/podjs/static/css/main.fa0029d4.chunk.css.map",
+    "static/css/main.e0396271.chunk.css.map": "/podjs/static/css/main.e0396271.chunk.css.map",
     "static/js/2.3eddebab.chunk.js.LICENSE.txt": "/podjs/static/js/2.3eddebab.chunk.js.LICENSE.txt",
     "static/media/index.css": "/podjs/static/media/roboto-vietnamese-400-normal.52cebac0.woff2"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.c16ad3da.js",
     "static/css/2.aa168e1f.chunk.css",
     "static/js/2.3eddebab.chunk.js",
-    "static/css/main.fa0029d4.chunk.css",
-    "static/js/main.b7ad4834.chunk.js"
+    "static/css/main.e0396271.chunk.css",
+    "static/js/main.d571aa09.chunk.js"
   ]
 }
