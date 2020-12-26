@@ -21,7 +21,11 @@ const Favorites = () => {
 
   return (
     <div className="screen">
-      <div className="screen-title">{`${favorites.length} podcasts favoritos`}</div>
+      {favorites.length === 1 ? (
+        <div className="screen-title">{`${favorites.length} podcast favorito`}</div>
+      ) : (
+        <div className="screen-title">{`${favorites.length} podcasts favoritos`}</div>
+      )}
       <div className="podcast-list">
         {favorites.map((podcast) => (
           <PodcastCard
