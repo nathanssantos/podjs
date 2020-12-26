@@ -24,16 +24,19 @@ const SearchResult = () => {
     return <div className="empty-state">Nenhum resultado para sua busca.</div>;
 
   return (
-    <div className="podcast-list">
-      {searchResult.map((podcast) => (
-        <PodcastCard
-          key={podcast.id}
-          id={podcast.id}
-          title={podcast.title}
-          author={podcast.author}
-          image={podcast.image}
-        />
-      ))}
+    <div className="screen">
+      <div className="screen-title">{`Resultados de busca para "${key}":`}</div>
+      <div className="podcast-list">
+        {searchResult.map((podcast) => (
+          <PodcastCard
+            key={podcast.id}
+            id={podcast.id}
+            title={podcast.title}
+            author={podcast.author}
+            image={podcast.image}
+          />
+        ))}
+      </div>
     </div>
   );
 };

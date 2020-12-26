@@ -15,7 +15,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import StarIcon from '@material-ui/icons/Star';
 import SearchIcon from '@material-ui/icons/Search';
 
-import Dashboard from '../../screens/Dashboard/Dashboard';
+import Home from '../../screens/Home/Home';
 import PodcastDetail from '../../screens/PodcastDetail/PodcastDetail';
 import Favorites from '../../screens/Favorites/Favorites';
 import SearchResult from '../../screens/SearchResult/SearchResult';
@@ -32,9 +32,7 @@ const Navigator = () => {
   const isFavorites = location.pathname.includes('favorites');
 
   const handleEnter = (event) => {
-    if (event.key === 'Enter') {
-      history.push(`/podjs/search/${searchKey}`);
-    }
+    if (event.key === 'Enter') history.push(`/podjs/search/${searchKey}`);
   };
 
   return (
@@ -94,7 +92,7 @@ const Navigator = () => {
             <Favorites />
           </Route>
           <Route path="/podjs">
-            <Dashboard />
+            <Home />
           </Route>
         </Switch>
       </main>

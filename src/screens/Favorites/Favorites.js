@@ -20,16 +20,19 @@ const Favorites = () => {
     );
 
   return (
-    <div className="podcast-list">
-      {favorites.map((podcast) => (
-        <PodcastCard
-          key={podcast.id}
-          id={podcast.id}
-          title={podcast.title}
-          author={podcast.author}
-          image={podcast.image}
-        />
-      ))}
+    <div className="screen">
+      <div className="screen-title">{`${favorites.length} podcasts favoritos`}</div>
+      <div className="podcast-list">
+        {favorites.map((podcast) => (
+          <PodcastCard
+            key={podcast.id}
+            id={podcast.id}
+            title={podcast.title}
+            author={podcast.author}
+            image={podcast.image}
+          />
+        ))}
+      </div>
     </div>
   );
 };

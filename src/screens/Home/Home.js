@@ -4,7 +4,7 @@ import PodcastCard from '../../components/PodcastCard/PodcastCard';
 import usePodcastsContext from '../../hooks/usePodcastsContext';
 import './styles.scss';
 
-const DashBoard = () => {
+const Home = () => {
   const [{ ui, topPodcasts }, { getTopPodcasts }] = usePodcastsContext();
 
   useEffect(() => {
@@ -15,18 +15,21 @@ const DashBoard = () => {
     return <LinearProgress className="screen-loader" />;
 
   return (
-    <div className="podcast-list">
-      {topPodcasts.map((podcast) => (
-        <PodcastCard
-          key={podcast.id}
-          id={podcast.id}
-          title={podcast.title}
-          author={podcast.author}
-          image={podcast.image}
-        />
-      ))}
+    <div className="screen">
+      <div className="screen-title">Top 100 Podcasts</div>
+      <div className="podcast-list">
+        {topPodcasts.map((podcast) => (
+          <PodcastCard
+            key={podcast.id}
+            id={podcast.id}
+            title={podcast.title}
+            author={podcast.author}
+            image={podcast.image}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default DashBoard;
+export default Home;
