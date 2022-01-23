@@ -2,13 +2,14 @@
 import { Container } from "@material-ui/core";
 import { flowResult } from "mobx";
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
 import {
   CollectionListItem,
+  ListLoader,
   Loader,
   Screen,
   SearchBar,
@@ -58,27 +59,33 @@ const HomeScreen = () => {
     search(true);
   };
 
+  useEffect(() => {
+    store.CollectionStore.clearCollectionDetail();
+  }, []);
+
   return (
     <Screen className="home" container={false}>
       <Container maxWidth={Theme.containerMaxWidth}>
         <div className="home__favorites">
           <div className="home__title">
-            <Text variant="h5">Favorites</Text>
+            <Text variant="h5">My Podcasts</Text>
           </div>
           <div className="collection-list">
             {store.UserStore.favorites?.length ? (
-              _.orderBy(store.UserStore.favorites, "favoriteRating", "desc").map(
-                (collection) => (
-                  <CollectionListItem
-                    key={collection.collectionId}
-                    collection={collection}
-                    onClickPlay={() => {
-                      history.push(`/collections/${collection.collectionId}`);
-                    }}
-                    onClickFavorite={() => handleFavoriteClick(collection)}
-                  />
-                )
-              )
+              _.orderBy(
+                store.UserStore.favorites,
+                "favoriteRating",
+                "desc"
+              ).map((collection) => (
+                <CollectionListItem
+                  key={collection.collectionId}
+                  collection={collection}
+                  onClickPlay={() => {
+                    history.push(`/collections/${collection.collectionId}`);
+                  }}
+                  onClickFavorite={() => handleFavoriteClick(collection)}
+                />
+              ))
             ) : (
               <Text color={Theme.light38}>Empty</Text>
             )}
@@ -91,13 +98,15 @@ const HomeScreen = () => {
           </div>
           <div className="home__search-bar">
             <SearchBar
+              value={store.CollectionStore.searchTerm}
+              placeholder="Podcast"
               requesting={searchingPodcast}
               onChangeText={setTerm}
               onSubmitSearch={search}
             />
           </div>
           {searchingPodcast ? (
-            <Loader />
+            <ListLoader variant="grid" />
           ) : (
             <div className="collection-list">
               {store.CollectionStore.searchResultList.map((collection) => (

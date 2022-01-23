@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import {
   Button,
   EpisodeListItem,
+  ListLoader,
   Loader,
   Screen,
   SearchBar,
@@ -28,8 +29,8 @@ const CollectionDetail = () => {
   const history = useHistory();
   const [requestingCollectionDetail, setRequestigCollectionDetail] =
     useState(false);
-  const [searchingPodcast, setSearchingPodcast] = useState(false);
-  const [term, setTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
   const getCollectionDetail = async (id) => {
     try {
@@ -38,7 +39,15 @@ const CollectionDetail = () => {
         store.CollectionStore.getCollectionDetail({ id })
       );
 
-      if (response.error) toast.error(SYSTEM_INSTABILITY);
+      if (
+        response.error ||
+        !store.CollectionStore.collectionDetail?.episodes?.length
+      ) {
+        toast.error(SYSTEM_INSTABILITY);
+        return;
+      }
+
+      setSearchResult(store.CollectionStore.collectionDetail.episodes);
     } catch (error) {
       console.log(error);
       toast.error(SYSTEM_INSTABILITY);
@@ -47,29 +56,23 @@ const CollectionDetail = () => {
     }
   };
 
-  const search = async () => {
+  const submitSearch = async () => {
     try {
-      setSearchingPodcast(true);
-      const response = await flowResult(
-        store.CollectionStore.searchCollectionByTerm({ term })
+      const result = store.CollectionStore.collectionDetail.episodes.filter(
+        (episode) =>
+          episode.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
-      if (response.error) toast.error(SYSTEM_INSTABILITY);
+      setSearchResult(result);
     } catch (error) {
       console.log(error);
       toast.error(SYSTEM_INSTABILITY);
-    } finally {
-      setSearchingPodcast(false);
     }
   };
 
   useEffect(() => {
     if (params.id) getCollectionDetail(params.id);
   }, []);
-
-  if (!store.CollectionStore.collectionDetail || requestingCollectionDetail) {
-    return <Loader paddingVertical={16} />;
-  }
 
   return (
     <Screen className="collection-detail" container={false}>
@@ -83,25 +86,24 @@ const CollectionDetail = () => {
             <ArrowLeftIcon color="#000" />
           </Button>
           <SearchBar
+            placeholder="Episode"
             requesting={requestingCollectionDetail}
-            onChangeText={setTerm}
-            onSubmitSearch={() => ""}
+            onChangeText={setSearchTerm}
+            onSubmitSearch={submitSearch}
           />
         </div>
 
         {requestingCollectionDetail ? (
-          <Loader />
+          <ListLoader />
         ) : (
           <div className="episode-list">
-            {store.CollectionStore.collectionDetail.episodes.map(
-              (episode, index) => (
-                <EpisodeListItem
-                  key={`${index}-${episode.title}`}
-                  episode={episode}
-                  onClick={() => store.PlayerStore.loadEpisode({ episode })}
-                />
-              )
-            )}
+            {searchResult.map((episode, index) => (
+              <EpisodeListItem
+                key={`${index}-${episode.title}`}
+                episode={episode}
+                onClick={() => store.PlayerStore.loadEpisode({ episode })}
+              />
+            ))}
           </div>
         )}
       </Container>

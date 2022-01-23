@@ -14,46 +14,45 @@
     }
   }
 
-  &--card {
+  &--list {
     .list-loader__item {
-      height: 416px;
+      height: 340px;
       width: 100%;
       border-radius: 4px;
-      margin-bottom: 32px;
-
-      @media screen and (min-width: 1024px) {
-        height: 270px;
-      }
+      margin-bottom: 16px;
 
       &:last-of-type {
         margin-bottom: 0;
+      }
+
+      @media screen and (min-width: 600px) {
+        height: 166px;
       }
     }
   }
 
   &--grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -4px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+
+    @media screen and (min-width: 360px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (min-width: 600px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (min-width: 1024px) {
+      grid-template-columns: repeat(6, 1fr);
+    }
 
     .list-loader__item {
-      display: flex;
-      flex: 1;
-      min-width: 112px;
-      height: 247px;
-      margin: 4px;
+      padding-top: calc(100% + 37.16px);
 
-      @media screen and (min-width: 1024px) {
-        min-width: 200px;
-      }
-
-      &--wide {
-        flex: 2;
-        min-width: 180px;
-
-        @media screen and (min-width: 1024px) {
-          min-width: 320px;
-        }
+      &:last-of-type {
+        margin-bottom: 0;
       }
     }
   }

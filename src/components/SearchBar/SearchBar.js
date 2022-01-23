@@ -11,12 +11,8 @@ import { SearchIcon } from "../svg";
 import "./styles.scss";
 
 const SearchBar = (props) => {
-  const {
-    placeholder,
-    requesting,
-    onChangeText,
-    onSubmitSearch,
-  } = props;
+  const { value, placeholder, requesting, onChangeText, onSubmitSearch } =
+    props;
 
   const { initialValues, validationSchema } = searchBarFormDefinitions;
 
@@ -37,6 +33,10 @@ const SearchBar = (props) => {
     onChangeText(formik.values.text);
   }, [formik.values.text]);
 
+  useEffect(() => {
+    if (value) formik.setFieldValue("text", value);
+  }, []);
+
   return (
     <form className="search-bar" noValidate onSubmit={formik.handleSubmit}>
       <Input
@@ -54,6 +54,7 @@ const SearchBar = (props) => {
 };
 
 SearchBar.propTypes = {
+  value: PropTypes.string,
   placeholder: PropTypes.string,
   requesting: PropTypes.bool,
   onChangeText: PropTypes.func,
@@ -61,7 +62,8 @@ SearchBar.propTypes = {
 };
 
 SearchBar.defaultProps = {
-  placeholder: "Podcast name",
+  value: "",
+  placeholder: "Search",
   requesting: false,
   onChangeText: () => "",
 };

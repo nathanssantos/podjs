@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { flow, makeObservable, observable } from "mobx";
+import { action, flow, makeObservable, observable } from "mobx";
 import RssParser from "rss-parser";
 import adapter from "axios-jsonp";
 
@@ -14,84 +14,33 @@ import { getRoot } from "mobx-easy";
 const DEV_MODE = Environment.DEV_MODE.PODCAST_STORE;
 
 export default class CollectionStore {
-  topCollections = [
-    new Collection({
-      collectionId: 381816509,
-      artistName: "Jovem Nerd",
-      artworkUrl100:
-        "https://is5-ssl.mzstatic.com/image/thumb/Podcasts115/v4/24/70/f4/2470f4fb-0157-9b11-9e05-7646f0f8eb0b/mza_15146351891494261154.jpg/100x100bb.jpg",
-      artworkUrl600:
-        "https://is5-ssl.mzstatic.com/image/thumb/Podcasts115/v4/24/70/f4/2470f4fb-0157-9b11-9e05-7646f0f8eb0b/mza_15146351891494261154.jpg/600x600bb.jpg",
-      collectionName: "NerdCast",
-      episodes: [],
-      feedUrl: "https://jovemnerd.com.br/feed-nerdcast/",
-      genreIds: ["1324", "26"],
-      genres: ["Sociedade e cultura", "Podcasts"],
-      primaryGenreName: "Sociedade e cultura",
-    }),
-    new Collection({
-      collectionId: 282567659,
-      artistName: "Cinema com Rapadura",
-      artworkUrl100:
-        "https://is3-ssl.mzstatic.com/image/thumb/Podcasts126/v4/ee/7e/a6/ee7ea62b-e883-4874-457d-5b85e423b49b/mza_534242946008264420.png/100x100bb.jpg",
-      artworkUrl600:
-        "https://is3-ssl.mzstatic.com/image/thumb/Podcasts126/v4/ee/7e/a6/ee7ea62b-e883-4874-457d-5b85e423b49b/mza_534242946008264420.png/600x600bb.jpg",
-      collectionName: "RapaduraCast",
-      episodes: [],
-      feedUrl: "https://cinemacomrapadura.com.br/rapaduracast/rapaduracast.xml",
-      genreIds: ["1309", "26"],
-      genres: ["Filme e TV", "Podcasts"],
-      primaryGenreName: "Filme e TV",
-    }),
-    new Collection({
-      collectionId: 1133325943,
-      artistName: "Alura",
-      artworkUrl100:
-        "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/03/02/dc/0302dc39-6963-0bc3-2aa0-95dafbf4bf65/mza_5758746539385216897.png/100x100bb.jpg",
-      artworkUrl600:
-        "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/03/02/dc/0302dc39-6963-0bc3-2aa0-95dafbf4bf65/mza_5758746539385216897.png/600x600bb.jpg",
-      collectionName: "Hipsters Ponto Tech",
-      episodes: [],
-      feedUrl: "https://hipsters.tech/feed/podcast/",
-      genreIds: ["1318", "26", "1533"],
-      genres: ["Tecnologia", "Podcasts", "Ciência"],
-      primaryGenreName: "Tecnologia",
-    }),
-    new Collection({
-      collectionId: 997779431,
-      artistName: "devanaestrada.com.br",
-      artworkUrl100:
-        "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/78/11/25/78112505-3e78-68ed-7f25-ea2baf28a305/mza_7243602696434713583.png/100x100bb.jpg",
-      artworkUrl600:
-        "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/78/11/25/78112505-3e78-68ed-7f25-ea2baf28a305/mza_7243602696434713583.png/600x600bb.jpg",
-      collectionName: "DEVNAESTRADA",
-      episodes: [],
-      feedUrl: "https://devnaestrada.com.br/feed.xml",
-      genreIds: ["1318", "26", "1489", "1528"],
-      genres: ["Tecnologia", "Podcasts", "Notícias", "Notícias Tech"],
-      primaryGenreName: "Tecnologia",
-    }),
-  ];
+  searchTerm = "";
   searchResultList = [];
   collectionDetail = null;
 
   constructor() {
     makeObservable(this, {
-      topCollections: observable,
+      searchTerm: observable,
       searchResultList: observable,
       collectionDetail: observable,
+
+      clearCollectionDetail: action.bound,
 
       searchCollectionByTerm: flow,
       getCollectionDetail: flow,
     });
   }
 
+  clearCollectionDetail() {
+    this.collectionDetail = null;
+  }
+
   *searchCollectionByTerm(payload = {}) {
     try {
       const { term } = payload;
 
-      this.collectionDetail = null;
-
+      this.searchTerm = term;
+      
       const response = yield baseAPI.get(
         `${process.env.REACT_APP_PODCAST_API_URL}/search`,
         {

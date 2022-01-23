@@ -61,14 +61,14 @@ const ListLoader = (props) => {
 };
 
 ListLoader.propTypes = {
-  variant: PropTypes.oneOf(["card", "grid"]),
+  variant: PropTypes.oneOf(["list", "grid"]),
   length: PropTypes.number,
   interval: PropTypes.number,
 };
 
 ListLoader.defaultProps = {
-  variant: "card",
-  length: 6,
+  variant: "list",
+  length: 12,
   interval: 150,
 };
 
