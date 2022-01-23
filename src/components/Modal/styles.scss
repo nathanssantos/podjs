@@ -1,0 +1,59 @@
+@import "../../scss/colors";
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  .MuiBackdrop-root {
+    background: rgba(39, 39, 48, 0.8);
+  }
+
+  &__paper {
+    padding: 32px 32px 8px;
+    max-width: 560px;
+    background: $surface-16;
+    box-shadow: $elevation-16;
+    position: relative;
+  }
+
+  &--rounded {
+    .modal__paper {
+      border-radius: 4px;
+    }
+  }
+
+  &__bt-close {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+
+    .button {
+      min-width: 36px;
+      padding: 0;
+    }
+  }
+
+  &__content {
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.15px;
+  }
+
+  &__actions {
+    padding-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+
+    .button {
+      &.MuiButtonBase-root {
+        margin-right: 8px;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

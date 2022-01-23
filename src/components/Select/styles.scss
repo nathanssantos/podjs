@@ -1,0 +1,53 @@
+@import "../../scss/colors";
+
+.select {
+  .MuiFormHelperText-root {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 3px;
+    color: $light-60;
+  }
+
+  .MuiSelect-icon {
+    right: 9px;
+  }
+
+  &.MuiFormControl-root {
+    .MuiInputBase-root {
+      background: $surface-12;
+
+      .MuiSelect-root {
+        min-width: 140px;
+        padding-top: 18px;
+        padding-bottom: 19px;
+      }
+
+      &::before {
+        border: none !important;
+      }
+    }
+  }
+
+  .MuiFormLabel-root + .MuiInputBase-root {
+    .MuiSelect-root {
+      padding-top: 27px;
+      padding-bottom: 10px;
+    }
+  }
+
+  &--placeholder {
+    &.MuiFormControl-root {
+      .MuiInputBase-root {
+        .MuiSelect-root {
+          color: $light-60;
+        }
+      }
+    }
+  }
+
+  &--error {
+    .select__label {
+      color: $error;
+    }
+  }
+}

@@ -1,0 +1,158 @@
+@import "colors.scss";
+
+.app {
+  color: $light;
+}
+
+.app-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+a {
+  color: $light;
+}
+
+.MuiBackdrop-root {
+  background-color: rgba(39, 39, 48, 0.8) !important;
+}
+
+.form-error {
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 3px;
+  color: $error;
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.input-group {
+  margin-bottom: 16px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &__label {
+    color: $light-60;
+    margin-bottom: 8px;
+  }
+}
+
+.modal-title {
+  &.text {
+    margin-bottom: 16px;
+  }
+}
+
+.placeholder {
+  &.MuiButtonBase-root {
+    color: $light-60;
+  }
+}
+
+.surface-0 {
+  background: $surface-0;
+  box-shadow: $elevation-0;
+}
+
+.surface-5 {
+  background: $surface-5;
+  box-shadow: $elevation-5;
+}
+
+.surface-7 {
+  background: $surface-7;
+  box-shadow: $elevation-7;
+}
+
+.surface-8 {
+  background: $surface-8;
+  box-shadow: $elevation-8;
+}
+
+.surface-9 {
+  background: $surface-9;
+  box-shadow: $elevation-9;
+}
+
+.surface-11 {
+  background: $surface-11;
+  box-shadow: $elevation-11;
+}
+
+.surface-12 {
+  background: $surface-12;
+  box-shadow: $elevation-12;
+}
+
+.surface-14 {
+  background: $surface-14;
+  box-shadow: $elevation-14;
+}
+
+.surface-15 {
+  background: $surface-15;
+  box-shadow: $elevation-15;
+}
+
+.surface-16 {
+  background: $surface-16;
+  box-shadow: $elevation-16;
+}
+
+.checkout {
+  &__header {
+    padding: 32px 0;
+
+    @media screen and (min-width: 1024px) {
+      padding: 48px 0 56px;
+    }
+  }
+
+  &__stepper {
+    margin: 0 -16px;
+    padding-bottom: 32px;
+
+    @media screen and (min-width: 600px) {
+      margin: 0 -8px;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding-bottom: 56px;
+      margin: 0 auto;
+      max-width: 640px;
+    }
+  }
+
+  &__section-title {
+    padding-bottom: 32px;
+
+    @media screen and (min-width: 1024px) {
+      padding-bottom: 32px;
+    }
+  }
+
+  &__surface {
+    margin: 0 -16px;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0 16px;
+    width: calc(100% + 32px);
+
+    @media screen and (min-width: 600px) {
+      margin: 0;
+      width: 100%;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 0 24px;
+    }
+
+    &__title {
+      padding: 56px 0 72px;
+    }
+  }
+}

@@ -1,0 +1,135 @@
+@import "../../scss/colors";
+
+.text {
+  margin: 0;
+  color: $light-87;
+  font-weight: 400;
+
+  &--h1 {
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 112px;
+    letter-spacing: -1.5px;
+  }
+
+  &--h2 {
+    font-weight: 300;
+    font-size: 60px;
+    line-height: 72px;
+    letter-spacing: -0.5px;
+  }
+
+  &--h3 {
+    font-size: 48px;
+    line-height: 56px;
+
+    &.responsive {
+      @media screen and (min-width: 1024px) {
+        font-weight: 300;
+        font-size: 60px;
+        line-height: 72px;
+        letter-spacing: -0.5px;
+      }
+    }
+  }
+
+  &--h4 {
+    font-size: 34px;
+    line-height: 36px;
+
+    &.responsive {
+      @media screen and (min-width: 1024px) {
+        font-size: 48px;
+        line-height: 56px;
+      }
+    }
+  }
+
+  &--h5 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 26px;
+    letter-spacing: 0.18px;
+
+    &.responsive {
+      @media screen and (min-width: 1024px) {
+        font-size: 34px;
+        line-height: 36px;
+        letter-spacing: initial;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &--h6 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+
+    &.responsive {
+      @media screen and (min-width: 1024px) {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 26px;
+        letter-spacing: 0.18px;
+      }
+    }
+  }
+
+  &--subtitle-1 {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+  }
+
+  &--subtitle-2 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+  }
+
+  &--body-1 {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  &--body-2 {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+
+    &.responsive {
+      @media screen and (min-width: 1024px) {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+      }
+    }
+  }
+
+  &--button {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: $light;
+  }
+
+  &--caption {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+  }
+
+  &--overline {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+}

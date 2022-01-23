@@ -1,0 +1,22 @@
+@import "../../scss/colors";
+
+.home {
+  &.screen {
+    padding-top: 40px;
+  }
+
+  .collection-detail-search-bar {
+    padding-bottom: 16px;
+    background: $surface-0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-top: 16px;
+  }
+
+  .episode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

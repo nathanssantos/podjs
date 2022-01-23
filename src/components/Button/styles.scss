@@ -1,0 +1,230 @@
+@import "../../scss/colors";
+
+.button {
+  overflow: hidden;
+
+  &.MuiButtonBase-root {
+    box-shadow: none;
+    padding: 0 16px;
+    min-height: 40px;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    .MuiButton-label {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 15px;
+      letter-spacing: 1.25px;
+      white-space: nowrap;
+    }
+
+    .MuiButton-startIcon,
+    .MuiButton-endIcon {
+      max-width: 20px;
+      max-height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .MuiButton-startIcon {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+
+    .MuiButton-endIcon {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+
+  &--text {
+    &.MuiButtonBase-root {
+      .MuiButton-label {
+        color: $primary;
+      }
+
+      .MuiTouchRipple-root {
+        .MuiTouchRipple-child {
+          background-color: $primary;
+        }
+      }
+
+      &:hover {
+        background-color: rgba($primary, 0.04);
+      }
+
+      &.Mui-disabled {
+        .MuiButton-label {
+          color: $light-38;
+        }
+      }
+
+      &.button {
+        &--light {
+          &.MuiButtonBase-root {
+            .MuiButton-label {
+              color: $gray;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &--outlined {
+    &.MuiButtonBase-root {
+      border-color: $light-12;
+      // background: $surface-12;
+
+      .MuiButton-label {
+        color: $primary;
+      }
+
+      &:hover {
+        background-color: rgba($primary, 0.04);
+      }
+
+      .MuiTouchRipple-root {
+        .MuiTouchRipple-child {
+          background-color: $primary;
+        }
+      }
+
+      &.Mui-disabled {
+        .MuiButton-label {
+          color: $light-38;
+        }
+      }
+
+      &.button {
+        &--light {
+          &.MuiButtonBase-root {
+            background-color: $light-12;
+
+            &:hover {
+              background-color: mix(rgba($primary, 0.04), $light-12);
+
+              .MuiButton-label {
+                color: $primary;
+              }
+            }
+
+            .MuiTouchRipple-root {
+              .MuiTouchRipple-child {
+                background-color: mix(rgba($primary, 0.12), $light-12);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &--contained {
+    &.MuiButtonBase-root {
+      background-color: $primary;
+
+      .MuiButton-label {
+        color: $dark-100;
+      }
+
+      &:hover {
+        background-color: lighten($primary, 4);
+      }
+
+      .MuiTouchRipple-root {
+        .MuiTouchRipple-child {
+          background-color: lighten($primary, 10);
+        }
+      }
+
+      &.Mui-disabled {
+        .MuiButton-label {
+          color: $light-38;
+        }
+      }
+    }
+  }
+
+  &--micro {
+    &.MuiButtonBase-root {
+      min-height: 24px;
+      padding: 0 8px;
+
+      .MuiButton-label {
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      .MuiButton-startIcon,
+      .MuiButton-endIcon {
+        max-width: 12px;
+        max-height: 12px;
+      }
+
+      .MuiButton-startIcon {
+        margin-right: 4px !important;
+      }
+
+      .MuiButton-endIcon {
+        margin-left: 4px !important;
+      }
+    }
+  }
+
+  &--large {
+    &.MuiButtonBase-root {
+      min-height: 44px;
+      .MuiButton-label {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &--small {
+    &.MuiButtonBase-root {
+      min-height: 36px;
+      padding: 0 16px;
+
+      .MuiButton-label {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .MuiButton-startIcon {
+        margin-right: 8px !important;
+      }
+
+      .MuiButton-endIcon {
+        margin-left: 8px !important;
+      }
+    }
+  }
+
+  &--loading {
+    &.MuiButtonBase-root {
+      pointer-events: none;
+    }
+  }
+
+  &__loader {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .MuiLinearProgress-root {
+      height: 4px;
+      background-color: transparent;
+
+      .MuiLinearProgress-bar {
+        border-radius: 2px;
+        background-color: $light-60;
+        // background: linear-gradient(317.39deg, #357cd6 -0.86%, #000325 104.49%);
+      }
+    }
+  }
+}

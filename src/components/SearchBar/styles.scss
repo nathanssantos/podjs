@@ -1,0 +1,39 @@
+@import "../../scss/colors";
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+
+  .input,
+  .autocomplete {
+    &.MuiFormControl-root,
+    &.MuiAutocomplete-root {
+      flex: 1;
+      margin-right: 16px;
+    }
+  }
+
+  .button {
+    &.MuiButtonBase-root {
+      min-width: 72px;
+    }
+  }
+
+  &__bt-icon {
+    display: none;
+
+    @media screen and (min-width: 1024px) {
+      margin-bottom: 0;
+      display: flex;
+    }
+  }
+
+  &__bt-text {
+    display: flex;
+
+    @media screen and (min-width: 1024px) {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import "../../scss/colors";
+
+.checkbox {
+  &.MuiFormControlLabel-root {
+    margin-left: 0;
+    .MuiFormControlLabel-label {
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import "../../scss/colors";
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $surface-9;
+  box-shadow: $elevation-9;
+
+  &__image {
+    width: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__player {
+    flex: 1;
+
+    .rhap {
+      &_container {
+        background: $surface-7;
+        box-shadow: none;
+
+        button {
+          color: $primary;
+        }
+      }
+
+      &_progress-indicator,
+      &_volume-indicator {
+        background: $primary;
+      }
+
+      &_progress-indicator,
+      &_volume-indicator {
+        z-index: 3;
+      }
+
+      &_time {
+        color: $primary;
+        font-size: 14px;
+      }
+
+      &_main-controls {
+        margin-left: -63px;
+      }
+
+      &_repeat-button {
+        display: none;
+      }
+    }
+  }
+}

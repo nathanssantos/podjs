@@ -1,0 +1,56 @@
+$primary: #00a8ff;
+$secondary: #40739e;
+
+$warning: #fbc531;
+$error: #e84118;
+$success: #4cd137;
+$info: #487eb0;
+
+$light: #ffffff;
+$gray: #c4c4c4;
+$dark: #121212;
+
+$background: #292929;
+
+$light-12: rgba($light, 0.12);
+$light-38: rgba($light, 0.38);
+$light-60: rgba($light, 0.6);
+$light-87: rgba($light, 0.87);
+
+$dark-12: rgba(#000000, 0.12);
+$dark-14: rgba(#000000, 0.14);
+$dark-20: rgba(#000000, 0.2);
+$dark-74: rgba(#000000, 0.74);
+$dark-100: rgba(#000000, 1);
+
+$surface-0: $dark;
+$surface-5: linear-gradient(0deg, rgba($light, 0.05), rgba($light, 0.05)), $dark;
+$surface-7: linear-gradient(0deg, rgba($light, 0.07), rgba($light, 0.07)), $dark;
+$surface-8: linear-gradient(0deg, rgba($light, 0.08), rgba($light, 0.08)), $dark;
+$surface-9: linear-gradient(0deg, rgba($light, 0.09), rgba($light, 0.09)), $dark;
+$surface-11: linear-gradient(0deg, rgba($light, 0.11), rgba($light, 0.11)),
+  $dark;
+$surface-12: linear-gradient(0deg, rgba($light, 0.12), rgba($light, 0.12)),
+  $dark;
+$surface-14: linear-gradient(0deg, rgba($light, 0.14), rgba($light, 0.14)),
+  $dark;
+$surface-15: linear-gradient(0deg, rgba($light, 0.15), rgba($light, 0.15)),
+  $dark;
+$surface-16: linear-gradient(0deg, rgba($light, 0.16), rgba($light, 0.16)),
+  $dark;
+
+$elevation-0: 0px 4px 4px rgba(#000000, 0.25);
+$elevation-5: 0px 1px 1px $dark-14, 0px 2px 1px $dark-12, 0px 1px 3px $dark-20;
+$elevation-7: 0px 2px 2px $dark-14, 0px 3px 1px $dark-12, 0px 1px 5px $dark-20;
+$elevation-8: 0px 3px 4px $dark-14, 0px 3px 3px $dark-12, 0px 1px 8px $dark-20;
+$elevation-9: 0px 4px 5px $dark-14, 0px 1px 10px $dark-12, 0px 2px 4px $dark-20;
+$elevation-11: 0px 6px 10px $dark-14, 0px 1px 18px $dark-12,
+  0px 3px 5px $dark-20;
+$elevation-12: 0px 8px 10px $dark-14, 0px 3px 14px $dark-12,
+  0px 5px 5px $dark-20;
+$elevation-14: 0px 12px 17px $dark-14, 0px 5px 22px $dark-12,
+  0px 7px 8px $dark-20;
+$elevation-15: 0px 16px 24px $dark-14, 0px 6px 30px $dark-12,
+  0px 8px 10px $dark-20;
+$elevation-16: 0px 24px 38px $dark-14, 0px 9px 46px $dark-12,
+  0px 11px 15px $dark-20;

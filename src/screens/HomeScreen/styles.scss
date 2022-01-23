@@ -1,0 +1,46 @@
+@import "../../scss/colors";
+
+.home {
+  &.screen {
+    padding-top: 40px;
+  }
+
+  .collection-search-bar {
+    padding-bottom: 16px;
+    background: $surface-0;
+    position: sticky;
+    top: -1px;
+    z-index: 1;
+    padding-top: 16px;
+  }
+
+  .collection-list {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+
+    @media screen and (min-width: 360px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (min-width: 600px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (min-width: 1024px) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    &.top-collections {
+      @media screen and (min-width: 360px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media screen and (min-width: 600px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      
+    }
+  }
+}

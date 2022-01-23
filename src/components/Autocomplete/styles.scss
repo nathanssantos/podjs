@@ -1,0 +1,90 @@
+@import "../../scss/colors";
+
+.autocomplete {
+  &.MuiAutocomplete-root {
+    .MuiFormLabel-root {
+      color: $light-60;
+    }
+
+    .MuiInputBase-root {
+      border-radius: 4px;
+      background: $surface-12;
+      // border-bottom-left-radius: 0;
+      // border-bottom-right-radius: 0;
+      padding-top: 0;
+
+      &:hover {
+        background: $surface-12;
+      }
+
+      &::before {
+        border: none !important;
+      }
+
+      &:not(.Mui-error) {
+        &::after {
+          border-color: $primary;
+        }
+      }
+
+      .MuiInputBase-input {
+        padding-top: 18px;
+        padding-bottom: 19px;
+        font-size: 16px;
+        line-height: 24px;
+
+        &::placeholder {
+          color: $light-60;
+          opacity: 1;
+        }
+      }
+
+      &.Mui-focused {
+        background: $surface-12;
+      }
+
+      &.Mui-disabled {
+        background: $surface-12;
+
+        &::before {
+          border-bottom-style: solid !important;
+        }
+      }
+    }
+
+    &.input--light {
+      .MuiInputBase-root {
+        &::after {
+          border-color: $light-60;
+        }
+      }
+
+      .MuiFormLabel-root {
+        &.Mui-focused {
+          color: $light-38;
+        }
+      }
+    }
+
+    .MuiFormLabel-root + .MuiInputBase-root {
+      .MuiInputBase-input {
+        padding-top: 27px;
+        padding-bottom: 10px;
+      }
+    }
+
+    .MuiFormHelperText-root {
+      font-size: 12px;
+      line-height: 16px;
+      margin-top: 3px;
+
+      &:not(.Mui-error) {
+        color: $light-60;
+      }
+    }
+
+    .MuiInputAdornment-positionStart:not(.MuiInputAdornment-hiddenLabel) {
+      margin-top: 0 !important;
+    }
+  }
+}

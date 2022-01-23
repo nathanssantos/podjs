@@ -1,0 +1,72 @@
+@import "../../scss/colors";
+
+.episode-list__item {
+  &.button {
+    width: 100%;
+    padding: 0;
+    background: $surface-5;
+    display: flex;
+    justify-content: flex-start;
+    color: $light-87 !important;
+
+    &:hover {
+      background: $surface-7;
+    }
+
+    .MuiButton-label {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    a {
+      color: $light-87 !important;
+    }
+  }
+
+  &__image {
+    width: 150px;
+    min-width: 150px;
+    display: flex;
+    padding: 16px 0 16px 16px;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__text {
+    padding: 16px;
+  }
+
+  &__title,
+  &__content {
+    text-align: left;
+    color: $light-87;
+    font-size: 12px;
+    width: 100%;
+    white-space: break-spaces;
+    line-height: 18px;
+  }
+
+  &__content {
+    text-transform: initial;
+    font-weight: 300;
+    padding: 0;
+    margin: 16px 0 0 0;
+
+    br + br {
+      display: none;
+      font-size: 0;
+      line-height: 0;
+      max-height: 0;
+    }
+
+    // a[rel="noopener noreferrer"] {
+    //   display: none;
+    // }
+  }
+
+  &:hover {
+    background: $surface-7;
+  }
+}

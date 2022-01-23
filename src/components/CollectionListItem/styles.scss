@@ -1,0 +1,39 @@
+@import "../../scss/colors";
+
+.collection-list__item {
+  &.button {
+    width: 100%;
+    padding: 0;
+    background: $surface-5;
+    display: flex;
+    flex-direction: column;
+
+    .MuiButton-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    &:hover {
+      background: $surface-7;
+    }
+  }
+
+
+  &__title {
+    padding: 10px;
+    color: $light-87;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  &:hover {
+    background: $surface-7;
+  }
+}

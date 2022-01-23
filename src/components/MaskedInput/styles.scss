@@ -1,0 +1,141 @@
+@import "../../scss/colors";
+
+.input {
+  &--outlined {
+    .MuiFormLabel-root {
+      color: $light-87;
+    }
+
+    .MuiInputBase-root {
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+      .MuiInputBase-input {
+        &::placeholder {
+          color: $light-60;
+          opacity: 1;
+        }
+      }
+
+      .MuiOutlinedInput-notchedOutline {
+        border-color: $light-60;
+        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      }
+
+      &:hover {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: $primary;
+        }
+      }
+
+      &.Mui-disabled {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: $light-38;
+        }
+
+        .MuiInputBase-input {
+          color: $light-38;
+        }
+      }
+
+      &.Mui-focused {
+        .MuiOutlinedInput-notchedOutline {
+          border-width: 1px;
+        }
+      }
+    }
+
+    .MuiFormHelperText-root {
+      font-size: 12px;
+      line-height: 16px;
+      margin-top: 3px;
+      color: $light-60;
+    }
+  }
+
+  &--filled {
+    .MuiFormLabel-root {
+      color: $light-60;
+    }
+
+    .MuiInputBase-root {
+      border-radius: 4px;
+      background: $surface-12;
+      // border-bottom-left-radius: 0;
+      // border-bottom-right-radius: 0;
+
+      &:hover {
+        background: $surface-12;
+      }
+
+      &::before {
+        border: none !important;
+      }
+
+      &::after {
+        border-color: $primary;
+      }
+
+      .MuiInputBase-input {
+        padding-top: 18px;
+        padding-bottom: 19px;
+        font-size: 16px;
+        line-height: 24px;
+
+        &::placeholder {
+          color: $light-60;
+          opacity: 1;
+        }
+      }
+
+      &.Mui-focused {
+        background: $surface-12;
+      }
+
+      &.Mui-disabled {
+        background: $surface-12;
+
+        &::before {
+          border-bottom-style: solid !important;
+        }
+      }
+    }
+
+    &.input--light {
+      .MuiInputBase-root {
+        &::after {
+          border-color: $light-60;
+        }
+      }
+
+      .MuiFormLabel-root {
+        &.Mui-focused {
+          color: $light-38;
+        }
+      }
+    }
+
+    .MuiFormLabel-root + .MuiInputBase-root {
+      .MuiInputBase-input {
+        padding-top: 27px;
+        padding-bottom: 10px;
+      }
+    }
+
+    .MuiFormHelperText-root {
+      font-size: 12px;
+      line-height: 16px;
+      margin-top: 3px;
+      color: $light-60;
+    }
+
+    .MuiInputAdornment-positionStart:not(.MuiInputAdornment-hiddenLabel) {
+      margin-top: 0 !important;
+    }
+  }
+
+  .bt-password {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

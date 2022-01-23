@@ -1,0 +1,14 @@
+@import "../../scss/colors";
+
+.stepper {
+  .MuiStepper-root {
+    background-color: transparent;
+    padding: 0;
+
+    .MuiStepConnector-root {
+      .MuiStepConnector-line {
+        border-color: $primary;
+      }
+    }
+  }
+}
