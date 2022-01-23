@@ -2,7 +2,7 @@
 import Axios from "axios";
 
 const baseAPI = Axios.create({
-  baseURL: process.env.REACT_APP_PODCAST_API_URL,
+  baseURL: `https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_PODCAST_API_URL}`,
   timeout: 30000,
   validateStatus: (status) => status !== 401,
 });
