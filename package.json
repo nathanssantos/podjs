@@ -16,6 +16,7 @@
     "@material-ui/pickers": "^3.3.10",
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.21.1",
+    "axios-jsonp": "^1.0.4",
     "date-fns": "^2.24.0",
     "formik": "^2.2.9",
     "mobx": "^6.3.3",

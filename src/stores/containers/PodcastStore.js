@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { flow, makeObservable, observable } from "mobx";
-import { getEnv } from "mobx-easy";
 import RssParser from "rss-parser";
 
 import * as Environment from "../../constants/Environment";
+import baseAPI from "../../services/baseAPI";
 
 import Collection from "../models/Collection";
 import Episode from "../models/Episode";
@@ -27,23 +28,19 @@ export default class PodcastStore {
       primaryGenreName: "Sociedade e cultura",
     }),
     new Collection({
-      "collectionId": 282567659,
-      "artistName": "Cinema com Rapadura",
-      "artworkUrl100": "https://is3-ssl.mzstatic.com/image/thumb/Podcasts126/v4/ee/7e/a6/ee7ea62b-e883-4874-457d-5b85e423b49b/mza_534242946008264420.png/100x100bb.jpg",
-      "artworkUrl600": "https://is3-ssl.mzstatic.com/image/thumb/Podcasts126/v4/ee/7e/a6/ee7ea62b-e883-4874-457d-5b85e423b49b/mza_534242946008264420.png/600x600bb.jpg",
-      "collectionName": "RapaduraCast",
-      "episodes": [],
-      "feedUrl": "https://cinemacomrapadura.com.br/rapaduracast/rapaduracast.xml",
-      "genreIds": [
-          "1309",
-          "26"
-      ],
-      "genres": [
-          "Filme e TV",
-          "Podcasts"
-      ],
-      "primaryGenreName": "Filme e TV"
-  }),
+      collectionId: 282567659,
+      artistName: "Cinema com Rapadura",
+      artworkUrl100:
+        "https://is3-ssl.mzstatic.com/image/thumb/Podcasts126/v4/ee/7e/a6/ee7ea62b-e883-4874-457d-5b85e423b49b/mza_534242946008264420.png/100x100bb.jpg",
+      artworkUrl600:
+        "https://is3-ssl.mzstatic.com/image/thumb/Podcasts126/v4/ee/7e/a6/ee7ea62b-e883-4874-457d-5b85e423b49b/mza_534242946008264420.png/600x600bb.jpg",
+      collectionName: "RapaduraCast",
+      episodes: [],
+      feedUrl: "https://cinemacomrapadura.com.br/rapaduracast/rapaduracast.xml",
+      genreIds: ["1309", "26"],
+      genres: ["Filme e TV", "Podcasts"],
+      primaryGenreName: "Filme e TV",
+    }),
     new Collection({
       collectionId: 1133325943,
       artistName: "Alura",
@@ -93,14 +90,17 @@ export default class PodcastStore {
 
       this.collectionDetail = null;
 
-      const response = yield getEnv().baseAPI.get("/search", {
-        params: {
-          country: "br",
-          entity: "podcast",
-          media: "podcast",
-          term,
-        },
-      });
+      const response = yield baseAPI.get(
+        `${process.env.REACT_APP_PODCAST_API_URL}/search`,
+        {
+          params: {
+            country: "br",
+            entity: "podcast",
+            media: "podcast",
+            term,
+          },
+        }
+      );
 
       if (DEV_MODE) {
         console.log(
@@ -152,11 +152,14 @@ export default class PodcastStore {
     try {
       const { id } = payload;
 
-      const response = yield getEnv().baseAPI.get("/lookup", {
-        params: {
-          id,
-        },
-      });
+      const response = yield baseAPI.get(
+        `${process.env.REACT_APP_PODCAST_API_URL}/lookup`,
+        {
+          params: {
+            id,
+          },
+        }
+      );
 
       if (DEV_MODE) {
         console.log(
@@ -186,6 +189,7 @@ export default class PodcastStore {
 
       const feed = yield parser.parseURL(data.results[0].feedUrl);
 
+      console.log(feed);
       if (!feed?.items?.length) {
         return {
           error: {

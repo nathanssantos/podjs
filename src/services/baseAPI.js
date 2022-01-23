@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import Axios from "axios";
+import adapter from "axios-jsonp";
 
 const baseAPI = Axios.create({
-  baseURL: `https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_PODCAST_API_URL}`,
+  adapter,
   timeout: 30000,
   validateStatus: (status) => status !== 401,
 });
