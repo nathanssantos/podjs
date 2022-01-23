@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { flow, makeObservable, observable } from "mobx";
 import RssParser from "rss-parser";
+import adapter from "axios-jsonp";
 
 import * as Environment from "../../constants/Environment";
 import baseAPI from "../../services/baseAPI";
@@ -93,6 +94,7 @@ export default class PodcastStore {
       const response = yield baseAPI.get(
         `${process.env.REACT_APP_PODCAST_API_URL}/search`,
         {
+          adapter,
           params: {
             country: "br",
             entity: "podcast",
@@ -112,8 +114,6 @@ export default class PodcastStore {
         );
       }
 
-      console.log(response);
-
       const { status, data } = response;
 
       if (status !== 200 || !data?.results) {
@@ -125,8 +125,6 @@ export default class PodcastStore {
       }
 
       this.searchResultList = data.results.map((item) => new Collection(item));
-
-      console.log(this.searchResultList);
 
       return true;
     } catch (error) {
@@ -155,6 +153,7 @@ export default class PodcastStore {
       const response = yield baseAPI.get(
         `${process.env.REACT_APP_PODCAST_API_URL}/lookup`,
         {
+          adapter,
           params: {
             id,
           },
@@ -189,7 +188,6 @@ export default class PodcastStore {
 
       const feed = yield parser.parseURL(data.results[0].feedUrl);
 
-      console.log(feed);
       if (!feed?.items?.length) {
         return {
           error: {
@@ -202,8 +200,6 @@ export default class PodcastStore {
         ...data.results[0],
         episodes: feed.items.map((item) => new Episode(item)),
       });
-
-      console.log(this.collectionDetail);
 
       return true;
     } catch (error) {
