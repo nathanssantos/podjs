@@ -13,12 +13,16 @@
 
   &:hover {
     background: $surface-16;
+
+    .collection-list__item__actions {
+      opacity: 1;
+    }
   }
 
   &__image {
     display: flex;
     width: 100%;
-    position: relative;
+    cursor: pointer;
   }
 
   &__actions {
@@ -27,7 +31,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
+    background: $surface-0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,9 +44,7 @@
       padding: 0;
     }
 
-    &:hover {
-      opacity: 1;
-    }
+    
   }
 
   &__title {
@@ -57,5 +59,6 @@
     text-transform: uppercase;
     font-weight: 500;
     cursor: pointer;
+    position: relative;
   }
 }

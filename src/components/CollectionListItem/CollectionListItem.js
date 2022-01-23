@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Favorite, FavoriteBorder, ViewList } from "@material-ui/icons";
+import {
+  Favorite,
+  FavoriteBorder /* InfoOutlined */,
+} from "@material-ui/icons";
 
 import { Button } from "..";
 
@@ -18,12 +21,15 @@ const CollectionListItem = (props) => {
 
   return (
     <div className="collection-list__item">
-      <div className="collection-list__item__image">
+      <div className="collection-list__item__image" onClick={onClickPlay}>
         <img src={artworkUrl600} />
+      </div>
+      <div className="collection-list__item__title">
+        {collectionName}
         <div className="collection-list__item__actions">
-          <Button onClick={onClickPlay}>
-            <ViewList />
-          </Button>
+          {/* <Button onClick={onClickPlay}>
+            <InfoOutlined />
+          </Button> */}
           <Button onClick={onClickFavorite}>
             {collection?.favorite ? (
               <div style={{ color: Theme.error }} title="Remove from favorites">
@@ -36,9 +42,6 @@ const CollectionListItem = (props) => {
             )}
           </Button>
         </div>
-      </div>
-      <div className="collection-list__item__title" onClick={onClickPlay}>
-        {collectionName}
       </div>
     </div>
   );
