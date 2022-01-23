@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import { observer } from "mobx-react";
 
 // import { Header } from "..";
@@ -9,7 +9,7 @@ import Routes from "../../constants/Routes";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       {/* <Header /> */}
       <Switch>
         {Routes.map(({ path, component }) => (
@@ -17,7 +17,7 @@ const Router = () => {
         ))}
       </Switch>
       <AudioPlayer />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
