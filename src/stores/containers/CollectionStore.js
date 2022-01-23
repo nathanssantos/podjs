@@ -40,7 +40,7 @@ export default class CollectionStore {
       const { term } = payload;
 
       this.searchTerm = term;
-      
+
       const response = yield baseAPI.get(
         `${process.env.REACT_APP_PODCAST_API_URL}/search`,
         {
@@ -158,10 +158,13 @@ export default class CollectionStore {
 
       this.collectionDetail = new Collection({
         ...data.results[0],
+        description: feed?.description,
         episodes: feed.items.map((item) => new Episode(item)),
         favorite: !!foundFavorite,
         favoriteRating: foundFavorite?.favoriteRating,
       });
+
+      console.log(this.collectionDetail);
 
       return true;
     } catch (error) {

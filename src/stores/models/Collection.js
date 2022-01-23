@@ -4,6 +4,7 @@ export default class Collection {
   collectionId = null;
 
   artistName = null;
+  description = null;
   artworkUrl100 = null;
   artworkUrl600 = null;
   collectionName = null;
@@ -20,6 +21,7 @@ export default class Collection {
       collectionId: observable,
 
       artistName: observable,
+      description: observable,
       artworkUrl100: observable,
       artworkUrl600: observable,
       collectionName: observable,
@@ -36,6 +38,7 @@ export default class Collection {
       collectionId,
 
       artistName,
+      description,
       artworkUrl100,
       artworkUrl600,
       collectionName,
@@ -51,6 +54,7 @@ export default class Collection {
     this.collectionId = collectionId || null;
 
     this.artistName = artistName || "";
+    this.description = description || "";
     this.artworkUrl100 = artworkUrl100 || "";
     this.artworkUrl600 = artworkUrl600 || "";
     this.collectionName = collectionName || "";

@@ -13,6 +13,7 @@ import {
   Loader,
   Screen,
   SearchBar,
+  Text,
 } from "../../components";
 import { SYSTEM_INSTABILITY } from "../../constants/Messages";
 import * as Theme from "../../constants/Theme";
@@ -39,13 +40,12 @@ const CollectionDetail = () => {
         store.CollectionStore.getCollectionDetail({ id })
       );
 
-      if (
-        response.error ||
-        !store.CollectionStore.collectionDetail?.episodes?.length
-      ) {
+      if (response.error) {
         toast.error(SYSTEM_INSTABILITY);
         return;
       }
+
+      console.log(store.CollectionStore.collectionDetail.episodes);
 
       setSearchResult(store.CollectionStore.collectionDetail.episodes);
     } catch (error) {
@@ -77,6 +77,23 @@ const CollectionDetail = () => {
   return (
     <Screen className="collection-detail" container={false}>
       <Container maxWidth={Theme.containerMaxWidth}>
+        <div className="collection-detail__header">
+          <div className="collection-detail__header__image">
+            <img src={store.CollectionStore.collectionDetail?.artworkUrl600} />
+          </div>
+          <div className="collection-detail__header__text">
+            <div className="collection-detail__header__title">
+              <Text variant="h4">
+                {store.CollectionStore.collectionDetail?.collectionName || ""}
+              </Text>
+            </div>
+            <div className="collection-detail__header__description">
+              <Text>
+                {store.CollectionStore.collectionDetail?.description || ""}
+              </Text>
+            </div>
+          </div>
+        </div>
         <div className="collection-detail__search-bar">
           <Button
             variant="contained"
