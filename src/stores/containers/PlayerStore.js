@@ -21,8 +21,6 @@ export default class PodcastStore {
 
       this.currentEpisode = episode;
 
-      console.log(this.currentEpisode);
-
       return true;
     } catch (error) {
       DEV_MODE

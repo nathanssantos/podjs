@@ -12,7 +12,7 @@ import Episode from "../models/Episode";
 
 const DEV_MODE = Environment.DEV_MODE.PODCAST_STORE;
 
-export default class PodcastStore {
+export default class CollectionStore {
   topCollections = [
     new Collection({
       collectionId: 381816509,
@@ -106,7 +106,7 @@ export default class PodcastStore {
 
       if (DEV_MODE) {
         console.log(
-          `PodcastStore searchCollectionByTerm RESPONSE: ${JSON.stringify(
+          `CollectionStore searchCollectionByTerm RESPONSE: ${JSON.stringify(
             response,
             null,
             2
@@ -130,13 +130,13 @@ export default class PodcastStore {
     } catch (error) {
       DEV_MODE
         ? console.log(
-            `PodcastStore searchCollectionByTerm ERROR: ${JSON.stringify(
+            `CollectionStore searchCollectionByTerm ERROR: ${JSON.stringify(
               error,
               null,
               2
             )}`
           )
-        : console.log("PodcastStore searchCollectionByTerm ERROR");
+        : console.log("CollectionStore searchCollectionByTerm ERROR");
 
       return {
         error: {
@@ -162,7 +162,7 @@ export default class PodcastStore {
 
       if (DEV_MODE) {
         console.log(
-          `PodcastStore getCollectionDetail RESPONSE: ${JSON.stringify(
+          `CollectionStore getCollectionDetail RESPONSE: ${JSON.stringify(
             response,
             null,
             2
@@ -205,13 +205,13 @@ export default class PodcastStore {
     } catch (error) {
       DEV_MODE
         ? console.log(
-            `PodcastStore getCollectionDetail ERROR: ${JSON.stringify(
+            `CollectionStore getCollectionDetail ERROR: ${JSON.stringify(
               error,
               null,
               2
             )}`
           )
-        : console.log("PodcastStore getCollectionDetail ERROR");
+        : console.log("CollectionStore getCollectionDetail ERROR");
 
       return {
         error: {

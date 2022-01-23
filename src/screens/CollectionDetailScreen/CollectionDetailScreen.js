@@ -8,7 +8,6 @@ import { observer } from "mobx-react";
 
 import {
   Button,
-  CollectionListItem,
   EpisodeListItem,
   Loader,
   Screen,
@@ -27,7 +26,6 @@ const CollectionDetail = () => {
   const store = useStore();
   const params = useParams();
   const history = useHistory();
-  // const [mounted, setMounted] = useState(false);
   const [requestingCollectionDetail, setRequestigCollectionDetail] =
     useState(false);
   const [searchingPodcast, setSearchingPodcast] = useState(false);
@@ -37,7 +35,7 @@ const CollectionDetail = () => {
     try {
       setRequestigCollectionDetail(true);
       const response = await flowResult(
-        store.PodcastStore.getCollectionDetail({ id })
+        store.CollectionStore.getCollectionDetail({ id })
       );
 
       if (response.error) toast.error(SYSTEM_INSTABILITY);
@@ -46,7 +44,6 @@ const CollectionDetail = () => {
       toast.error(SYSTEM_INSTABILITY);
     } finally {
       setRequestigCollectionDetail(false);
-      // setMounted(true);
     }
   };
 
@@ -54,7 +51,7 @@ const CollectionDetail = () => {
     try {
       setSearchingPodcast(true);
       const response = await flowResult(
-        store.PodcastStore.searchCollectionByTerm({ term })
+        store.CollectionStore.searchCollectionByTerm({ term })
       );
 
       if (response.error) toast.error(SYSTEM_INSTABILITY);
@@ -63,7 +60,6 @@ const CollectionDetail = () => {
       toast.error(SYSTEM_INSTABILITY);
     } finally {
       setSearchingPodcast(false);
-      // setMounted(true);
     }
   };
 
@@ -71,7 +67,7 @@ const CollectionDetail = () => {
     if (params.id) getCollectionDetail(params.id);
   }, []);
 
-  if (!store.PodcastStore.collectionDetail || requestingCollectionDetail) {
+  if (!store.CollectionStore.collectionDetail || requestingCollectionDetail) {
     return <Loader paddingVertical={16} />;
   }
 
@@ -89,7 +85,7 @@ const CollectionDetail = () => {
           <SearchBar
             requesting={requestingCollectionDetail}
             onChangeText={setTerm}
-            onSubmitSearch={search}
+            onSubmitSearch={() => ""}
           />
         </div>
 
@@ -97,7 +93,7 @@ const CollectionDetail = () => {
           <Loader />
         ) : (
           <div className="episode-list">
-            {store.PodcastStore.collectionDetail.episodes.map(
+            {store.CollectionStore.collectionDetail.episodes.map(
               (episode, index) => (
                 <EpisodeListItem
                   key={`${index}-${episode.title}`}

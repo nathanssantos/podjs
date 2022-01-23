@@ -23,7 +23,6 @@ import "./styles.scss";
 const HomeScreen = () => {
   const store = useStore();
   const history = useHistory();
-  // const [mounted, setMounted] = useState(false);
   const [searchingPodcast, setSearchingPodcast] = useState(false);
   const [term, setTerm] = useState("nerd");
 
@@ -31,7 +30,7 @@ const HomeScreen = () => {
     try {
       setSearchingPodcast(true);
       const response = await flowResult(
-        store.PodcastStore.searchCollectionByTerm({ term })
+        store.CollectionStore.searchCollectionByTerm({ term })
       );
 
       if (response.error) toast.error(SYSTEM_INSTABILITY);
@@ -40,7 +39,6 @@ const HomeScreen = () => {
       toast.error(SYSTEM_INSTABILITY);
     } finally {
       setSearchingPodcast(false);
-      // setMounted(true);
     }
   };
 
@@ -52,7 +50,7 @@ const HomeScreen = () => {
     <Screen className="home" container={false}>
       <Container maxWidth={Theme.containerMaxWidth}>
         <div className="collection-list top-collections">
-          {store.PodcastStore.topCollections.map((collection) => (
+          {store.CollectionStore.topCollections.map((collection) => (
             <CollectionListItem
               key={collection.collectionId}
               collection={collection}
@@ -74,7 +72,7 @@ const HomeScreen = () => {
           <Loader />
         ) : (
           <div className="collection-list">
-            {store.PodcastStore.searchResultList.map((collection) => (
+            {store.CollectionStore.searchResultList.map((collection) => (
               <CollectionListItem
                 key={collection.collectionId}
                 collection={collection}

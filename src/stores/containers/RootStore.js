@@ -1,15 +1,15 @@
 import AuthStore from "./AuthStore";
-import PodcastStore from "./PodcastStore";
+import CollectionStore from "./CollectionStore";
 import PlayerStore from "./PlayerStore";
 
 export default class RootStore {
   AuthStore = null;
-  PodcastStore = null;
+  CollectionStore = null;
   PlayerStore = null;
 
   init() {
     this.AuthStore = new AuthStore();
-    this.PodcastStore = new PodcastStore();
+    this.CollectionStore = new CollectionStore();
     this.PlayerStore = new PlayerStore();
   }
 }
