@@ -5,6 +5,24 @@
     padding-top: 40px;
   }
 
+  &__favorites {
+    &__title {
+      margin-bottom: 8px;
+    }
+
+    &__list {
+      margin-bottom: 32px;
+      
+      @media screen and (min-width: 360px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media screen and (min-width: 600px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+
   &__search-bar {
     padding-bottom: 16px;
     background: $surface-0;
@@ -29,16 +47,6 @@
 
     @media screen and (min-width: 1024px) {
       grid-template-columns: repeat(6, 1fr);
-    }
-
-    &.top-collections {
-      @media screen and (min-width: 360px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      @media screen and (min-width: 600px) {
-        grid-template-columns: repeat(4, 1fr);
-      }
     }
   }
 }

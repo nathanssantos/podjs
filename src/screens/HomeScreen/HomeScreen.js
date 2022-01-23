@@ -12,11 +12,12 @@ import {
   Loader,
   Screen,
   SearchBar,
+  Text,
 } from "../../components";
 import { SYSTEM_INSTABILITY } from "../../constants/Messages";
 import * as Theme from "../../constants/Theme";
 
-import { useStore } from "../../hooks";
+import { useLocalStorage, useStore } from "../../hooks";
 
 import "./styles.scss";
 
@@ -26,9 +27,10 @@ const HomeScreen = () => {
   const [searchingPodcast, setSearchingPodcast] = useState(false);
   const [term, setTerm] = useState("nerd");
 
-  const search = async () => {
+  const search = async (seamless) => {
     try {
-      setSearchingPodcast(true);
+      if (!seamless) setSearchingPodcast(true);
+
       const response = await flowResult(
         store.CollectionStore.searchCollectionByTerm({ term })
       );
@@ -42,6 +44,20 @@ const HomeScreen = () => {
     }
   };
 
+  const handleFavoriteClick = (collection) => {
+    if (collection?.favorite) {
+      store.StorageStore.removeCollectionFromFavorites({
+        id: collection.collectionId,
+      });
+    } else {
+      store.StorageStore.addCollectionToFavorites({
+        collection,
+      });
+    }
+
+    search(true);
+  };
+
   useEffect(() => {
     search();
   }, []);
@@ -49,16 +65,24 @@ const HomeScreen = () => {
   return (
     <Screen className="home" container={false}>
       <Container maxWidth={Theme.containerMaxWidth}>
-        <div className="collection-list top-collections">
-          {store.CollectionStore.topCollections.map((collection) => (
-            <CollectionListItem
-              key={collection.collectionId}
-              collection={collection}
-              onClick={() =>
-                history.push(`/collections/${collection.collectionId}`)
-              }
-            />
-          ))}
+        <div className="home__favorites__title">
+          <Text variant="h4">Favorites</Text>
+        </div>
+        <div className="collection-list home__favorites__list">
+          {store.UserStore.favorites?.length ? (
+            store.UserStore.favorites.map((collection) => (
+              <CollectionListItem
+                key={collection.collectionId}
+                collection={collection}
+                onClickPlay={() => {
+                  history.push(`/collections/${collection.collectionId}`);
+                }}
+                onClickFavorite={() => handleFavoriteClick(collection)}
+              />
+            ))
+          ) : (
+            <Text color={Theme.light38}>Empty</Text>
+          )}
         </div>
 
         <div className="home__search-bar">
@@ -76,9 +100,10 @@ const HomeScreen = () => {
               <CollectionListItem
                 key={collection.collectionId}
                 collection={collection}
-                onClick={() =>
-                  history.push(`/collections/${collection.collectionId}`)
-                }
+                onClickPlay={() => {
+                  history.push(`/collections/${collection.collectionId}`);
+                }}
+                onClickFavorite={() => handleFavoriteClick(collection)}
               />
             ))}
           </div>

@@ -9,6 +9,7 @@ import baseAPI from "../../services/baseAPI";
 
 import Collection from "../models/Collection";
 import Episode from "../models/Episode";
+import { getRoot } from "mobx-easy";
 
 const DEV_MODE = Environment.DEV_MODE.PODCAST_STORE;
 
@@ -124,7 +125,15 @@ export default class CollectionStore {
         };
       }
 
-      this.searchResultList = data.results.map((item) => new Collection(item));
+      this.searchResultList = data.results.map((item) => {
+        const favorite = !!getRoot().UserStore.favorites.find(
+          (favorite) => favorite.collectionId === item.collectionId
+        );
+
+        return new Collection({ ...item, favorite });
+      });
+
+      console.log(this.searchResultList);
 
       return true;
     } catch (error) {

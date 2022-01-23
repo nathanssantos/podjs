@@ -1,26 +1,49 @@
 @import "../../scss/colors";
 
 .collection-list__item {
-  &.button {
-    width: 100%;
-    padding: 0;
-    background: $surface-5;
-    display: flex;
-    flex-direction: column;
+  padding: 0;
+  background: $surface-5;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 64px;
+  border-radius: 4px;
+  overflow: hidden;
 
-    .MuiButton-label {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      flex: 1;
+  &__image {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
+
+  &__actions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 200ms ease-in-out;
+    opacity: 0;
+
+    .button {
+      min-width: 36px;
+      padding: 0;
     }
 
     &:hover {
-      background: $surface-7;
+      opacity: 1;
     }
   }
 
+  &:hover {
+    background: $surface-7;
+  }
 
   &__title {
     padding: 10px;
@@ -31,6 +54,8 @@
     overflow: hidden;
     width: 100%;
     margin-top: auto;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
   &:hover {

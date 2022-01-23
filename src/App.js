@@ -42,6 +42,8 @@ const App = () => {
         }
       );
 
+      newRootStore.StorageStore.loadFavoriteCollections();
+
       if (storedToken?.length) {
         await flowResult(newRootStore.AuthStore.authenticate({ storedToken }));
       }
