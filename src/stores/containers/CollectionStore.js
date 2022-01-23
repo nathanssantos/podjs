@@ -133,8 +133,6 @@ export default class CollectionStore {
         return new Collection({ ...item, favorite });
       });
 
-      console.log(this.searchResultList);
-
       return true;
     } catch (error) {
       DEV_MODE
@@ -205,9 +203,15 @@ export default class CollectionStore {
         };
       }
 
+      const foundFavorite = getRoot().UserStore.favorites.find(
+        (favorite) => favorite.collectionId === data.results[0].collectionId
+      );
+
       this.collectionDetail = new Collection({
         ...data.results[0],
         episodes: feed.items.map((item) => new Episode(item)),
+        favorite: !!foundFavorite,
+        favoriteRating: foundFavorite?.favoriteRating,
       });
 
       return true;

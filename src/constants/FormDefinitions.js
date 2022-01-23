@@ -21,7 +21,7 @@ const searchBarFormDefinitions = {
     text: Yup.string().nullable(),
   },
   initialValues: {
-    text: "nerd",
+    text: "",
   },
 };
 

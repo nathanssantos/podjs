@@ -1,10 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Favorite,
-  FavoriteBorder,
-  PlayCircleOutline,
-} from "@material-ui/icons";
+import { Favorite, FavoriteBorder, ViewList } from "@material-ui/icons";
 
 import { Button } from "..";
 
@@ -26,7 +22,7 @@ const CollectionListItem = (props) => {
         <img src={artworkUrl600} />
         <div className="collection-list__item__actions">
           <Button onClick={onClickPlay}>
-            <PlayCircleOutline />
+            <ViewList />
           </Button>
           <Button onClick={onClickFavorite}>
             {collection?.favorite ? (
@@ -41,7 +37,9 @@ const CollectionListItem = (props) => {
           </Button>
         </div>
       </div>
-      <div className="collection-list__item__title">{collectionName}</div>
+      <div className="collection-list__item__title" onClick={onClickPlay}>
+        {collectionName}
+      </div>
     </div>
   );
 };

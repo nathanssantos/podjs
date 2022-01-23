@@ -61,7 +61,7 @@ SearchBar.propTypes = {
 };
 
 SearchBar.defaultProps = {
-  placeholder: "Pesquisar",
+  placeholder: "Podcast name",
   requesting: false,
   onChangeText: () => "",
 };

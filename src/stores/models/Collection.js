@@ -13,6 +13,7 @@ export default class Collection {
   genres = null;
   primaryGenreName = null;
   favorite = false;
+  favoriteRating = 0;
 
   constructor(newCollection = {}) {
     makeObservable(this, {
@@ -28,6 +29,7 @@ export default class Collection {
       genres: observable,
       primaryGenreName: observable,
       favorite: observable,
+      favoriteRating: observable,
     });
 
     const {
@@ -43,6 +45,7 @@ export default class Collection {
       genres,
       primaryGenreName,
       favorite,
+      favoriteRating,
     } = newCollection;
 
     this.collectionId = collectionId || null;
@@ -57,5 +60,6 @@ export default class Collection {
     this.genres = genres || [];
     this.primaryGenreName = primaryGenreName || "";
     this.favorite = favorite || false;
+    this.favoriteRating = favoriteRating || 0;
   }
 }

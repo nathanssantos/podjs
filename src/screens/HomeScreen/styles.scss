@@ -6,20 +6,18 @@
   }
 
   &__favorites {
-    &__title {
+    margin-bottom: 40px;
+
+    .home__title {
       margin-bottom: 8px;
     }
 
-    &__list {
-      margin-bottom: 32px;
-      
-      @media screen and (min-width: 360px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    @media screen and (min-width: 360px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-      @media screen and (min-width: 600px) {
-        grid-template-columns: repeat(4, 1fr);
-      }
+    @media screen and (min-width: 600px) {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
