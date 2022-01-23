@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
 import { flowResult } from "mobx";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { observer } from "mobx-react";
 
 import {
   Button,
@@ -18,11 +19,14 @@ import * as Theme from "../../constants/Theme";
 
 import { useStore } from "../../hooks";
 
+import { ArrowLeftIcon } from "../../components/svg";
+
 import "./styles.scss";
 
 const CollectionDetail = () => {
   const store = useStore();
   const params = useParams();
+  const history = useHistory();
   // const [mounted, setMounted] = useState(false);
   const [requestingCollectionDetail, setRequestigCollectionDetail] =
     useState(false);
@@ -72,9 +76,16 @@ const CollectionDetail = () => {
   }
 
   return (
-    <Screen className="home" container={false}>
+    <Screen className="collection-detail" container={false}>
       <Container maxWidth={Theme.containerMaxWidth}>
-        <div className="collection-detail-search-bar">
+        <div className="collection-detail__search-bar">
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => history.push("/")}
+          >
+            <ArrowLeftIcon color="#000" />
+          </Button>
           <SearchBar
             requesting={requestingCollectionDetail}
             onChangeText={setTerm}
@@ -91,7 +102,7 @@ const CollectionDetail = () => {
                 <EpisodeListItem
                   key={`${index}-${episode.title}`}
                   episode={episode}
-                  onClick={() => console.log(episode.mediaUrl)}
+                  onClick={() => store.PlayerStore.loadEpisode({ episode })}
                 />
               )
             )}
@@ -102,4 +113,4 @@ const CollectionDetail = () => {
   );
 };
 
-export default CollectionDetail;
+export default observer(CollectionDetail);

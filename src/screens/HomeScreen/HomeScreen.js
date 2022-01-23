@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Container } from "@material-ui/core";
 import { flowResult } from "mobx";
+import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -62,7 +63,7 @@ const HomeScreen = () => {
           ))}
         </div>
 
-        <div className="collection-search-bar">
+        <div className="home__search-bar">
           <SearchBar
             requesting={searchingPodcast}
             onChangeText={setTerm}
@@ -89,4 +90,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default observer(HomeScreen);

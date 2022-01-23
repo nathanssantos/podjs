@@ -19,21 +19,4 @@
       min-width: 72px;
     }
   }
-
-  &__bt-icon {
-    display: none;
-
-    @media screen and (min-width: 1024px) {
-      margin-bottom: 0;
-      display: flex;
-    }
-  }
-
-  &__bt-text {
-    display: flex;
-
-    @media screen and (min-width: 1024px) {
-      display: none;
-    }
-  }
 }

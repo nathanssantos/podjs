@@ -13,10 +13,8 @@ import "./styles.scss";
 const SearchBar = (props) => {
   const {
     placeholder,
-    buttonLabel,
     requesting,
     onChangeText,
-
     onSubmitSearch,
   } = props;
 
@@ -49,10 +47,7 @@ const SearchBar = (props) => {
         onChange={formik.handleChange}
       />
       <Button variant="contained" type="submit" loading={requesting}>
-        <div className="search-bar__bt-icon">
-          <SearchIcon color="#000" size={40} />
-        </div>
-        <div className="search-bar__bt-text">{buttonLabel}</div>
+        <SearchIcon color="#000" />
       </Button>
     </form>
   );
@@ -60,7 +55,6 @@ const SearchBar = (props) => {
 
 SearchBar.propTypes = {
   placeholder: PropTypes.string,
-  buttonLabel: PropTypes.string,
   requesting: PropTypes.bool,
   onChangeText: PropTypes.func,
   onSubmitSearch: PropTypes.func.isRequired,
@@ -68,7 +62,6 @@ SearchBar.propTypes = {
 
 SearchBar.defaultProps = {
   placeholder: "Pesquisar",
-  buttonLabel: "Buscar",
   requesting: false,
   onChangeText: () => "",
 };

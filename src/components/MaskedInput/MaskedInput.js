@@ -12,8 +12,6 @@ import {
 } from "@material-ui/core";
 import { VisibilityIcon, VisibilityOffIcon } from "../svg";
 
-import "./styles.scss";
-
 const MaskedInput = (props) => {
   const {
     id,

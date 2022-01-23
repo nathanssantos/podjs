@@ -1,17 +1,23 @@
 @import "../../scss/colors";
 
-.home {
+.collection-detail {
   &.screen {
     padding-top: 40px;
   }
 
-  .collection-detail-search-bar {
+  &__search-bar {
+    display: flex;
+    align-items: center;
     padding-bottom: 16px;
     background: $surface-0;
     position: sticky;
-    top: 0;
+    top: -1px;
     z-index: 1;
     padding-top: 16px;
+
+    .search-bar {
+      margin-left: 16px;
+    }
   }
 
   .episode-list {

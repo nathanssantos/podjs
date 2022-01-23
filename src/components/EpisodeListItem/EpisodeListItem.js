@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
+import { observer } from "mobx-react";
 
 import { Button } from "..";
 
@@ -34,4 +35,4 @@ EpisodeListItem.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default EpisodeListItem;
+export default observer(EpisodeListItem)

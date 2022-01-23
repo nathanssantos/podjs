@@ -9,20 +9,40 @@
   right: 0;
   background: $surface-9;
   box-shadow: $elevation-9;
+  transform: translate3d(0, 100%, 0);
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &.open {
+    transform: initial;
+  }
+
+  &__body {
+    width: calc(100% - 120px);
+  }
+
+  &__title {
+    padding: 8px 10px 0;
+
+    .text {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
 
   &__image {
-    width: 88px;
+    min-width: 120px;
+    width: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   &__player {
-    flex: 1;
 
     .rhap {
       &_container {
-        background: $surface-7;
+        background: $surface-9;
         box-shadow: none;
 
         button {

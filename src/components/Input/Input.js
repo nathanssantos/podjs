@@ -175,15 +175,21 @@ const Input = (props) => {
   const renderTextField = () => {
     switch (variant) {
       case "outlined": {
-        return <MUIOutlinedInput {...inputProps} labelWidth={labelWidth} />;
+        return (
+          <MUIOutlinedInput
+            {...inputProps}
+            labelWidth={labelWidth}
+            size="small"
+          />
+        );
       }
 
       case "filled": {
-        return <MUIFilledInput {...inputProps} />;
+        return <MUIFilledInput {...inputProps} size="small" />;
       }
 
       default: {
-        return <MUIInput {...inputProps} />;
+        return <MUIInput {...inputProps} size="small" />;
       }
     }
   };
@@ -195,6 +201,7 @@ const Input = (props) => {
       error={error}
       fullWidth={fullWidth}
       disabled={disabled}
+      size="small"
     >
       {inputLabel}
       {renderTextField()}
