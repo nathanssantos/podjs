@@ -10,7 +10,7 @@ import Collection from "../models/Collection";
 
 import { useLocalStorage } from "../../hooks";
 
-const DEV_MODE = Environment.DEV_MODE.PODCAST_STORE;
+const DEV_MODE = Environment.DEV_MODE.STORAGE_STORE;
 
 export default class StorageStore {
   constructor() {
@@ -31,10 +31,6 @@ export default class StorageStore {
           (item) => new Collection({ ...item, favorite: true })
         );
       }
-
-      console.log(
-        _.orderBy(getRoot().UserStore.favorites, "favoriteRating", "desc")
-      );
 
       return true;
     } catch (error) {

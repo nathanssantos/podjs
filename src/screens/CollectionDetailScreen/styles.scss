@@ -2,7 +2,7 @@
 
 .collection-detail {
   &.screen {
-    padding-top: 40px;
+    // padding-top: 40px;
   }
 
   &__header {
@@ -44,12 +44,23 @@
     padding-bottom: 16px;
     background: $surface-0;
     position: sticky;
-    top: -1px;
+    top: 64px;
     z-index: 1;
     padding-top: 16px;
 
     .search-bar {
       margin-left: 16px;
+    }
+
+    .button {
+      &.MuiButtonBase-root {
+        min-width: 36px;
+        padding: 0;
+
+        @media screen and (min-width: 600px) {
+          min-width: 64px;
+        }
+      }
     }
   }
 

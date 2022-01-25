@@ -22,6 +22,14 @@ const AudioPlayer = () => {
     return classNames;
   };
 
+  const previous = () => {
+    store.PlayerStore.playPreviousPlaylistEpisode();
+  };
+
+  const next = () => {
+    store.PlayerStore.playNextPlaylistEpisode();
+  };
+
   return (
     <div className={audioPlayerClassNames()}>
       {currentEpisode?.image ? (
@@ -36,7 +44,10 @@ const AudioPlayer = () => {
         <div className="audio-player__player">
           <H5AudioPlayer
             src={currentEpisode?.mediaUrl}
+            onClickPrevious={previous}
+            onClickNext={next}
             showFilledVolume
+            showSkipControls
             autoPlayAfterSrcChange
           />
         </div>

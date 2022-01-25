@@ -11,7 +11,7 @@ import Collection from "../models/Collection";
 import Episode from "../models/Episode";
 import { getRoot } from "mobx-easy";
 
-const DEV_MODE = Environment.DEV_MODE.PODCAST_STORE;
+const DEV_MODE = Environment.DEV_MODE.COLLECTION_STORE;
 
 export default class CollectionStore {
   searchTerm = "";
@@ -49,6 +49,7 @@ export default class CollectionStore {
             country: "br",
             entity: "podcast",
             media: "podcast",
+            limit: 200,
             term,
           },
         }

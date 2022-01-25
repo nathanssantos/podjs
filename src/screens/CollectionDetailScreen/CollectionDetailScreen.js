@@ -45,8 +45,6 @@ const CollectionDetail = () => {
         return;
       }
 
-      console.log(store.CollectionStore.collectionDetail.episodes);
-
       setSearchResult(store.CollectionStore.collectionDetail.episodes);
     } catch (error) {
       console.log(error);
@@ -118,7 +116,10 @@ const CollectionDetail = () => {
               <EpisodeListItem
                 key={`${index}-${episode.title}`}
                 episode={episode}
-                onClick={() => store.PlayerStore.loadEpisode({ episode })}
+                onClickPlay={() => store.PlayerStore.loadEpisode({ episode })}
+                onClickAddToPlaylist={() =>
+                  store.PlayerStore.addEpisodeToPlaylist({ episode })
+                }
               />
             ))}
           </div>

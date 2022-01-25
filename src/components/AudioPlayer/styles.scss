@@ -11,13 +11,18 @@
   box-shadow: $elevation-9;
   transform: translate3d(0, 100%, 0);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  z-index: 9999;
 
   &.open {
     transform: initial;
   }
 
   &__body {
-    width: calc(100% - 120px);
+    width: 100%;
+
+    @media screen and(min-width: 440px) {
+      width: calc(100% - 120px);
+    }
   }
 
   &__title {
@@ -36,10 +41,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
+
+    @media screen and(min-width: 440px) {
+      display: flex;
+    }
   }
 
   &__player {
-
     .rhap {
       &_container {
         background: $surface-9;

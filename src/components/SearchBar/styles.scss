@@ -16,7 +16,12 @@
 
   .button {
     &.MuiButtonBase-root {
-      min-width: 72px;
+      min-width: 36px;
+      padding: 0;
+
+      @media screen and (min-width: 600px) {
+        min-width: 64px;
+      }
     }
   }
 }

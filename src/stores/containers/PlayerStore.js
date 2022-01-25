@@ -3,23 +3,89 @@ import { getRoot } from "mobx-easy";
 
 import * as Environment from "../../constants/Environment";
 
+const DEV_MODE = Environment.DEV_MODE.PLAYER_STORE;
 
-const DEV_MODE = Environment.DEV_MODE.PODCAST_STORE;
-
-export default class PodcastStore {
+export default class PlayerStore {
   currentEpisode = null;
+  playlist = [];
+  playlistIsOpen = false;
 
   constructor() {
     makeObservable(this, {
       currentEpisode: observable,
+      playlist: observable,
+      playlistIsOpen: observable,
 
+      openPlaylist: action.bound,
+      closePlaylist: action.bound,
+      addEpisodeToPlaylist: action.bound,
+      removeEpisodeFromPlaylist: action.bound,
+      playNextPlaylistEpisode: action.bound,
+      playPreviousPlaylistEpisode: action.bound,
+      clearPlaylist: action.bound,
       loadEpisode: action.bound,
     });
+  }
+
+  openPlaylist() {
+    this.playlistIsOpen = true;
+  }
+
+  closePlaylist() {
+    this.playlistIsOpen = false;
+  }
+
+  addEpisodeToPlaylist({ episode }) {
+    this.openPlaylist();
+    if (this.playlist.find((item) => item.title === episode.title)) return;
+    this.playlist = [...this.playlist, episode];
+  }
+
+  removeEpisodeFromPlaylist({ episode }) {
+    this.playlist = this.playlist.filter(
+      (item) => item.title !== episode.title
+    );
+  }
+
+  playNextPlaylistEpisode() {
+    let continueLoop = true;
+
+    this.playlist.forEach((episode, index) => {
+      if (
+        continueLoop &&
+        index + 1 < this.playlist?.length &&
+        episode.title === this.currentEpisode.title
+      ) {
+        console.log(this.currentEpisode.title);
+
+        this.loadEpisode({ episode: this.playlist[index + 1] });
+
+        continueLoop = false;
+      }
+    });
+  }
+
+  playPreviousPlaylistEpisode() {
+    this.playlist.forEach((episode, index) => {
+      const previousEpisode = this.playlist[index - 1];
+
+      if (previousEpisode && episode.title === this.currentEpisode.title) {
+        this.loadEpisode({ episode: previousEpisode });
+      }
+    });
+  }
+
+  clearPlaylist() {
+    this.playlist = [];
   }
 
   loadEpisode(payload = {}) {
     try {
       const { episode } = payload;
+
+      if (!this.playlist.find((item) => item.title === episode.title)) {
+        this.addEpisodeToPlaylist({ episode });
+      }
 
       const foundFavorite = getRoot().UserStore.favorites.find(
         (favorite) =>
@@ -44,9 +110,9 @@ export default class PodcastStore {
     } catch (error) {
       DEV_MODE
         ? console.log(
-            `PodcastStore loadEpisode ERROR: ${JSON.stringify(error, null, 2)}`
+            `PlayerStore loadEpisode ERROR: ${JSON.stringify(error, null, 2)}`
           )
-        : console.log("PodcastStore loadEpisode ERROR");
+        : console.log("PlayerStore loadEpisode ERROR");
 
       return {
         error: {

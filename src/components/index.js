@@ -19,6 +19,7 @@ import Autocomplete from "./Autocomplete/Autocomplete";
 import MaskedInput from "./MaskedInput/MaskedInput";
 import Menu from "./Menu/Menu";
 import Modal from "./Modal/Modal";
+import Playlist from "./Playlist/Playlist";
 import RadioButtonsGroup from "./RadioButtonsGroup/RadioButtonsGroup";
 import Router from "./Router/Router";
 import Screen from "./Screen/Screen";
@@ -52,6 +53,7 @@ export {
   MaskedInput,
   Menu,
   Modal,
+  Playlist,
   RadioButtonsGroup,
   Router,
   Screen,
