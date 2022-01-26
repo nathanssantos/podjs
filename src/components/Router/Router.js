@@ -7,19 +7,17 @@ import { AudioPlayer } from "..";
 
 import Routes from "../../constants/Routes";
 
-const Router = () => {
-  return (
-    <HashRouter>
-      <Header />
-      <Switch>
-        {Routes.map(({ path, component }) => (
-          <Route key={path} path={path} component={component} exact />
-        ))}
-      </Switch>
-      <AudioPlayer />
-      <Playlist />
-    </HashRouter>
-  );
-};
+const Router = () => (
+  <HashRouter>
+    <Header />
+    <Switch>
+      {Routes.map(({ path, component }) => (
+        <Route key={path} path={path} component={component} exact />
+      ))}
+    </Switch>
+    <AudioPlayer />
+    <Playlist />
+  </HashRouter>
+);
 
 export default observer(Router);

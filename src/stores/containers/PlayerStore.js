@@ -16,6 +16,7 @@ export default class PlayerStore {
       playlist: observable,
       playlistIsOpen: observable,
 
+      setPlaylist: action.bound,
       openPlaylist: action.bound,
       closePlaylist: action.bound,
       addEpisodeToPlaylist: action.bound,
@@ -25,6 +26,10 @@ export default class PlayerStore {
       clearPlaylist: action.bound,
       loadEpisode: action.bound,
     });
+  }
+
+  setPlaylist(newPlaylist) {
+    this.playlist = newPlaylist;
   }
 
   openPlaylist() {

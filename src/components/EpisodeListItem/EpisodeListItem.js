@@ -47,8 +47,8 @@ const EpisodeListItem = (props) => {
 EpisodeListItem.propTypes = {
   episode: PropTypes.instanceOf(Episode),
   hightlighted: PropTypes.bool,
-  onClickPlay: PropTypes.func.isRequired,
-  onClickAddToPlaylist: PropTypes.func.isRequired,
+  onClickPlay: PropTypes.func,
+  onClickAddToPlaylist: PropTypes.func,
 };
 
 export default observer(EpisodeListItem);
