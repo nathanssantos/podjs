@@ -41,7 +41,6 @@ export default class PlayerStore {
   }
 
   addEpisodeToPlaylist({ episode }) {
-    this.openPlaylist();
     if (this.playlist.find((item) => item.title === episode.title)) return;
     this.playlist = [...this.playlist, episode];
   }

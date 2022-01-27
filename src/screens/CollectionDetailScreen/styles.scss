@@ -1,10 +1,6 @@
-@import "../../scss/colors";
+@import '../../scss/colors';
 
 .collection-detail {
-  &.screen {
-    // padding-top: 40px;
-  }
-
   &__header {
     display: flex;
     flex-direction: column;
@@ -16,12 +12,17 @@
       flex-direction: row;
       text-align: left;
       align-items: flex-start;
+      min-height: 300px;
     }
 
     &__image {
       width: 100%;
       max-width: 300px;
       margin-bottom: 16px;
+      border-radius: 4px;
+      display: flex;
+      overflow: hidden;
+      border: 1px solid transparent;
 
       @media screen and (min-width: 600px) {
         margin-right: 16px;

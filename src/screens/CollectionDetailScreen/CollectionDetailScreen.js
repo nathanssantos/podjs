@@ -15,7 +15,10 @@ import {
   SearchBar,
   Text,
 } from "../../components";
-import { SYSTEM_INSTABILITY } from "../../constants/Messages";
+import {
+  EPISODE_ADDED_TO_PLAYLIST,
+  SYSTEM_INSTABILITY,
+} from "../../constants/Messages";
 import * as Theme from "../../constants/Theme";
 
 import { useStore } from "../../hooks";
@@ -117,9 +120,10 @@ const CollectionDetail = () => {
                 key={`${index}-${episode.title}`}
                 episode={episode}
                 onClickPlay={() => store.PlayerStore.loadEpisode({ episode })}
-                onClickAddToPlaylist={() =>
-                  store.PlayerStore.addEpisodeToPlaylist({ episode })
-                }
+                onClickAddToPlaylist={() => {
+                  store.PlayerStore.addEpisodeToPlaylist({ episode });
+                  toast.success(EPISODE_ADDED_TO_PLAYLIST);
+                }}
               />
             ))}
           </div>

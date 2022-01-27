@@ -16,7 +16,7 @@
 
   &--list {
     .list-loader__item {
-      height: 340px;
+      height: 312px;
       width: 100%;
       border-radius: 4px;
       margin-bottom: 16px;
@@ -26,7 +26,7 @@
       }
 
       @media screen and (min-width: 600px) {
-        height: 166px;
+        height: 150px;
       }
     }
   }

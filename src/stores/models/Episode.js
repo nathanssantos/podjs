@@ -1,4 +1,5 @@
 import { makeObservable, observable } from "mobx";
+import { millisecondsToHms, secondsToHms } from "../../utils";
 
 export default class Episode {
   title = null;
@@ -7,7 +8,7 @@ export default class Episode {
   link = null;
   content = null;
   mediaUrl = null;
-  length = null
+  duration = null;
 
   constructor(newEpisode = {}) {
     makeObservable(this, {
@@ -17,7 +18,7 @@ export default class Episode {
       link: observable,
       content: observable,
       mediaUrl: observable,
-      length: observable,
+      duration: observable,
     });
 
     const { title, pubDate, link, content, itunes, enclosure } = newEpisode;
@@ -25,9 +26,15 @@ export default class Episode {
     this.title = title || "";
     this.pubDate = pubDate || "";
     this.link = link || "";
-    this.image = itunes?.image?.length ? itunes.image : "";
+    this.image = itunes?.image || "";
     this.content = itunes?.summary?.length ? itunes.summary : content || "";
-    this.mediaUrl = enclosure?.url?.length ? enclosure.url : "";
-    this.length = enclosure?.length?.length ? enclosure.length : "";
+    this.duration = itunes?.duration?.length
+      ? itunes?.duration?.includes(":")
+        ? itunes.duration
+        : itunes?.duration?.length > 8
+        ? millisecondsToHms(itunes.duration)
+        : secondsToHms(itunes.duration)
+      : "";
+    this.mediaUrl = enclosure?.url || "";
   }
 }

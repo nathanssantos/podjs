@@ -1,21 +1,25 @@
-@import "../../scss/colors";
+@import '../../scss/colors';
 
 .episode-list__item {
   width: 100%;
-  padding: 0;
   background: $surface-5;
   display: flex;
   justify-content: flex-start;
   color: $light-87 !important;
-  min-height: 250px;
+  min-height: 312px;
   flex-direction: column;
   align-items: center;
   border-radius: 4px;
+  border: 1px solid transparent;
+  padding: 16px 16px 0;
+  overflow: hidden;
 
   @media screen and (min-width: 600px) {
-    min-height: 166px;
+    min-height: initial;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: initial;
+    padding: 0;
+    min-height: 150px;
   }
 
   &:hover {
@@ -26,48 +30,61 @@
     color: $light-87 !important;
   }
 
-  &__display {
-    padding: 16px 0;
-
-    @media screen and (min-width: 600px) {
-      padding: 16px 0 16px 16px;
-    }
-  }
-
   &__image {
     width: 150px;
     min-width: 150px;
     display: flex;
-    margin-bottom: 16px;
 
     img {
       object-fit: cover;
     }
   }
 
-  &__actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  &__text {
-    padding: 16px;
-  }
-
   &__title,
-  &__content {
-    text-align: left;
-    color: $light-87;
-    font-size: 12px;
+  &__content,
+  &__duration {
     width: 100%;
     white-space: break-spaces;
     word-break: break-word;
-    line-height: 18px;
     text-align: center;
 
     @media screen and (min-width: 600px) {
       text-align: left;
+    }
+  }
+
+  &__title.text,
+  &__display {
+    margin-bottom: 16px;
+  }
+
+  &__display,
+  &__duration {
+    @media screen and (min-width: 600px) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__text {
+    @media screen and (min-width: 600px) {
+      padding: 16px;
+      flex: 1;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+
+    .button {
+      min-width: 36px;
+      padding: 0;
+    }
+
+    @media screen and (min-width: 600px) {
+      flex-direction: column;
+      justify-content: center;
     }
   }
 
@@ -76,6 +93,9 @@
     font-weight: 300;
     padding: 0;
     margin: 16px 0 0 0;
+    color: $light-87;
+    font-size: 12px;
+    line-height: 18px;
 
     br + br {
       display: none;
@@ -83,10 +103,6 @@
       line-height: 0;
       max-height: 0;
     }
-
-    // a[rel="noopener noreferrer"] {
-    //   display: none;
-    // }
   }
 
   &:hover {

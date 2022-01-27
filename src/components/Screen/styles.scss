@@ -1,8 +1,7 @@
 .screen {
-  padding-top: 80px;
   min-height: 100vh;
+  padding: 96px 0 136px;
   transition: all 200ms ease-out;
-  padding-bottom: 136px;
 
   &__children {
     transition: all 200ms ease-out;

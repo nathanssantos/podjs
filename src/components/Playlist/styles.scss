@@ -1,4 +1,4 @@
-@import "../../scss/colors";
+@import '../../scss/colors';
 
 .playlist {
   &__button {
@@ -14,6 +14,7 @@
     width: 100vw;
     max-width: 440px;
     padding: 0;
+    padding-bottom: 120px;
 
     .episode-list__item {
       border-radius: 0;
@@ -21,7 +22,6 @@
       flex-direction: row;
       padding: 16px;
       min-height: initial;
-      margin-bottom: 1px;
 
       @media screen and (min-width: 600px) {
         min-height: initial;
@@ -57,5 +57,9 @@
         padding-left: 16px;
       }
     }
+  }
+
+  &__item-wrapper {
+    padding-bottom: 1px;
   }
 }

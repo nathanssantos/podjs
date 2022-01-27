@@ -28,7 +28,7 @@ const HomeScreen = () => {
   const [searchingPodcast, setSearchingPodcast] = useState(false);
   const [term, setTerm] = useState("");
 
-  const search = async (seamless) => {
+  const search = async ({ seamless = false }) => {
     try {
       if (!seamless) setSearchingPodcast(true);
 
@@ -56,7 +56,7 @@ const HomeScreen = () => {
       });
     }
 
-    search(true);
+    search({ seamles: true });
   };
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const HomeScreen = () => {
             />
           </div>
           {searchingPodcast ? (
-            <ListLoader variant="grid" />
+            <ListLoader variant="grid" length={24} />
           ) : (
             <div className="collection-list">
               {store.CollectionStore.searchResultList.map((collection) => (

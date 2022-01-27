@@ -41,6 +41,7 @@ const Playlist = () => {
         anchor={"right"}
         open={store.PlayerStore.playlistIsOpen}
         onClose={() => store.PlayerStore.closePlaylist()}
+        onOpen={() => ""}
       >
         <div className="playlist__content">
           <DragDropContext onDragEnd={onDragEnd}>
@@ -49,7 +50,7 @@ const Playlist = () => {
                 <div
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  className="kanban__list__droppable"
+                  className="playlist__droppable"
                 >
                   {store.PlayerStore.playlist.map((episode, index) => (
                     <Draggable
@@ -63,21 +64,16 @@ const Playlist = () => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           style={provided.draggableProps.style}
-                          className="kanban__list__draggable"
+                          className="playlist__draggable"
                         >
                           <div
                             key={episode.title}
                             onClick={() =>
                               store.PlayerStore.loadEpisode({ episode })
                             }
+                            className="playlist__item-wrapper"
                           >
-                            <EpisodeListItem
-                              episode={episode}
-                              hightlighted={
-                                store.PlayerStore.currentEpisode?.title ===
-                                episode.title
-                              }
-                            />
+                            <EpisodeListItem episode={episode} />
                           </div>
                         </div>
                       )}
