@@ -16,7 +16,7 @@
 
   &--list {
     .list-loader__item {
-      height: 312px;
+      height: 256px;
       width: 100%;
       border-radius: 4px;
       margin-bottom: 16px;
@@ -26,7 +26,7 @@
       }
 
       @media screen and (min-width: 600px) {
-        height: 150px;
+        height: 114px;
       }
     }
   }
@@ -49,7 +49,7 @@
     }
 
     .list-loader__item {
-      padding-top: calc(100% + 37.16px);
+      padding-top: calc(100% + 39.16px);
 
       &:last-of-type {
         margin-bottom: 0;

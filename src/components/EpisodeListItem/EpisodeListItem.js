@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 import { PlayArrow, PlaylistAdd } from "@material-ui/icons";
 
-import { Button, Text } from "..";
+import { Button } from "..";
 
 import Episode from "../../stores/models/Episode";
 
@@ -29,9 +29,7 @@ const EpisodeListItem = (props) => {
         </div>
       </div>
       <div className="episode-list__item__text">
-        <Text className="episode-list__item__title" variant="h6">
-          {title}
-        </Text>
+        <div className="episode-list__item__title">{title}</div>
         <div className="episode-list__item__duration">{duration}</div>
         {/* <p
           className="episode-list__item__content"
