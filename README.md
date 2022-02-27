@@ -1,2 +1,2 @@
-# Podjs v1.0.0
-A podcast aggregator app.
+# Podjs
+A podcast aggregator app buit with React.js.
