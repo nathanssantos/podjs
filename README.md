@@ -1,2 +1,2 @@
-# Podjs
-A podcast aggregator app buit with React.js.
+# next-typescript-boilerplate
+Boilerplate for Next.js applications with TypeScript.

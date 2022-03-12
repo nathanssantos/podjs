@@ -1,70 +1,38 @@
 {
-  "name": "podjs",
+  "name": "portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://nathanssantos.github.io/podjs/",
-  "author": {
-    "name": "Natha Silva Santos",
-    "email": "nathansilvasantos@gmail.com"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@date-io/date-fns": "1.x",
-    "@fontsource/roboto": "^4.5.0",
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.60",
-    "@material-ui/pickers": "^3.3.10",
-    "autosuggest-highlight": "^3.1.1",
-    "axios": "^0.21.1",
-    "axios-jsonp": "^1.0.4",
-    "date-fns": "^2.24.0",
-    "formik": "^2.2.9",
-    "mobx": "^6.3.3",
-    "mobx-easy": "^1.0.11",
-    "mobx-react": "^7.2.0",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-beautiful-dnd": "^13.1.0",
-    "react-dom": "^17.0.2",
-    "react-h5-audio-player": "^3.8.1",
-    "react-number-format": "^4.7.3",
-    "react-router-dom": "^5.2.1",
-    "react-scripts": "4.0.3",
-    "react-toastify": "^8.0.2",
-    "rss-parser": "^3.12.0",
-    "sass": "^1.42.1",
-    "yup": "^0.32.9"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@emotion/css": "^11.7.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.4.2",
+    "@mui/material": "^5.4.2",
+    "@mui/styled-engine-sc": "^5.4.2",
+    "axios": "^0.26.0",
+    "framer-motion": "^6.2.8",
+    "next": "12.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-lazyload": "^3.2.0",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-react": "^7.25.1",
-    "gh-pages": "^3.2.3"
+    "@babel/core": "^7.17.5",
+    "@types/node": "17.0.18",
+    "@types/react": "17.0.39",
+    "@types/react-lazyload": "^3.1.1",
+    "@types/styled-components": "^5.1.22",
+    "babel-plugin-styled-components": "^2.0.6",
+    "eslint": "8.9.0",
+    "eslint-config-next": "12.1.0",
+    "typescript": "4.5.5"
   }
 }
