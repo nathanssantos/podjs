@@ -1,2 +1,3 @@
-# next-typescript-boilerplate
-Boilerplate for Next.js applications with TypeScript.
+# PodJS 2.0.0
+
+Podcast app built with Next.js and TypeScript.
