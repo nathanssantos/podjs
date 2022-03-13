@@ -1,14 +1,10 @@
-interface Repository {
-  id: number;
-  name: string;
+interface Podcast {
+  artistName: string;
+  collectionId: number;
+  collectionName: string;
+  artworkUrl100: string;
+  artworkUrl600: string;
   description?: string;
-  stargazers_count?: number;
-  language: string;
-  license?: {
-    key: string;
-    name: string;
-    spdx_id: string;
-  };
-  homepage?: string;
-  html_url: string;
+  genres?: Array;
+  feedUrl: string;
 }

@@ -1,18 +1,20 @@
 import axios from "axios";
 import type { NextPage } from "next";
-import { Hero, Projects } from "../sections";
+import { Hero, Podcasts } from "../sections";
 
 interface HomeProps {
-  repositories?: Repository[];
+  podcasts?: Podcast[];
 }
 
 const Home: NextPage<HomeProps> = (props) => {
-  const { repositories } = props;
+  const { podcasts } = props;
+
+  console.log(podcasts);
 
   return (
     <div className="home">
-      <Hero />
-      {repositories?.length && <Projects repositories={repositories} />}
+      {/* <Hero /> */}
+      {podcasts?.length && <Podcasts list={podcasts} />}
     </div>
   );
 };
@@ -20,15 +22,15 @@ const Home: NextPage<HomeProps> = (props) => {
 export async function getServerSideProps() {
   try {
     const response = await axios.get(
-      "https://portfolio-nathanssantos.vercel.app/api/repositories"
+      "https://itunes.apple.com/search?country=br&entity=podcast&media=podcast&limit=200&term=nerd"
     );
 
     return {
-      props: { repositories: response.data },
+      props: { podcasts: response.data.results },
     };
   } catch (error) {
     return {
-      props: { repositories: [] },
+      props: { podcasts: [] },
     };
   }
 }

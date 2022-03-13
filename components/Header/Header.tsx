@@ -41,7 +41,7 @@ const Header = () => {
       <Toolbar>
         <Styles>
           <FadeInContainer delay={1000}>
-            <div className="header__logo"></div>
+            <h1>Podjs</h1>
           </FadeInContainer>
           <div className="header__menu">
             <Menu />

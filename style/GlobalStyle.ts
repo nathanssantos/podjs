@@ -148,6 +148,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   img {
+    object-fit: cover;
     width: 100%;
     max-width: 100%;
     vertical-align: middle;

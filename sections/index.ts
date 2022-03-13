@@ -1,4 +1,4 @@
 import Hero from "./Hero/Hero";
-import Projects from "./Projects/Projects";
+import Podcasts from "./Podcasts/Podcasts";
 
-export { Hero, Projects };
+export { Hero, Podcasts };

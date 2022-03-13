@@ -5,7 +5,7 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Layout from "./Layout/Layout";
 import Menu from "./Menu/Menu";
-import ProjectCard from "./ProjectCard/ProjectCard";
+import PodcastCard from "./PodcastCard/PodcastCard";
 import ThemeProvider from "./ThemeProvider/ThemeProvider";
 
 export {
@@ -16,6 +16,6 @@ export {
   Header,
   Layout,
   Menu,
-  ProjectCard,
+  PodcastCard,
   ThemeProvider,
 };
