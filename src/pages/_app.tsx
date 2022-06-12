@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import RootStore, { RootStoreProvider } from '../stores/rootStore';
 import theme from '../theme/theme';
 
@@ -9,7 +9,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RootStoreProvider value={store}>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+        <ColorModeProvider>
+          <Component {...pageProps} />
+        </ColorModeProvider>
       </ChakraProvider>
     </RootStoreProvider>
   );

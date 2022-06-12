@@ -1,10 +1,43 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Button, SimpleGrid, useColorMode } from '@chakra-ui/react';
 import { useStore } from '../hooks';
+import { useEffect } from 'react';
+import { flowResult } from 'mobx';
+import { observer } from 'mobx-react';
+import CollectionCard from '../components/CollectionCard';
 
 const Home: NextPage = () => {
   const store = useStore();
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  const init = async () => {
+    flowResult(store.collectionStore.getList());
+  };
+
+  const renderList = () => {
+    switch (store.collectionStore.status) {
+      case 'fetching': {
+        return 'loading';
+      }
+
+      case 'success': {
+        if (store.collectionStore.list?.length)
+          return store.collectionStore.list.map((collection) => (
+            <CollectionCard key={collection.collectionId} collection={collection} />
+          ));
+        return 'empty';
+      }
+
+      default: {
+        return '';
+      }
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <div>
@@ -15,18 +48,15 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <Flex direction='column' gap='2'>
-          <Flex direction='column'>
-            <Text>{store.authStore.user?.name}</Text>
-            <Text>{store.authStore.user?.email}</Text>
-          </Flex>
-          <Button colorScheme='blue' alignSelf='flex-start'>
-            PodJS
-          </Button>
-        </Flex>
+        <Button onClick={toggleColorMode}>
+          Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+        </Button>
+        <SimpleGrid spacing={10} minChildWidth={240}>
+          {renderList()}
+        </SimpleGrid>
       </main>
     </div>
   );
 };
 
-export default Home;
+export default observer(Home);
