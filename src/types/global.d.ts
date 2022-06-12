@@ -6,6 +6,8 @@ type StoreActionResponse = {
   message?: string;
 };
 
+type MessageResponse = { message: string };
+
 type User = {
   id: number;
   name: string;
