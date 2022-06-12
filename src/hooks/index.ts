@@ -1,1 +1,3 @@
-export * from './useStore';
+import useStore from './useStore';
+
+export { useStore };
