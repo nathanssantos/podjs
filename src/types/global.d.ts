@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type FetchStatus = 'idle' | 'fetching' | 'error' | 'success';
 
 type StoreActionResponse = {
@@ -12,3 +11,14 @@ type User = {
   name: string;
   email: string;
 };
+
+interface Collection {
+  artistName: string;
+  collectionId: number;
+  collectionName: string;
+  artworkUrl100: string;
+  artworkUrl600: string;
+  description?: string;
+  genres?: Array;
+  feedUrl: string;
+}
