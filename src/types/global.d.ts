@@ -12,7 +12,7 @@ type User = {
   email: string;
 };
 
-interface Collection {
+type Collection = {
   artistName: string;
   collectionId: number;
   collectionName: string;
@@ -21,4 +21,4 @@ interface Collection {
   description?: string;
   genres?: Array;
   feedUrl: string;
-}
+};
