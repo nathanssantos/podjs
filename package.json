@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "husky": "husky install",
-    "format": "prettier --write \"{,!(node_modules|public|build|dist)/**/}*.{js,jsx,ts,tsx,scss,css}\""
+    "format": "prettier --write \"{,!(node_modules|public|build|dist|.next)/**/}*.{js,jsx,ts,tsx,scss,css}\""
   },
   "dependencies": {
     "next": "12.1.6",
