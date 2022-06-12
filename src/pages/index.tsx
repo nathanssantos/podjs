@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Button } from '@chakra-ui/react';
 
 const Home: NextPage = () => {
   return (
@@ -10,7 +11,9 @@ const Home: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main>PodJS</main>
+      <main>
+        <Button colorScheme='blue'>PodJS</Button>
+      </main>
     </div>
   );
 };
