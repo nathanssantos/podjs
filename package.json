@@ -2,40 +2,23 @@
   "name": "podjs",
   "version": "0.1.0",
   "private": true,
-  "author": {
-    "name": "Nathan Silva Santos",
-    "email": "nathansilvasantos@gmail.com"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "husky-install": "husky install"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/core": "^0.8.0",
-    "@chakra-ui/react": "^1.8.8",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "axios": "^0.27.2",
-    "framer-motion": "^6.3.3",
-    "mobx": "^6.5.0",
-    "mobx-easy": "^1.0.11",
-    "next": "12.1.5",
-    "nookies": "^2.5.2",
+    "next": "12.1.6",
     "react": "18.1.0",
-    "react-dom": "18.1.0",
-    "react-icons": "^4.3.1"
+    "react-dom": "18.1.0"
   },
   "devDependencies": {
-    "@types/cookie": "^0.5.1",
-    "@types/node": "17.0.30",
-    "@types/react": "18.0.8",
-    "@types/react-dom": "18.0.3",
-    "eslint": "8.14.0",
-    "eslint-config-next": "12.1.5",
-    "husky": "^7.0.4",
-    "typescript": "4.6.4"
+    "@types/node": "17.0.42",
+    "@types/react": "18.0.12",
+    "@types/react-dom": "18.0.5",
+    "eslint": "8.17.0",
+    "eslint-config-next": "12.1.6",
+    "typescript": "4.7.3"
   }
 }
