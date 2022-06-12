@@ -21,6 +21,7 @@ type Collection = {
   artworkUrl100: string;
   artworkUrl600: string;
   description?: string;
+  primaryGenreName?: string;
   genres?: string[];
   feedUrl: string;
 };

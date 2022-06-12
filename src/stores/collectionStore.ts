@@ -24,7 +24,7 @@ export default class CollectionStore {
     try {
       this.setStatus('fetching');
 
-      const response = await axios.get('/api/collection');
+      const response = await axios.get('/api/collections');
 
       const { status, data } = response;
 
