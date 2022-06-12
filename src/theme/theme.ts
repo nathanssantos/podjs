@@ -7,6 +7,9 @@ const theme = extendTheme({
   },
   styles: {
     global: {
+      html: {
+        scrollBehavior: 'smooth',
+      },
       'html, body': {
         padding: 0,
         margin: 0,

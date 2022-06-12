@@ -1,15 +1,15 @@
+import { useEffect } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Box, Button, Flex, SimpleGrid, useColorMode } from '@chakra-ui/react';
-import { useStore } from '../hooks';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { flowResult } from 'mobx';
 import { observer } from 'mobx-react';
-import CollectionCard from '../components/CollectionCard';
+import { Box, SimpleGrid } from '@chakra-ui/react';
+import { useStore } from '../../hooks';
 
-const Home: NextPage = () => {
+const CollectionDetail: NextPage = () => {
+  const router = useRouter();
   const store = useStore();
-  const { colorMode, toggleColorMode } = useColorMode();
 
   const init = async () => {
     flowResult(store.collectionStore.getList());
@@ -22,10 +22,7 @@ const Home: NextPage = () => {
       }
 
       case 'success': {
-        if (store.collectionStore.list?.length)
-          return store.collectionStore.list.map((collection) => (
-            <CollectionCard key={collection.collectionId} collection={collection} />
-          ));
+        if (store.collectionStore.list?.length) return router.query.id;
         return 'empty';
       }
 
@@ -47,13 +44,11 @@ const Home: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex direction='column' as='main' p='6' gap='3'>
-        <SimpleGrid minChildWidth={240} gap='3'>
-          {renderList()}
-        </SimpleGrid>
-      </Flex>
+      <Box as='main' p='3'>
+        <SimpleGrid minChildWidth={240}>{renderList()}</SimpleGrid>
+      </Box>
     </div>
   );
 };
 
-export default observer(Home);
+export default observer(CollectionDetail);
