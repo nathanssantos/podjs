@@ -1,4 +1,4 @@
-import { Badge, Box, filter, Flex, Image } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
 type CollectionCardProps = {
@@ -21,7 +21,12 @@ const CollectionCard = (props: CollectionCardProps) => {
       >
         <Image src={artworkUrl600} alt={collectionName} />
 
-        <Box display='flex' alignItems='baseline' flexDir='column' p='3' flex='1'>
+        <Flex alignItems='flex-start' direction='column' p='3' flex='1'>
+          <Box flex='1' mb='6'>
+            <Text fontWeight='semibold' lineHeight='tight'>
+              {collectionName}
+            </Text>
+          </Box>
           <Badge borderRadius='full' px='2' colorScheme='teal' mb='2'>
             {primaryGenreName}
           </Badge>
@@ -31,7 +36,6 @@ const CollectionCard = (props: CollectionCardProps) => {
             letterSpacing='wide'
             fontSize='xs'
             textTransform='uppercase'
-            flex='1'
           >
             {genres
               ?.filter((genre) => genre !== 'Podcasts')
@@ -44,10 +48,7 @@ const CollectionCard = (props: CollectionCardProps) => {
                   }`,
               )}
           </Box>
-          <Box mt='1' fontWeight='semibold' as='h4' lineHeight='tight' noOfLines={1}>
-            {collectionName}
-          </Box>
-        </Box>
+        </Flex>
       </Flex>
     </Link>
   );

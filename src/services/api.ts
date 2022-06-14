@@ -4,7 +4,7 @@ const baseURL = 'https://itunes.apple.com/';
 
 const api = axios.create({
   baseURL,
-  timeout: 10000,
+  timeout: 20000,
 });
 
 export default api;

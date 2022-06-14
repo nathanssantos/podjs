@@ -52,14 +52,13 @@ const Layout = () => {
       <Header visible={!scrollingDown} onOpenDrawer={onOpen} />
       <IconButton
         as={motion.button}
-        aria-label='Voltar ao topo'
+        aria-label='Back to the top'
         position='fixed'
         right='6'
         bottom='6'
         onClick={scrollToTop}
         zIndex={11}
-        // rounded='full'
-        // size='lg'
+        backdropFilter='blur(10px)'
         borderWidth='1px'
         transition='0.2s linear'
         animate={
