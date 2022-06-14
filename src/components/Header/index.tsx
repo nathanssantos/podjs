@@ -18,7 +18,7 @@ const Header = ({ visible, onOpenDrawer }: HeaderProps) => {
       top='0'
       left='0'
       right='0'
-      py='2'
+      py='3'
       px='6'
       backdropFilter='blur(10px)'
       zIndex={99}
@@ -28,7 +28,12 @@ const Header = ({ visible, onOpenDrawer }: HeaderProps) => {
       }}
     >
       <Logo />
-      <IconButton aria-label='Menu' onClick={onOpenDrawer} borderWidth='1px'>
+      <IconButton
+        aria-label='Menu'
+        onClick={onOpenDrawer}
+        borderWidth='1px'
+        backdropFilter='blur(10px)'
+      >
         <Icon as={RiMenuLine} fontSize={24} />
       </IconButton>
     </Flex>

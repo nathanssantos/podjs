@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Profile = () => {
   return (
     <Link href='/' passHref>
-      <Box display={{ base: 'none', md: 'flex' }}>
+      <Box display='flex' cursor='pointer'>
         <Text fontSize={22} letterSpacing='tight' fontWeight='bold'>
           PodJS
         </Text>

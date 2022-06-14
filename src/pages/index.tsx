@@ -1,42 +1,42 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Box, Button, Flex, SimpleGrid, useColorMode } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 import { useStore } from '../hooks';
 import { useEffect } from 'react';
-import { flowResult } from 'mobx';
 import { observer } from 'mobx-react';
 import CollectionCard from '../components/CollectionCard';
 
 const Home: NextPage = () => {
   const store = useStore();
-  const { colorMode, toggleColorMode } = useColorMode();
 
-  const init = async () => {
-    flowResult(store.collectionStore.getList());
-  };
+  const list = store.collectionStore.list;
 
   const renderList = () => {
-    switch (store.collectionStore.status) {
+    switch (store.collectionStore.listStatus) {
       case 'fetching': {
-        return 'loading';
+        return 'fetching';
+      }
+
+      case 'error': {
+        return 'error';
       }
 
       case 'success': {
-        if (store.collectionStore.list?.length)
-          return store.collectionStore.list.map((collection) => (
+        if (list?.length) {
+          return list.map((collection) => (
             <CollectionCard key={collection.collectionId} collection={collection} />
           ));
-        return 'empty';
+        }
       }
 
       default: {
-        return '';
+        return 'empty';
       }
     }
   };
 
   useEffect(() => {
-    init();
+    if (!list?.length) store.collectionStore.getList();
   }, []);
 
   return (
