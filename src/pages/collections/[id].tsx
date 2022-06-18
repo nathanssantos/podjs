@@ -79,7 +79,7 @@ const CollectionDetail: NextPage = () => {
                     direction='column'
                     alignItems={{ base: 'center', md: 'flex-start' }}
                   >
-                    <Text fontSize='3xl' lineHeight={1} mb={2}>
+                    <Text fontSize='2xl' lineHeight={1} mb={2}>
                       {collectionName}
                     </Text>
                     <Text fontSize='lg' mb={4} fontWeight={100} color='gray.500'>
