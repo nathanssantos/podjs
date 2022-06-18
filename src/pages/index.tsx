@@ -36,6 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
   try {
     const response = await axios.get('http://localhost:3000/api/collections');
 
+    console.log(response);
     const { status, data } = response;
 
     if (status !== 200 || !data?.results?.length) {
