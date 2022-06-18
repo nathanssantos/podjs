@@ -72,7 +72,7 @@ const CollectionDetail: NextPage = () => {
                     h='100%'
                   />
                 </Flex>
-                <Flex direction='column' gap={4} textAlign={{ base: 'center', sm: 'left' }}>
+                <Flex direction='column' gap={4} textAlign={{ base: 'center', md: 'left' }}>
                   <Flex
                     flex={1}
                     direction='column'
@@ -94,7 +94,12 @@ const CollectionDetail: NextPage = () => {
               </Flex>
               <Flex direction='column' gap={{ base: 12, md: 6 }}>
                 {items.map((podcast) => (
-                  <LazyLoad height={150} key={`${podcast.title}${podcast.isoDate}`}>
+                  <LazyLoad
+                    key={`${podcast.title}${podcast.isoDate}`}
+                    height={150}
+                    offset={2048}
+                    unmountIfInvisible
+                  >
                     <PodcastCard podcast={podcast} />
                   </LazyLoad>
                 ))}
@@ -123,7 +128,7 @@ const CollectionDetail: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex as='main' p={6} gap={{ base: 12, md: 8 }} direction={{ base: 'column', lg: 'row' }}>
+      <Flex as='main' p={6} gap={{ base: 12, md: 6 }} direction={{ base: 'column', lg: 'row' }}>
         {renderDetail()}
       </Flex>
     </div>

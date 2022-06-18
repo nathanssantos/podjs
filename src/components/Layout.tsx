@@ -7,6 +7,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
   Icon,
   IconButton,
   useColorMode,
@@ -49,13 +50,16 @@ const Layout = () => {
           <DrawerCloseButton />
           <DrawerHeader>PodJS</DrawerHeader>
 
-          <DrawerBody>
-            <Button onClick={toggleColorMode}>
-              {colorMode === 'light' ? 'Dark' : 'Light'}
-            </Button>
-          </DrawerBody>
+          <DrawerBody></DrawerBody>
 
-          <DrawerFooter></DrawerFooter>
+          <DrawerFooter>
+            <Flex alignItems='center' gap={3}>
+              Set theme
+              <Button onClick={toggleColorMode}>
+                {colorMode === 'light' ? 'Dark' : 'Light'}
+              </Button>
+            </Flex>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
       <Player />
