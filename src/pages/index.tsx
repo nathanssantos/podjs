@@ -47,8 +47,8 @@ const Home: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex direction='column' as='main' p={6} gap={3}>
-        <SimpleGrid minChildWidth={240} gap={3}>
+      <Flex direction='column' as='main' p={6}>
+        <SimpleGrid minChildWidth={240} gap={6}>
           {renderList()}
         </SimpleGrid>
       </Flex>
