@@ -129,7 +129,13 @@ const CollectionDetail: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex as='main' p={6} gap={{ base: 12, md: 6 }} direction={{ base: 'column', lg: 'row' }}>
+      <Flex
+        as='main'
+        p={6}
+        pb={40}
+        gap={{ base: 12, md: 6 }}
+        direction={{ base: 'column', lg: 'row' }}
+      >
         {renderDetail()}
       </Flex>
     </div>
