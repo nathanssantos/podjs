@@ -1,20 +1,20 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Flex, SimpleGrid } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Spinner } from '@chakra-ui/react';
 import { useStore } from '../hooks';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import CollectionCard from '../components/CollectionCard';
 
 const Home: NextPage = () => {
-  const store = useStore();
+  const { collectionStore } = useStore();
 
-  const list = store.collectionStore.list;
+  const { list, listStatus, getList } = collectionStore;
 
   const renderList = () => {
-    switch (store.collectionStore.listStatus) {
+    switch (listStatus) {
       case 'fetching': {
-        return 'fetching';
+        return <Spinner />;
       }
 
       case 'error': {
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    if (!list?.length) store.collectionStore.getList();
+    if (!list?.length) getList();
   }, []);
 
   return (

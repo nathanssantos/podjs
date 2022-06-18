@@ -1,6 +1,6 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
-import RootStore from './rootStore';
+import type RootStore from './rootStore';
 
 export default class CollectionStore {
   rootStore: RootStore;

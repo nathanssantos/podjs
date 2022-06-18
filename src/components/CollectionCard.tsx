@@ -19,7 +19,7 @@ const CollectionCard = (props: CollectionCardProps) => {
         borderRadius='lg'
         overflow='hidden'
       >
-        <Image src={artworkUrl600} alt={collectionName} />
+        <Image src={artworkUrl600} alt={collectionName} objectFit='cover' />
 
         <Flex alignItems='flex-start' direction='column' p='3' flex='1'>
           <Box flex='1' mb='6'>

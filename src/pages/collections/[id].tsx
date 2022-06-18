@@ -2,22 +2,22 @@ import { useEffect } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { flowResult } from 'mobx';
 import { observer } from 'mobx-react';
-import { Badge, Box, Flex, Image, SimpleGrid, Text } from '@chakra-ui/react';
+import LazyLoad from 'react-lazyload';
+import { Badge, Box, Flex, Image, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
 import { useStore } from '../../hooks';
 import PodcastCard from '../../components/PodcastCard';
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
-  const store = useStore();
+  const { collectionStore } = useStore();
 
-  const collection = store.collectionStore.detail;
+  const { detail, detailStatus, getDetail } = collectionStore;
 
   const renderDetail = () => {
-    switch (store.collectionStore.detailStatus) {
+    switch (detailStatus) {
       case 'fetching': {
-        return 'fetching';
+        return <Spinner />;
       }
 
       case 'error': {
@@ -25,7 +25,7 @@ const CollectionDetail: NextPage = () => {
       }
 
       case 'success': {
-        if (collection) {
+        if (detail) {
           const {
             artistName,
             collectionId,
@@ -43,13 +43,13 @@ const CollectionDetail: NextPage = () => {
             trackCount,
             country,
             items,
-          } = collection;
+          } = detail;
 
           return (
-            <Flex as='main' direction='column' px='6' py='3' gap='6'>
+            <>
               <Flex gap='6'>
                 <Flex borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={artworkUrl600} alt={collectionName} w={300} />
+                  <Image src={artworkUrl600} alt={collectionName} w={300} objectFit='cover' />
                 </Flex>
                 <Flex direction='column'>
                   <Flex flex='1' direction='column' alignItems='flex-start'>
@@ -88,10 +88,12 @@ const CollectionDetail: NextPage = () => {
               </Flex>
               <Flex direction='column' gap='3'>
                 {items.map((podcast) => (
-                  <PodcastCard key={`${podcast.title}${podcast.isoDate}`} podcast={podcast} />
+                  <LazyLoad height={150} key={`${podcast.title}${podcast.isoDate}`}>
+                    <PodcastCard podcast={podcast} />
+                  </LazyLoad>
                 ))}
               </Flex>
-            </Flex>
+            </>
           );
         }
       }
@@ -104,7 +106,7 @@ const CollectionDetail: NextPage = () => {
 
   useEffect(() => {
     const { id } = router.query;
-    if (id && !collection) store.collectionStore.getDetail({ id });
+    if (id && String(detail?.collectionId) !== id) getDetail({ id });
   }, [router.query]);
 
   return (
@@ -115,7 +117,9 @@ const CollectionDetail: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      {renderDetail()}
+      <Flex as='main' direction='column' p='6' gap='6'>
+        {renderDetail()}
+      </Flex>
     </div>
   );
 };
