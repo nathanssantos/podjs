@@ -49,11 +49,12 @@ const CollectionDetail: NextPage = () => {
             <>
               <Flex
                 gap={4}
-                position={{ base: 'initial', lg: 'sticky' }}
+                position={{ lg: 'sticky' }}
                 direction={{ base: 'column', md: 'row', lg: 'column' }}
                 alignSelf={{ base: 'center', md: 'flex-start' }}
                 alignItems={{ base: 'center', md: 'initial' }}
                 top='81px'
+                maxW={{ lg: 60 }}
               >
                 <Flex
                   borderWidth='1px'
@@ -61,8 +62,8 @@ const CollectionDetail: NextPage = () => {
                   overflow='hidden'
                   w={{ base: '100%', md: 240 }}
                   minW={240}
-                  maxW={400}
-                  h={{ h: 'initial', md: 240 }}
+                  maxW={{ base: '100%', md: 240 }}
+                  h={{ md: 240 }}
                 >
                   <Image
                     src={artworkUrl600}
@@ -78,7 +79,7 @@ const CollectionDetail: NextPage = () => {
                     direction='column'
                     alignItems={{ base: 'center', md: 'flex-start' }}
                   >
-                    <Text fontSize='3xl' lineHeight={1}>
+                    <Text fontSize='3xl' lineHeight={1} mb={2}>
                       {collectionName}
                     </Text>
                     <Text fontSize='lg' mb={4} fontWeight={100} color='gray.500'>

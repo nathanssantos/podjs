@@ -13,9 +13,10 @@ const Player = () => {
   return (
     <Flex
       as={motion.div}
-      w='100%'
       position='fixed'
       bottom={0}
+      left={0}
+      right={0}
       bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
       borderTopWidth='1px'
       animate={{
@@ -34,7 +35,7 @@ const Player = () => {
           color: 'var(--chakra-colors-chakra-body-text)',
         },
         '.rhap_repeat-button': {
-          color: 'var(--chakra-colors-chakra-body-text)',
+          display: 'none',
         },
         '.rhap_progress-indicator': {
           bg: 'var(--chakra-colors-chakra-body-text)',
@@ -51,31 +52,34 @@ const Player = () => {
         '.rhap_volume-bar': {
           bg: 'gray.500',
         },
+        '.rhap_additional-controls': {
+          display: { base: 'none', sm: 'flex' },
+          pl: { md: '32px' },
+        },
       }}
     >
       {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
         <Image
+          display={{ base: 'none', sm: 'initial' }}
           h='121px'
           width='121px'
           alt={currentPodcast.title}
           src={currentPodcast.itunes.image}
         />
       )}
-      <Flex direction='column' flex={1} py={2} px={3} gap={2}>
+      <Flex direction='column' py={2} px={3} gap={2} flex='1'>
         {!!currentPodcast?.title?.length && (
-          <Flex>
-            <Text
-              mb={1}
-              fontWeight='semibold'
-              lineHeight='tight'
-              overflow='hidden'
-              textOverflow='ellipsis'
-              whiteSpace='nowrap'
-              width='100%'
-            >
-              {currentPodcast.title}
-            </Text>
-          </Flex>
+          <Text
+            mb={1}
+            fontWeight='semibold'
+            lineHeight='tight'
+            overflow='hidden'
+            textOverflow='ellipsis'
+            whiteSpace='nowrap'
+            w={{ base: 'calc(100vw - 46px)', sm: 'calc(100vw - 161px)' }}
+          >
+            {currentPodcast.title}
+          </Text>
         )}
         <AudioPlayer
           autoPlayAfterSrcChange
