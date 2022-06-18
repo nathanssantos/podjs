@@ -3,6 +3,7 @@ import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import RootStore, { RootStoreProvider } from '../stores/rootStore';
 import theme from '../theme/theme';
 import Layout from '../components/Layout';
+import 'react-h5-audio-player/lib/styles.css';
 
 const store = new RootStore();
 

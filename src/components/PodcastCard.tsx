@@ -1,4 +1,5 @@
-import { Badge, Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Text, useColorMode } from '@chakra-ui/react';
+import { useStore } from '../hooks';
 
 type PodcastCardProps = {
   podcast: Podcast;
@@ -6,6 +7,10 @@ type PodcastCardProps = {
 
 const PodcastCard = (props: PodcastCardProps) => {
   const { podcast } = props;
+  const { playerStore } = useStore();
+  const { colorMode } = useColorMode();
+
+  const { setCurrentPodcast } = playerStore;
 
   const {
     title,
@@ -16,27 +21,56 @@ const PodcastCard = (props: PodcastCardProps) => {
     itunes: { summary, duration, image },
   } = podcast;
 
-  return (
-    <Flex cursor='pointer' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-      <Image src={image} alt={title} w={150} h={150} />
+  const playPodcast = () => {
+    setCurrentPodcast(podcast);
+  };
 
-      <Flex direction='column' p='3' alignItems='flex-start'>
-        <Text mb='1' fontWeight='semibold' lineHeight='tight'>
+  return (
+    <Flex
+      cursor='pointer'
+      overflow='hidden'
+      onClick={playPodcast}
+      direction={{ base: 'column', sm: 'row' }}
+      alignItems={{ base: 'center', sm: 'flex-start' }}
+    >
+      <Flex
+        borderWidth='1px'
+        borderRadius='lg'
+        overflow='hidden'
+        w={{ base: '100%', sm: 150 }}
+        minW={150}
+        h={{ h: 'initial', sm: 150 }}
+        mb={{ base: 3, sm: 0 }}
+      >
+        <Image src={image} alt={title} w='100%' h='100%' objectFit='cover' />
+      </Flex>
+
+      <Flex
+        direction='column'
+        px={3}
+        alignItems={{ base: 'center', sm: 'flex-start' }}
+        textAlign={{ base: 'center', sm: 'left' }}
+      >
+        <Text mb={1} fontWeight='semibold' lineHeight='tight'>
           {title}
         </Text>
-        <Flex mb='1' h='64px' overflow='hidden'>
-          <Text fontSize='14px' lineHeight='17px' color='gray.500'>
-            {summary?.length ? summary : content}
-          </Text>
+        <Flex mb={1} h='88px' overflow='hidden'>
+          <Text
+            fontSize='14px'
+            color='gray.500'
+            dangerouslySetInnerHTML={{ __html: summary?.length ? summary : content }}
+          />
         </Flex>
         <Box
-          bgGradient='linear(to-b, transparent, #1a202c)'
-          h='20px'
+          bgGradient={`linear(to-b, transparent, ${
+            colorMode === 'light' ? '#fff' : 'gray.800'
+          })`}
+          h='32px'
           w='100%'
-          mt='-24px'
+          mt='-32px'
           mb='3'
         />
-        <Badge borderRadius='full' px='2' colorScheme='teal'>
+        <Badge borderRadius='full' px={2} colorScheme='teal'>
           {duration}
         </Badge>
       </Flex>
