@@ -50,21 +50,34 @@ const CollectionDetail: NextPage = () => {
               <Flex
                 gap='4'
                 position={{ base: 'initial', lg: 'sticky' }}
-                direction={{ base: 'row', lg: 'column' }}
-                alignSelf='flex-start'
+                direction={{ base: 'column', md: 'row', lg: 'column' }}
+                alignSelf={{ base: 'center', md: 'flex-start' }}
+                alignItems={{ base: 'center', md: 'initial' }}
                 top='81px'
               >
-                <Flex borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                <Flex
+                  borderWidth='1px'
+                  borderRadius='lg'
+                  overflow='hidden'
+                  w={{ base: '100%', md: 240 }}
+                  minW={240}
+                  maxW={400}
+                  h={{ h: 'initial', md: 240 }}
+                >
                   <Image
                     src={artworkUrl600}
                     alt={collectionName}
-                    w={240}
-                    minW={200}
                     objectFit='cover'
+                    w='100%'
+                    h='100%'
                   />
                 </Flex>
-                <Flex direction='column' gap='4'>
-                  <Flex flex='1' direction='column' alignItems='flex-start'>
+                <Flex direction='column' gap='4' textAlign={{ base: 'center', sm: 'left' }}>
+                  <Flex
+                    flex='1'
+                    direction='column'
+                    alignItems={{ base: 'center', md: 'flex-start' }}
+                  >
                     <Text fontSize='3xl' lineHeight='1'>
                       {collectionName}
                     </Text>
@@ -79,7 +92,7 @@ const CollectionDetail: NextPage = () => {
                   {!!copyright?.length && <Text fontSize='14px'>{copyright}</Text>}
                 </Flex>
               </Flex>
-              <Flex direction='column' gap='3'>
+              <Flex direction='column' gap={{ base: 12, md: 6 }}>
                 {items.map((podcast) => (
                   <LazyLoad height={150} key={`${podcast.title}${podcast.isoDate}`}>
                     <PodcastCard podcast={podcast} />
@@ -110,7 +123,7 @@ const CollectionDetail: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex as='main' p='6' gap='6' direction={{ base: 'column', lg: 'row' }}>
+      <Flex as='main' p='6' gap={{ base: 12, md: 8 }} direction={{ base: 'column', lg: 'row' }}>
         {renderDetail()}
       </Flex>
     </div>

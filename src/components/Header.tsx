@@ -1,20 +1,18 @@
 import { Flex, Box, Icon, Text, IconButton, useColorMode, useTheme } from '@chakra-ui/react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { RiMenuLine } from 'react-icons/ri';
 
 type HeaderProps = {
-  visible: boolean;
   onOpenDrawer: () => void;
 };
 
-const Header = ({ visible, onOpenDrawer }: HeaderProps) => {
+const Header = ({ onOpenDrawer }: HeaderProps) => {
   const theme = useTheme();
   const { colorMode } = useColorMode();
 
   return (
     <Flex
-      as={motion.header}
+      as='header'
       align='center'
       justify='space-between'
       position='sticky'
@@ -28,9 +26,6 @@ const Header = ({ visible, onOpenDrawer }: HeaderProps) => {
       transition='0.2s linear'
       backgroundColor={colorMode === 'light' ? '#fff' : theme.colors.gray[700]}
       borderBottomWidth='1px'
-      // animate={{
-      //   transform: visible ? 'translate3d(0, 0, 0)' : 'translate3d(0, -100%, 0)',
-      // }}
     >
       <Link href='/' passHref>
         <Box display='flex' cursor='pointer'>

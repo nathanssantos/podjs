@@ -28,18 +28,33 @@ const PodcastCard = (props: PodcastCardProps) => {
   return (
     <Flex
       cursor='pointer'
-      borderWidth='1px'
-      borderRadius='lg'
       overflow='hidden'
       onClick={playPodcast}
+      direction={{ base: 'column', sm: 'row' }}
+      alignItems={{ base: 'center', sm: 'flex-start' }}
     >
-      <Image src={image} alt={title} w={150} h={150} minW={150} objectFit='cover' />
+      <Flex
+        borderWidth='1px'
+        borderRadius='lg'
+        overflow='hidden'
+        w={{ base: '100%', sm: 150 }}
+        minW={150}
+        h={{ h: 'initial', sm: 150 }}
+        mb={{ base: 3, sm: 0 }}
+      >
+        <Image src={image} alt={title} w='100%' h='100%' objectFit='cover' />
+      </Flex>
 
-      <Flex direction='column' p='3' alignItems='flex-start'>
+      <Flex
+        direction='column'
+        px='3'
+        alignItems={{ base: 'center', sm: 'flex-start' }}
+        textAlign={{ base: 'center', sm: 'left' }}
+      >
         <Text mb='1' fontWeight='semibold' lineHeight='tight'>
           {title}
         </Text>
-        <Flex mb='1' h='64px' overflow='hidden'>
+        <Flex mb='1' h='88px' overflow='hidden'>
           <Text fontSize='14px' color='gray.500'>
             {summary?.length ? summary : content}
           </Text>
