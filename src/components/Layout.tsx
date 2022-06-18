@@ -13,15 +13,20 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { observer } from 'mobx-react';
 import { useEffect, useState } from 'react';
 import { RiArrowUpLine } from 'react-icons/ri';
+import { useStore } from '../hooks';
 import Header from './Header';
+import Player from './Player';
 
 const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-
+  const { playerStore } = useStore();
   const [scrollingDown, setScrollingDown] = useState(false);
+
+  const { currentPodcast } = playerStore;
 
   const scrollToTop = () => window.scrollTo(0, 0);
 
@@ -55,7 +60,7 @@ const Layout = () => {
         aria-label='Back to the top'
         position='fixed'
         right='6'
-        bottom='6'
+        bottom={!currentPodcast?.enclosure ? '6' : '36'}
         onClick={scrollToTop}
         zIndex={11}
         backdropFilter='blur(10px)'
@@ -90,8 +95,9 @@ const Layout = () => {
           <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
+      <Player />
     </>
   );
 };
 
-export default Layout;
+export default observer(Layout);

@@ -1,7 +1,7 @@
-import { Flex, Icon, IconButton } from '@chakra-ui/react';
+import { Flex, Box, Icon, Text, IconButton, useColorMode, useTheme } from '@chakra-ui/react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { RiMenuLine } from 'react-icons/ri';
-import Logo from './Logo';
 
 type HeaderProps = {
   visible: boolean;
@@ -9,6 +9,9 @@ type HeaderProps = {
 };
 
 const Header = ({ visible, onOpenDrawer }: HeaderProps) => {
+  const theme = useTheme();
+  const { colorMode } = useColorMode();
+
   return (
     <Flex
       as={motion.header}
@@ -23,11 +26,19 @@ const Header = ({ visible, onOpenDrawer }: HeaderProps) => {
       backdropFilter='blur(10px)'
       zIndex={99}
       transition='0.2s linear'
+      backgroundColor={colorMode === 'light' ? '#fff' : theme.colors.gray[700]}
+      borderBottomWidth='1px'
       animate={{
         transform: visible ? 'translate3d(0, 0, 0)' : 'translate3d(0, -100%, 0)',
       }}
     >
-      <Logo />
+      <Link href='/' passHref>
+        <Box display='flex' cursor='pointer'>
+          <Text fontSize={22} letterSpacing='tight' fontWeight='bold'>
+            PodJS
+          </Text>
+        </Box>
+      </Link>
       <IconButton
         aria-label='Menu'
         onClick={onOpenDrawer}

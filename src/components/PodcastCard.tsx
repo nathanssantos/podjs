@@ -1,4 +1,5 @@
-import { Badge, Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Text, useColorMode, useTheme } from '@chakra-ui/react';
+import { useStore } from '../hooks';
 
 type PodcastCardProps = {
   podcast: Podcast;
@@ -6,6 +7,11 @@ type PodcastCardProps = {
 
 const PodcastCard = (props: PodcastCardProps) => {
   const { podcast } = props;
+  const { playerStore } = useStore();
+  const theme = useTheme();
+  const { colorMode } = useColorMode();
+
+  const { setCurrentPodcast } = playerStore;
 
   const {
     title,
@@ -16,9 +22,19 @@ const PodcastCard = (props: PodcastCardProps) => {
     itunes: { summary, duration, image },
   } = podcast;
 
+  const playPodcast = () => {
+    setCurrentPodcast(podcast);
+  };
+
   return (
-    <Flex cursor='pointer' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-      <Image src={image} alt={title} w={150} h={150} />
+    <Flex
+      cursor='pointer'
+      borderWidth='1px'
+      borderRadius='lg'
+      overflow='hidden'
+      onClick={playPodcast}
+    >
+      <Image src={image} alt={title} w={150} h={150} objectFit='cover' />
 
       <Flex direction='column' p='3' alignItems='flex-start'>
         <Text mb='1' fontWeight='semibold' lineHeight='tight'>
@@ -30,7 +46,9 @@ const PodcastCard = (props: PodcastCardProps) => {
           </Text>
         </Flex>
         <Box
-          bgGradient='linear(to-b, transparent, #1a202c)'
+          bgGradient={`linear(to-b, transparent, ${
+            colorMode === 'light' ? '#fff' : theme.colors.gray[800]
+          })`}
           h='20px'
           w='100%'
           mt='-24px'

@@ -1,15 +1,15 @@
 import { createContext } from 'react';
 import { configure } from 'mobx';
-import AuthStore from './authStore';
 import CollectionStore from './collectionStore';
+import PlayerStore from './playerStore';
 
 class RootStore {
-  authStore = {} as AuthStore;
   collectionStore = {} as CollectionStore;
+  playerStore = {} as PlayerStore;
 
   constructor() {
-    this.authStore = new AuthStore(this);
     this.collectionStore = new CollectionStore(this);
+    this.playerStore = new PlayerStore(this);
 
     configure({
       enforceActions: 'never',
