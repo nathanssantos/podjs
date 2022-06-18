@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Image, Text, useColorMode, useTheme } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Text, useColorMode } from '@chakra-ui/react';
 import { useStore } from '../hooks';
 
 type PodcastCardProps = {
@@ -8,7 +8,6 @@ type PodcastCardProps = {
 const PodcastCard = (props: PodcastCardProps) => {
   const { podcast } = props;
   const { playerStore } = useStore();
-  const theme = useTheme();
   const { colorMode } = useColorMode();
 
   const { setCurrentPodcast } = playerStore;
@@ -34,20 +33,20 @@ const PodcastCard = (props: PodcastCardProps) => {
       overflow='hidden'
       onClick={playPodcast}
     >
-      <Image src={image} alt={title} w={150} h={150} objectFit='cover' />
+      <Image src={image} alt={title} w={150} h={150} minW={150} objectFit='cover' />
 
       <Flex direction='column' p='3' alignItems='flex-start'>
         <Text mb='1' fontWeight='semibold' lineHeight='tight'>
           {title}
         </Text>
         <Flex mb='1' h='64px' overflow='hidden'>
-          <Text fontSize='14px' lineHeight='17px' color='gray.500'>
+          <Text fontSize='14px' color='gray.500'>
             {summary?.length ? summary : content}
           </Text>
         </Flex>
         <Box
           bgGradient={`linear(to-b, transparent, ${
-            colorMode === 'light' ? '#fff' : theme.colors.gray[800]
+            colorMode === 'light' ? '#fff' : 'gray.800'
           })`}
           h='20px'
           w='100%'

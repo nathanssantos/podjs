@@ -30,7 +30,7 @@ const Player = () => {
           src={currentPodcast.itunes.image}
         />
       )}
-      <Flex direction='column' flex='1' p='2' pr='3' gap='2'>
+      <Flex direction='column' flex='1' py='2' px='3' gap='2'>
         {!!currentPodcast?.title?.length && (
           <Flex>
             <Text
