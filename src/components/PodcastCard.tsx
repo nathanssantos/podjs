@@ -3,10 +3,11 @@ import { useStore } from '../hooks';
 
 type PodcastCardProps = {
   podcast: Podcast;
+  imageFallback: string;
 };
 
 const PodcastCard = (props: PodcastCardProps) => {
-  const { podcast } = props;
+  const { podcast, imageFallback } = props;
   const { playerStore } = useStore();
   const { colorMode } = useColorMode();
 
@@ -42,7 +43,14 @@ const PodcastCard = (props: PodcastCardProps) => {
         h={{ h: 'initial', sm: 150 }}
         mb={{ base: 3, sm: 0 }}
       >
-        <Image src={image} alt={title} w='100%' h='100%' objectFit='cover' />
+        <Image
+          src={image}
+          alt={title}
+          w='100%'
+          h='100%'
+          objectFit='cover'
+          fallbackSrc={imageFallback}
+        />
       </Flex>
 
       <Flex

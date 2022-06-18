@@ -101,7 +101,7 @@ const CollectionDetail: NextPage = () => {
                     offset={2048}
                     unmountIfInvisible
                   >
-                    <PodcastCard podcast={podcast} />
+                    <PodcastCard podcast={podcast} imageFallback={artworkUrl600} />
                   </LazyLoad>
                 ))}
               </Flex>
