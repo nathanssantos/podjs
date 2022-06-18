@@ -1,5 +1,5 @@
 import { Flex, Image, Text, useColorMode } from '@chakra-ui/react';
-import { useTheme } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { observer } from 'mobx-react';
 import AudioPlayer from 'react-h5-audio-player';
 import { useStore } from '../hooks';
@@ -7,19 +7,22 @@ import { useStore } from '../hooks';
 const Player = () => {
   const { playerStore } = useStore();
   const { colorMode } = useColorMode();
-  const theme = useTheme();
 
   const { currentPodcast } = playerStore;
 
-  if (!currentPodcast?.enclosure) return null;
-
   return (
     <Flex
+      as={motion.div}
       w='100%'
       position='fixed'
       bottom={0}
-      bgColor={colorMode === 'light' ? '#fff' : theme.colors.gray[700]}
+      bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
       borderTopWidth='1px'
+      animate={{
+        transform: `translate3d(0, ${
+          playerStore?.currentPodcast?.enclosure ? '0' : '100%'
+        }, 0)`,
+      }}
       sx={{
         '.rhap_container': {
           boxShadow: 'none',
