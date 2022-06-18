@@ -19,8 +19,8 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       top='0'
       left='0'
       right='0'
-      py='2'
-      px='6'
+      py={2}
+      px={6}
       backdropFilter='blur(10px)'
       zIndex={99}
       transition='0.2s linear'

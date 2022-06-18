@@ -47,28 +47,30 @@ const PodcastCard = (props: PodcastCardProps) => {
 
       <Flex
         direction='column'
-        px='3'
+        px={3}
         alignItems={{ base: 'center', sm: 'flex-start' }}
         textAlign={{ base: 'center', sm: 'left' }}
       >
-        <Text mb='1' fontWeight='semibold' lineHeight='tight'>
+        <Text mb={1} fontWeight='semibold' lineHeight='tight'>
           {title}
         </Text>
-        <Flex mb='1' h='88px' overflow='hidden'>
-          <Text fontSize='14px' color='gray.500'>
-            {summary?.length ? summary : content}
-          </Text>
+        <Flex mb={1} h='88px' overflow='hidden'>
+          <Text
+            fontSize='14px'
+            color='gray.500'
+            dangerouslySetInnerHTML={{ __html: summary?.length ? summary : content }}
+          />
         </Flex>
         <Box
           bgGradient={`linear(to-b, transparent, ${
             colorMode === 'light' ? '#fff' : 'gray.800'
           })`}
-          h='20px'
+          h='32px'
           w='100%'
-          mt='-24px'
+          mt='-32px'
           mb='3'
         />
-        <Badge borderRadius='full' px='2' colorScheme='teal'>
+        <Badge borderRadius='full' px={2} colorScheme='teal'>
           {duration}
         </Badge>
       </Flex>

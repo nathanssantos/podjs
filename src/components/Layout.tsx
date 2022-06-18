@@ -33,8 +33,8 @@ const Layout = () => {
       <IconButton
         aria-label='Back to the top'
         position='fixed'
-        right='6'
-        bottom={!currentPodcast?.enclosure ? '6' : '36'}
+        right={6}
+        bottom={!currentPodcast?.enclosure ? 6 : 36}
         onClick={scrollToTop}
         zIndex={11}
         backdropFilter='blur(10px)'

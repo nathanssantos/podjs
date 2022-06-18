@@ -48,7 +48,7 @@ const CollectionDetail: NextPage = () => {
           return (
             <>
               <Flex
-                gap='4'
+                gap={4}
                 position={{ base: 'initial', lg: 'sticky' }}
                 direction={{ base: 'column', md: 'row', lg: 'column' }}
                 alignSelf={{ base: 'center', md: 'flex-start' }}
@@ -72,20 +72,20 @@ const CollectionDetail: NextPage = () => {
                     h='100%'
                   />
                 </Flex>
-                <Flex direction='column' gap='4' textAlign={{ base: 'center', sm: 'left' }}>
+                <Flex direction='column' gap={4} textAlign={{ base: 'center', sm: 'left' }}>
                   <Flex
-                    flex='1'
+                    flex={1}
                     direction='column'
                     alignItems={{ base: 'center', md: 'flex-start' }}
                   >
-                    <Text fontSize='3xl' lineHeight='1'>
+                    <Text fontSize='3xl' lineHeight={1}>
                       {collectionName}
                     </Text>
-                    <Text fontSize='lg' mb='4' fontWeight={100} color='gray.500'>
+                    <Text fontSize='lg' mb={4} fontWeight={100} color='gray.500'>
                       {artistName}
                     </Text>
-                    <Text mb='4'>{description}</Text>
-                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                    <Text mb={4}>{description}</Text>
+                    <Badge borderRadius='full' px={2} colorScheme='teal'>
                       {primaryGenreName}
                     </Badge>
                   </Flex>
@@ -123,7 +123,7 @@ const CollectionDetail: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex as='main' p='6' gap={{ base: 12, md: 8 }} direction={{ base: 'column', lg: 'row' }}>
+      <Flex as='main' p={6} gap={{ base: 12, md: 8 }} direction={{ base: 'column', lg: 'row' }}>
         {renderDetail()}
       </Flex>
     </div>
