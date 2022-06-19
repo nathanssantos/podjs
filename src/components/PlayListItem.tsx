@@ -8,21 +8,20 @@ import {
   Text,
   useColorMode,
 } from '@chakra-ui/react';
-import { observer } from 'mobx-react-lite';
-import { RiPlayListAddLine } from 'react-icons/ri';
+import { observer } from 'mobx-react';
+import { RiDeleteBinLine, RiPlayListAddLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
 
-type PodcastCardProps = {
+type PlayListItemProps = {
   podcast: Podcast;
   imageFallback: string;
 };
 
-const PodcastCard = (props: PodcastCardProps) => {
+const PlayListItem = (props: PlayListItemProps) => {
   const { podcast, imageFallback } = props;
   const { playerStore } = useStore();
-  const { colorMode } = useColorMode();
 
-  const { currentPodcast, setCurrentPodcast, addPodcastToPlayList } = playerStore;
+  const { currentPodcast, setCurrentPodcast, removePodcastFromPlaylist } = playerStore;
 
   const {
     title,
@@ -35,12 +34,11 @@ const PodcastCard = (props: PodcastCardProps) => {
 
   const playPodcast = () => {
     setCurrentPodcast(podcast);
-    addPodcastToPlayList(podcast);
   };
 
-  const addToPlayList = () => {
-    addPodcastToPlayList(podcast);
-    if (!currentPodcast?.enclosure.url) playPodcast();
+  const removeFromPlayList = () => {
+    removePodcastFromPlaylist(podcast);
+    if (currentPodcast?.enclosure.url === podcast.enclosure.url) setCurrentPodcast(null);
   };
 
   return (
@@ -50,13 +48,13 @@ const PodcastCard = (props: PodcastCardProps) => {
       alignItems={{ base: 'center', sm: 'flex-start' }}
     >
       <Flex
+        borderColor={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
         borderWidth='1px'
         borderRadius='lg'
-        borderColor={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
         overflow='hidden'
-        w={{ base: '100%', sm: '150px' }}
-        minW={'150px'}
-        h={{ h: 'initial', sm: '150px' }}
+        w={{ base: '100%', sm: '80px' }}
+        minW={'80px'}
+        h={{ h: 'initial', sm: '80px' }}
         mb={{ base: 3, sm: 0 }}
         onClick={playPodcast}
         cursor='pointer'
@@ -79,40 +77,26 @@ const PodcastCard = (props: PodcastCardProps) => {
         w='100%'
       >
         <Text
-          mb={1}
+          mb={3}
           fontWeight='semibold'
           lineHeight='tight'
+          onClick={playPodcast}
+          cursor='pointer'
           color={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
         >
           {title}
         </Text>
-        <Flex mb={1} h='72px' overflow='hidden'>
-          <Text
-            fontSize='14px'
-            color='gray.500'
-            dangerouslySetInnerHTML={{ __html: summary?.length ? summary : content }}
-          />
-        </Flex>
-        <Box
-          bgGradient={`linear(to-b, transparent, ${
-            colorMode === 'light' ? '#fff' : 'gray.800'
-          })`}
-          h='40px'
-          w='100%'
-          mt='-40px'
-          mb='1'
-        />
         <Flex w='100%' alignItems='flex-end' justifyContent='space-between' gap={3}>
           <Badge borderRadius='full' px={2} colorScheme='teal'>
             {duration}
           </Badge>
           <IconButton
             aria-label='Menu'
-            onClick={addToPlayList}
+            onClick={removeFromPlayList}
             borderWidth='1px'
             backdropFilter='blur(10px)'
           >
-            <Icon as={RiPlayListAddLine} fontSize={24} />
+            <Icon as={RiDeleteBinLine} fontSize={24} />
           </IconButton>
         </Flex>
       </Flex>
@@ -120,4 +104,4 @@ const PodcastCard = (props: PodcastCardProps) => {
   );
 };
 
-export default observer(PodcastCard);
+export default observer(PlayListItem);
