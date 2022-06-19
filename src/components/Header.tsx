@@ -44,7 +44,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
         </IconButton>
         <Link href='/' passHref>
           <Box display='flex' cursor='pointer'>
-            <Text fontSize={22} letterSpacing='tight' fontWeight='bold'>
+            <Text fontSize={20} letterSpacing='tight' fontWeight='bold'>
               PodJS
             </Text>
           </Box>
