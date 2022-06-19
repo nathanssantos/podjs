@@ -64,10 +64,10 @@ const Player = () => {
     >
       <Box
         position='absolute'
-        right={3}
+        right={4}
         zIndex={11}
-        bg='gray.700'
-        p={3}
+        bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
+        p={2}
         borderWidth='1px'
         borderBottomWidth={0}
         borderTopLeftRadius='lg'
