@@ -4,15 +4,33 @@ import api from '../../../services/api';
 
 type Data = Collection[] | AxiosError;
 
+type Params = {
+  country?: string;
+  term?: string;
+  entity: string;
+  limit: number;
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
-    const { status, data } = await api.get(
-      `search?country=br&entity=podcast&media=podcast&limit=200&term=nerd`,
-    );
+    const {
+      query: { country, term },
+    } = req;
 
-    if (status !== 200) res.status(status).end();
+    const params = {
+      entity: 'podcast',
+      media: 'podcast',
+      limit: 200,
+    } as Params;
 
-    res.status(status).json(data);
+    if (typeof country === 'string' && country?.length) params.country = country;
+    if (typeof term === 'string' && term?.length) params.term = term;
+
+    const { status, data } = await api.get(`search`, {
+      params,
+    });
+
+    res.status(status).json(data?.results);
   } catch (error) {
     res.status(500).json(error as AxiosError);
   }
