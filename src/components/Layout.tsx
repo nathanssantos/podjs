@@ -39,10 +39,10 @@ const Layout = () => {
         onClick={scrollToTop}
         zIndex={11}
         backdropFilter='blur(10px)'
-        borderWidth='1px'
         transition='0.2s linear'
+        size='sm'
       >
-        <Icon as={RiArrowUpLine} fontSize={24} />
+        <Icon as={RiArrowUpLine} fontSize={20} />
       </IconButton>
       <Drawer isOpen={isOpen} onClose={onClose} />
       <PlayList />

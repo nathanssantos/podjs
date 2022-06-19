@@ -21,7 +21,7 @@ const CollectionCard = (props: CollectionCardProps) => {
       >
         <Image src={artworkUrl600} alt={collectionName} objectFit='cover' />
 
-        <Flex alignItems='flex-start' direction='column' p={3} flex={1}>
+        <Flex align='flex-start' direction='column' p={3} flex={1}>
           <Box flex={1} mb={3}>
             <Text fontWeight='semibold' lineHeight='tight'>
               {collectionName}

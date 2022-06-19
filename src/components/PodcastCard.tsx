@@ -47,7 +47,7 @@ const PodcastCard = (props: PodcastCardProps) => {
     <Flex
       overflow='hidden'
       direction={{ base: 'column', sm: 'row' }}
-      alignItems={{ base: 'center', sm: 'flex-start' }}
+      align={{ base: 'center', sm: 'flex-start' }}
     >
       <Flex
         borderWidth='1px'
@@ -74,7 +74,7 @@ const PodcastCard = (props: PodcastCardProps) => {
       <Flex
         direction='column'
         pl={3}
-        alignItems={{ base: 'center', sm: 'flex-start' }}
+        align={{ base: 'center', sm: 'flex-start' }}
         textAlign={{ base: 'center', sm: 'left' }}
         w='100%'
       >
@@ -102,17 +102,17 @@ const PodcastCard = (props: PodcastCardProps) => {
           mt='-40px'
           mb='1'
         />
-        <Flex w='100%' alignItems='flex-end' justifyContent='space-between' gap={3}>
+        <Flex w='100%' align='flex-end' justify='space-between' gap={3}>
           <Badge borderRadius='full' px={2} colorScheme='teal'>
             {duration}
           </Badge>
           <IconButton
             aria-label='Menu'
             onClick={addToPlayList}
-            borderWidth='1px'
             backdropFilter='blur(10px)'
+            size='sm'
           >
-            <Icon as={RiPlayListAddLine} fontSize={24} />
+            <Icon as={RiPlayListAddLine} fontSize={20} />
           </IconButton>
         </Flex>
       </Flex>

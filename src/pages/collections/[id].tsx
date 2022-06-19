@@ -52,8 +52,8 @@ const CollectionDetail: NextPage = () => {
                 position={{ lg: 'sticky' }}
                 direction={{ base: 'column', md: 'row', lg: 'column' }}
                 alignSelf={{ base: 'center', md: 'flex-start' }}
-                alignItems={{ base: 'center', md: 'initial' }}
-                top='81px'
+                align={{ base: 'center', md: 'initial' }}
+                top='88px'
                 maxW={{ lg: 60 }}
               >
                 <Flex
@@ -77,7 +77,7 @@ const CollectionDetail: NextPage = () => {
                   <Flex
                     flex={1}
                     direction='column'
-                    alignItems={{ base: 'center', md: 'flex-start' }}
+                    align={{ base: 'center', md: 'flex-start' }}
                   >
                     <Text fontSize='2xl' lineHeight={1} mb={2}>
                       {collectionName}
