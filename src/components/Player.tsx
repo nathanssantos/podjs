@@ -1,7 +1,8 @@
-import { Flex, Image, Text, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, Icon, IconButton, Image, Text, useColorMode } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { observer } from 'mobx-react';
 import AudioPlayer from 'react-h5-audio-player';
+import { RiArrowUpLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
 
 const Player = () => {
@@ -9,6 +10,8 @@ const Player = () => {
   const { colorMode } = useColorMode();
 
   const { currentPodcast } = playerStore;
+
+  const scrollToTop = () => window.scrollTo(0, 0);
 
   return (
     <Flex
@@ -59,6 +62,28 @@ const Player = () => {
         },
       }}
     >
+      <Box
+        position='absolute'
+        right={3}
+        zIndex={11}
+        bg='gray.700'
+        p={3}
+        borderWidth='1px'
+        borderBottomWidth={0}
+        borderTopLeftRadius='lg'
+        borderTopRightRadius='lg'
+        transform='translateY(-100%)'
+      >
+        <IconButton
+          aria-label='Back to the top'
+          onClick={scrollToTop}
+          backdropFilter='blur(10px)'
+          transition='0.2s linear'
+          size='sm'
+        >
+          <Icon as={RiArrowUpLine} fontSize={20} />
+        </IconButton>
+      </Box>
       {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
         <Image
           display={{ base: 'none', sm: 'initial' }}
