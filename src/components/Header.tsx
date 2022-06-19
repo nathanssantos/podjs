@@ -24,6 +24,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       top='0'
       left='0'
       right='0'
+      minH='64px'
       py={2}
       px={6}
       backdropFilter='blur(10px)'
@@ -36,10 +37,10 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
         <IconButton
           aria-label='Menu'
           onClick={onOpenDrawer}
-          borderWidth='1px'
           backdropFilter='blur(10px)'
+          size='sm'
         >
-          <Icon as={RiMenuLine} fontSize={24} />
+          <Icon as={RiMenuLine} fontSize={20} />
         </IconButton>
         <Link href='/' passHref>
           <Box display='flex' cursor='pointer'>
@@ -53,11 +54,11 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       <IconButton
         aria-label='Menu'
         onClick={openPlayList}
-        borderWidth='1px'
         backdropFilter='blur(10px)'
         color={playList?.length ? 'teal.200' : 'var(--chakra-colors-chakra-body-text)'}
+        size='sm'
       >
-        <Icon as={RiPlayListLine} fontSize={24} />
+        <Icon as={RiPlayListLine} fontSize={20} />
       </IconButton>
     </Flex>
   );
