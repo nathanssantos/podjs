@@ -5,12 +5,9 @@ const eslintCommand = (filenames) =>
     .map((f) => path.relative(process.cwd(), f))
     .join(' --file ')}`;
 
-const prettierCommand = (filenames) =>
-  `next lint --fix --file ${filenames
-    .map((f) => path.relative(process.cwd(), f))
-    .join(' --file ')}`;
+const prettierCommand = 'prettier --write';
 
 module.exports = {
   '*.{js,jsx,ts,tsx}': [eslintCommand],
-  '{,!(node_modules|public|build|dist|.next)/**/}*.{js,jsx,ts,tsx,scss,css}': [prettierCommand],
+  '*.{js,jsx,ts,tsx,css,scss}': [prettierCommand],
 };
