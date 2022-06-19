@@ -46,6 +46,8 @@ const PlayListItem = (props: PlayListItemProps) => {
       overflow='hidden'
       direction={{ base: 'column', sm: 'row' }}
       align={{ base: 'center', sm: 'flex-start' }}
+      borderBottomWidth='1px'
+      pb={6}
     >
       <Flex
         borderColor={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
@@ -77,7 +79,7 @@ const PlayListItem = (props: PlayListItemProps) => {
         w='100%'
       >
         <Text
-          mb={3}
+          mb={4}
           fontWeight='semibold'
           lineHeight='tight'
           onClick={playPodcast}
