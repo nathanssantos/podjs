@@ -2,9 +2,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { observer } from 'mobx-react';
 import { Box, Flex, SimpleGrid, Spinner, useColorMode } from '@chakra-ui/react';
+import { useStore } from '../hooks';
 import CollectionCard from '../components/CollectionCard';
 import Search from '../components/Search';
-import { useStore } from '../hooks';
 
 const Home: NextPage = () => {
   const { collectionStore } = useStore();

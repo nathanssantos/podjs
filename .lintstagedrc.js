@@ -8,6 +8,6 @@ const eslintCommand = (filenames) =>
 const prettierCommand = 'prettier --write';
 
 module.exports = {
-  'src/**/*.{js,jsx,ts,tsx}': [eslintCommand],
-  'src/**/*.{js,jsx,ts,tsx,json,css,scss}': [prettierCommand],
+  'src/**/*.(js|jsx|ts|tsx)': [eslintCommand, prettierCommand],
+  'src/**/*.(js|jsx|ts|tsx|json|css|scss)': [prettierCommand],
 };
