@@ -50,6 +50,7 @@ const PodcastCard = (props: PodcastCardProps) => {
       align={{ base: 'center', sm: 'flex-start' }}
       borderBottomWidth='1px'
       pb={6}
+      _last={{ borderBottomWidth: 0 }}
     >
       <Flex
         borderWidth='1px'
