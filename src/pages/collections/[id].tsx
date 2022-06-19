@@ -136,7 +136,7 @@ const CollectionDetail: NextPage = () => {
       <Flex
         as='main'
         p={6}
-        pb={40}
+        pb={36}
         gap={{ base: 12, md: 6 }}
         direction={{ base: 'column', lg: 'row' }}
       >

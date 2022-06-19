@@ -48,6 +48,7 @@ const PlayListItem = (props: PlayListItemProps) => {
       align={{ base: 'center', sm: 'flex-start' }}
       borderBottomWidth='1px'
       pb={6}
+      _last={{ borderBottomWidth: 0 }}
     >
       <Flex
         borderColor={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
