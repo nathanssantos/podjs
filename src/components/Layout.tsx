@@ -1,6 +1,5 @@
 import {
   Button,
-  Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
@@ -18,10 +17,11 @@ import { RiArrowUpLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
 import Header from './Header';
 import Player from './Player';
+import Drawer from './Drawer';
+import PlayList from './PlayList';
 
 const Layout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode();
   const { playerStore } = useStore();
 
   const { currentPodcast } = playerStore;
@@ -44,24 +44,8 @@ const Layout = () => {
       >
         <Icon as={RiArrowUpLine} fontSize={24} />
       </IconButton>
-      <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>PodJS</DrawerHeader>
-
-          <DrawerBody></DrawerBody>
-
-          <DrawerFooter>
-            <Flex alignItems='center' gap={3}>
-              Set theme
-              <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? 'Dark' : 'Light'}
-              </Button>
-            </Flex>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+      <Drawer isOpen={isOpen} onClose={onClose} />
+      <PlayList />
       <Player />
     </>
   );
