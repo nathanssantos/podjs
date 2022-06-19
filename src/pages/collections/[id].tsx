@@ -90,7 +90,11 @@ const CollectionDetail: NextPage = () => {
                       {primaryGenreName}
                     </Badge>
                   </Flex>
-                  {!!copyright?.length && <Text fontSize='14px'>{copyright}</Text>}
+                  {!!copyright?.length && (
+                    <Text fontSize='12px' color='gray.500'>
+                      {copyright}
+                    </Text>
+                  )}
                 </Flex>
               </Flex>
               <Flex direction='column' gap={{ base: 12, md: 6 }}>

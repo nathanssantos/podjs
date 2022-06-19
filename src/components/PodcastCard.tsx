@@ -48,6 +48,8 @@ const PodcastCard = (props: PodcastCardProps) => {
       overflow='hidden'
       direction={{ base: 'column', sm: 'row' }}
       align={{ base: 'center', sm: 'flex-start' }}
+      borderBottomWidth='1px'
+      pb={6}
     >
       <Flex
         borderWidth='1px'
