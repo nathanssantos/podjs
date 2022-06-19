@@ -4,15 +4,18 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
 import LazyLoad from 'react-lazyload';
-import { Badge, Box, Flex, Image, SimpleGrid, Spinner, Text, useTheme } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Spinner, Text, useColorMode } from '@chakra-ui/react';
 import { useStore } from '../../hooks';
 import PodcastCard from '../../components/PodcastCard';
+import Search from '../../components/Search';
+import { ParsedUrlQuery } from 'querystring';
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
   const { collectionStore } = useStore();
+  const { colorMode } = useColorMode();
 
-  const { detail, detailStatus, getDetail } = collectionStore;
+  const { detail, detailStatus, detailSearchResult, getDetail, search } = collectionStore;
 
   const renderDetail = () => {
     switch (detailStatus) {
@@ -85,7 +88,9 @@ const CollectionDetail: NextPage = () => {
                     <Text fontSize='lg' mb={4} fontWeight={100} color='gray.500'>
                       {artistName}
                     </Text>
-                    <Text mb={4}>{description}</Text>
+                    {!!description?.length && (
+                      <Text mb={4} dangerouslySetInnerHTML={{ __html: description }} />
+                    )}
                     <Badge borderRadius='full' px={2} colorScheme='teal'>
                       {primaryGenreName}
                     </Badge>
@@ -98,16 +103,17 @@ const CollectionDetail: NextPage = () => {
                 </Flex>
               </Flex>
               <Flex direction='column' gap={{ base: 12, md: 6 }}>
-                {items.map((podcast) => (
-                  <LazyLoad
-                    key={`${podcast.title}${podcast.isoDate}`}
-                    height={150}
-                    offset={2048}
-                    unmountIfInvisible
-                  >
-                    <PodcastCard podcast={podcast} imageFallback={artworkUrl600} />
-                  </LazyLoad>
-                ))}
+                {detailSearchResult &&
+                  detailSearchResult.map((podcast) => (
+                    <LazyLoad
+                      key={`${podcast.title}${podcast.isoDate}`}
+                      height={150}
+                      offset={2048}
+                      unmountIfInvisible
+                    >
+                      <PodcastCard podcast={podcast} imageFallback={artworkUrl600} />
+                    </LazyLoad>
+                  ))}
               </Flex>
             </>
           );
@@ -120,9 +126,14 @@ const CollectionDetail: NextPage = () => {
     }
   };
 
+  const init = async (query: ParsedUrlQuery) => {
+    const { id } = query;
+    if (id && String(detail?.collectionId) !== id) await getDetail({ id });
+    search();
+  };
+
   useEffect(() => {
-    const { id } = router.query;
-    if (id && String(detail?.collectionId) !== id) getDetail({ id });
+    init(router.query);
   }, [router.query]);
 
   return (
@@ -133,14 +144,29 @@ const CollectionDetail: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex
-        as='main'
-        p={6}
-        pb={36}
-        gap={{ base: 12, md: 6 }}
-        direction={{ base: 'column', lg: 'row' }}
-      >
-        {renderDetail()}
+      <Flex direction='column' as='main' p={6} pt={20} pb={36} gap={6}>
+        <Flex
+          bg='gray.900'
+          justifyContent='flex-end'
+          position='fixed'
+          top='63px'
+          right={4}
+          ml={4}
+          zIndex={1000}
+          bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
+          p={2}
+          borderWidth='1px'
+          borderTopWidth={0}
+          borderBottomLeftRadius='lg'
+          borderBottomRightRadius='lg'
+        >
+          <Box maxW={80}>
+            <Search onChange={search} />
+          </Box>
+        </Flex>
+        <Flex gap={12} direction={{ base: 'column', lg: 'row' }}>
+          {renderDetail()}
+        </Flex>
       </Flex>
     </div>
   );

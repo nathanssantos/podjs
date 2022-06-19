@@ -1,11 +1,14 @@
 import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
 import type RootStore from './rootStore';
+import { normalizeString } from '../utils';
 
 export default class CollectionStore {
   rootStore: RootStore;
   list: Collection[] | null = null;
+  listSearchTerm: string | null = null;
   detail: Collection | null = null;
+  detailSearchResult: Podcast[] | null = null;
   listStatus: FetchStatus = 'idle';
   detailStatus: FetchStatus = 'idle';
 
@@ -14,15 +17,30 @@ export default class CollectionStore {
     this.rootStore = rootStore;
   }
 
-  getList = async (): Promise<StoreActionResponse> => {
+  getList = async (payload: {
+    term: string;
+    country?: string;
+  }): Promise<StoreActionResponse> => {
     try {
-      this.listStatus = 'fetching';
+      const { term, country } = payload;
 
-      const response = await axios.get('/api/collections');
+      if (this.list?.length && term?.length && term === this.listSearchTerm) return;
+
+      this.listSearchTerm = term;
+      this.listStatus = 'fetching';
+      this.list = null;
+
+      const params = { country } as { term: string; country?: string };
+
+      if (term?.length) params.term = term;
+
+      const response = await axios.get('/api/collections', {
+        params,
+      });
 
       const { status, data } = response;
 
-      if (status !== 200 || !data?.results) {
+      if (status !== 200 || !data) {
         this.listStatus = 'error';
 
         return {
@@ -30,7 +48,7 @@ export default class CollectionStore {
         };
       }
 
-      this.list = data.results;
+      this.list = data;
       this.listStatus = 'success';
 
       return { status };
@@ -46,9 +64,11 @@ export default class CollectionStore {
   };
 
   getDetail = async (payload: { id: string | string[] }): Promise<StoreActionResponse> => {
-    try {
-      this.detailStatus = 'fetching';
+    this.detailStatus = 'fetching';
+    this.detail = null;
+    this.detailSearchResult = null;
 
+    try {
       const { id } = payload;
 
       const response = await axios.get(`/api/collections/${id}`);
@@ -78,8 +98,27 @@ export default class CollectionStore {
     }
   };
 
+  search = (term?: string): void => {
+    this.detailSearchResult = null;
+
+    if (!this.detail?.items) return;
+
+    if (term?.length && this.detail?.items) {
+      this.detailSearchResult = this.detail.items.filter((item) =>
+        normalizeString(item.title.toLowerCase()).includes(normalizeString(term.toLowerCase())),
+      );
+
+      return;
+    }
+
+    this.detailSearchResult = this.detail.items;
+  };
+
   reset = () => {
     this.list = null;
+    this.detail = null;
+    this.detailSearchResult = null;
     this.listStatus = 'idle';
+    this.detailStatus = 'idle';
   };
 }
