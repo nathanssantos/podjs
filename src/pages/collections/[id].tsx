@@ -97,7 +97,7 @@ const CollectionDetail: NextPage = () => {
                   </Flex>
                   {!!copyright?.length && (
                     <Text fontSize='12px' color='gray.500'>
-                      {copyright}
+                      {`${!copyright.includes('©') ? `© ${copyright}` : `${copyright}`}`}
                     </Text>
                   )}
                 </Flex>

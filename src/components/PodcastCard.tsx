@@ -47,19 +47,18 @@ const PodcastCard = (props: PodcastCardProps) => {
     <Flex
       overflow='hidden'
       direction={{ base: 'column', sm: 'row' }}
-      align={{ base: 'center', sm: 'flex-start' }}
+      align={{ base: 'center', sm: 'initial' }}
       borderBottomWidth='1px'
       pb={6}
-      _last={{ borderBottomWidth: 0 }}
     >
       <Flex
         borderWidth='1px'
         borderRadius='lg'
         borderColor={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
         overflow='hidden'
-        w={{ base: '100%', sm: '150px' }}
-        minW={'150px'}
-        h={{ h: 'initial', sm: '150px' }}
+        w={{ base: '100%', sm: '181px' }}
+        minW={'181px'}
+        h={{ h: 'initial', sm: '181px' }}
         mb={{ base: 3, sm: 0 }}
         onClick={playPodcast}
         cursor='pointer'
@@ -89,7 +88,13 @@ const PodcastCard = (props: PodcastCardProps) => {
         >
           {title}
         </Text>
-        <Flex mb={1} h='72px' overflow='hidden'>
+        <Flex align='center' gap={2} mb={1}>
+          <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
+          <Badge borderRadius='full' px={2} colorScheme='teal'>
+            {duration}
+          </Badge>
+        </Flex>
+        <Flex mb={1} h='68px' overflow='hidden'>
           <Text
             fontSize='14px'
             color='gray.500'
@@ -100,15 +105,12 @@ const PodcastCard = (props: PodcastCardProps) => {
           bgGradient={`linear(to-b, transparent, ${
             colorMode === 'light' ? '#fff' : 'gray.800'
           })`}
-          h='40px'
+          h='32px'
           w='100%'
-          mt='-40px'
+          mt='-36px'
           mb='1'
         />
-        <Flex w='100%' align='flex-end' justify='space-between' gap={3}>
-          <Badge borderRadius='full' px={2} colorScheme='teal'>
-            {duration}
-          </Badge>
+        <Flex flex='1' alignItems='flex-end' justify='flex-end' w='100%'>
           <IconButton
             aria-label='Menu'
             onClick={addToPlayList}
