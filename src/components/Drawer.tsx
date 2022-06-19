@@ -30,7 +30,7 @@ const Drawer = ({ isOpen, onClose }: DrawerProps) => {
         <DrawerBody></DrawerBody>
 
         <DrawerFooter>
-          <Flex alignItems='center' gap={3}>
+          <Flex align='center' gap={3}>
             Set theme
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? 'Dark' : 'Light'}
