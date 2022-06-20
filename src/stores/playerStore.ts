@@ -29,14 +29,14 @@ export default class PlayerStore {
   };
 
   addPodcastToPlayList = (podcast: Podcast) => {
-    if (!this.playList.find(({ enclosure }) => enclosure.url === podcast.enclosure.url)) {
+    if (!this.playList.find(({ enclosure }) => enclosure.url === podcast?.enclosure?.url)) {
       this.setPlayList([...this.playList, podcast]);
     }
   };
 
   removePodcastFromPlaylist = (podcast: Podcast) => {
     this.setPlayList(
-      this.playList.filter(({ enclosure }) => enclosure.url !== podcast.enclosure.url),
+      this.playList.filter(({ enclosure }) => enclosure.url !== podcast?.enclosure?.url),
     );
   };
 }
