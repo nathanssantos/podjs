@@ -30,7 +30,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       backdropFilter='blur(10px)'
       zIndex={99}
       transition='0.2s linear'
-      backgroundColor={colorMode === 'light' ? '#fff' : theme.colors.gray[700]}
+      backgroundColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
       borderBottomWidth='1px'
     >
       <Flex gap={3}>
@@ -44,7 +44,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
         </IconButton>
         <Link href='/' passHref>
           <Box display='flex' cursor='pointer'>
-            <Text fontSize={20} letterSpacing='tight' fontWeight='bold'>
+            <Text fontSize={20} fontWeight='semibold'>
               PodJS
             </Text>
           </Box>
@@ -55,7 +55,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
         aria-label='Menu'
         onClick={openPlayList}
         backdropFilter='blur(10px)'
-        color={playList?.length ? 'teal.200' : 'var(--chakra-colors-chakra-body-text)'}
+        color={playList?.length ? 'teal.300' : 'var(--chakra-colors-chakra-body-text)'}
         size='sm'
       >
         <Icon as={RiPlayListLine} fontSize={20} />

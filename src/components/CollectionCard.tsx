@@ -27,7 +27,7 @@ const CollectionCard = (props: CollectionCardProps) => {
               {collectionName}
             </Text>
           </Box>
-          <Badge borderRadius='full' px={2} colorScheme='teal' mb={2}>
+          <Badge borderRadius='full' px={2} colorScheme='teal'>
             {primaryGenreName}
           </Badge>
         </Flex>
