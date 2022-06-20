@@ -38,7 +38,7 @@ const PlayListItem = (props: PlayListItemProps) => {
 
   const removeFromPlayList = () => {
     removePodcastFromPlaylist(podcast);
-    if (currentPodcast?.enclosure.url === podcast.enclosure.url) setCurrentPodcast(null);
+    if (currentPodcast?.enclosure?.url === podcast?.enclosure?.url) setCurrentPodcast(null);
   };
 
   return (
@@ -51,7 +51,7 @@ const PlayListItem = (props: PlayListItemProps) => {
       _last={{ borderBottomWidth: 0 }}
     >
       <Flex
-        borderColor={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
+        borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
         borderWidth='1px'
         borderRadius='lg'
         overflow='hidden'
@@ -85,7 +85,7 @@ const PlayListItem = (props: PlayListItemProps) => {
           lineHeight='tight'
           onClick={playPodcast}
           cursor='pointer'
-          color={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
+          color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
         >
           {title}
         </Text>

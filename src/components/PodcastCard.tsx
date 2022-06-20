@@ -24,14 +24,7 @@ const PodcastCard = (props: PodcastCardProps) => {
 
   const { currentPodcast, setCurrentPodcast, addPodcastToPlayList } = playerStore;
 
-  const {
-    title,
-    link,
-    isoDate,
-    enclosure: { url, length, type },
-    content,
-    itunes: { summary, duration, image },
-  } = podcast;
+  const { title, link, isoDate, enclosure, content, itunes } = podcast;
 
   const playPodcast = () => {
     setCurrentPodcast(podcast);
@@ -54,7 +47,7 @@ const PodcastCard = (props: PodcastCardProps) => {
       <Flex
         borderWidth='1px'
         borderRadius='lg'
-        borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
+        borderColor={currentPodcast?.enclosure?.url === enclosure?.url ? 'teal.300' : ''}
         overflow='hidden'
         w={{ base: '100%', sm: '180px' }}
         minW={'180px'}
@@ -64,7 +57,7 @@ const PodcastCard = (props: PodcastCardProps) => {
         cursor='pointer'
       >
         <Image
-          src={image}
+          src={itunes.image}
           alt={title}
           w='100%'
           h='100%'
@@ -84,14 +77,14 @@ const PodcastCard = (props: PodcastCardProps) => {
           mb={1}
           fontWeight='semibold'
           lineHeight='tight'
-          color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
+          color={currentPodcast?.enclosure?.url === enclosure?.url ? 'teal.300' : ''}
         >
           {title}
         </Text>
         <Flex align='center' gap={2} mb={1}>
           <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
           <Badge borderRadius='full' px={2} colorScheme='teal'>
-            {duration}
+            {itunes.duration}
           </Badge>
         </Flex>
         <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }}>
@@ -100,7 +93,9 @@ const PodcastCard = (props: PodcastCardProps) => {
               <Text
                 fontSize='14px'
                 color='gray.500'
-                dangerouslySetInnerHTML={{ __html: summary?.length ? summary : content }}
+                dangerouslySetInnerHTML={{
+                  __html: itunes.summary?.length ? itunes.summary : content,
+                }}
               />
             </Flex>
             <Box
