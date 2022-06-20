@@ -27,7 +27,7 @@ const PlayList = () => {
         <DrawerBody>
           <Flex direction='column' gap={6}>
             {playList.map((podcast) => (
-              <PlayListItem key={podcast.enclosure.url} podcast={podcast} imageFallback='' />
+              <PlayListItem key={podcast?.enclosure?.url} podcast={podcast} imageFallback='' />
             ))}
           </Flex>
         </DrawerBody>
