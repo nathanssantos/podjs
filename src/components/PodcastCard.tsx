@@ -47,18 +47,18 @@ const PodcastCard = (props: PodcastCardProps) => {
     <Flex
       overflow='hidden'
       direction={{ base: 'column', sm: 'row' }}
-      align={{ base: 'center', sm: 'initial' }}
+      align={{ base: 'center', sm: 'flex-start' }}
       borderBottomWidth='1px'
       pb={6}
     >
       <Flex
         borderWidth='1px'
         borderRadius='lg'
-        borderColor={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
+        borderColor={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
         overflow='hidden'
-        w={{ base: '100%', sm: '181px' }}
-        minW={'181px'}
-        h={{ h: 'initial', sm: '181px' }}
+        w={{ base: '100%', sm: '180px' }}
+        minW={'180px'}
+        h={{ h: 'initial', sm: '180px' }}
         mb={{ base: 3, sm: 0 }}
         onClick={playPodcast}
         cursor='pointer'
@@ -84,7 +84,7 @@ const PodcastCard = (props: PodcastCardProps) => {
           mb={1}
           fontWeight='semibold'
           lineHeight='tight'
-          color={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
+          color={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
         >
           {title}
         </Text>
@@ -94,31 +94,35 @@ const PodcastCard = (props: PodcastCardProps) => {
             {duration}
           </Badge>
         </Flex>
-        <Flex mb={1} h='68px' overflow='hidden'>
-          <Text
-            fontSize='14px'
-            color='gray.500'
-            dangerouslySetInnerHTML={{ __html: summary?.length ? summary : content }}
-          />
-        </Flex>
-        <Box
-          bgGradient={`linear(to-b, transparent, ${
-            colorMode === 'light' ? '#fff' : 'gray.800'
-          })`}
-          h='32px'
-          w='100%'
-          mt='-36px'
-          mb='1'
-        />
-        <Flex flex='1' alignItems='flex-end' justify='flex-end' w='100%'>
-          <IconButton
-            aria-label='Menu'
-            onClick={addToPlayList}
-            backdropFilter='blur(10px)'
-            size='sm'
-          >
-            <Icon as={RiPlayListAddLine} fontSize={20} />
-          </IconButton>
+        <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }}>
+          <Flex direction='column' flex={1}>
+            <Flex mb={1} h='124px' overflow='hidden' w='100%'>
+              <Text
+                fontSize='14px'
+                color='gray.500'
+                dangerouslySetInnerHTML={{ __html: summary?.length ? summary : content }}
+              />
+            </Flex>
+            <Box
+              bgGradient={`linear(to-b, transparent, ${
+                colorMode === 'light' ? '#fff' : 'gray.800'
+              })`}
+              h='32px'
+              w='100%'
+              mt='-36px'
+              mb='1'
+            />
+          </Flex>
+          <Flex direction='column' alignItems='flex-end' justify='flex-end' pl={3}>
+            <IconButton
+              aria-label='Menu'
+              onClick={addToPlayList}
+              backdropFilter='blur(10px)'
+              size='sm'
+            >
+              <Icon as={RiPlayListAddLine} fontSize={20} />
+            </IconButton>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

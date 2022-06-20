@@ -2,7 +2,15 @@ import { Box, Flex, Icon, IconButton, Image, Text, useColorMode } from '@chakra-
 import { motion } from 'framer-motion';
 import { observer } from 'mobx-react';
 import AudioPlayer from 'react-h5-audio-player';
-import { RiArrowUpLine } from 'react-icons/ri';
+import {
+  RiArrowUpLine,
+  RiPauseLine,
+  RiPlayLine,
+  RiRewindLine,
+  RiSpeedLine,
+  RiVolumeMuteLine,
+  RiVolumeUpLine,
+} from 'react-icons/ri';
 import { useStore } from '../hooks';
 
 const Player = () => {
@@ -21,7 +29,7 @@ const Player = () => {
       bottom={0}
       left={0}
       right={0}
-      bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
+      bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
       borderTopWidth='1px'
       animate={{
         transform: `translate3d(0, ${
@@ -35,6 +43,9 @@ const Player = () => {
         '.rhap_time': {
           color: 'gray.500',
         },
+        '.rhap_main-controls': {
+          flex: 3,
+        },
         '.rhap_main-controls-button': {
           color: 'var(--chakra-colors-chakra-body-text)',
         },
@@ -43,9 +54,16 @@ const Player = () => {
         },
         '.rhap_progress-indicator': {
           bg: 'var(--chakra-colors-chakra-body-text)',
+          w: '16px',
+          h: '16px',
+          top: '-6px',
+          marginLeft: '-8px',
         },
         '.rhap_progress-bar-show-download': {
           bgColor: 'gray.500',
+        },
+        '.rhap_volume-controls': {
+          flex: 1,
         },
         '.rhap_volume-button': {
           color: 'var(--chakra-colors-chakra-body-text)',
@@ -57,8 +75,7 @@ const Player = () => {
           bg: 'gray.500',
         },
         '.rhap_additional-controls': {
-          display: { base: 'none', sm: 'flex' },
-          pl: { md: '32px' },
+          display: 'none',
         },
       }}
     >
@@ -66,7 +83,7 @@ const Player = () => {
         position='absolute'
         right={4}
         zIndex={11}
-        bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
+        bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
         p={2}
         borderWidth='1px'
         borderBottomWidth={0}
@@ -86,9 +103,9 @@ const Player = () => {
       </Box>
       {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
         <Image
-          display={{ base: 'none', sm: 'initial' }}
-          h='121px'
-          width='121px'
+          display={{ base: 'none', md: 'initial' }}
+          h='92px'
+          width='92px'
           alt={currentPodcast.title}
           src={currentPodcast.itunes.image}
         />
@@ -109,12 +126,22 @@ const Player = () => {
         )}
         <AudioPlayer
           autoPlayAfterSrcChange
+          layout='horizontal'
           src={currentPodcast?.enclosure?.url}
           style={{
             background: 'transparent',
             padding: 0,
           }}
           progressJumpSteps={{ backward: 30000, forward: 30000 }}
+          customAdditionalControls={[]}
+          customIcons={{
+            play: <RiPlayLine />,
+            pause: <RiPauseLine />,
+            rewind: <RiRewindLine />,
+            forward: <RiSpeedLine />,
+            volume: <RiVolumeUpLine />,
+            volumeMute: <RiVolumeMuteLine />,
+          }}
         />
       </Flex>
     </Flex>

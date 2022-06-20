@@ -51,7 +51,7 @@ const PlayListItem = (props: PlayListItemProps) => {
       _last={{ borderBottomWidth: 0 }}
     >
       <Flex
-        borderColor={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
+        borderColor={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
         borderWidth='1px'
         borderRadius='lg'
         overflow='hidden'
@@ -85,7 +85,7 @@ const PlayListItem = (props: PlayListItemProps) => {
           lineHeight='tight'
           onClick={playPodcast}
           cursor='pointer'
-          color={currentPodcast?.enclosure.url === url ? 'teal.200' : ''}
+          color={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
         >
           {title}
         </Text>

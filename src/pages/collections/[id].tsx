@@ -82,10 +82,10 @@ const CollectionDetail: NextPage = () => {
                     direction='column'
                     align={{ base: 'center', md: 'flex-start' }}
                   >
-                    <Text fontSize='2xl' lineHeight={1} mb={2}>
+                    <Text fontSize='2xl' lineHeight={1} mb={2} fontWeight='semibold'>
                       {collectionName}
                     </Text>
-                    <Text fontSize='lg' mb={4} fontWeight={100} color='gray.500'>
+                    <Text fontSize='lg' mb={4} fontWeight={300} color='gray.500'>
                       {artistName}
                     </Text>
                     {!!description?.length && (
@@ -153,7 +153,7 @@ const CollectionDetail: NextPage = () => {
           right={4}
           ml={4}
           zIndex={1000}
-          bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
+          bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
           p={2}
           borderWidth='1px'
           borderTopWidth={0}
