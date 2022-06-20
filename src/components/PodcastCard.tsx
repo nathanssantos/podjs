@@ -40,7 +40,7 @@ const PodcastCard = (props: PodcastCardProps) => {
 
   const addToPlayList = () => {
     addPodcastToPlayList(podcast);
-    if (!currentPodcast?.enclosure.url) playPodcast();
+    if (!currentPodcast?.enclosure?.url) playPodcast();
   };
 
   return (
@@ -54,7 +54,7 @@ const PodcastCard = (props: PodcastCardProps) => {
       <Flex
         borderWidth='1px'
         borderRadius='lg'
-        borderColor={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
+        borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
         overflow='hidden'
         w={{ base: '100%', sm: '180px' }}
         minW={'180px'}
@@ -84,7 +84,7 @@ const PodcastCard = (props: PodcastCardProps) => {
           mb={1}
           fontWeight='semibold'
           lineHeight='tight'
-          color={currentPodcast?.enclosure.url === url ? 'teal.300' : ''}
+          color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
         >
           {title}
         </Text>
