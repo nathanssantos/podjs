@@ -7,6 +7,7 @@ export default class CollectionStore {
   rootStore: RootStore;
   list: Collection[] | null = null;
   listSearchTerm: string | null = null;
+  listSearchCountry: string | null = null;
   detail: Collection | null = null;
   detailSearchResult: Podcast[] | null = null;
   listStatus: FetchStatus = 'idle';
@@ -17,28 +18,42 @@ export default class CollectionStore {
     this.rootStore = rootStore;
   }
 
+  setListSearchCountry = (country: string) => {
+    this.listSearchCountry = country;
+  };
+
   getList = async (payload: {
     term: string;
-    country?: string;
+    country: string;
   }): Promise<StoreActionResponse> => {
     try {
       const { term, country } = payload;
 
-      if (this.list?.length && term?.length && term === this.listSearchTerm) return;
+      if (
+        this.list?.length &&
+        term?.length &&
+        term === this.listSearchTerm &&
+        country?.length &&
+        country === this.listSearchCountry
+      ) {
+        return;
+      }
 
       this.listSearchTerm = term;
+      this.listSearchCountry = country;
       this.listStatus = 'fetching';
       this.list = null;
 
-      const params = { country } as { term: string; country?: string };
+      const params = {} as { term: string; country: string };
 
       if (term?.length) params.term = term;
+      if (country?.length) params.country = country;
 
       const response = await axios.get('/api/collections', {
         params,
       });
 
-      const { status, data } = response;
+      const { status, data } = response as { status: number; data: Collection[] };
 
       if (status !== 200 || !data) {
         this.listStatus = 'error';
@@ -49,6 +64,7 @@ export default class CollectionStore {
       }
 
       this.list = data;
+
       this.listStatus = 'success';
 
       return { status };
