@@ -96,7 +96,7 @@ const CollectionDetail: NextPage = () => {
                     </Badge>
                   </Flex>
                   {!!copyright?.length && (
-                    <Text fontSize='12px' color='gray.500'>
+                    <Text fontSize='13px' color='gray.500'>
                       {`${!copyright.includes('©') ? `© ${copyright}` : `${copyright}`}`}
                     </Text>
                   )}
@@ -161,7 +161,7 @@ const CollectionDetail: NextPage = () => {
           borderBottomRightRadius='lg'
         >
           <Box maxW={80}>
-            <Search onChange={search} />
+            <Search onChange={({ term }) => search(term)} />
           </Box>
         </Flex>
         <Flex gap={12} direction={{ base: 'column', lg: 'row' }}>

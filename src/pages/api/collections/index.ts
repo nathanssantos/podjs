@@ -31,6 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     });
     res.status(status).json(data?.results);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error as AxiosError);
   }
 }

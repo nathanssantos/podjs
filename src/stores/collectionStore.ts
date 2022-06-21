@@ -6,8 +6,8 @@ import { normalizeString } from '../utils';
 export default class CollectionStore {
   rootStore: RootStore;
   list: Collection[] | null = null;
-  listSearchTerm: string | null = null;
-  listSearchCountry: string | null = null;
+  listSearchTerm: string = '';
+  listSearchCountry: string = '';
   detail: Collection | null = null;
   detailSearchResult: Podcast[] | null = null;
   listStatus: FetchStatus = 'idle';
@@ -22,6 +22,10 @@ export default class CollectionStore {
     this.listSearchCountry = country;
   };
 
+  setDetail = (payload: Collection | null) => {
+    this.detail = payload;
+  };
+
   getList = async (payload: {
     term: string;
     country: string;
@@ -31,23 +35,30 @@ export default class CollectionStore {
 
       if (
         this.list?.length &&
-        term?.length &&
         term === this.listSearchTerm &&
-        country?.length &&
         country === this.listSearchCountry
       ) {
         return;
       }
 
-      this.listSearchTerm = term;
-      this.listSearchCountry = country;
       this.listStatus = 'fetching';
       this.list = null;
 
       const params = {} as { term: string; country: string };
 
-      if (term?.length) params.term = term;
-      if (country?.length) params.country = country;
+      if (term?.length) {
+        this.listSearchTerm = term;
+        params.term = term;
+      } else {
+        this.listSearchTerm = '';
+      }
+
+      if (country?.length) {
+        this.listSearchCountry = country;
+        params.country = country;
+      } else {
+        this.listSearchCountry = '';
+      }
 
       const response = await axios.get('/api/collections', {
         params,

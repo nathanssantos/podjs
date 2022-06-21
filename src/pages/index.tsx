@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       }
 
       case 'error': {
-        return 'error';
+        return 'Something unexpected happened. Please try again.';
       }
 
       case 'success': {
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
       }
 
       default: {
-        return 'empty';
+        return 'No collection found.';
       }
     }
   };
@@ -65,6 +65,7 @@ const Home: NextPage = () => {
           borderBottomRightRadius='lg'
         >
           <Search
+            showCountry
             onChange={onSearch}
             initialValue={{ term: listSearchTerm, country: listSearchCountry }}
           />
