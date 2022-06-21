@@ -29,8 +29,9 @@ const Player = () => {
       bottom={0}
       left={0}
       right={0}
-      bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
+      bgColor={colorMode === 'light' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(13, 17, 23, 0.75)'}
       borderTopWidth='1px'
+      backdropFilter='blur(10px)'
       animate={{
         transform: `translate3d(0, ${
           playerStore?.currentPodcast?.enclosure ? '0' : '100%'
@@ -83,13 +84,12 @@ const Player = () => {
         position='absolute'
         right={4}
         zIndex={11}
-        bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
+        bgColor={colorMode === 'light' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(13, 17, 23, 0.75)'}
         p={2}
         borderWidth='1px'
-        borderBottomWidth={0}
-        borderTopLeftRadius='lg'
-        borderTopRightRadius='lg'
-        transform='translateY(-100%)'
+        borderRadius='lg'
+        transform='translateY(calc(-100% - 16px))'
+        backdropFilter='blur(10px)'
       >
         <IconButton
           aria-label='Back to the top'
