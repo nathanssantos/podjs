@@ -8,7 +8,7 @@ import {
   Text,
   useColorMode,
 } from '@chakra-ui/react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { RiPlayListAddLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
 
