@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
-import LazyLoad from 'react-lazyload';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import { Badge, Box, Flex, Image, Spinner, Text, useColorMode } from '@chakra-ui/react';
 import { useStore } from '../../hooks';
 import PodcastCard from '../../components/PodcastCard';
@@ -17,6 +17,11 @@ const CollectionDetail: NextPage = () => {
   const { colorMode } = useColorMode();
 
   const { detail, detailStatus, detailSearchResult, getDetail, search } = collectionStore;
+
+  const handleSearch = (payload: { term: string }) => {
+    const { term } = payload;
+    search(term);
+  };
 
   const renderDetail = () => {
     switch (detailStatus) {
@@ -134,8 +139,11 @@ const CollectionDetail: NextPage = () => {
   const init = async (query: ParsedUrlQuery) => {
     const { id } = query;
     if (id && String(detail?.collectionId) !== id) await getDetail({ id });
-    search();
   };
+
+  useEffect(() => {
+    forceCheck();
+  }, [detailSearchResult]);
 
   useEffect(() => {
     init(router.query);
@@ -149,28 +157,29 @@ const CollectionDetail: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex direction='column' as='main' p={6} pt={20} pb={36} gap={6}>
+      <Flex direction='column'>
         <Flex
-          bg='gray.900'
           justifyContent='flex-end'
-          position='fixed'
-          top='63px'
+          position='sticky'
+          top={0}
           right={4}
-          ml={4}
           zIndex={1000}
-          bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
-          p={2}
-          borderWidth='1px'
-          borderTopWidth={0}
-          borderBottomLeftRadius='lg'
-          borderBottomRightRadius='lg'
+          py={3}
+          px={6}
+          backdropFilter='blur(10px)'
+          borderBottomWidth='1px'
+          bgColor={
+            colorMode === 'light' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(13, 17, 23, 0.75)'
+          }
         >
           <Box maxW={80}>
-            <Search onChange={({ term }) => search(term)} />
+            <Search onChange={handleSearch} placeholder='Search episodes' />
           </Box>
         </Flex>
-        <Flex gap={12} direction={{ base: 'column', lg: 'row' }}>
-          {renderDetail()}
+        <Flex as='main' px={6} pt={12} pb={36}>
+          <Flex gap={12} direction={{ base: 'column', lg: 'row' }}>
+            {renderDetail()}
+          </Flex>
         </Flex>
       </Flex>
     </div>

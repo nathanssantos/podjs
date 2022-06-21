@@ -64,8 +64,10 @@ const Home: NextPage = () => {
 
     return (
       <Flex direction='column' gap={3} mb={12}>
-        <Flex borderBottomWidth='1px' pb={1}>
-          <Text fontSize='2xl'>{`Search results for "${listSearchTerm}":`}</Text>
+        <Flex borderBottomWidth='1px' pb={3}>
+          <Text fontSize='2xl' lineHeight={1}>
+            {`Search results for "${listSearchTerm}":`}
+          </Text>
         </Flex>
         <SimpleGrid minChildWidth={200} gap={3}>
           {listContent}
@@ -118,36 +120,41 @@ const Home: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex direction='column' as='main' p={6} pt={20} gap={3}>
+      <Flex direction='column'>
         <Flex
-          bg='gray.900'
           justifyContent='flex-end'
-          position='fixed'
-          top='63px'
+          position='sticky'
+          top={0}
           right={4}
-          ml={4}
           zIndex={1000}
-          bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
-          p={2}
-          borderWidth='1px'
-          borderTopWidth={0}
-          borderBottomLeftRadius='lg'
-          borderBottomRightRadius='lg'
+          py={3}
+          px={6}
+          backdropFilter='blur(10px)'
+          borderBottomWidth='1px'
+          bgColor={
+            colorMode === 'light' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(13, 17, 23, 0.75)'
+          }
         >
           <Search
             showCountry
             onChange={onSearch}
             initialValue={{ term: listSearchTerm, country: listSearchCountry }}
+            placeholder='Search podcasts'
           />
         </Flex>
 
-        {renderList()}
+        <Flex direction='column' as='main' px={6} pt={12} pb={36}>
+          {renderList()}
 
-        <Flex direction='column' gap={3} mb={12}>
-          <Flex borderBottomWidth='1px' pb={1}>
-            <Text fontSize='2xl'>Top Podcasts</Text>
+          <Flex direction='column' gap={3} mb={12}>
+            <Flex borderBottomWidth='1px' pb={3}>
+              <Text fontSize='2xl' lineHeight={1}>
+                Top Podcasts
+              </Text>
+            </Flex>
+
+            {renderTopList()}
           </Flex>
-          {renderTopList()}
         </Flex>
       </Flex>
     </div>

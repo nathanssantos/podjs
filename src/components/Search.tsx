@@ -8,9 +8,10 @@ type SearchProps = {
   onChange: (payload: { term: string; country: string }) => any;
   initialValue?: { term: string; country: string } | null;
   showCountry?: boolean;
+  placeholder: string;
 };
 
-const Search = ({ onChange, initialValue, showCountry = false }: SearchProps) => {
+const Search = ({ onChange, initialValue, placeholder, showCountry = false }: SearchProps) => {
   const [term, setTerm] = useState(initialValue?.term || '');
   const [country, setCountry] = useState(initialValue?.country || '');
 
@@ -46,7 +47,7 @@ const Search = ({ onChange, initialValue, showCountry = false }: SearchProps) =>
           <InputRightElement pointerEvents='none'>
             <Icon as={RiSearchLine} />
           </InputRightElement>
-          <Input value={term} onChange={handleTermChange} placeholder='Search' />
+          <Input value={term} onChange={handleTermChange} placeholder={placeholder} />
         </InputGroup>
       </Flex>
     </Flex>

@@ -1,4 +1,4 @@
-import { Flex, Box, Icon, Text, IconButton, useColorMode, useTheme } from '@chakra-ui/react';
+import { Flex, Box, Icon, Text, IconButton, useColorMode } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
 import { RiMenuLine, RiPlayListLine } from 'react-icons/ri';
@@ -9,7 +9,6 @@ type HeaderProps = {
 };
 
 const Header = ({ onOpenDrawer }: HeaderProps) => {
-  const theme = useTheme();
   const { colorMode } = useColorMode();
   const { playerStore } = useStore();
 
@@ -21,7 +20,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       align='center'
       justify='space-between'
       position='sticky'
-      top='0'
+      top='-64px'
       left='0'
       right='0'
       minH='64px'
@@ -31,15 +30,9 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       zIndex={99}
       transition='0.2s linear'
       backgroundColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
-      borderBottomWidth='1px'
     >
       <Flex gap={3}>
-        <IconButton
-          aria-label='Menu'
-          onClick={onOpenDrawer}
-          backdropFilter='blur(10px)'
-          size='sm'
-        >
+        <IconButton aria-label='Menu' onClick={onOpenDrawer} size='sm'>
           <Icon as={RiMenuLine} fontSize={20} />
         </IconButton>
         <Link href='/' passHref>
