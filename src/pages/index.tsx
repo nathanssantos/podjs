@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { observer } from 'mobx-react';
-import { Box, Flex, SimpleGrid, Spinner, useColorMode } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Spinner, useColorMode } from '@chakra-ui/react';
 import { useStore } from '../hooks';
 import CollectionCard from '../components/CollectionCard';
 import Search from '../components/Search';
@@ -10,10 +10,10 @@ const Home: NextPage = () => {
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
-  const { list, listStatus, listSearchTerm, getList } = collectionStore;
+  const { list, listStatus, listSearchTerm, listSearchCountry, getList } = collectionStore;
 
-  const onSearch = (term: string) => {
-    getList({ term });
+  const onSearch = (payload: { term: string; country: string }) => {
+    getList(payload);
   };
 
   const renderList = () => {
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       }
 
       case 'error': {
-        return 'error';
+        return 'Something unexpected happened. Please try again.';
       }
 
       case 'success': {
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
       }
 
       default: {
-        return 'empty';
+        return 'No collection found.';
       }
     }
   };
@@ -64,9 +64,11 @@ const Home: NextPage = () => {
           borderBottomLeftRadius='lg'
           borderBottomRightRadius='lg'
         >
-          <Box maxW={80} alignSelf='flex-end'>
-            <Search onChange={onSearch} initialValue={listSearchTerm} />
-          </Box>
+          <Search
+            showCountry
+            onChange={onSearch}
+            initialValue={{ term: listSearchTerm, country: listSearchCountry }}
+          />
         </Flex>
 
         <SimpleGrid minChildWidth={200} gap={3}>

@@ -23,15 +23,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       limit: 200,
     } as Params;
 
-    if (typeof country === 'string' && country?.length) params.country = country;
     if (typeof term === 'string' && term?.length) params.term = term;
+    if (typeof country === 'string' && country?.length) params.country = country;
 
     const { status, data } = await api.get(`search`, {
       params,
     });
-
     res.status(status).json(data?.results);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error as AxiosError);
   }
 }
