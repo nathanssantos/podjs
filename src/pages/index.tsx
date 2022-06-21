@@ -1,24 +1,81 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { observer } from 'mobx-react';
-import { Flex, SimpleGrid, Spinner, useColorMode } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Spinner, Text, useColorMode } from '@chakra-ui/react';
 import { useStore } from '../hooks';
 import CollectionCard from '../components/CollectionCard';
 import Search from '../components/Search';
 import EmptyState from '../components/EmptyState';
+import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
-  const { list, listStatus, listSearchTerm, listSearchCountry, getList } = collectionStore;
+  const {
+    list,
+    topList,
+    listStatus,
+    topListStatus,
+    listSearchTerm,
+    listSearchCountry,
+    getList,
+    getTopList,
+  } = collectionStore;
 
   const onSearch = (payload: { term: string; country: string }) => {
     getList(payload);
   };
 
   const renderList = () => {
+    if (!listSearchTerm?.length) return null;
+
+    let listContent = null;
+
     switch (listStatus) {
+      case 'fetching': {
+        listContent = <Spinner />;
+        break;
+      }
+
+      case 'empty': {
+        listContent = <EmptyState variant='not-found' />;
+        break;
+      }
+
+      case 'error': {
+        listContent = <EmptyState />;
+        break;
+      }
+
+      case 'success': {
+        if (list?.length) {
+          listContent = list.map((collection) => (
+            <CollectionCard key={collection.collectionId} collection={collection} />
+          ));
+        }
+        break;
+      }
+
+      default: {
+        listContent = null;
+      }
+    }
+
+    return (
+      <Flex direction='column' gap={3} mb={12}>
+        <Flex borderBottomWidth='1px' pb={1}>
+          <Text fontSize='2xl'>{`Search results for "${listSearchTerm}":`}</Text>
+        </Flex>
+        <SimpleGrid minChildWidth={200} gap={3}>
+          {listContent}
+        </SimpleGrid>
+      </Flex>
+    );
+  };
+
+  const renderTopList = () => {
+    switch (topListStatus) {
       case 'fetching': {
         return <Spinner />;
       }
@@ -32,10 +89,14 @@ const Home: NextPage = () => {
       }
 
       case 'success': {
-        if (list?.length) {
-          return list.map((collection) => (
-            <CollectionCard key={collection.collectionId} collection={collection} />
-          ));
+        if (topList?.length) {
+          return (
+            <SimpleGrid minChildWidth={200} gap={3} mb={12}>
+              {topList.map((collection) => (
+                <CollectionCard key={collection.collectionId} collection={collection} />
+              ))}
+            </SimpleGrid>
+          );
         }
       }
 
@@ -45,6 +106,10 @@ const Home: NextPage = () => {
     }
   };
 
+  useEffect(() => {
+    if (!topList?.length) getTopList({ country: listSearchCountry });
+  }, []);
+
   return (
     <div>
       <Head>
@@ -53,7 +118,7 @@ const Home: NextPage = () => {
         <meta name='author' content='Nathan Silva Santos <nathansilvasantos@gmail.com>' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex direction='column' as='main' p={6} pt={20} gap={6}>
+      <Flex direction='column' as='main' p={6} pt={20} gap={3}>
         <Flex
           bg='gray.900'
           justifyContent='flex-end'
@@ -62,7 +127,7 @@ const Home: NextPage = () => {
           right={4}
           ml={4}
           zIndex={1000}
-          bgColor={colorMode === 'light' ? '#fff' : 'gray.700'}
+          bgColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
           p={2}
           borderWidth='1px'
           borderTopWidth={0}
@@ -76,9 +141,14 @@ const Home: NextPage = () => {
           />
         </Flex>
 
-        <SimpleGrid minChildWidth={200} gap={3}>
-          {renderList()}
-        </SimpleGrid>
+        {renderList()}
+
+        <Flex direction='column' gap={3} mb={12}>
+          <Flex borderBottomWidth='1px' pb={1}>
+            <Text fontSize='2xl'>Top Podcasts</Text>
+          </Flex>
+          {renderTopList()}
+        </Flex>
       </Flex>
     </div>
   );

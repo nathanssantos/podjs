@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useStore } from '../hooks';
 
@@ -8,7 +8,14 @@ type CollectionCardProps = {
 
 const CollectionCard = (props: CollectionCardProps) => {
   const {
-    collection: { collectionId, collectionName, artworkUrl600, primaryGenreName, genres },
+    collection: {
+      collectionId,
+      collectionName,
+      artworkUrl600,
+      artworkUrl100,
+      primaryGenreName,
+      genres,
+    },
   } = props;
   const router = useRouter();
   const { collectionStore } = useStore();
@@ -29,7 +36,16 @@ const CollectionCard = (props: CollectionCardProps) => {
       overflow='hidden'
       onClick={handleClick}
     >
-      <Image src={artworkUrl600} alt={collectionName} objectFit='cover' />
+      <Image
+        src={artworkUrl600 || artworkUrl100}
+        alt={collectionName}
+        objectFit='cover'
+        fallback={
+          <Flex w='100%' padding='calc(50% - 12px)' align='center' justify='center'>
+            <Spinner />
+          </Flex>
+        }
+      />
 
       <Flex align='flex-start' direction='column' p={3} flex={1}>
         <Box flex={1} mb={3}>
