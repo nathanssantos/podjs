@@ -29,6 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const { status, data } = await api.get(`search`, {
       params,
     });
+
     res.status(status).json(data?.results);
   } catch (error) {
     console.log(error);

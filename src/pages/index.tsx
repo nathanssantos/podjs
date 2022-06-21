@@ -5,6 +5,7 @@ import { Flex, SimpleGrid, Spinner, useColorMode } from '@chakra-ui/react';
 import { useStore } from '../hooks';
 import CollectionCard from '../components/CollectionCard';
 import Search from '../components/Search';
+import EmptyState from '../components/EmptyState';
 
 const Home: NextPage = () => {
   const { collectionStore } = useStore();
@@ -22,8 +23,12 @@ const Home: NextPage = () => {
         return <Spinner />;
       }
 
+      case 'empty': {
+        return <EmptyState variant='not-found' />;
+      }
+
       case 'error': {
-        return 'Something unexpected happened. Please try again.';
+        return <EmptyState />;
       }
 
       case 'success': {
@@ -35,7 +40,7 @@ const Home: NextPage = () => {
       }
 
       default: {
-        return 'No collection found.';
+        return null;
       }
     }
   };

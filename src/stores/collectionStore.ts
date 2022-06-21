@@ -66,11 +66,19 @@ export default class CollectionStore {
 
       const { status, data } = response as { status: number; data: Collection[] };
 
+      if (status === 200 && !data?.length) {
+        this.listStatus = 'empty';
+
+        return {
+          status: status || 400,
+        };
+      }
+
       if (status !== 200 || !data) {
         this.listStatus = 'error';
 
         return {
-          status: response?.status || 400,
+          status: status || 400,
         };
       }
 
@@ -106,7 +114,7 @@ export default class CollectionStore {
         this.detailStatus = 'error';
 
         return {
-          status: response?.status || 400,
+          status: status || 400,
         };
       }
 
