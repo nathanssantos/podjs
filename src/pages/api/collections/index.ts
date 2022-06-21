@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const params = {
       entity: 'podcast',
       media: 'podcast',
-      limit: 200,
+      limit: 24,
     } as Params;
 
     if (typeof term === 'string' && term?.length) params.term = term;
@@ -29,6 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const { status, data } = await api.get(`search`, {
       params,
     });
+
     res.status(status).json(data?.results);
   } catch (error) {
     console.log(error);
