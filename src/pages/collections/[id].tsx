@@ -9,6 +9,7 @@ import { useStore } from '../../hooks';
 import PodcastCard from '../../components/PodcastCard';
 import Search from '../../components/Search';
 import { ParsedUrlQuery } from 'querystring';
+import EmptyState from '../../components/EmptyState';
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
@@ -23,8 +24,12 @@ const CollectionDetail: NextPage = () => {
         return <Spinner />;
       }
 
+      case 'empty': {
+        return <EmptyState variant='not-found' />;
+      }
+
       case 'error': {
-        return 'error';
+        return <EmptyState />;
       }
 
       case 'success': {
@@ -121,7 +126,7 @@ const CollectionDetail: NextPage = () => {
       }
 
       default: {
-        return 'empty';
+        return null;
       }
     }
   };

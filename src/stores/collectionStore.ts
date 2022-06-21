@@ -6,11 +6,13 @@ import { normalizeString } from '../utils';
 export default class CollectionStore {
   rootStore: RootStore;
   list: Collection[] | null = null;
+  topList: Collection[] | null = null;
   listSearchTerm: string = '';
   listSearchCountry: string = '';
   detail: Collection | null = null;
   detailSearchResult: Podcast[] | null = null;
   listStatus: FetchStatus = 'idle';
+  topListStatus: FetchStatus = 'idle';
   detailStatus: FetchStatus = 'idle';
 
   constructor(rootStore: RootStore) {
@@ -66,11 +68,19 @@ export default class CollectionStore {
 
       const { status, data } = response as { status: number; data: Collection[] };
 
+      if (status === 200 && !data?.length) {
+        this.listStatus = 'empty';
+
+        return {
+          status: status || 400,
+        };
+      }
+
       if (status !== 200 || !data) {
         this.listStatus = 'error';
 
         return {
-          status: response?.status || 400,
+          status: status || 400,
         };
       }
 
@@ -83,6 +93,57 @@ export default class CollectionStore {
       console.warn(error);
 
       this.listStatus = 'error';
+
+      return {
+        status: 400,
+      };
+    }
+  };
+
+  getTopList = async (payload: { country: string }): Promise<StoreActionResponse> => {
+    try {
+      const { country } = payload;
+
+      if (this.topList?.length && country === this.listSearchCountry) {
+        return;
+      }
+
+      this.topListStatus = 'fetching';
+      this.topList = null;
+
+      const params = {} as { country: string };
+
+      const response = await axios.get('/api/collections/top', {
+        params,
+      });
+
+      const { status, data } = response as { status: number; data: Collection[] };
+
+      if (status === 200 && !data?.length) {
+        this.topListStatus = 'empty';
+
+        return {
+          status: status || 400,
+        };
+      }
+
+      if (status !== 200 || !data) {
+        this.topListStatus = 'error';
+
+        return {
+          status: status || 400,
+        };
+      }
+
+      this.topList = data;
+
+      this.topListStatus = 'success';
+
+      return { status };
+    } catch (error) {
+      console.warn(error);
+
+      this.topListStatus = 'error';
 
       return {
         status: 400,
@@ -106,7 +167,7 @@ export default class CollectionStore {
         this.detailStatus = 'error';
 
         return {
-          status: response?.status || 400,
+          status: status || 400,
         };
       }
 
