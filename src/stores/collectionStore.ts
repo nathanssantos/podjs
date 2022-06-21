@@ -85,7 +85,6 @@ export default class CollectionStore {
       }
 
       this.list = data;
-
       this.listStatus = 'success';
 
       return { status };
@@ -136,7 +135,6 @@ export default class CollectionStore {
       }
 
       this.topList = data;
-
       this.topListStatus = 'success';
 
       return { status };
@@ -172,6 +170,7 @@ export default class CollectionStore {
       }
 
       this.detail = data;
+      this.detailSearchResult = data.items;
       this.detailStatus = 'success';
 
       return { status };
@@ -191,7 +190,7 @@ export default class CollectionStore {
 
     if (!this.detail?.items) return;
 
-    if (term?.length && this.detail?.items) {
+    if (term?.length) {
       this.detailSearchResult = this.detail.items.filter((item) =>
         normalizeString(item.title.toLowerCase()).includes(normalizeString(term.toLowerCase())),
       );
