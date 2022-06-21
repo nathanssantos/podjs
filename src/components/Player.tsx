@@ -1,4 +1,13 @@
-import { Box, Flex, Icon, IconButton, Image, Text, useColorMode } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  Icon,
+  IconButton,
+  Image,
+  Text,
+  useColorMode,
+} from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { observer } from 'mobx-react';
 import AudioPlayer from 'react-h5-audio-player';
@@ -29,7 +38,7 @@ const Player = () => {
       bottom={0}
       left={0}
       right={0}
-      bgColor={colorMode === 'light' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(13, 17, 23, 0.75)'}
+      bgColor={colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'}
       borderTopWidth='1px'
       backdropFilter='blur(10px)'
       animate={{
@@ -80,70 +89,80 @@ const Player = () => {
         },
       }}
     >
-      <Box
-        position='absolute'
-        right={4}
-        zIndex={11}
-        bgColor={colorMode === 'light' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(13, 17, 23, 0.75)'}
-        p={2}
-        borderWidth='1px'
-        borderRadius='lg'
-        transform='translateY(calc(-100% - 16px))'
-        backdropFilter='blur(10px)'
+      <Container
+        display='flex'
+        w='100%'
+        maxW='container.xl'
+        px={{ base: 3, md: 6 }}
+        position='relative'
       >
-        <IconButton
-          aria-label='Back to the top'
-          onClick={scrollToTop}
+        <Box
+          position='absolute'
+          right={{ base: 1, md: 4 }}
+          zIndex={11}
+          bgColor={
+            colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
+          }
+          p={2}
+          borderWidth='1px'
+          borderRadius='lg'
+          transform={{
+            base: 'translateY(calc(-100% - 5px))',
+            md: 'translateY(calc(-100% - 16px))',
+          }}
           backdropFilter='blur(10px)'
-          transition='0.2s linear'
-          size='sm'
         >
-          <Icon as={RiArrowUpLine} fontSize={20} />
-        </IconButton>
-      </Box>
-      {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
-        <Image
-          display={{ base: 'none', md: 'initial' }}
-          h='92px'
-          width='92px'
-          alt={currentPodcast.title}
-          src={currentPodcast.itunes.image}
-        />
-      )}
-      <Flex direction='column' py={2} px={3} gap={2} flex='1'>
-        {!!currentPodcast?.title?.length && (
-          <Text
-            mb={1}
-            fontWeight='semibold'
-            lineHeight='tight'
-            overflow='hidden'
-            textOverflow='ellipsis'
-            whiteSpace='nowrap'
-            w={{ base: 'calc(100vw - 42px)', md: 'calc(100vw - 135px)' }}
+          <IconButton
+            aria-label='Back to the top'
+            onClick={scrollToTop}
+            backdropFilter='blur(10px)'
+            transition='0.2s linear'
+            size='sm'
           >
-            {currentPodcast.title}
-          </Text>
+            <Icon as={RiArrowUpLine} fontSize={20} />
+          </IconButton>
+        </Box>
+        {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
+          <Image
+            display={{ base: 'none', md: 'initial' }}
+            h='92px'
+            width='92px'
+            alt={currentPodcast.title}
+            src={currentPodcast.itunes.image}
+          />
         )}
-        <AudioPlayer
-          autoPlayAfterSrcChange
-          layout='horizontal'
-          src={currentPodcast?.enclosure?.url}
-          style={{
-            background: 'transparent',
-            padding: 0,
-          }}
-          progressJumpSteps={{ backward: 30000, forward: 30000 }}
-          customAdditionalControls={[]}
-          customIcons={{
-            play: <RiPlayLine />,
-            pause: <RiPauseLine />,
-            rewind: <RiRewindLine />,
-            forward: <RiSpeedLine />,
-            volume: <RiVolumeUpLine />,
-            volumeMute: <RiVolumeMuteLine />,
-          }}
-        />
-      </Flex>
+        <Flex direction='column' py={2} pl={{ base: 0, md: 4 }} gap={2} flex='1'>
+          {!!currentPodcast?.title?.length && (
+            <Text
+              fontWeight='semibold'
+              lineHeight='tight'
+              overflow='hidden'
+              whiteSpace='nowrap'
+            >
+              {currentPodcast.title}
+            </Text>
+          )}
+          <AudioPlayer
+            autoPlayAfterSrcChange
+            layout='horizontal'
+            src={currentPodcast?.enclosure?.url}
+            style={{
+              background: 'transparent',
+              padding: 0,
+            }}
+            progressJumpSteps={{ backward: 30000, forward: 30000 }}
+            customAdditionalControls={[]}
+            customIcons={{
+              play: <RiPlayLine />,
+              pause: <RiPauseLine />,
+              rewind: <RiRewindLine />,
+              forward: <RiSpeedLine />,
+              volume: <RiVolumeUpLine />,
+              volumeMute: <RiVolumeMuteLine />,
+            }}
+          />
+        </Flex>
+      </Container>
     </Flex>
   );
 };

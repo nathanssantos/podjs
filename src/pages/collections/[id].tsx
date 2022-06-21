@@ -4,7 +4,16 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react';
 import LazyLoad, { forceCheck } from 'react-lazyload';
-import { Badge, Box, Flex, Image, Spinner, Text, useColorMode } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Container,
+  Flex,
+  Image,
+  Spinner,
+  Text,
+  useColorMode,
+} from '@chakra-ui/react';
 import { useStore } from '../../hooks';
 import PodcastCard from '../../components/PodcastCard';
 import Search from '../../components/Search';
@@ -66,7 +75,7 @@ const CollectionDetail: NextPage = () => {
                 direction={{ base: 'column', md: 'row', lg: 'column' }}
                 alignSelf={{ base: 'center', md: 'flex-start' }}
                 align={{ base: 'center', md: 'initial' }}
-                top='88px'
+                top='72px'
                 maxW={{ lg: 60 }}
               >
                 <Flex
@@ -164,22 +173,37 @@ const CollectionDetail: NextPage = () => {
           top={0}
           right={4}
           zIndex={1000}
-          py={3}
-          px={6}
           backdropFilter='blur(10px)'
           borderBottomWidth='1px'
           bgColor={
-            colorMode === 'light' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(13, 17, 23, 0.75)'
+            colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
           }
         >
-          <Box maxW={80}>
+          <Container
+            display='flex'
+            alignItems='center'
+            justifyContent='flex-end'
+            py={2}
+            px={{ base: 3, md: 6 }}
+            w='100%'
+            maxW='container.xl'
+          >
             <Search onChange={handleSearch} placeholder='Search episodes' />
-          </Box>
+          </Container>
         </Flex>
-        <Flex as='main' px={6} pt={12} pb={36}>
-          <Flex gap={12} direction={{ base: 'column', lg: 'row' }} w='100%'>
-            {renderDetail()}
-          </Flex>
+        <Flex as='main'>
+          <Container
+            display='flex'
+            px={{ base: 3, md: 6 }}
+            pt={6}
+            pb={36}
+            w='100%'
+            maxW='container.xl'
+          >
+            <Flex gap={12} direction={{ base: 'column', lg: 'row' }} w='100%'>
+              {renderDetail()}
+            </Flex>
+          </Container>
         </Flex>
       </Flex>
     </div>

@@ -1,8 +1,7 @@
-import { Flex, Box, Icon, Text, IconButton, useColorMode } from '@chakra-ui/react';
+import { Flex, Box, Icon, Text, IconButton, useColorMode, Container } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
-import { RiMenuLine, RiPlayListLine } from 'react-icons/ri';
-import { useStore } from '../hooks';
+import { RiMenuLine } from 'react-icons/ri';
 
 type HeaderProps = {
   onOpenDrawer: () => void;
@@ -10,9 +9,6 @@ type HeaderProps = {
 
 const Header = ({ onOpenDrawer }: HeaderProps) => {
   const { colorMode } = useColorMode();
-  const { playerStore } = useStore();
-
-  const { playList, openPlayList } = playerStore;
 
   return (
     <Flex
@@ -20,39 +16,37 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       align='center'
       justify='space-between'
       position='sticky'
-      top='-64px'
+      top={-14}
       left='0'
       right='0'
-      minH='64px'
-      py={2}
-      px={6}
       backdropFilter='blur(10px)'
       zIndex={99}
       transition='0.2s linear'
       backgroundColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
     >
-      <Flex gap={3}>
+      <Container
+        display='flex'
+        alignItems='center'
+        justifyContent='space-between'
+        py={3}
+        px={{ base: 3, md: 6 }}
+        w='100%'
+        maxW='container.xl'
+      >
+        <Flex gap={3}>
+          <Link href='/' passHref>
+            <Box display='flex' cursor='pointer'>
+              <Text fontSize={20} fontWeight='semibold'>
+                PodJS
+              </Text>
+            </Box>
+          </Link>
+        </Flex>
+
         <IconButton aria-label='Menu' onClick={onOpenDrawer} size='sm'>
           <Icon as={RiMenuLine} fontSize={20} />
         </IconButton>
-        <Link href='/' passHref>
-          <Box display='flex' cursor='pointer'>
-            <Text fontSize={20} fontWeight='semibold'>
-              PodJS
-            </Text>
-          </Box>
-        </Link>
-      </Flex>
-
-      <IconButton
-        aria-label='Menu'
-        onClick={openPlayList}
-        backdropFilter='blur(10px)'
-        color={playList?.length ? 'teal.300' : 'var(--chakra-colors-chakra-body-text)'}
-        size='sm'
-      >
-        <Icon as={RiPlayListLine} fontSize={20} />
-      </IconButton>
+      </Container>
     </Flex>
   );
 };
