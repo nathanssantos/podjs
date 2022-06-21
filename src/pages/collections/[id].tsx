@@ -112,7 +112,7 @@ const CollectionDetail: NextPage = () => {
                   )}
                 </Flex>
               </Flex>
-              <Flex direction='column' gap={{ base: 12, md: 6 }}>
+              <Flex direction='column' gap={{ base: 12, md: 6 }} flex={1}>
                 {detailSearchResult &&
                   detailSearchResult.map((podcast) => (
                     <LazyLoad
@@ -177,7 +177,7 @@ const CollectionDetail: NextPage = () => {
           </Box>
         </Flex>
         <Flex as='main' px={6} pt={12} pb={36}>
-          <Flex gap={12} direction={{ base: 'column', lg: 'row' }}>
+          <Flex gap={12} direction={{ base: 'column', lg: 'row' }} w='100%'>
             {renderDetail()}
           </Flex>
         </Flex>

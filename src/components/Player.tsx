@@ -119,7 +119,7 @@ const Player = () => {
             overflow='hidden'
             textOverflow='ellipsis'
             whiteSpace='nowrap'
-            w={{ base: 'calc(100vw - 46px)', sm: 'calc(100vw - 161px)' }}
+            w={{ base: 'calc(100vw - 42px)', md: 'calc(100vw - 135px)' }}
           >
             {currentPodcast.title}
           </Text>
