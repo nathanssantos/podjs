@@ -7,13 +7,13 @@ export default class CollectionStore {
   rootStore: RootStore;
   list: Collection[] | null = null;
   topList: Collection[] | null = null;
-  listSearchTerm: string = '';
-  listSearchCountry: string = '';
   detail: Collection | null = null;
   detailSearchResult: Podcast[] | null = null;
   listStatus: FetchStatus = 'idle';
   topListStatus: FetchStatus = 'idle';
   detailStatus: FetchStatus = 'idle';
+  listSearchTerm: string = '';
+  listSearchCountry: string = '';
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this, { rootStore: false });
@@ -203,9 +203,12 @@ export default class CollectionStore {
 
   reset = () => {
     this.list = null;
+    this.topList = null;
     this.detail = null;
     this.detailSearchResult = null;
     this.listStatus = 'idle';
     this.detailStatus = 'idle';
+    this.listSearchTerm = '';
+    this.listSearchCountry = '';
   };
 }
