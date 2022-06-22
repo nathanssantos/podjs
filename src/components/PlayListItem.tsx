@@ -1,16 +1,8 @@
-import {
-  Badge,
-  Box,
-  Flex,
-  Icon,
-  IconButton,
-  Image,
-  Text,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Badge, Flex, Icon, IconButton, Image, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
-import { RiDeleteBinLine, RiPlayListAddLine } from 'react-icons/ri';
+import { RiDeleteBinLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
+import { formatDuration } from '../utils';
 
 type PlayListItemProps = {
   podcast: Podcast;
@@ -91,7 +83,7 @@ const PlayListItem = (props: PlayListItemProps) => {
         </Text>
         <Flex w='100%' align='flex-end' justify='space-between' gap={3}>
           <Badge borderRadius='full' px={2} colorScheme='teal'>
-            {duration}
+            {formatDuration(duration)}
           </Badge>
           <IconButton
             aria-label='Menu'
