@@ -2,7 +2,7 @@ import { Badge, Flex, Icon, IconButton, Image, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
-import { formatSecondsToHms } from '../utils';
+import { formatDuration } from '../utils';
 
 type PlayListItemProps = {
   podcast: Podcast;
@@ -83,7 +83,7 @@ const PlayListItem = (props: PlayListItemProps) => {
         </Text>
         <Flex w='100%' align='flex-end' justify='space-between' gap={3}>
           <Badge borderRadius='full' px={2} colorScheme='teal'>
-            {duration.includes(':') ? duration : formatSecondsToHms(Number(duration))}
+            {formatDuration(duration)}
           </Badge>
           <IconButton
             aria-label='Menu'
