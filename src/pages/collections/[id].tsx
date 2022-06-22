@@ -6,6 +6,8 @@ import { observer } from 'mobx-react';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import {
   Badge,
+  Box,
+  BoxProps,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -23,6 +25,9 @@ import Search from '../../components/Search';
 import { ParsedUrlQuery } from 'querystring';
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
+import { motion } from 'framer-motion';
+
+const MotionBox = motion<Omit<BoxProps, 'transition'>>(Box);
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
@@ -133,6 +138,53 @@ const CollectionDetail: NextPage = () => {
                       height={150}
                       offset={2048}
                       unmountIfInvisible
+                      placeholder={
+                        <Flex
+                          overflow='hidden'
+                          direction={{ base: 'column', sm: 'row' }}
+                          align={{ base: 'center', sm: 'flex-start' }}
+                          borderBottomWidth='1px'
+                          pb={6}
+                          gap={4}
+                        >
+                          <Flex
+                            borderWidth='1px'
+                            borderRadius='lg'
+                            overflow='hidden'
+                            w={{ base: '100%', sm: '180px' }}
+                            minW={'180px'}
+                            h={{ base: 'initial', sm: '180px' }}
+                          >
+                            <Box w='100%' bg='gray.700' padding='50%' />
+                          </Flex>
+
+                          <Flex
+                            direction='column'
+                            align={{ base: 'center', sm: 'flex-start' }}
+                            textAlign={{ base: 'center', sm: 'left' }}
+                            w='100%'
+                          >
+                            <Box w='100%' bg='gray.700' minH={6} mb={2} />
+                            <Flex align='center' gap={2} mb={2} w='100%'>
+                              <Box w={20} bg='gray.700' minH={6} />
+                              <Box w={16} bg='gray.700' minH={6} />
+                            </Flex>
+                            <Flex
+                              flex={1}
+                              w='100%'
+                              direction={{ base: 'column', sm: 'row' }}
+                              gap={4}
+                            >
+                              <Flex direction='column' flex={1}>
+                                <Box h='116px' w='100%' bg='gray.700' />
+                              </Flex>
+                              <Flex direction='column' alignItems='flex-end' justify='flex-end'>
+                                <Box h={8} w={8} bg='gray.700' />
+                              </Flex>
+                            </Flex>
+                          </Flex>
+                        </Flex>
+                      }
                     >
                       <PodcastCard podcast={podcast} imageFallback={artworkUrl600} />
                     </LazyLoad>

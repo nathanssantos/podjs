@@ -44,6 +44,7 @@ const PodcastCard = (props: PodcastCardProps) => {
       align={{ base: 'center', sm: 'flex-start' }}
       borderBottomWidth='1px'
       pb={6}
+      gap={4}
     >
       <Flex
         borderWidth='1px'
@@ -53,7 +54,6 @@ const PodcastCard = (props: PodcastCardProps) => {
         w={{ base: '100%', sm: '180px' }}
         minW={'180px'}
         h={{ h: 'initial', sm: '180px' }}
-        mb={{ base: 3, sm: 0 }}
         onClick={playPodcast}
         cursor='pointer'
       >
@@ -69,7 +69,6 @@ const PodcastCard = (props: PodcastCardProps) => {
 
       <Flex
         direction='column'
-        pl={3}
         align={{ base: 'center', sm: 'flex-start' }}
         textAlign={{ base: 'center', sm: 'left' }}
         w='100%'
@@ -88,7 +87,7 @@ const PodcastCard = (props: PodcastCardProps) => {
             {formatDuration(itunes.duration)}
           </Badge>
         </Flex>
-        <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }}>
+        <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }} gap={3}>
           <Flex direction='column' flex={1}>
             <Flex mb={1} h='124px' overflow='hidden' w='100%'>
               <Text
@@ -109,7 +108,7 @@ const PodcastCard = (props: PodcastCardProps) => {
               mb='1'
             />
           </Flex>
-          <Flex direction='column' alignItems='flex-end' justify='flex-end' pl={3}>
+          <Flex direction='column' alignItems='flex-end' justify='flex-end'>
             <IconButton
               aria-label='Menu'
               onClick={addToPlayList}

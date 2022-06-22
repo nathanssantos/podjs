@@ -79,7 +79,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   mb={4}
                 />
                 <MotionBox
-                  w={32}
+                  w={24}
                   as={motion.div}
                   bg='gray.700'
                   animate={{
@@ -91,7 +91,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 />
               </Flex>
               <MotionBox
-                w={24}
+                w={56}
                 as={motion.div}
                 bg='gray.700'
                 animate={{
@@ -111,6 +111,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 borderBottomWidth='1px'
                 pb={6}
                 key={index}
+                gap={4}
               >
                 <Flex
                   borderWidth='1px'
@@ -119,7 +120,6 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   w={{ base: '100%', sm: '180px' }}
                   minW={'180px'}
                   h={{ base: 'initial', sm: '180px' }}
-                  mb={{ base: 3, sm: 0 }}
                 >
                   <MotionBox
                     w='100%'
@@ -135,7 +135,6 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
 
                 <Flex
                   direction='column'
-                  pl={{ sm: 4 }}
                   align={{ base: 'center', sm: 'flex-start' }}
                   textAlign={{ base: 'center', sm: 'left' }}
                   w='100%'
@@ -173,7 +172,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                       minH={6}
                     />
                   </Flex>
-                  <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }} gap={2}>
+                  <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }} gap={4}>
                     <Flex direction='column' flex={1}>
                       <MotionBox
                         h='116px'
