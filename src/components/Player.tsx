@@ -70,7 +70,13 @@ const Player = () => {
           marginLeft: '-8px',
         },
         '.rhap_progress-bar-show-download': {
+          bgColor: 'gray.50',
+        },
+        '.rhap_progress-filled': {
           bgColor: 'gray.500',
+        },
+        '.rhap_download-progress': {
+          bgColor: 'gray.300',
         },
         '.rhap_volume-controls': {
           flex: 1,
@@ -104,13 +110,13 @@ const Player = () => {
             colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
           }
           p={2}
+          backdropFilter='blur(10px)'
           borderWidth='1px'
           borderRadius='lg'
           transform={{
-            base: 'translateY(calc(-100% - 5px))',
+            base: 'translateY(calc(-100% - px))',
             md: 'translateY(calc(-100% - 16px))',
           }}
-          backdropFilter='blur(10px)'
         >
           <IconButton
             aria-label='Back to the top'

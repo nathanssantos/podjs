@@ -1,7 +1,7 @@
 import { Flex, Box, Icon, Text, IconButton, useColorMode, Container } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
-import { RiMenuLine } from 'react-icons/ri';
+import { RiDiscLine, RiMenuLine } from 'react-icons/ri';
 
 type HeaderProps = {
   onOpenDrawer: () => void;
@@ -35,11 +35,12 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       >
         <Flex gap={3}>
           <Link href='/' passHref>
-            <Box display='flex' cursor='pointer'>
+            <Flex cursor='pointer' align='center' gap={1}>
+              <Icon as={RiDiscLine} fontSize='32px' />
               <Text fontSize={20} fontWeight='semibold'>
                 PodJS
               </Text>
-            </Box>
+            </Flex>
           </Link>
         </Flex>
 

@@ -11,6 +11,7 @@ import {
 import { observer } from 'mobx-react';
 import { RiPlayListAddLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
+import { formatSecondsToHms } from '../utils';
 
 type PodcastCardProps = {
   podcast: Podcast;
@@ -84,7 +85,9 @@ const PodcastCard = (props: PodcastCardProps) => {
         <Flex align='center' gap={2} mb={1}>
           <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
           <Badge borderRadius='full' px={2} colorScheme='teal'>
-            {itunes.duration}
+            {itunes.duration.includes(':')
+              ? itunes.duration
+              : formatSecondsToHms(Number(itunes.duration))}
           </Badge>
         </Flex>
         <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }}>
