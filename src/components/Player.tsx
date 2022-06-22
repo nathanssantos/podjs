@@ -64,10 +64,10 @@ const Player = () => {
         },
         '.rhap_progress-indicator': {
           bg: 'var(--chakra-colors-chakra-body-text)',
-          w: '16px',
-          h: '16px',
+          w: 4,
+          h: 4,
           top: '-6px',
-          marginLeft: '-8px',
+          marginLeft: -2,
         },
         '.rhap_progress-bar-show-download': {
           bgColor: 'gray.50',
@@ -114,7 +114,7 @@ const Player = () => {
           borderWidth='1px'
           borderRadius='lg'
           transform={{
-            base: 'translateY(calc(-100% - px))',
+            base: 'translateY(calc(-100% - 8px))',
             md: 'translateY(calc(-100% - 16px))',
           }}
         >

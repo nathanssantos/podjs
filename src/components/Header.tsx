@@ -36,7 +36,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
         <Flex gap={3}>
           <Link href='/' passHref>
             <Flex cursor='pointer' align='center' gap={1}>
-              <Icon as={RiDiscLine} fontSize='32px' />
+              <Icon as={RiDiscLine} fontSize='32px' color='teal.300' />
               <Text fontSize={20} fontWeight='semibold'>
                 PodJS
               </Text>

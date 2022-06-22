@@ -7,8 +7,12 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 import {
   Badge,
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Container,
   Flex,
+  Icon,
   Image,
   Spinner,
   Text,
@@ -19,6 +23,7 @@ import PodcastCard from '../../components/PodcastCard';
 import Search from '../../components/Search';
 import { ParsedUrlQuery } from 'querystring';
 import EmptyState from '../../components/EmptyState';
+import { RiArrowLeftLine, RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
@@ -182,15 +187,50 @@ const CollectionDetail: NextPage = () => {
           <Container
             display='flex'
             alignItems='center'
-            justifyContent='flex-end'
+            justifyContent='space-between'
             py={2}
             px={{ base: 3, md: 6 }}
             w='100%'
             maxW='container.xl'
           >
+            <Flex>
+              {!!detail?.collectionName?.length && (
+                <Breadcrumb
+                  separator={<Icon as={RiArrowLeftSLine} color='gray.500' />}
+                  sx={{
+                    'span, ol': {
+                      display: 'flex',
+                      alignItems: 'center',
+                    },
+                  }}
+                >
+                  <BreadcrumbItem>
+                    <BreadcrumbLink onClick={() => router.push('/')}>
+                      <Flex align='center' gap={2}>
+                        <Icon as={RiHomeLine} color='gray.500' fontSize='20px' />
+                        <Text>Home</Text>
+                      </Flex>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+
+                  <BreadcrumbItem isCurrentPage>
+                    <BreadcrumbLink
+                      as='div'
+                      _hover={{ textDecoration: 'none' }}
+                      cursor='initial'
+                    >
+                      <Flex align='center'>
+                        <Text>{detail.collectionName}</Text>
+                      </Flex>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                </Breadcrumb>
+              )}
+            </Flex>
             <Search onChange={handleSearch} placeholder='Search episodes' />
           </Container>
         </Flex>
+
         <Flex as='main'>
           <Container
             display='flex'

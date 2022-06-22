@@ -38,6 +38,7 @@ const Search = ({ onChange, initialValue, placeholder, showCountry = false }: Se
 
   useEffect(() => {
     onChange({ term, country });
+    window.scrollTo(0, 0);
   }, [debouncedTerm, country]);
 
   return (
