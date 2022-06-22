@@ -6,7 +6,6 @@ import { observer } from 'mobx-react';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import {
   Badge,
-  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -14,16 +13,16 @@ import {
   Flex,
   Icon,
   Image,
-  Spinner,
   Text,
   useColorMode,
 } from '@chakra-ui/react';
+import { RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
 import { useStore } from '../../hooks';
 import PodcastCard from '../../components/PodcastCard';
 import Search from '../../components/Search';
 import { ParsedUrlQuery } from 'querystring';
 import EmptyState from '../../components/EmptyState';
-import { RiArrowLeftLine, RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
+import Loader from '../../components/Loader';
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
@@ -40,7 +39,7 @@ const CollectionDetail: NextPage = () => {
   const renderDetail = () => {
     switch (detailStatus) {
       case 'fetching': {
-        return <Spinner />;
+        return <Loader variant='list' />;
       }
 
       case 'empty': {
@@ -164,7 +163,7 @@ const CollectionDetail: NextPage = () => {
   }, [router.query]);
 
   return (
-    <div>
+    <>
       <Head>
         <title>PodJS</title>
         <meta name='description' content='PodJS' />
@@ -246,7 +245,7 @@ const CollectionDetail: NextPage = () => {
           </Container>
         </Flex>
       </Flex>
-    </div>
+    </>
   );
 };
 
