@@ -155,7 +155,11 @@ const CollectionDetail: NextPage = () => {
                             minW={'180px'}
                             h={{ base: 'initial', sm: '180px' }}
                           >
-                            <Box w='100%' bg='gray.700' padding='50%' />
+                            <Box
+                              w='100%'
+                              bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                              padding='50%'
+                            />
                           </Flex>
 
                           <Flex
@@ -164,10 +168,23 @@ const CollectionDetail: NextPage = () => {
                             textAlign={{ base: 'center', sm: 'left' }}
                             w='100%'
                           >
-                            <Box w='100%' bg='gray.700' minH={6} mb={2} />
+                            <Box
+                              w='100%'
+                              bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                              minH={6}
+                              mb={2}
+                            />
                             <Flex align='center' gap={2} mb={2} w='100%'>
-                              <Box w={20} bg='gray.700' minH={6} />
-                              <Box w={16} bg='gray.700' minH={6} />
+                              <Box
+                                w={20}
+                                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                                minH={6}
+                              />
+                              <Box
+                                w={16}
+                                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                                minH={6}
+                              />
                             </Flex>
                             <Flex
                               flex={1}
@@ -176,10 +193,18 @@ const CollectionDetail: NextPage = () => {
                               gap={4}
                             >
                               <Flex direction='column' flex={1}>
-                                <Box h='116px' w='100%' bg='gray.700' />
+                                <Box
+                                  h='116px'
+                                  w='100%'
+                                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                                />
                               </Flex>
                               <Flex direction='column' alignItems='flex-end' justify='flex-end'>
-                                <Box h={8} w={8} bg='gray.700' />
+                                <Box
+                                  h={8}
+                                  w={8}
+                                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                                />
                               </Flex>
                             </Flex>
                           </Flex>

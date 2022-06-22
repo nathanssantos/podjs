@@ -9,6 +9,7 @@ type LoaderProps = {
 
 const Loader = ({ variant = 'grid' }: LoaderProps) => {
   const transition = { repeat: Infinity, duration: 1.5 };
+  const { colorMode } = useColorMode();
 
   switch (variant) {
     case 'list': {
@@ -35,7 +36,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
               <MotionBox
                 w='100%'
                 as={motion.div}
-                bg='gray.700'
+                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                 animate={{
                   opacity: [0, 1, 0],
                 }}
@@ -48,7 +49,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 <MotionBox
                   w={40}
                   as={motion.div}
-                  bg='gray.700'
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                   animate={{
                     opacity: [0, 1, 0],
                   }}
@@ -59,7 +60,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 <MotionBox
                   w={32}
                   as={motion.div}
-                  bg='gray.700'
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                   animate={{
                     opacity: [0, 1, 0],
                   }}
@@ -70,7 +71,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 <MotionBox
                   w={56}
                   as={motion.div}
-                  bg='gray.700'
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                   animate={{
                     opacity: [0, 1, 0],
                   }}
@@ -81,7 +82,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 <MotionBox
                   w={24}
                   as={motion.div}
-                  bg='gray.700'
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                   animate={{
                     opacity: [0, 1, 0],
                   }}
@@ -93,7 +94,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
               <MotionBox
                 w={56}
                 as={motion.div}
-                bg='gray.700'
+                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                 animate={{
                   opacity: [0, 1, 0],
                 }}
@@ -124,7 +125,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   <MotionBox
                     w='100%'
                     as={motion.div}
-                    bg='gray.700'
+                    bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                     animate={{
                       opacity: [0, 1, 0],
                     }}
@@ -142,7 +143,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   <MotionBox
                     w='100%'
                     as={motion.div}
-                    bg='gray.700'
+                    bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                     animate={{
                       opacity: [0, 1, 0],
                     }}
@@ -152,9 +153,9 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   />
                   <Flex align='center' gap={2} mb={2} w='100%'>
                     <MotionBox
-                      w={32}
+                      w={20}
                       as={motion.div}
-                      bg='gray.700'
+                      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                       animate={{
                         opacity: [0, 1, 0],
                       }}
@@ -162,9 +163,9 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                       minH={6}
                     />
                     <MotionBox
-                      w={32}
+                      w={16}
                       as={motion.div}
-                      bg='gray.700'
+                      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                       animate={{
                         opacity: [0, 1, 0],
                       }}
@@ -178,7 +179,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                         h='116px'
                         w='100%'
                         as={motion.div}
-                        bg='gray.700'
+                        bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                         animate={{
                           opacity: [0, 1, 0],
                         }}
@@ -190,7 +191,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                         h={8}
                         w={8}
                         as={motion.div}
-                        bg='gray.700'
+                        bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                         animate={{
                           opacity: [0, 1, 0],
                         }}
@@ -221,7 +222,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 w='100%'
                 padding='50%'
                 as={motion.div}
-                bg='gray.700'
+                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                 animate={{
                   opacity: [0, 1, 0],
                 }}
@@ -232,7 +233,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   <MotionBox
                     as={motion.div}
                     minH={6}
-                    bg='gray.700'
+                    bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                     w='80%'
                     animate={{
                       opacity: [0, 1, 0],
@@ -243,7 +244,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 <MotionBox
                   as={motion.div}
                   minH={6}
-                  bg='gray.700'
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                   w='50%'
                   animate={{
                     opacity: [0, 1, 0],
