@@ -7,6 +7,7 @@ import CollectionCard from '../components/CollectionCard';
 import Search from '../components/Search';
 import EmptyState from '../components/EmptyState';
 import { useEffect, useState } from 'react';
+import Loader from '../components/Loader';
 
 const Home: NextPage = () => {
   const { collectionStore } = useStore();
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
 
     switch (listStatus) {
       case 'fetching': {
-        listContent = <Spinner />;
+        listContent = <Loader />;
         break;
       }
 
@@ -88,7 +89,7 @@ const Home: NextPage = () => {
   const renderTopList = () => {
     switch (topListStatus) {
       case 'fetching': {
-        return <Spinner />;
+        return <Loader />;
       }
 
       case 'empty': {
