@@ -43,7 +43,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 p='50%'
               />
             </Flex>
-            <Flex direction='column' gap={4} textAlign={{ base: 'center', md: 'left' }}>
+            <Flex direction='column' gap={4} alignItems={{ base: 'center', md: 'flex-start' }}>
               <Flex flex={1} direction='column' align={{ base: 'center', md: 'flex-start' }}>
                 <MotionBox
                   w={40}
@@ -129,12 +129,13 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                       opacity: [0, 1, 0],
                     }}
                     transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
+                    padding='50%'
                   />
                 </Flex>
 
                 <Flex
                   direction='column'
-                  pl={3}
+                  pl={{ sm: 4 }}
                   align={{ base: 'center', sm: 'flex-start' }}
                   textAlign={{ base: 'center', sm: 'left' }}
                   w='100%'
@@ -172,7 +173,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                       minH={6}
                     />
                   </Flex>
-                  <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }}>
+                  <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }} gap={2}>
                     <Flex direction='column' flex={1}>
                       <MotionBox
                         h='116px'
@@ -185,7 +186,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                         transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
                       />
                     </Flex>
-                    <Flex direction='column' alignItems='flex-end' justify='flex-end' pl={2}>
+                    <Flex direction='column' alignItems='flex-end' justify='flex-end'>
                       <MotionBox
                         h={8}
                         w={8}
