@@ -107,7 +107,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
           </Flex>
           <Flex direction='column' gap={{ base: 12, md: 6 }} flex={1}>
             {new Array(6).fill('').map((item, index) => (
-              <PodcastListItemLoader index={index} key={index} />
+              <PodcastListItemLoader index={index} key={index} animate />
             ))}
           </Flex>
         </>
@@ -118,7 +118,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
       return (
         <SimpleGrid minChildWidth={200} gap={3} mb={12}>
           {new Array(20).fill('').map((item, index) => (
-            <CollectionGridItemLoader key={index} index={index} />
+            <CollectionGridItemLoader key={index} index={index} animate />
           ))}
         </SimpleGrid>
       );

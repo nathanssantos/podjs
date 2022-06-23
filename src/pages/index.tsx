@@ -1,10 +1,10 @@
-import { Container, Flex, SimpleGrid, Text, useColorMode } from '@chakra-ui/react';
+import { Container, Flex, Text, useColorMode } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import CollectionListItem from '../components/CollectionListItem';
 import EmptyState from '../components/EmptyState';
 import Loader from '../components/Loader';
 import RankCollectionListItem from '../components/RankCollectionListItem';
@@ -12,84 +12,37 @@ import Search from '../components/Search';
 import { useStore } from '../hooks';
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
   const {
-    list,
-    topList,
-    listStatus,
-    topListStatus,
+    rank,
+    rankStatus,
     listSearchTerm,
     listSearchCountry,
-    getList,
     getRank,
+    setListSearchTerm,
+    setListSearchCountry,
   } = collectionStore;
 
-  const onSearch = (payload: { term: string; country: string }) => {
-    getList(payload);
-  };
+  const handleSearch = (payload: { country: string; term: string }) => {
+    const { country, term } = payload;
 
-  const renderList = () => {
-    if (!listSearchTerm?.length) return null;
+    if (!term?.length) return;
 
-    let listContent = null;
-
-    switch (listStatus) {
-      case 'fetching': {
-        listContent = <Loader />;
-        break;
-      }
-
-      case 'empty': {
-        listContent = <EmptyState variant='not-found' />;
-        break;
-      }
-
-      case 'error': {
-        listContent = <EmptyState />;
-        break;
-      }
-
-      case 'success': {
-        if (list?.length) {
-          listContent = list.map((collection) => (
-            <CollectionListItem key={collection.collectionId} collection={collection} />
-          ));
-        }
-        break;
-      }
-
-      default: {
-        listContent = null;
-      }
+    setListSearchTerm(term);
+    let route = `/search?term=${term}`;
+    if (country) {
+      setListSearchCountry(country);
+      route += `&country=${country}`;
     }
 
-    return (
-      <Flex direction='column' gap={3} mb={12}>
-        <Flex
-          borderBottomWidth='1px'
-          position='sticky'
-          top={12}
-          py={2}
-          backdropFilter='blur(10px)'
-          bgColor={
-            colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
-          }
-        >
-          <Text fontSize='xl' lineHeight={1}>
-            {`Search results for "${listSearchTerm}":`}
-          </Text>
-        </Flex>
-        <SimpleGrid minChildWidth={200} gap={3}>
-          {listContent}
-        </SimpleGrid>
-      </Flex>
-    );
+    router.push(route);
   };
 
-  const renderTopList = () => {
-    switch (topListStatus) {
+  const renderRank = () => {
+    switch (rankStatus) {
       case 'fetching': {
         return <Loader />;
       }
@@ -103,10 +56,10 @@ const Home: NextPage = () => {
       }
 
       case 'success': {
-        if (topList?.length) {
+        if (rank?.length) {
           return (
             <Flex direction='column' gap={3} mb={12}>
-              {topList.map((collection, index) => (
+              {rank.map((collection, index) => (
                 <RankCollectionListItem
                   key={collection.collectionId}
                   collection={collection}
@@ -125,7 +78,7 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    if (!topList?.length) getRank({ country: listSearchCountry });
+    if (!rank?.length) getRank({ country: '' });
   }, []);
 
   return (
@@ -158,9 +111,9 @@ const Home: NextPage = () => {
         >
           <Search
             showCountry
-            onChange={onSearch}
-            initialValue={{ term: listSearchTerm, country: listSearchCountry }}
+            onChange={handleSearch}
             placeholder='Search podcasts'
+            initialValue={{ term: listSearchTerm, country: listSearchCountry }}
           />
         </Container>
       </Flex>
@@ -174,28 +127,26 @@ const Home: NextPage = () => {
           px={{ base: 3, md: 6 }}
           pt={6}
           pb={36}
+          gap={3}
+          mb={12}
         >
-          {renderList()}
-
-          <Flex direction='column' gap={3} mb={12}>
-            <Flex
-              borderBottomWidth='1px'
-              py={2}
-              position='sticky'
-              top={12}
-              backdropFilter='blur(10px)'
-              bgColor={
-                colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
-              }
-              zIndex={1}
-            >
-              <Text fontSize='xl' lineHeight={1}>
-                Podcast Ranking
-              </Text>
-            </Flex>
-
-            {renderTopList()}
+          <Flex
+            borderBottomWidth='1px'
+            py={2}
+            position='sticky'
+            top={12}
+            backdropFilter='blur(10px)'
+            bgColor={
+              colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
+            }
+            zIndex={1}
+          >
+            <Text fontSize='xl' lineHeight={1}>
+              Podcast Ranking
+            </Text>
           </Flex>
+
+          {renderRank()}
         </Container>
       </Flex>
     </div>

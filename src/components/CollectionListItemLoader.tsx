@@ -5,9 +5,13 @@ import MotionBox from './MotionBox';
 
 type CollectionGridItemLoaderProps = {
   index: number;
+  animate?: boolean;
 };
 
-const CollectionListItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
+const CollectionListItemLoader = ({
+  index,
+  animate = false,
+}: CollectionGridItemLoaderProps) => {
   const transition = { repeat: Infinity, duration: 1.5, delay: index * 0.15, ease: 'linear' };
   const { colorMode } = useColorMode();
 
@@ -18,9 +22,11 @@ const CollectionListItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
         padding='50%'
         as={motion.div}
         bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-        animate={{
-          opacity: [0, 1, 0],
-        }}
+        animate={
+          animate && {
+            opacity: [0, 1, 0],
+          }
+        }
         transition={transition}
       />
       <Flex align='flex-start' direction='column' p={3} flex={1} minH='78px'>
@@ -30,9 +36,11 @@ const CollectionListItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
             minH={6}
             bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
             w='80%'
-            animate={{
-              opacity: [0, 1, 0],
-            }}
+            animate={
+              animate && {
+                opacity: [0, 1, 0],
+              }
+            }
             transition={transition}
           />
         </Box>
@@ -41,9 +49,11 @@ const CollectionListItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
           minH={6}
           bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
           w='50%'
-          animate={{
-            opacity: [0, 1, 0],
-          }}
+          animate={
+            animate && {
+              opacity: [0, 1, 0],
+            }
+          }
           transition={transition}
         />
       </Flex>
