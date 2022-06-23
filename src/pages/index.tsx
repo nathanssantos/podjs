@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     listSearchTerm,
     listSearchCountry,
     getList,
-    getTopList,
+    getRank,
   } = collectionStore;
 
   const onSearch = (payload: { term: string; country: string }) => {
@@ -105,11 +105,15 @@ const Home: NextPage = () => {
       case 'success': {
         if (topList?.length) {
           return (
-            <SimpleGrid minChildWidth={200} gap={3} mb={12}>
-              {topList.map((collection) => (
-                <RankCollectionListItem key={collection.collectionId} collection={collection} />
+            <Flex direction='column' gap={3} mb={12}>
+              {topList.map((collection, index) => (
+                <RankCollectionListItem
+                  key={collection.collectionId}
+                  collection={collection}
+                  index={index}
+                />
               ))}
-            </SimpleGrid>
+            </Flex>
           );
         }
       }
@@ -121,7 +125,7 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    if (!topList?.length) getTopList({ country: listSearchCountry });
+    if (!topList?.length) getRank({ country: listSearchCountry });
   }, []);
 
   return (
@@ -183,9 +187,10 @@ const Home: NextPage = () => {
               bgColor={
                 colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
               }
+              zIndex={1}
             >
               <Text fontSize='xl' lineHeight={1}>
-                Top Podcasts
+                Podcast Ranking
               </Text>
             </Flex>
 
