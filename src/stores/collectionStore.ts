@@ -1,7 +1,8 @@
-import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
-import type RootStore from './rootStore';
+import { makeAutoObservable } from 'mobx';
+
 import { normalizeString } from '../utils';
+import type RootStore from './rootStore';
 
 export default class CollectionStore {
   rootStore: RootStore;

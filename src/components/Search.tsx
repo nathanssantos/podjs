@@ -1,5 +1,3 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { observer } from 'mobx-react';
 import {
   Flex,
   Icon,
@@ -9,9 +7,12 @@ import {
   InputRightElement,
   Select,
 } from '@chakra-ui/react';
+import { observer } from 'mobx-react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { RiPlayListLine, RiSearchLine } from 'react-icons/ri';
-import { useDebounce, useStore } from '../hooks';
+
 import countries from '../constants/countries';
+import { useDebounce, useStore } from '../hooks';
 
 type SearchProps = {
   onChange: (payload: { term: string; country: string }) => any;

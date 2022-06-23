@@ -1,9 +1,3 @@
-import { useEffect } from 'react';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { observer } from 'mobx-react';
-import LazyLoad, { forceCheck } from 'react-lazyload';
 import {
   Badge,
   Box,
@@ -17,13 +11,20 @@ import {
   Text,
   useColorMode,
 } from '@chakra-ui/react';
-import { RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
-import { useStore } from '../../hooks';
-import PodcastCard from '../../components/PodcastCard';
-import Search from '../../components/Search';
+import { observer } from 'mobx-react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
+import { useEffect } from 'react';
+import { RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
+import LazyLoad, { forceCheck } from 'react-lazyload';
+
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
+import PodcastCard from '../../components/PodcastCard';
+import Search from '../../components/Search';
+import { useStore } from '../../hooks';
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();

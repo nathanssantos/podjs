@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+
 import type RootStore from './rootStore';
 
 export default class PlayerStore {

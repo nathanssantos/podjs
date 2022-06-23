@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { RiPlayListAddLine } from 'react-icons/ri';
+
 import { useStore } from '../hooks';
 import { formatDuration } from '../utils';
 
