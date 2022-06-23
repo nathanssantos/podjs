@@ -1,7 +1,8 @@
-import { Box, BoxProps, Container, Flex, SimpleGrid, useColorMode } from '@chakra-ui/react';
+import { Flex, SimpleGrid, useColorMode } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-
-const MotionBox = motion<Omit<BoxProps, 'transition'>>(Box);
+import CollectionGridItemLoader from './CollectionGridItemLoader';
+import MotionBox from './MotionBox';
+import PodcastListItemLoader from './PodcastListItemLoader';
 
 type LoaderProps = {
   variant?: 'grid' | 'list';
@@ -28,10 +29,10 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
               borderWidth='1px'
               borderRadius='lg'
               overflow='hidden'
-              w={{ base: '100%', md: 240 }}
-              minW={240}
-              maxW={{ base: '100%', md: 240 }}
-              h={{ md: 240 }}
+              w={{ base: '100%', md: '240px' }}
+              minW='240px'
+              maxW={{ base: '100%', md: '240px' }}
+              h={{ md: '240px' }}
             >
               <MotionBox
                 w='100%'
@@ -105,102 +106,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
           </Flex>
           <Flex direction='column' gap={{ base: 12, md: 6 }} flex={1}>
             {new Array(6).fill('').map((item, index) => (
-              <Flex
-                overflow='hidden'
-                direction={{ base: 'column', sm: 'row' }}
-                align={{ base: 'center', sm: 'flex-start' }}
-                borderBottomWidth='1px'
-                pb={6}
-                key={index}
-                gap={4}
-              >
-                <Flex
-                  borderWidth='1px'
-                  borderRadius='lg'
-                  overflow='hidden'
-                  w={{ base: '100%', sm: '180px' }}
-                  minW={'180px'}
-                  h={{ base: 'initial', sm: '180px' }}
-                >
-                  <MotionBox
-                    w='100%'
-                    as={motion.div}
-                    bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                    animate={{
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                    padding='50%'
-                  />
-                </Flex>
-
-                <Flex
-                  direction='column'
-                  align={{ base: 'center', sm: 'flex-start' }}
-                  textAlign={{ base: 'center', sm: 'left' }}
-                  w='100%'
-                >
-                  <MotionBox
-                    w='100%'
-                    as={motion.div}
-                    bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                    animate={{
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                    minH={6}
-                    mb={2}
-                  />
-                  <Flex align='center' gap={2} mb={2} w='100%'>
-                    <MotionBox
-                      w={20}
-                      as={motion.div}
-                      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                      animate={{
-                        opacity: [0, 1, 0],
-                      }}
-                      transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                      minH={6}
-                    />
-                    <MotionBox
-                      w={16}
-                      as={motion.div}
-                      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                      animate={{
-                        opacity: [0, 1, 0],
-                      }}
-                      transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                      minH={6}
-                    />
-                  </Flex>
-                  <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }} gap={4}>
-                    <Flex direction='column' flex={1}>
-                      <MotionBox
-                        h='116px'
-                        w='100%'
-                        as={motion.div}
-                        bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                        animate={{
-                          opacity: [0, 1, 0],
-                        }}
-                        transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                      />
-                    </Flex>
-                    <Flex direction='column' alignItems='flex-end' justify='flex-end'>
-                      <MotionBox
-                        h={8}
-                        w={8}
-                        as={motion.div}
-                        bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                        animate={{
-                          opacity: [0, 1, 0],
-                        }}
-                        transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
+              <PodcastListItemLoader index={index} key={index} />
             ))}
           </Flex>
         </>
@@ -211,48 +117,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
       return (
         <SimpleGrid minChildWidth={200} gap={3} mb={12}>
           {new Array(20).fill('').map((item, index) => (
-            <Flex
-              key={`${index}`}
-              direction='column'
-              borderWidth='1px'
-              borderRadius='lg'
-              overflow='hidden'
-            >
-              <MotionBox
-                w='100%'
-                padding='50%'
-                as={motion.div}
-                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                animate={{
-                  opacity: [0, 1, 0],
-                }}
-                transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-              />
-              <Flex align='flex-start' direction='column' p={3} flex={1} minH='102px'>
-                <Box flex={1} mb={3} w='100%'>
-                  <MotionBox
-                    as={motion.div}
-                    minH={6}
-                    bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                    w='80%'
-                    animate={{
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                  />
-                </Box>
-                <MotionBox
-                  as={motion.div}
-                  minH={6}
-                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                  w='50%'
-                  animate={{
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{ ...transition, delay: index * 0.15, ease: 'linear' }}
-                />
-              </Flex>
-            </Flex>
+            <CollectionGridItemLoader key={index} index={index} />
           ))}
         </SimpleGrid>
       );
