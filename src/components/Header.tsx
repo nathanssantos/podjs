@@ -2,6 +2,7 @@ import { Flex, Box, Icon, Text, IconButton, useColorMode, Container } from '@cha
 import { observer } from 'mobx-react';
 import Link from 'next/link';
 import { RiDiscLine, RiMenuLine } from 'react-icons/ri';
+import Logo from './Logo';
 
 type HeaderProps = {
   onOpenDrawer: () => void;
@@ -35,12 +36,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
       >
         <Flex gap={3}>
           <Link href='/' passHref>
-            <Flex cursor='pointer' align='center' gap={1}>
-              <Icon as={RiDiscLine} fontSize='32px' color='teal.300' />
-              <Text fontSize={20} fontWeight='semibold'>
-                PodJS
-              </Text>
-            </Flex>
+            <Logo />
           </Link>
         </Flex>
 
