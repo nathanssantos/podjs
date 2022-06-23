@@ -2,7 +2,6 @@ import { Container, Flex, SimpleGrid, Text, useColorMode } from '@chakra-ui/reac
 import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import CollectionListItem from '../../components/CollectionListItem';
 import EmptyState from '../../components/EmptyState';
@@ -14,11 +13,7 @@ const SearchScreen: NextPage = () => {
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
-  const { list, listStatus, listSearchTerm, listSearchCountry, getList } = collectionStore;
-
-  const handleSearch = (payload: { term: string; country: string }) => {
-    getList(payload);
-  };
+  const { list, listStatus, searchTerm, searchCountry, getList } = collectionStore;
 
   const renderList = () => {
     let listContent = null;
@@ -55,7 +50,7 @@ const SearchScreen: NextPage = () => {
 
     return (
       <Flex direction='column' gap={3} mb={12}>
-        {!!listSearchTerm?.length && (
+        {!!searchTerm?.length && (
           <Flex
             borderBottomWidth='1px'
             position='sticky'
@@ -67,9 +62,7 @@ const SearchScreen: NextPage = () => {
             }
           >
             <Text fontSize='xl' lineHeight={1}>
-              {`${
-                !!list?.length ? `${list.length} ` : ''
-              }Search results for "${listSearchTerm}":`}
+              {`${!!list?.length ? `${list.length} ` : ''}Search results for "${searchTerm}":`}
             </Text>
           </Flex>
         )}
@@ -110,8 +103,8 @@ const SearchScreen: NextPage = () => {
         >
           <Search
             showCountry
-            onChange={handleSearch}
-            initialValue={{ term: listSearchTerm, country: listSearchCountry }}
+            onChange={getList}
+            initialValue={{ term: searchTerm, country: searchCountry }}
             placeholder='Search podcasts'
           />
         </Container>

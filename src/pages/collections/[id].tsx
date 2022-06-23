@@ -33,11 +33,6 @@ const CollectionDetail: NextPage = () => {
 
   const { detail, detailStatus, detailSearchResult, getDetail, search } = collectionStore;
 
-  const handleSearch = (payload: { term: string }) => {
-    const { term } = payload;
-    search(term);
-  };
-
   const renderDetail = () => {
     switch (detailStatus) {
       case 'fetching': {
@@ -236,11 +231,7 @@ const CollectionDetail: NextPage = () => {
                 </Flex>
               )}
             </Flex>
-            <Search
-              onChange={handleSearch}
-              placeholder='Search episodes'
-              redirectOnSearch={false}
-            />
+            <Search onChange={search} placeholder='Filter episodes' redirectOnSearch={false} />
           </Container>
         </Flex>
 

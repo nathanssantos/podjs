@@ -16,10 +16,6 @@ const Home: NextPage = () => {
 
   const { rank, rankStatus, getRank, getList } = collectionStore;
 
-  const handleSearch = (payload: { term: string; country: string }) => {
-    getList(payload);
-  };
-
   const renderRank = () => {
     switch (rankStatus) {
       case 'fetching': {
@@ -88,7 +84,7 @@ const Home: NextPage = () => {
           w='100%'
           maxW='container.xl'
         >
-          <Search showCountry placeholder='Search podcasts' onChange={handleSearch} />
+          <Search showCountry placeholder='Search podcasts' onChange={getList} />
         </Container>
       </Flex>
 
