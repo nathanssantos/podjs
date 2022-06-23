@@ -1,5 +1,6 @@
 import { Flex, useColorMode } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+
 import MotionBox from './MotionBox';
 
 type PodcastListItemLoaderProps = {

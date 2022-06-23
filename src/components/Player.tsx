@@ -20,6 +20,7 @@ import {
   RiVolumeMuteLine,
   RiVolumeUpLine,
 } from 'react-icons/ri';
+
 import { useStore } from '../hooks';
 
 const Player = () => {

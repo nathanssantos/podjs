@@ -1,5 +1,6 @@
 import type { AxiosError } from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
+
 import api from '../../../services/api';
 
 type Data = Collection[] | AxiosError;

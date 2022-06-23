@@ -1,6 +1,7 @@
 import { Flex, SimpleGrid, useColorMode } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import CollectionGridItemLoader from './CollectionGridItemLoader';
+
+import CollectionGridItemLoader from './CollectionListItemLoader';
 import MotionBox from './MotionBox';
 import PodcastListItemLoader from './PodcastListItemLoader';
 

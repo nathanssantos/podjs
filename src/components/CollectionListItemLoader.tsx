@@ -1,12 +1,13 @@
-import { Flex, useColorMode, Box } from '@chakra-ui/react';
+import { Box, Flex, useColorMode } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+
 import MotionBox from './MotionBox';
 
 type CollectionGridItemLoaderProps = {
   index: number;
 };
 
-const CollectionGridItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
+const CollectionListItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
   const transition = { repeat: Infinity, duration: 1.5, delay: index * 0.15, ease: 'linear' };
   const { colorMode } = useColorMode();
 
@@ -50,4 +51,4 @@ const CollectionGridItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
   );
 };
 
-export default CollectionGridItemLoader;
+export default CollectionListItemLoader;

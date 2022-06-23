@@ -1,13 +1,15 @@
+import { Container, Flex, SimpleGrid, Text, useColorMode } from '@chakra-ui/react';
+import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { observer } from 'mobx-react';
-import { Container, Flex, SimpleGrid, Spinner, Text, useColorMode } from '@chakra-ui/react';
-import { useStore } from '../hooks';
-import CollectionCard from '../components/CollectionCard';
-import Search from '../components/Search';
+import { useEffect } from 'react';
+
+import CollectionListItem from '../components/CollectionListItem';
 import EmptyState from '../components/EmptyState';
-import { useEffect, useState } from 'react';
 import Loader from '../components/Loader';
+import RankCollectionListItem from '../components/RankCollectionListItem';
+import Search from '../components/Search';
+import { useStore } from '../hooks';
 
 const Home: NextPage = () => {
   const { collectionStore } = useStore();
@@ -52,7 +54,7 @@ const Home: NextPage = () => {
       case 'success': {
         if (list?.length) {
           listContent = list.map((collection) => (
-            <CollectionCard key={collection.collectionId} collection={collection} />
+            <CollectionListItem key={collection.collectionId} collection={collection} />
           ));
         }
         break;
@@ -105,7 +107,7 @@ const Home: NextPage = () => {
           return (
             <SimpleGrid minChildWidth={200} gap={3} mb={12}>
               {topList.map((collection) => (
-                <CollectionCard key={collection.collectionId} collection={collection} />
+                <RankCollectionListItem key={collection.collectionId} collection={collection} />
               ))}
             </SimpleGrid>
           );
