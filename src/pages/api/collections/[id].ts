@@ -1,6 +1,7 @@
 import type { AxiosError } from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import RssParser from 'rss-parser';
+
 import api from '../../../services/api';
 
 type Data = Collection | AxiosError;

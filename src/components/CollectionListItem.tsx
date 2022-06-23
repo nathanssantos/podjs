@@ -1,12 +1,13 @@
 import { Badge, Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+
 import { useStore } from '../hooks';
 
-type CollectionCardProps = {
+type CollectionListItemProps = {
   collection: Collection;
 };
 
-const CollectionCard = (props: CollectionCardProps) => {
+const CollectionListItem = (props: CollectionListItemProps) => {
   const {
     collection: {
       collectionId,
@@ -61,4 +62,4 @@ const CollectionCard = (props: CollectionCardProps) => {
   );
 };
 
-export default CollectionCard;
+export default CollectionListItem;

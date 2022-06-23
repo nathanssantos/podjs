@@ -1,7 +1,8 @@
-import { Flex, Box, Icon, Text, IconButton, useColorMode, Container } from '@chakra-ui/react';
+import { Container, Flex, Icon, IconButton, useColorMode } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
-import { RiDiscLine, RiMenuLine } from 'react-icons/ri';
+import { RiMenuLine } from 'react-icons/ri';
+
 import Logo from './Logo';
 
 type HeaderProps = {
