@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Flex, useDisclosure } from '@chakra-ui/react';
-import { observer } from 'mobx-react';
-import Header from './Header';
-import Player from './Player';
-import Drawer from './Drawer';
-import PlayList from './PlayList';
-import AppLoader from './AppLoader';
 import { motion } from 'framer-motion';
+import { observer } from 'mobx-react';
+import { useEffect, useState } from 'react';
+
+import AppLoader from './AppLoader';
+import Drawer from './Drawer';
+import Header from './Header';
 import MotionBox from './MotionBox';
+import PlayList from './PlayList';
+import Player from './Player';
 
 const Layout = () => {
   const [appIsLoading, setAppIsLoading] = useState(true);
