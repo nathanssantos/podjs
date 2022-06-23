@@ -36,6 +36,7 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       borderRadius='lg'
       overflow='hidden'
       onClick={handleClick}
+      maxW='411px'
     >
       <Image
         src={artworkUrl600 || artworkUrl100}
