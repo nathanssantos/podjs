@@ -7,7 +7,7 @@ type CollectionGridItemLoaderProps = {
   index: number;
 };
 
-const CollectionGridItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
+const CollectionListItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
   const transition = { repeat: Infinity, duration: 1.5, delay: index * 0.15, ease: 'linear' };
   const { colorMode } = useColorMode();
 
@@ -51,4 +51,4 @@ const CollectionGridItemLoader = ({ index }: CollectionGridItemLoaderProps) => {
   );
 };
 
-export default CollectionGridItemLoader;
+export default CollectionListItemLoader;

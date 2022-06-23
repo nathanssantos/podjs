@@ -22,7 +22,7 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
-import PodcastCard from '../../components/PodcastCard';
+import PodcastListItem from '../../components/PodcastListItem';
 import Search from '../../components/Search';
 import { useStore } from '../../hooks';
 
@@ -208,7 +208,7 @@ const CollectionDetail: NextPage = () => {
                         </Flex>
                       }
                     >
-                      <PodcastCard podcast={podcast} imageFallback={artworkUrl600} />
+                      <PodcastListItem podcast={podcast} imageFallback={artworkUrl600} />
                     </LazyLoad>
                   ))}
               </Flex>

@@ -4,9 +4,10 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect } from 'react';
 
+import CollectionListItem from '../components/CollectionListItem';
 import EmptyState from '../components/EmptyState';
 import Loader from '../components/Loader';
-import RankCollectionCard from '../components/RankCollectionCard';
+import RankCollectionListItem from '../components/RankCollectionListItem';
 import Search from '../components/Search';
 import { useStore } from '../hooks';
 
@@ -53,7 +54,7 @@ const Home: NextPage = () => {
       case 'success': {
         if (list?.length) {
           listContent = list.map((collection) => (
-            <RankCollectionCard key={collection.collectionId} collection={collection} />
+            <CollectionListItem key={collection.collectionId} collection={collection} />
           ));
         }
         break;
@@ -106,7 +107,7 @@ const Home: NextPage = () => {
           return (
             <SimpleGrid minChildWidth={200} gap={3} mb={12}>
               {topList.map((collection) => (
-                <RankCollectionCard key={collection.collectionId} collection={collection} />
+                <RankCollectionListItem key={collection.collectionId} collection={collection} />
               ))}
             </SimpleGrid>
           );

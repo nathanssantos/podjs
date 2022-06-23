@@ -14,12 +14,12 @@ import { RiPlayListAddLine } from 'react-icons/ri';
 import { useStore } from '../hooks';
 import { formatDuration } from '../utils';
 
-type PodcastCardProps = {
+type PodcastListItemProps = {
   podcast: Podcast;
   imageFallback: string;
 };
 
-const PodcastCard = (props: PodcastCardProps) => {
+const PodcastListItem = (props: PodcastListItemProps) => {
   const { podcast, imageFallback } = props;
   const { playerStore } = useStore();
   const { colorMode } = useColorMode();
@@ -125,4 +125,4 @@ const PodcastCard = (props: PodcastCardProps) => {
   );
 };
 
-export default observer(PodcastCard);
+export default observer(PodcastListItem);

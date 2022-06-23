@@ -1,7 +1,7 @@
-import { Flex, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { observer } from 'mobx-react';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import AppLoader from './AppLoader';
 import Drawer from './Drawer';
@@ -10,7 +10,11 @@ import MotionBox from './MotionBox';
 import PlayList from './PlayList';
 import Player from './Player';
 
-const Layout = () => {
+type LayoutProps = {
+  children: ReactElement;
+};
+
+const Layout = ({ children }: LayoutProps) => {
   const [appIsLoading, setAppIsLoading] = useState(true);
   const [loaderIsVisible, setLoaderIsVisible] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,6 +31,7 @@ const Layout = () => {
   return (
     <>
       <Header onOpenDrawer={onOpen} />
+      {children}
       <Player />
       <PlayList />
       <Drawer isOpen={isOpen} onClose={onClose} />

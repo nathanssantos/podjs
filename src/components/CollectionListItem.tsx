@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 
 import { useStore } from '../hooks';
 
-type RankCollectionCardProps = {
+type CollectionListItemProps = {
   collection: Collection;
 };
 
-const RankCollectionCard = (props: RankCollectionCardProps) => {
+const CollectionListItem = (props: CollectionListItemProps) => {
   const {
     collection: {
       collectionId,
@@ -62,4 +62,4 @@ const RankCollectionCard = (props: RankCollectionCardProps) => {
   );
 };
 
-export default RankCollectionCard;
+export default CollectionListItem;

@@ -8,17 +8,16 @@ import theme from '../theme/theme';
 
 const store = new RootStore();
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <RootStoreProvider value={store}>
-      <ChakraProvider theme={theme}>
-        <ColorModeProvider>
-          <Layout />
+const App = ({ Component, pageProps }: AppProps) => (
+  <RootStoreProvider value={store}>
+    <ChakraProvider theme={theme}>
+      <ColorModeProvider>
+        <Layout>
           <Component {...pageProps} />
-        </ColorModeProvider>
-      </ChakraProvider>
-    </RootStoreProvider>
-  );
-}
+        </Layout>
+      </ColorModeProvider>
+    </ChakraProvider>
+  </RootStoreProvider>
+);
 
-export default MyApp;
+export default App;
