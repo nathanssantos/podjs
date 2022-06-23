@@ -23,6 +23,7 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
 import PodcastListItem from '../../components/PodcastListItem';
+import PodcastListItemLoader from '../../components/PodcastListItemLoader';
 import Search from '../../components/Search';
 import { useStore } from '../../hooks';
 
@@ -135,78 +136,7 @@ const CollectionDetail: NextPage = () => {
                       height={150}
                       offset={2048}
                       unmountIfInvisible
-                      placeholder={
-                        <Flex
-                          overflow='hidden'
-                          direction={{ base: 'column', sm: 'row' }}
-                          align={{ base: 'center', sm: 'flex-start' }}
-                          borderBottomWidth='1px'
-                          pb={6}
-                          gap={4}
-                        >
-                          <Flex
-                            borderWidth='1px'
-                            borderRadius='lg'
-                            overflow='hidden'
-                            w={{ base: '100%', sm: '180px' }}
-                            minW={'180px'}
-                            h={{ base: 'initial', sm: '180px' }}
-                          >
-                            <Box
-                              w='100%'
-                              bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                              padding='50%'
-                            />
-                          </Flex>
-
-                          <Flex
-                            direction='column'
-                            align={{ base: 'center', sm: 'flex-start' }}
-                            textAlign={{ base: 'center', sm: 'left' }}
-                            w='100%'
-                          >
-                            <Box
-                              w='100%'
-                              bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                              minH={6}
-                              mb={2}
-                            />
-                            <Flex align='center' gap={2} mb={2} w='100%'>
-                              <Box
-                                w={20}
-                                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                                minH={6}
-                              />
-                              <Box
-                                w={16}
-                                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                                minH={6}
-                              />
-                            </Flex>
-                            <Flex
-                              flex={1}
-                              w='100%'
-                              direction={{ base: 'column', sm: 'row' }}
-                              gap={4}
-                            >
-                              <Flex direction='column' flex={1}>
-                                <Box
-                                  h='116px'
-                                  w='100%'
-                                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                                />
-                              </Flex>
-                              <Flex direction='column' alignItems='flex-end' justify='flex-end'>
-                                <Box
-                                  h={8}
-                                  w={8}
-                                  bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                                />
-                              </Flex>
-                            </Flex>
-                          </Flex>
-                        </Flex>
-                      }
+                      placeholder={<PodcastListItemLoader />}
                     >
                       <PodcastListItem podcast={podcast} imageFallback={artworkUrl600} />
                     </LazyLoad>

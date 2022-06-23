@@ -8,6 +8,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
+import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { RiPlayListLine, RiSearchLine } from 'react-icons/ri';
 
@@ -22,11 +23,17 @@ type SearchProps = {
 };
 
 const Search = ({ onChange, initialValue, placeholder, showCountry = false }: SearchProps) => {
-  const { playerStore } = useStore();
+  const router = useRouter();
+  const { playerStore, collectionStore } = useStore();
+  const [mounted, setMounted] = useState(false);
   const [term, setTerm] = useState(initialValue?.term || '');
   const [country, setCountry] = useState(initialValue?.country || '');
 
   const { playList, openPlayList } = playerStore;
+  const { setListSearchTerm, setListSearchCountry } = collectionStore;
+
+  const { term: termParam, country: countryParam } = router.query;
+
   const handleTermChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTerm(event.target.value);
   };
@@ -38,9 +45,39 @@ const Search = ({ onChange, initialValue, placeholder, showCountry = false }: Se
   const debouncedTerm = useDebounce(term, 1000);
 
   useEffect(() => {
+    if (!mounted) return;
     onChange({ term, country });
     window.scrollTo(0, 0);
+
+    const query = {} as { term?: string; country?: string };
+
+    if (term?.length) query.term = term;
+    if (country?.length) query.country = country;
+
+    router.push(
+      {
+        pathname: '/search',
+        query,
+      },
+      undefined,
+      { shallow: true },
+    );
   }, [debouncedTerm, country]);
+
+  useEffect(() => {
+    if (termParam) {
+      setListSearchTerm(termParam as string);
+      setTerm(termParam as string);
+    }
+    if (countryParam) {
+      setListSearchCountry(countryParam as string);
+      setCountry(countryParam as string);
+    }
+  }, [termParam, countryParam]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <Flex alignSelf='flex-end' gap='3'>
@@ -65,7 +102,7 @@ const Search = ({ onChange, initialValue, placeholder, showCountry = false }: Se
           <InputRightElement pointerEvents='none'>
             <Icon as={RiSearchLine} />
           </InputRightElement>
-          <Input value={term} onChange={handleTermChange} placeholder={placeholder} />
+          <Input value={term} onChange={handleTermChange} placeholder={placeholder} autoFocus />
         </InputGroup>
       </Flex>
       <IconButton
