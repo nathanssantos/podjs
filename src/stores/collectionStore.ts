@@ -100,7 +100,7 @@ export default class CollectionStore {
     }
   };
 
-  getTopList = async (payload: { country: string }): Promise<StoreActionResponse> => {
+  getRank = async (payload: { country: string }): Promise<StoreActionResponse> => {
     try {
       const { country } = payload;
 
@@ -113,7 +113,7 @@ export default class CollectionStore {
 
       const params = {} as { country: string };
 
-      const response = await axios.get('/api/collections/top', {
+      const response = await axios.get('/api/collections/rank', {
         params,
       });
 
