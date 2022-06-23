@@ -112,7 +112,7 @@ const Home: NextPage = () => {
             zIndex={1}
           >
             <Text fontSize='xl' lineHeight={1}>
-              Podcast Ranking
+              Ranking
             </Text>
           </Flex>
 

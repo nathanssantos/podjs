@@ -1,7 +1,19 @@
-import { Container, Flex, SimpleGrid, Text, useColorMode } from '@chakra-ui/react';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Container,
+  Flex,
+  Icon,
+  SimpleGrid,
+  Text,
+  useColorMode,
+} from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
 
 import CollectionListItem from '../../components/CollectionListItem';
 import EmptyState from '../../components/EmptyState';
@@ -10,6 +22,7 @@ import Search from '../../components/Search';
 import { useStore } from '../../hooks';
 
 const SearchScreen: NextPage = () => {
+  const router = useRouter();
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
@@ -95,12 +108,42 @@ const SearchScreen: NextPage = () => {
         <Container
           display='flex'
           alignItems='center'
-          justifyContent='flex-end'
+          justifyContent='space-between'
           py={2}
           px={{ base: 3, md: 6 }}
           w='100%'
           maxW='container.xl'
         >
+          <Flex>
+            <Flex display={{ base: 'none', md: 'flex' }}>
+              <Breadcrumb
+                separator={<Icon as={RiArrowLeftSLine} color='gray.500' />}
+                sx={{
+                  'span, ol': {
+                    display: 'flex',
+                    alignItems: 'center',
+                  },
+                }}
+              >
+                <BreadcrumbItem>
+                  <BreadcrumbLink onClick={() => router.push('/')}>
+                    <Flex align='center' gap={2}>
+                      <Icon as={RiHomeLine} color='gray.500' fontSize='20px' />
+                      <Text>Home</Text>
+                    </Flex>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+
+                <BreadcrumbItem isCurrentPage>
+                  <BreadcrumbLink as='div' _hover={{ textDecoration: 'none' }} cursor='initial'>
+                    <Flex align='center'>
+                      <Text>Search</Text>
+                    </Flex>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </Breadcrumb>
+            </Flex>
+          </Flex>
           <Search
             showCountry
             onChange={getList}
