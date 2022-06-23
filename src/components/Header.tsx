@@ -1,6 +1,7 @@
 import { Container, Flex, Icon, IconButton, useColorMode } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { RiMenuLine } from 'react-icons/ri';
 
 import Logo from './Logo';
@@ -11,6 +12,7 @@ type HeaderProps = {
 
 const Header = ({ onOpenDrawer }: HeaderProps) => {
   const { colorMode } = useColorMode();
+  const router = useRouter();
 
   return (
     <Flex
@@ -35,10 +37,8 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
         w='100%'
         maxW='container.xl'
       >
-        <Flex gap={3}>
-          <Link href='/' passHref>
-            <Logo />
-          </Link>
+        <Flex cursor='pointer' onClick={() => router.push('/')}>
+          <Logo />
         </Flex>
 
         <IconButton aria-label='Menu' onClick={onOpenDrawer} size='sm'>

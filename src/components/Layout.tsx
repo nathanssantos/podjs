@@ -22,10 +22,10 @@ const Layout = ({ children }: LayoutProps) => {
   useEffect(() => {
     setTimeout(() => {
       setLoaderIsVisible(false);
-    }, 2000);
+    }, 1000);
     setTimeout(() => {
       setAppIsLoading(false);
-    }, 2600);
+    }, 1500);
   }, []);
 
   return (

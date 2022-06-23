@@ -7,11 +7,11 @@ import type RootStore from './rootStore';
 export default class CollectionStore {
   rootStore: RootStore;
   list: Collection[] | null = null;
-  topList: Collection[] | null = null;
+  rank: Collection[] | null = null;
   detail: Collection | null = null;
   detailSearchResult: Podcast[] | null = null;
   listStatus: FetchStatus = 'idle';
-  topListStatus: FetchStatus = 'idle';
+  rankStatus: FetchStatus = 'idle';
   detailStatus: FetchStatus = 'idle';
   listSearchTerm: string = '';
   listSearchCountry: string = '';
@@ -20,6 +20,10 @@ export default class CollectionStore {
     makeAutoObservable(this, { rootStore: false });
     this.rootStore = rootStore;
   }
+
+  setListSearchTerm = (term: string) => {
+    this.listSearchTerm = term;
+  };
 
   setListSearchCountry = (country: string) => {
     this.listSearchCountry = country;
@@ -104,12 +108,12 @@ export default class CollectionStore {
     try {
       const { country } = payload;
 
-      if (this.topList?.length && country === this.listSearchCountry) {
+      if (this.rank?.length && country === this.listSearchCountry) {
         return;
       }
 
-      this.topListStatus = 'fetching';
-      this.topList = null;
+      this.rankStatus = 'fetching';
+      this.rank = null;
 
       const params = {} as { country: string };
 
@@ -120,7 +124,7 @@ export default class CollectionStore {
       const { status, data } = response as { status: number; data: Collection[] };
 
       if (status === 200 && !data?.length) {
-        this.topListStatus = 'empty';
+        this.rankStatus = 'empty';
 
         return {
           status: status || 400,
@@ -128,21 +132,21 @@ export default class CollectionStore {
       }
 
       if (status !== 200 || !data) {
-        this.topListStatus = 'error';
+        this.rankStatus = 'error';
 
         return {
           status: status || 400,
         };
       }
 
-      this.topList = data;
-      this.topListStatus = 'success';
+      this.rank = data;
+      this.rankStatus = 'success';
 
       return { status };
     } catch (error) {
       console.warn(error);
 
-      this.topListStatus = 'error';
+      this.rankStatus = 'error';
 
       return {
         status: 400,
@@ -204,7 +208,7 @@ export default class CollectionStore {
 
   reset = () => {
     this.list = null;
-    this.topList = null;
+    this.rank = null;
     this.detail = null;
     this.detailSearchResult = null;
     this.listStatus = 'idle';

@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import MotionBox from './MotionBox';
 
 type PodcastListItemLoaderProps = {
-  index: number;
+  index?: number;
+  animate?: boolean;
 };
 
-const PodcastListItemLoader = ({ index }: PodcastListItemLoaderProps) => {
+const PodcastListItemLoader = ({ index = 0, animate = false }: PodcastListItemLoaderProps) => {
   const { colorMode } = useColorMode();
   const transition = {
     repeat: Infinity,
@@ -38,9 +39,11 @@ const PodcastListItemLoader = ({ index }: PodcastListItemLoaderProps) => {
           w='100%'
           as={motion.div}
           bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-          animate={{
-            opacity: [0, 1, 0],
-          }}
+          animate={
+            animate && {
+              opacity: [0, 1, 0],
+            }
+          }
           transition={transition}
           padding='50%'
         />
@@ -56,9 +59,11 @@ const PodcastListItemLoader = ({ index }: PodcastListItemLoaderProps) => {
           w='100%'
           as={motion.div}
           bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-          animate={{
-            opacity: [0, 1, 0],
-          }}
+          animate={
+            animate && {
+              opacity: [0, 1, 0],
+            }
+          }
           transition={transition}
           minH={6}
           mb={2}
@@ -68,9 +73,11 @@ const PodcastListItemLoader = ({ index }: PodcastListItemLoaderProps) => {
             w={20}
             as={motion.div}
             bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-            animate={{
-              opacity: [0, 1, 0],
-            }}
+            animate={
+              animate && {
+                opacity: [0, 1, 0],
+              }
+            }
             transition={transition}
             minH={6}
           />
@@ -78,9 +85,11 @@ const PodcastListItemLoader = ({ index }: PodcastListItemLoaderProps) => {
             w={16}
             as={motion.div}
             bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-            animate={{
-              opacity: [0, 1, 0],
-            }}
+            animate={
+              animate && {
+                opacity: [0, 1, 0],
+              }
+            }
             transition={transition}
             minH={6}
           />
@@ -92,9 +101,11 @@ const PodcastListItemLoader = ({ index }: PodcastListItemLoaderProps) => {
               w='100%'
               as={motion.div}
               bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-              animate={{
-                opacity: [0, 1, 0],
-              }}
+              animate={
+                animate && {
+                  opacity: [0, 1, 0],
+                }
+              }
               transition={transition}
             />
           </Flex>
@@ -104,9 +115,11 @@ const PodcastListItemLoader = ({ index }: PodcastListItemLoaderProps) => {
               w={8}
               as={motion.div}
               bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-              animate={{
-                opacity: [0, 1, 0],
-              }}
+              animate={
+                animate && {
+                  opacity: [0, 1, 0],
+                }
+              }
               transition={transition}
             />
           </Flex>
