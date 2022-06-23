@@ -2,7 +2,6 @@ import { Container, Flex, Text, useColorMode } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import EmptyState from '../components/EmptyState';
@@ -12,33 +11,13 @@ import Search from '../components/Search';
 import { useStore } from '../hooks';
 
 const Home: NextPage = () => {
-  const router = useRouter();
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
-  const {
-    rank,
-    rankStatus,
-    listSearchTerm,
-    listSearchCountry,
-    getRank,
-    setListSearchTerm,
-    setListSearchCountry,
-  } = collectionStore;
+  const { rank, rankStatus, getRank, getList } = collectionStore;
 
-  const handleSearch = (payload: { country: string; term: string }) => {
-    const { country, term } = payload;
-
-    if (!term?.length) return;
-
-    setListSearchTerm(term);
-    let route = `/search?term=${term}`;
-    if (country) {
-      setListSearchCountry(country);
-      route += `&country=${country}`;
-    }
-
-    router.push(route);
+  const handleSearch = (payload: { term: string; country: string }) => {
+    getList(payload);
   };
 
   const renderRank = () => {
@@ -109,12 +88,7 @@ const Home: NextPage = () => {
           w='100%'
           maxW='container.xl'
         >
-          <Search
-            showCountry
-            onChange={handleSearch}
-            placeholder='Search podcasts'
-            initialValue={{ term: listSearchTerm, country: listSearchCountry }}
-          />
+          <Search showCountry placeholder='Search podcasts' onChange={handleSearch} />
         </Container>
       </Flex>
 

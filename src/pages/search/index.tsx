@@ -3,7 +3,6 @@ import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactElement, useEffect } from 'react';
 
 import CollectionListItem from '../../components/CollectionListItem';
 import EmptyState from '../../components/EmptyState';
@@ -12,11 +11,8 @@ import Search from '../../components/Search';
 import { useStore } from '../../hooks';
 
 const SearchScreen: NextPage = () => {
-  const router = useRouter();
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
-
-  const { term, country } = router.query;
 
   const { list, listStatus, listSearchTerm, listSearchCountry, getList } = collectionStore;
 
@@ -25,44 +21,64 @@ const SearchScreen: NextPage = () => {
   };
 
   const renderList = () => {
-    if (!listSearchTerm?.length) return null;
+    let listContent = null;
 
     switch (listStatus) {
       case 'fetching': {
-        return <Loader />;
+        listContent = <Loader />;
+        break;
       }
 
       case 'empty': {
-        return <EmptyState variant='not-found' />;
+        listContent = <EmptyState variant='not-found' />;
+        break;
       }
 
       case 'error': {
-        return <EmptyState />;
+        listContent = <EmptyState />;
+        break;
       }
 
       case 'success': {
         if (list?.length) {
-          return list.map((collection) => (
+          listContent = list.map((collection) => (
             <CollectionListItem key={collection.collectionId} collection={collection} />
           ));
         }
+        break;
       }
 
       default: {
-        return null;
+        listContent = null;
       }
     }
+
+    return (
+      <Flex direction='column' gap={3} mb={12}>
+        {!!listSearchTerm?.length && (
+          <Flex
+            borderBottomWidth='1px'
+            position='sticky'
+            top={12}
+            py={2}
+            backdropFilter='blur(10px)'
+            bgColor={
+              colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
+            }
+          >
+            <Text fontSize='xl' lineHeight={1}>
+              {`${
+                !!list?.length ? `${list.length} ` : ''
+              }Search results for "${listSearchTerm}":`}
+            </Text>
+          </Flex>
+        )}
+        <SimpleGrid minChildWidth={200} gap={3}>
+          {listContent}
+        </SimpleGrid>
+      </Flex>
+    );
   };
-
-  useEffect(() => {
-    if (!term) return;
-
-    const params = { term, country: '' } as { term: string; country: string };
-
-    if (country) params.country = country as string;
-
-    handleSearch(params);
-  }, [term, country]);
 
   return (
     <div>
@@ -111,27 +127,7 @@ const SearchScreen: NextPage = () => {
           pt={6}
           pb={36}
         >
-          <Flex direction='column' gap={3} mb={12}>
-            <Flex
-              borderBottomWidth='1px'
-              position='sticky'
-              top={12}
-              py={2}
-              backdropFilter='blur(10px)'
-              bgColor={
-                colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
-              }
-            >
-              <Text fontSize='xl' lineHeight={1}>
-                {`${
-                  !!list?.length ? `${list.length} ` : ''
-                }Search results for "${listSearchTerm}":`}
-              </Text>
-            </Flex>
-            <SimpleGrid minChildWidth='200px' gap={3}>
-              {renderList()}
-            </SimpleGrid>
-          </Flex>
+          {renderList()}
         </Container>
       </Flex>
     </div>

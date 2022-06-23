@@ -92,7 +92,7 @@ const PlayListItem = (props: PlayListItemProps) => {
             backdropFilter='blur(10px)'
             size='sm'
           >
-            <Icon as={RiDeleteBinLine} fontSize={20} />
+            <Icon as={RiDeleteBinLine} fontSize='20px' />
           </IconButton>
         </Flex>
       </Flex>

@@ -42,7 +42,7 @@ const Header = ({ onOpenDrawer }: HeaderProps) => {
         </Flex>
 
         <IconButton aria-label='Menu' onClick={onOpenDrawer} size='sm'>
-          <Icon as={RiMenuLine} fontSize={20} />
+          <Icon as={RiMenuLine} fontSize='20px' />
         </IconButton>
       </Container>
     </Flex>
