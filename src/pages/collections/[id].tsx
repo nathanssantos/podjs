@@ -7,7 +7,6 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 import {
   Badge,
   Box,
-  BoxProps,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -25,9 +24,6 @@ import Search from '../../components/Search';
 import { ParsedUrlQuery } from 'querystring';
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
-import { motion } from 'framer-motion';
-
-const MotionBox = motion<Omit<BoxProps, 'transition'>>(Box);
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
@@ -91,10 +87,10 @@ const CollectionDetail: NextPage = () => {
                   borderWidth='1px'
                   borderRadius='lg'
                   overflow='hidden'
-                  w={{ base: '100%', md: 240 }}
+                  w={{ base: '100%', md: '240px' }}
                   minW={240}
-                  maxW={{ base: '100%', md: 240 }}
-                  h={{ md: 240 }}
+                  maxW={{ base: '400px', md: '240px' }}
+                  h={{ md: '240px' }}
                 >
                   <Image
                     src={artworkUrl600}
@@ -271,36 +267,38 @@ const CollectionDetail: NextPage = () => {
           >
             <Flex>
               {!!detail?.collectionName?.length && (
-                <Breadcrumb
-                  separator={<Icon as={RiArrowLeftSLine} color='gray.500' />}
-                  sx={{
-                    'span, ol': {
-                      display: 'flex',
-                      alignItems: 'center',
-                    },
-                  }}
-                >
-                  <BreadcrumbItem>
-                    <BreadcrumbLink onClick={() => router.push('/')}>
-                      <Flex align='center' gap={2}>
-                        <Icon as={RiHomeLine} color='gray.500' fontSize='20px' />
-                        <Text>Home</Text>
-                      </Flex>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
+                <Flex display={{ base: 'none', md: 'flex' }}>
+                  <Breadcrumb
+                    separator={<Icon as={RiArrowLeftSLine} color='gray.500' />}
+                    sx={{
+                      'span, ol': {
+                        display: 'flex',
+                        alignItems: 'center',
+                      },
+                    }}
+                  >
+                    <BreadcrumbItem>
+                      <BreadcrumbLink onClick={() => router.push('/')}>
+                        <Flex align='center' gap={2}>
+                          <Icon as={RiHomeLine} color='gray.500' fontSize='20px' />
+                          <Text>Home</Text>
+                        </Flex>
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
 
-                  <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink
-                      as='div'
-                      _hover={{ textDecoration: 'none' }}
-                      cursor='initial'
-                    >
-                      <Flex align='center'>
-                        <Text>{detail.collectionName}</Text>
-                      </Flex>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                </Breadcrumb>
+                    <BreadcrumbItem isCurrentPage>
+                      <BreadcrumbLink
+                        as='div'
+                        _hover={{ textDecoration: 'none' }}
+                        cursor='initial'
+                      >
+                        <Flex align='center'>
+                          <Text>{detail.collectionName}</Text>
+                        </Flex>
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                  </Breadcrumb>
+                </Flex>
               )}
             </Flex>
             <Search onChange={handleSearch} placeholder='Search episodes' />
