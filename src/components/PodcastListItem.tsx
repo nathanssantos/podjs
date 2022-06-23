@@ -90,7 +90,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
         </Flex>
         <Flex flex={1} w='100%' direction={{ base: 'column', sm: 'row' }} gap={3}>
           <Flex direction='column' flex={1}>
-            <Flex mb={1} h='124px' overflow='hidden' w='100%'>
+            <Flex mb={1} h='120px' overflow='hidden' w='100%'>
               <Text
                 fontSize='14px'
                 color='gray.500'
@@ -116,7 +116,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
               backdropFilter='blur(10px)'
               size='sm'
             >
-              <Icon as={RiPlayListAddLine} fontSize={20} />
+              <Icon as={RiPlayListAddLine} fontSize='20px' />
             </IconButton>
           </Flex>
         </Flex>

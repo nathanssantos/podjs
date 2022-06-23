@@ -1,6 +1,5 @@
 import {
   Badge,
-  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -15,8 +14,7 @@ import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ParsedUrlQuery } from 'querystring';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 
@@ -29,15 +27,11 @@ import { useStore } from '../../hooks';
 
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
   const { detail, detailStatus, detailSearchResult, getDetail, search } = collectionStore;
-
-  const handleSearch = (payload: { term: string }) => {
-    const { term } = payload;
-    search(term);
-  };
 
   const renderDetail = () => {
     switch (detailStatus) {
@@ -134,9 +128,8 @@ const CollectionDetail: NextPage = () => {
                     <LazyLoad
                       key={`${podcast.title}${podcast.isoDate}`}
                       height={150}
-                      offset={2048}
+                      offset={1024}
                       unmountIfInvisible
-                      placeholder={<PodcastListItemLoader />}
                     >
                       <PodcastListItem podcast={podcast} imageFallback={artworkUrl600} />
                     </LazyLoad>
@@ -153,9 +146,8 @@ const CollectionDetail: NextPage = () => {
     }
   };
 
-  const init = async (query: ParsedUrlQuery) => {
-    const { id } = query;
-    if (id && String(detail?.collectionId) !== id) await getDetail({ id });
+  const init = async (id: string) => {
+    if (String(detail?.collectionId) !== id) await getDetail({ id });
   };
 
   useEffect(() => {
@@ -163,7 +155,14 @@ const CollectionDetail: NextPage = () => {
   }, [detailSearchResult]);
 
   useEffect(() => {
-    init(router.query);
+    if (mounted) return;
+
+    const { id } = router.query;
+
+    if (id?.length) {
+      init(id as string);
+      setMounted(true);
+    }
   }, [router.query]);
 
   return (
@@ -232,7 +231,7 @@ const CollectionDetail: NextPage = () => {
                 </Flex>
               )}
             </Flex>
-            <Search onChange={handleSearch} placeholder='Search episodes' />
+            <Search onChange={search} placeholder='Filter episodes' redirectOnSearch={false} />
           </Container>
         </Flex>
 

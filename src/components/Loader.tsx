@@ -116,7 +116,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
 
     default: {
       return (
-        <SimpleGrid minChildWidth={200} gap={3} mb={12}>
+        <SimpleGrid minChildWidth='200px' gap={3} mb={12}>
           {new Array(20).fill('').map((item, index) => (
             <CollectionGridItemLoader key={index} index={index} animate />
           ))}

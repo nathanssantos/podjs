@@ -126,7 +126,7 @@ const Player = () => {
             transition='0.2s linear'
             size='sm'
           >
-            <Icon as={RiArrowUpLine} fontSize={20} />
+            <Icon as={RiArrowUpLine} fontSize='20px' />
           </IconButton>
         </Box>
         {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (

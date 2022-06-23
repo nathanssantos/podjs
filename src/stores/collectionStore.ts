@@ -13,8 +13,8 @@ export default class CollectionStore {
   listStatus: FetchStatus = 'idle';
   rankStatus: FetchStatus = 'idle';
   detailStatus: FetchStatus = 'idle';
-  listSearchTerm: string = '';
-  listSearchCountry: string = '';
+  searchTerm: string = '';
+  searchCountry: string = '';
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this, { rootStore: false });
@@ -22,11 +22,11 @@ export default class CollectionStore {
   }
 
   setListSearchTerm = (term: string) => {
-    this.listSearchTerm = term;
+    this.searchTerm = term;
   };
 
   setListSearchCountry = (country: string) => {
-    this.listSearchCountry = country;
+    this.searchCountry = country;
   };
 
   setDetail = (payload: Collection | null) => {
@@ -40,11 +40,7 @@ export default class CollectionStore {
     try {
       const { term, country } = payload;
 
-      if (
-        this.list?.length &&
-        term === this.listSearchTerm &&
-        country === this.listSearchCountry
-      ) {
+      if (this.list?.length && term === this.searchTerm && country === this.searchCountry) {
         return;
       }
 
@@ -54,17 +50,17 @@ export default class CollectionStore {
       const params = {} as { term: string; country: string };
 
       if (term?.length) {
-        this.listSearchTerm = term;
+        this.searchTerm = term;
         params.term = term;
       } else {
-        this.listSearchTerm = '';
+        this.searchTerm = '';
       }
 
       if (country?.length) {
-        this.listSearchCountry = country;
+        this.searchCountry = country;
         params.country = country;
       } else {
-        this.listSearchCountry = '';
+        this.searchCountry = '';
       }
 
       const response = await axios.get('/api/collections', {
@@ -108,7 +104,7 @@ export default class CollectionStore {
     try {
       const { country } = payload;
 
-      if (this.rank?.length && country === this.listSearchCountry) {
+      if (this.rank?.length && country === this.searchCountry) {
         return;
       }
 
@@ -190,7 +186,8 @@ export default class CollectionStore {
     }
   };
 
-  search = (term?: string): void => {
+  search = (payload: { term?: string }): void => {
+    const { term } = payload;
     this.detailSearchResult = null;
 
     if (!this.detail?.items) return;
@@ -213,7 +210,7 @@ export default class CollectionStore {
     this.detailSearchResult = null;
     this.listStatus = 'idle';
     this.detailStatus = 'idle';
-    this.listSearchTerm = '';
-    this.listSearchCountry = '';
+    this.searchTerm = '';
+    this.searchCountry = '';
   };
 }
