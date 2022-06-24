@@ -68,7 +68,7 @@ const SearchScreen: NextPage = () => {
     }
 
     return (
-      <Flex direction='column' gap={3} mb={12}>
+      <Flex direction='column' gap={6} mb={12}>
         {!!searchTerm?.length && (
           <Flex
             borderBottomWidth='1px'
