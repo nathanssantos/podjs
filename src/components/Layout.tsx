@@ -11,7 +11,7 @@ import PlayList from './PlayList';
 import Player from './Player';
 
 type LayoutProps = {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 };
 
 const Layout = ({ children }: LayoutProps) => {

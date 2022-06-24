@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { makeAutoObservable } from 'mobx';
+import { toast } from 'react-toastify';
 
+import { ERROR_STATE } from '../constants/message';
 import { normalizeString } from '../utils';
 import type RootStore from './rootStore';
 
@@ -92,6 +94,8 @@ export default class CollectionStore {
     } catch (error) {
       console.warn(error);
 
+      toast.error(ERROR_STATE);
+
       this.listStatus = 'error';
 
       return {
@@ -142,6 +146,8 @@ export default class CollectionStore {
     } catch (error) {
       console.warn(error);
 
+      toast.error(ERROR_STATE);
+
       this.rankStatus = 'error';
 
       return {
@@ -177,6 +183,8 @@ export default class CollectionStore {
       return { status };
     } catch (error) {
       console.warn(error);
+
+      toast.error(ERROR_STATE);
 
       this.detailStatus = 'error';
 
