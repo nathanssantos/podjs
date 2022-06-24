@@ -20,7 +20,7 @@ const PlayList = () => {
 
   return (
     <CharkraDrawer isOpen={playListIsOpen} placement='right' onClose={closePlayList} size='lg'>
-      <DrawerOverlay />
+      <DrawerOverlay backdropFilter='auto' backdropBlur='10px' />
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader>Playlist</DrawerHeader>

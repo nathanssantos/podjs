@@ -22,7 +22,7 @@ const Drawer = ({ isOpen, onClose }: DrawerProps) => {
 
   return (
     <CharkraDrawer isOpen={isOpen} placement='left' onClose={onClose}>
-      <DrawerOverlay />
+      <DrawerOverlay backdropFilter='auto' backdropBlur='10px' />
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader>PodJS</DrawerHeader>

@@ -157,12 +157,13 @@ export default class CollectionStore {
   };
 
   getDetail = async (payload: { id: string | string[] }): Promise<StoreActionResponse> => {
-    this.detailStatus = 'fetching';
-    this.detail = null;
-    this.detailSearchResult = null;
-
     try {
+      this.detailStatus = 'fetching';
+      this.detail = null;
+      this.detailSearchResult = null;
+
       const { id } = payload;
+      console.log(id);
 
       const response = await axios.get(`/api/collections/${id}`);
 

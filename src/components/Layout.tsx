@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { ReactElement, useEffect, useState } from 'react';
 
 import AppLoader from './AppLoader';
+import CollectionDetailModal from './CollectionDetailModal';
 import Drawer from './Drawer';
 import Header from './Header';
 import MotionBox from './MotionBox';
@@ -15,38 +16,17 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  const [appIsLoading, setAppIsLoading] = useState(true);
-  const [loaderIsVisible, setLoaderIsVisible] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoaderIsVisible(false);
-    }, 1000);
-    setTimeout(() => {
-      setAppIsLoading(false);
-    }, 1500);
-  }, []);
 
   return (
     <>
       <Header onOpenDrawer={onOpen} />
       {children}
       <Player />
+      <CollectionDetailModal />
       <PlayList />
       <Drawer isOpen={isOpen} onClose={onClose} />
-      {appIsLoading && (
-        <MotionBox
-          as={motion.div}
-          animate={{ opacity: loaderIsVisible ? 1 : 0 }}
-          transition={{
-            duration: 0.5,
-            ease: 'linear',
-          }}
-        >
-          <AppLoader />
-        </MotionBox>
-      )}
+      <AppLoader />
     </>
   );
 };
