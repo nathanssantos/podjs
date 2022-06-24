@@ -4,9 +4,10 @@ import { motion } from 'framer-motion';
 import CollectionGridItemLoader from './CollectionListItemLoader';
 import MotionBox from './MotionBox';
 import PodcastListItemLoader from './PodcastListItemLoader';
+import RankCollectionItemLoader from './RankCollectionListItemLoader';
 
 type LoaderProps = {
-  variant?: 'grid' | 'list';
+  variant?: 'grid' | 'list' | 'rank';
 };
 
 const Loader = ({ variant = 'grid' }: LoaderProps) => {
@@ -14,6 +15,16 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
   const { colorMode } = useColorMode();
 
   switch (variant) {
+    case 'rank': {
+      return (
+        <Flex w='100%' direction='column' gap={6}>
+          {new Array(20).fill('').map((item, index) => (
+            <RankCollectionItemLoader key={index} index={index} animate />
+          ))}
+        </Flex>
+      );
+    }
+
     case 'list': {
       return (
         <>

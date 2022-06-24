@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const renderRank = () => {
     switch (rankStatus) {
       case 'fetching': {
-        return <Loader />;
+        return <Loader variant='rank' />;
       }
 
       case 'empty': {
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
       case 'success': {
         if (rank?.length) {
           return (
-            <Flex direction='column' gap={3} mb={12}>
+            <Flex direction='column' gap={6} mb={12}>
               {rank.map((collection, index) => (
                 <RankCollectionListItem
                   key={collection.collectionId}
@@ -97,7 +97,7 @@ const Home: NextPage = () => {
           px={{ base: 3, md: 6 }}
           pt={6}
           pb={36}
-          gap={3}
+          gap={6}
           mb={12}
         >
           <Flex
