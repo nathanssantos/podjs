@@ -19,6 +19,7 @@ import CollectionListItem from '../../components/CollectionListItem';
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
 import Search from '../../components/Search';
+import countries from '../../constants/countries';
 import { useStore } from '../../hooks';
 
 const SearchScreen: NextPage = () => {
@@ -38,7 +39,12 @@ const SearchScreen: NextPage = () => {
       }
 
       case 'empty': {
-        listContent = <EmptyState variant='not-found' />;
+        listContent = (
+          <EmptyState
+            variant='not-found'
+            text={`No search results found for "${searchTerm}". Please try a different term.`}
+          />
+        );
         break;
       }
 
@@ -57,7 +63,7 @@ const SearchScreen: NextPage = () => {
       }
 
       default: {
-        listContent = null;
+        break;
       }
     }
 
@@ -75,7 +81,11 @@ const SearchScreen: NextPage = () => {
             }
           >
             <Text fontSize='xl' lineHeight={1}>
-              {`${!!list?.length ? `${list.length} ` : ''}Search results for "${searchTerm}":`}
+              {`${!!list?.length ? `${list.length} ` : ''}Search results for "${searchTerm}"${
+                countries.find(({ code }) => code === searchCountry)
+                  ? countries.find(({ code }) => code === searchCountry)?.name
+                  : ''
+              }:`}
             </Text>
           </Flex>
         )}

@@ -6,15 +6,16 @@ import { EMPTY_STATE, ERROR_STATE } from '../constants/message';
 
 type EmptyStateProps = {
   variant?: 'not-found' | 'error';
+  text?: string;
 };
 
-const renderContent = ({ variant = 'error' }: EmptyStateProps) => {
+const renderContent = ({ variant = 'error', text }: EmptyStateProps) => {
   switch (variant) {
     case 'not-found': {
       return (
         <>
           <Icon as={RiSearchEyeLine} fontSize='100px' />
-          <Text>{EMPTY_STATE}</Text>
+          <Text>{!!text?.length ? text : EMPTY_STATE}</Text>
         </>
       );
     }
@@ -23,7 +24,7 @@ const renderContent = ({ variant = 'error' }: EmptyStateProps) => {
       return (
         <>
           <Icon as={RiErrorWarningLine} fontSize='100px' />
-          <Text>{ERROR_STATE}</Text>
+          <Text>{!!text?.length ? text : ERROR_STATE}</Text>
         </>
       );
     }
@@ -31,7 +32,7 @@ const renderContent = ({ variant = 'error' }: EmptyStateProps) => {
 };
 
 const EmptyState = (props: EmptyStateProps) => {
-  const { variant } = props;
+  const { variant, text } = props;
 
   return (
     <Flex
@@ -43,7 +44,7 @@ const EmptyState = (props: EmptyStateProps) => {
       gap={6}
       textAlign='center'
     >
-      {renderContent({ variant })}
+      {renderContent({ variant, text })}
     </Flex>
   );
 };
