@@ -32,33 +32,43 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
 
   return (
     <Flex align='center' gap={6}>
-      <Flex position='relative' minW='56px' justifyContent='center'>
+      <Flex position='relative' minW='56px' justifyContent='center' pb={6}>
         <Text fontSize='50px' fontWeight={700}>
           {index + 1}
         </Text>
       </Flex>
       <Flex
         cursor='pointer'
-        borderWidth='1px'
-        borderRadius='lg'
-        overflow='hidden'
         onClick={handleClick}
         flex={1}
+        borderBottomWidth='1px'
+        pb={6}
+        gap={4}
+        align='center'
       >
-        <Image
-          src={artworkUrl600 || artworkUrl100}
-          alt={collectionName}
-          objectFit='cover'
-          fallback={
-            <Flex w='100%' padding='calc(50% - 12px)' align='center' justify='center'>
-              <Spinner />
-            </Flex>
-          }
+        <Flex
           w='100px'
           h='100px'
-        />
+          maxW='100px'
+          borderWidth='1px'
+          borderRadius='lg'
+          overflow='hidden'
+        >
+          <Image
+            w='100%'
+            h='100%'
+            src={artworkUrl600 || artworkUrl100}
+            alt={collectionName}
+            objectFit='cover'
+            fallback={
+              <Flex w='100%' padding='calc(50% - 12px)' align='center' justify='center'>
+                <Spinner />
+              </Flex>
+            }
+          />
+        </Flex>
 
-        <Flex align='flex-start' direction='column' p={3} flex={1}>
+        <Flex align='flex-start' direction='column' flex={1}>
           <Box flex={1} mb={3}>
             <Text fontWeight='semibold' lineHeight='tight'>
               {collectionName}
