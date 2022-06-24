@@ -2,6 +2,8 @@ import { Flex, Icon, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { RiErrorWarningLine, RiSearchEyeLine } from 'react-icons/ri';
 
+import { EMPTY_STATE, ERROR_STATE } from '../constants/message';
+
 type EmptyStateProps = {
   variant?: 'not-found' | 'error';
 };
@@ -12,7 +14,7 @@ const renderContent = ({ variant = 'error' }: EmptyStateProps) => {
       return (
         <>
           <Icon as={RiSearchEyeLine} fontSize='100px' />
-          <Text>No search results found. Please try a different term.</Text>
+          <Text>{EMPTY_STATE}</Text>
         </>
       );
     }
@@ -21,7 +23,7 @@ const renderContent = ({ variant = 'error' }: EmptyStateProps) => {
       return (
         <>
           <Icon as={RiErrorWarningLine} fontSize='100px' />
-          <Text>Something unexpected happened. Please try again.</Text>
+          <Text>{ERROR_STATE}</Text>
         </>
       );
     }
