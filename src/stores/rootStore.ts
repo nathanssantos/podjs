@@ -3,15 +3,14 @@ import { createContext } from 'react';
 
 import CollectionStore from './collectionStore';
 import PlayerStore from './playerStore';
+import UiStore from './uiStore';
 
 class RootStore {
-  collectionStore = {} as CollectionStore;
-  playerStore = {} as PlayerStore;
+  collectionStore = new CollectionStore(this);
+  playerStore = new PlayerStore(this);
+  uiStore = new UiStore(this);
 
   constructor() {
-    this.collectionStore = new CollectionStore(this);
-    this.playerStore = new PlayerStore(this);
-
     configure({
       enforceActions: 'never',
     });

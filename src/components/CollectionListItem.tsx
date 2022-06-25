@@ -2,6 +2,7 @@ import { Badge, Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { useStore } from '../hooks';
+import ListItemActions from './ListItemActions';
 
 type CollectionListItemProps = {
   collection: Collection;
@@ -19,9 +20,10 @@ const CollectionListItem = (props: CollectionListItemProps) => {
     },
   } = props;
   const router = useRouter();
-  const { collectionStore } = useStore();
+  const { collectionStore, uiStore } = useStore();
 
   const { detail, setDetail } = collectionStore;
+  const { toggleCollectionModal } = uiStore;
 
   const handleClick = () => {
     if (detail?.collectionId !== collectionId) setDetail(null);
@@ -30,26 +32,42 @@ const CollectionListItem = (props: CollectionListItemProps) => {
 
   return (
     <Flex
-      cursor='pointer'
       direction='column'
       borderWidth='1px'
       borderRadius='lg'
       overflow='hidden'
-      onClick={handleClick}
       maxW='411px'
+      role='group'
     >
-      <Image
-        src={artworkUrl600 || artworkUrl100}
-        alt={collectionName}
-        objectFit='cover'
-        fallback={
-          <Flex w='100%' padding='calc(50% - 12px)' align='center' justify='center'>
-            <Spinner />
-          </Flex>
-        }
-      />
+      <Flex position='relative'>
+        <Image
+          src={artworkUrl600 || artworkUrl100}
+          alt={collectionName}
+          objectFit='cover'
+          fallback={
+            <Flex w='100%' padding='calc(50% - 12px)' align='center' justify='center'>
+              <Spinner />
+            </Flex>
+          }
+          transition='all 150ms ease-in-out'
+          _groupHover={{ filter: 'brightness(0.7) blur(5px)' }}
+          cursor='pointer'
+          onClick={handleClick}
+        />
+        <ListItemActions
+          showBtInfo
+          onClickInfo={() => toggleCollectionModal({ id: String(collectionId), open: true })}
+        />
+      </Flex>
 
-      <Flex align='flex-start' direction='column' p={3} flex={1}>
+      <Flex
+        align='flex-start'
+        direction='column'
+        p={3}
+        flex={1}
+        cursor='pointer'
+        onClick={handleClick}
+      >
         <Box flex={1} mb={3}>
           <Text fontWeight='semibold' lineHeight='tight'>
             {collectionName}
