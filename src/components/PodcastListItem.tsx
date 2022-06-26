@@ -45,6 +45,35 @@ const PodcastListItem = (props: PodcastListItemProps) => {
     if (!currentPodcast?.enclosure?.url) playPodcast();
   };
 
+  const menu = (
+    <Menu>
+      <MenuButton
+        as={IconButton}
+        aria-label='Options'
+        icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+        variant='ghost'
+        size='sm'
+      />
+      <MenuList
+        sx={{
+          span: {
+            display: 'flex',
+          },
+        }}
+      >
+        <MenuItem icon={<Icon as={RiInformationLine} fontSize='20px' />} onClick={onOpen}>
+          Information
+        </MenuItem>
+        <MenuItem
+          icon={<Icon as={RiPlayListAddLine} fontSize='20px' />}
+          onClick={addToPlayList}
+        >
+          Add to playlist
+        </MenuItem>
+      </MenuList>
+    </Menu>
+  );
+
   return (
     <Flex borderBottomWidth='1px' pb={6} position='relative' gap={4}>
       <Flex
@@ -82,7 +111,17 @@ const PodcastListItem = (props: PodcastListItemProps) => {
           flex={1}
           gap={1}
         >
-          <Flex gap={2}>
+          <Flex gap={2} justify='space-between'>
+            <Text
+              fontWeight='semibold'
+              lineHeight='tight'
+              color={currentPodcast?.enclosure?.url === enclosure?.url ? 'teal.300' : ''}
+            >
+              {title}
+            </Text>
+            <Flex display={{ base: 'flex', md: 'none' }}>{menu}</Flex>
+          </Flex>
+          <Flex align='center' gap={2}>
             {currentPodcast?.enclosure?.url === enclosure?.url && (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -143,20 +182,10 @@ const PodcastListItem = (props: PodcastListItemProps) => {
                 </g>
               </svg>
             )}
-
-            <Text
-              fontWeight='semibold'
-              lineHeight='tight'
-              color={currentPodcast?.enclosure?.url === enclosure?.url ? 'teal.300' : ''}
-            >
-              {title}
-            </Text>
-          </Flex>
-          <Flex align='center' gap={2}>
-            <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
             <Badge borderRadius='full' px={2} colorScheme='teal'>
               {formatDuration(itunes.duration)}
             </Badge>
+            <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
           </Flex>
           <Flex direction='column' flex={1}>
             <Flex h='127px' overflow='hidden' w='100%'>
@@ -179,43 +208,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
           </Flex>
         </Flex>
       </Flex>
-      <Flex
-        direction='column'
-        alignItems='flex-end'
-        justify='space-between'
-        position={{ base: 'absolute', md: 'initial' }}
-        right={3}
-        top={3}
-        bottom={3}
-        zIndex={1}
-      >
-        <Menu>
-          <MenuButton
-            as={IconButton}
-            aria-label='Options'
-            icon={<Icon as={RiMore2Fill} fontSize='20px' />}
-            variant='ghost'
-            size='sm'
-          />
-          <MenuList
-            sx={{
-              span: {
-                display: 'flex',
-              },
-            }}
-          >
-            <MenuItem icon={<Icon as={RiInformationLine} fontSize='20px' />} onClick={onOpen}>
-              Information
-            </MenuItem>
-            <MenuItem
-              icon={<Icon as={RiPlayListAddLine} fontSize='20px' />}
-              onClick={addToPlayList}
-            >
-              Add to playlist
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </Flex>
+      <Flex display={{ base: 'none', md: 'flex' }}>{menu}</Flex>
       <PodcastDetailModal podcast={podcast} isOpen={isOpen} onClose={onClose} />
     </Flex>
   );

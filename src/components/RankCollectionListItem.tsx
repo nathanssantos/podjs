@@ -83,7 +83,7 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
             />
           </Flex>
 
-          <Flex align='flex-start' direction='column' justify='center' flex={1} gap={1}>
+          <Flex align='flex-start' direction='column' flex={1} gap={1}>
             <Text fontWeight='semibold' lineHeight='tight'>
               {collectionName}
             </Text>
