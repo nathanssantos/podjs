@@ -29,21 +29,19 @@ const CollectionListItemLoader = ({
         }
         transition={transition}
       />
-      <Flex align='flex-start' direction='column' p={3} flex={1} minH='78px'>
-        <Box flex={1} mb={1} w='100%'>
-          <MotionBox
-            as={motion.div}
-            minH={6}
-            bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-            w='80%'
-            animate={
-              animate && {
-                opacity: [0, 1, 0],
-              }
+      <Flex align='flex-start' direction='column' p={3} flex={1} minH='78px' gap={1}>
+        <MotionBox
+          as={motion.div}
+          minH={6}
+          bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+          w='80%'
+          animate={
+            animate && {
+              opacity: [0, 1, 0],
             }
-            transition={transition}
-          />
-        </Box>
+          }
+          transition={transition}
+        />
         <MotionBox
           as={motion.div}
           minH={6}

@@ -66,12 +66,11 @@ const CollectionListItem = (props: CollectionListItemProps) => {
         flex={1}
         cursor='pointer'
         onClick={handleClick}
+        gap={1}
       >
-        <Box flex={1} mb={3}>
-          <Text fontWeight='semibold' lineHeight='tight'>
-            {collectionName}
-          </Text>
-        </Box>
+        <Text fontWeight='semibold' lineHeight='tight'>
+          {collectionName}
+        </Text>
         <Badge borderRadius='full' px={2} colorScheme='teal'>
           {primaryGenreName}
         </Badge>
