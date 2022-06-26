@@ -31,6 +31,7 @@ const SearchScreen: NextPage = () => {
 
   const renderList = () => {
     let listContent = null;
+    const country = countries.find(({ code }) => code.toLocaleLowerCase() === searchCountry);
 
     switch (listStatus) {
       case 'fetching': {
@@ -42,7 +43,13 @@ const SearchScreen: NextPage = () => {
         listContent = (
           <EmptyState
             variant='not-found'
-            text={`No search results found for "${searchTerm}". Please try a different term.`}
+            text={
+              searchTerm.trim().length
+                ? `No search results found for "${searchTerm}"${
+                    country ? ` in ${country.name}` : ''
+                  }. Please try a different term.`
+                : 'Please enter a search term in the box above.'
+            }
           />
         );
         break;
@@ -58,18 +65,43 @@ const SearchScreen: NextPage = () => {
           listContent = list.map((collection) => (
             <CollectionListItem key={collection.collectionId} collection={collection} />
           ));
+        } else {
+          listContent = (
+            <EmptyState
+              variant='not-found'
+              text={
+                searchTerm.trim().length
+                  ? `No search results found for "${searchTerm}"${
+                      country ? ` in ${country.name}` : ''
+                    }. Please try a different term.`
+                  : 'Please enter a search term in the box above.'
+              }
+            />
+          );
         }
         break;
       }
 
       default: {
+        listContent = (
+          <EmptyState
+            variant='not-found'
+            text={
+              searchTerm.trim().length
+                ? `No search results found for "${searchTerm}"${
+                    country ? ` in ${country.name}` : ''
+                  }. Please try a different term.`
+                : 'Please enter a search term in the box above.'
+            }
+          />
+        );
         break;
       }
     }
 
     return (
       <Flex direction='column' gap={6} mb={12}>
-        {!!searchTerm?.length && (
+        {!!searchTerm.trim().length && (
           <Flex
             borderBottomWidth='1px'
             position='sticky'
@@ -82,9 +114,7 @@ const SearchScreen: NextPage = () => {
           >
             <Text fontSize='xl' lineHeight={1}>
               {`${!!list?.length ? `${list.length} ` : ''}Search results for "${searchTerm}"${
-                countries.find(({ code }) => code === searchCountry)
-                  ? countries.find(({ code }) => code === searchCountry)?.name
-                  : ''
+                country ? ` in ${country.name}` : ''
               }:`}
             </Text>
           </Flex>

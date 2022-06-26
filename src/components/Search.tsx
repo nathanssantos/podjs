@@ -58,17 +58,19 @@ const Search = ({
     if (redirectOnSearch) {
       const query = {} as { term?: string; country?: string };
 
-      if (term?.length) query.term = term;
-      if (country?.length) query.country = country;
+      query.term = term;
+      query.country = country;
 
-      router.push(
-        {
-          pathname: '/search',
-          query,
-        },
-        undefined,
-        { shallow: true },
-      );
+      if (term.trim().length) {
+        router.push(
+          {
+            pathname: '/search',
+            query,
+          },
+          undefined,
+          { shallow: true },
+        );
+      }
     }
 
     if (onChange) onChange({ term: term, country });
@@ -88,7 +90,7 @@ const Search = ({
   }, [termParam, countryParam]);
 
   return (
-    <Flex alignSelf='flex-end' gap='3'>
+    <Flex alignSelf='flex-end' gap={4}>
       {showCountry && (
         <Flex maxW={32} flex={1}>
           <Select
