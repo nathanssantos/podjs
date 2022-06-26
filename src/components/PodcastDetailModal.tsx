@@ -69,10 +69,10 @@ const PodcastDetailModal = ({ podcast, isOpen, onClose }: PodcastDetailModal) =>
                 </Text>
               )}
               <Flex gap={2} align='center'>
-                <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
                 <Badge borderRadius='full' px={2} colorScheme='teal'>
                   {formatDuration(itunes.duration)}
                 </Badge>
+                <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
               </Flex>
               <Text
                 fontSize='14px'
