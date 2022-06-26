@@ -11,7 +11,7 @@ type LoaderProps = {
 };
 
 const Loader = ({ variant = 'grid' }: LoaderProps) => {
-  const transition = { repeat: Infinity, duration: 1.5 };
+  const transition = { repeat: Infinity, duration: 1.5, ease: 'linear' };
   const { colorMode } = useColorMode();
 
   switch (variant) {
@@ -53,7 +53,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 animate={{
                   opacity: [0, 1, 0],
                 }}
-                transition={{ ...transition, ease: 'linear' }}
+                transition={transition}
                 p='50%'
               />
             </Flex>
@@ -66,7 +66,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   animate={{
                     opacity: [0, 1, 0],
                   }}
-                  transition={{ ...transition, ease: 'linear' }}
+                  transition={transition}
                   minH={6}
                   mb={2}
                 />
@@ -77,7 +77,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   animate={{
                     opacity: [0, 1, 0],
                   }}
-                  transition={{ ...transition, ease: 'linear' }}
+                  transition={transition}
                   minH={6}
                   mb={4}
                 />
@@ -88,7 +88,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   animate={{
                     opacity: [0, 1, 0],
                   }}
-                  transition={{ ...transition, ease: 'linear' }}
+                  transition={transition}
                   minH={6}
                   mb={4}
                 />
@@ -99,7 +99,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                   animate={{
                     opacity: [0, 1, 0],
                   }}
-                  transition={{ ...transition, ease: 'linear' }}
+                  transition={transition}
                   minH={6}
                   mb={4}
                 />
@@ -111,7 +111,7 @@ const Loader = ({ variant = 'grid' }: LoaderProps) => {
                 animate={{
                   opacity: [0, 1, 0],
                 }}
-                transition={{ ...transition, ease: 'linear' }}
+                transition={transition}
                 minH={6}
               />
             </Flex>

@@ -1,24 +1,21 @@
 import {
   Badge,
-  Box,
-  Button,
   Flex,
+  Icon,
+  IconButton,
   Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Spinner,
   Text,
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
+import { RiInformationLine, RiMore2Fill } from 'react-icons/ri';
 
 import { useStore } from '../hooks';
-import ListItemActions from './ListItemActions';
 
 type RankCollectionListItemProps = {
   collection: Collection;
@@ -49,10 +46,11 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
   };
 
   return (
-    <Flex align='center' gap={{ base: 2, md: 6 }} role='group'>
+    <Flex gap={{ base: 2, md: 6 }} role='group' position='relative'>
       <Flex
         position='relative'
         minW={{ base: '34px', md: '56px' }}
+        align='center'
         justifyContent='center'
         pb={6}
       >
@@ -60,56 +58,64 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
           {index + 1}
         </Text>
       </Flex>
-      <Flex flex={1} borderBottomWidth='1px' pb={6}>
-        <Flex
-          w={{ base: '60px', md: '100px' }}
-          h={{ base: '60px', md: '100px' }}
-          maxW={{ base: '60px', md: '100px' }}
-          borderWidth='1px'
-          borderRadius='lg'
-          overflow='hidden'
-          position='relative'
-        >
-          <Image
-            w='100%'
-            h='100%'
-            src={artworkUrl600 || artworkUrl100}
-            alt={collectionName}
-            objectFit='cover'
-            fallback={
-              <Flex w='100%' padding='calc(50% - 12px)' align='center' justify='center'>
-                <Spinner />
-              </Flex>
-            }
-            onClick={handleClick}
-            transition='all 150ms ease-in-out'
-            cursor='pointer'
-            _groupHover={{ filter: 'brightness(0.7) blur(5px)' }}
-          />
+      <Flex flex={1} gap={4} borderBottomWidth='1px' pb={6}>
+        <Flex flex={1} onClick={handleClick} cursor='pointer' gap={{ base: 2, md: 4 }}>
+          <Flex
+            w={{ base: '60px', md: '100px' }}
+            h={{ base: '60px', md: '100px' }}
+            maxW={{ base: '60px', md: '100px' }}
+            borderWidth='1px'
+            borderRadius='lg'
+            overflow='hidden'
+            position='relative'
+          >
+            <Image
+              w='100%'
+              h='100%'
+              src={artworkUrl600 || artworkUrl100}
+              alt={collectionName}
+              objectFit='cover'
+              fallback={
+                <Flex w='100%' padding='calc(50% - 12px)' align='center' justify='center'>
+                  <Spinner />
+                </Flex>
+              }
+            />
+          </Flex>
 
-          <ListItemActions
-            showBtInfo
-            onClickInfo={() => toggleCollectionModal({ id: String(collectionId), open: true })}
-          />
+          <Flex align='flex-start' direction='column' justify='center' flex={1} gap={1}>
+            <Text fontWeight='semibold' lineHeight='tight'>
+              {collectionName}
+            </Text>
+            <Badge borderRadius='full' px={2} colorScheme='teal'>
+              {primaryGenreName}
+            </Badge>
+          </Flex>
         </Flex>
 
-        <Flex
-          align='flex-start'
-          direction='column'
-          justify='center'
-          flex={1}
-          onClick={handleClick}
-          cursor='pointer'
-          gap={1}
-          pl={{ base: 2, md: 4 }}
-        >
-          <Text fontWeight='semibold' lineHeight='tight'>
-            {collectionName}
-          </Text>
-          <Badge borderRadius='full' px={2} colorScheme='teal'>
-            {primaryGenreName}
-          </Badge>
-        </Flex>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label='Options'
+            icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+            size='sm'
+            variant='ghost'
+          />
+          <MenuList
+            sx={{
+              span: {
+                display: 'flex',
+              },
+            }}
+          >
+            <MenuItem
+              icon={<Icon as={RiInformationLine} fontSize='20px' />}
+              onClick={() => toggleCollectionModal({ id: String(collectionId), open: true })}
+            >
+              Information
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </Flex>
     </Flex>
   );

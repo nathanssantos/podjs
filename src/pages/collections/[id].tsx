@@ -21,7 +21,6 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
 import PodcastListItem from '../../components/PodcastListItem';
-import PodcastListItemLoader from '../../components/PodcastListItemLoader';
 import Search from '../../components/Search';
 import { useStore } from '../../hooks';
 
@@ -127,7 +126,7 @@ const CollectionDetail: NextPage = () => {
                   detailSearchResult.map((podcast) => (
                     <LazyLoad
                       key={`${podcast.title}${podcast.isoDate}`}
-                      height={150}
+                      height={205}
                       offset={1024}
                       unmountIfInvisible
                     >

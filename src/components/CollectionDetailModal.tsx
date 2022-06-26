@@ -19,7 +19,7 @@ import { useStore } from '../hooks';
 import EmptyState from './EmptyState';
 import Loader from './Loader';
 
-const CollectionDetailModal = ({}) => {
+const CollectionDetailModal = () => {
   const { uiStore, collectionStore } = useStore();
   const btnRef = useRef(null);
 
@@ -70,7 +70,7 @@ const CollectionDetailModal = ({}) => {
                   overflow='hidden'
                   w='100%'
                   minW={240}
-                  maxW='400px'
+                  maxW='411px'
                 >
                   <Image
                     src={artworkUrl600}
