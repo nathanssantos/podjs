@@ -39,6 +39,7 @@ export default class PlayerStore {
     this.setPlayList(
       this.playList.filter(({ enclosure }) => enclosure.url !== podcast?.enclosure?.url),
     );
+    if (!this.playList.length) this.currentPodcast = null;
   };
 
   reset = () => {

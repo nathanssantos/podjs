@@ -1,9 +1,22 @@
-import { Badge, Flex, Icon, IconButton, Image, Text } from '@chakra-ui/react';
+import {
+  Badge,
+  Flex,
+  Icon,
+  IconButton,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { observer } from 'mobx-react';
-import { RiDeleteBinLine } from 'react-icons/ri';
+import { RiDeleteBinLine, RiInformationLine, RiMore2Fill } from 'react-icons/ri';
 
 import { useStore } from '../hooks';
 import { formatDuration } from '../utils';
+import PodcastDetailModal from './PodcastDetailModal';
 
 type PlayListItemProps = {
   podcast: Podcast;
@@ -13,6 +26,7 @@ type PlayListItemProps = {
 const PlayListItem = (props: PlayListItemProps) => {
   const { podcast, imageFallback } = props;
   const { playerStore } = useStore();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { currentPodcast, setCurrentPodcast, removePodcastFromPlaylist } = playerStore;
 
@@ -34,17 +48,51 @@ const PlayListItem = (props: PlayListItemProps) => {
     if (currentPodcast?.enclosure?.url === podcast?.enclosure?.url) setCurrentPodcast(null);
   };
 
+  const menu = (
+    <Menu>
+      <MenuButton
+        as={IconButton}
+        aria-label='Options'
+        icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+        variant='ghost'
+        size='sm'
+      />
+      <MenuList
+        sx={{
+          span: {
+            display: 'flex',
+          },
+        }}
+      >
+        <MenuItem icon={<Icon as={RiInformationLine} fontSize='20px' />} onClick={onOpen}>
+          Information
+        </MenuItem>
+        <MenuItem
+          icon={<Icon as={RiDeleteBinLine} fontSize='20px' />}
+          onClick={removeFromPlayList}
+        >
+          Remove from playlist
+        </MenuItem>
+      </MenuList>
+    </Menu>
+  );
+
   return (
     <Flex
       overflow='hidden'
-      direction={{ base: 'column', sm: 'row' }}
       align={{ base: 'center', sm: 'flex-start' }}
       borderBottomWidth='1px'
       pb={6}
       gap={4}
       _last={{ borderBottomWidth: 0 }}
     >
-      <Flex onClick={playPodcast} cursor='pointer' flex={1} gap={4}>
+      <Flex
+        onClick={playPodcast}
+        cursor='pointer'
+        flex={1}
+        gap={4}
+        direction={{ base: 'column', sm: 'row' }}
+      >
         {!!currentPodcast?.enclosure?.url?.length && (
           <Flex
             borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
@@ -54,7 +102,6 @@ const PlayListItem = (props: PlayListItemProps) => {
             w={{ base: '100%', sm: '80px' }}
             minW={'80px'}
             h={{ h: 'initial', sm: '80px' }}
-            mb={{ base: 3, sm: 0 }}
           >
             <Image
               src={image}
@@ -69,12 +116,25 @@ const PlayListItem = (props: PlayListItemProps) => {
 
         <Flex
           direction='column'
-          align={{ base: 'center', sm: 'flex-start' }}
-          textAlign={{ base: 'center', sm: 'left' }}
+          align={{ base: 'center', sm: 'flex-start', justify: 'center' }}
+          textAlign='left'
           w='100%'
           gap={1}
         >
-          <Flex gap={2}>
+          <Flex gap={2} justify='space-between'>
+            <Text
+              fontWeight='semibold'
+              lineHeight='tight'
+              onClick={playPodcast}
+              cursor='pointer'
+              color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
+            >
+              {title}
+            </Text>
+            <Flex display={{ base: 'flex', sm: 'none' }}>{menu}</Flex>
+          </Flex>
+
+          <Flex w='100%' align='center' gap={2}>
             {currentPodcast?.enclosure?.url === url && (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -135,27 +195,15 @@ const PlayListItem = (props: PlayListItemProps) => {
                 </g>
               </svg>
             )}
-            <Text
-              fontWeight='semibold'
-              lineHeight='tight'
-              onClick={playPodcast}
-              cursor='pointer'
-              color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
-            >
-              {title}
-            </Text>
-          </Flex>
-
-          <Flex w='100%' align='flex-end' justify='space-between' gap={3}>
             <Badge borderRadius='full' px={2} colorScheme='teal'>
               {formatDuration(duration)}
             </Badge>
+            <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
           </Flex>
         </Flex>
       </Flex>
-      <IconButton aria-label='Menu' onClick={removeFromPlayList} size='sm' variant='ghost'>
-        <Icon as={RiDeleteBinLine} fontSize='20px' />
-      </IconButton>
+      <Flex display={{ base: 'none', sm: 'flex' }}>{menu}</Flex>
+      <PodcastDetailModal podcast={podcast} isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };

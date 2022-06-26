@@ -95,20 +95,20 @@ const CollectionDetail: NextPage = () => {
                     h='100%'
                   />
                 </Flex>
-                <Flex direction='column' gap={4} textAlign={{ base: 'center', md: 'left' }}>
+                <Flex direction='column' gap={2} textAlign={{ base: 'center', md: 'left' }}>
                   <Flex
                     flex={1}
                     direction='column'
                     align={{ base: 'center', md: 'flex-start' }}
                   >
-                    <Text fontSize='2xl' lineHeight={1} mb={2} fontWeight='semibold'>
+                    <Text fontSize='2xl' lineHeight={1} mb={1} fontWeight='semibold'>
                       {collectionName}
                     </Text>
-                    <Text fontSize='lg' mb={4} fontWeight={300} color='gray.500'>
+                    <Text fontSize='lg' mb={2} fontWeight={300} color='gray.500'>
                       {artistName}
                     </Text>
                     {!!description?.length && (
-                      <Text mb={4} dangerouslySetInnerHTML={{ __html: description }} />
+                      <Text mb={2} dangerouslySetInnerHTML={{ __html: description }} />
                     )}
                     <Badge borderRadius='full' px={2} colorScheme='teal'>
                       {primaryGenreName}
@@ -129,6 +129,7 @@ const CollectionDetail: NextPage = () => {
                       height={205}
                       offset={1024}
                       unmountIfInvisible
+                      resize
                     >
                       <PodcastListItem podcast={podcast} imageFallback={artworkUrl600} />
                     </LazyLoad>
