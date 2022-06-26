@@ -45,25 +45,27 @@ const PlayListItem = (props: PlayListItemProps) => {
       _last={{ borderBottomWidth: 0 }}
     >
       <Flex onClick={playPodcast} cursor='pointer' flex={1} gap={4}>
-        <Flex
-          borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
-          borderWidth='1px'
-          borderRadius='lg'
-          overflow='hidden'
-          w={{ base: '100%', sm: '80px' }}
-          minW={'80px'}
-          h={{ h: 'initial', sm: '80px' }}
-          mb={{ base: 3, sm: 0 }}
-        >
-          <Image
-            src={image}
-            alt={title}
-            w='100%'
-            h='100%'
-            objectFit='cover'
-            fallbackSrc={imageFallback}
-          />
-        </Flex>
+        {!!currentPodcast?.enclosure?.url?.length && (
+          <Flex
+            borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
+            borderWidth='1px'
+            borderRadius='lg'
+            overflow='hidden'
+            w={{ base: '100%', sm: '80px' }}
+            minW={'80px'}
+            h={{ h: 'initial', sm: '80px' }}
+            mb={{ base: 3, sm: 0 }}
+          >
+            <Image
+              src={image}
+              alt={title}
+              w='100%'
+              h='100%'
+              objectFit='cover'
+              fallbackSrc={imageFallback}
+            />
+          </Flex>
+        )}
 
         <Flex
           direction='column'
