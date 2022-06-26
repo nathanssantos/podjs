@@ -46,7 +46,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
   };
 
   return (
-    <Flex overflow='hidden' borderBottomWidth='1px' pb={6} position='relative' gap={4}>
+    <Flex borderBottomWidth='1px' pb={6} position='relative' gap={4}>
       <Flex
         gap={4}
         direction={{ base: 'column', md: 'row' }}
