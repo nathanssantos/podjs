@@ -1,12 +1,15 @@
-import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
+import { Input, Select, extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
-    useSystemColorMode: true,
+    useSystemColorMode: false,
   },
   styles: {
     global: {
+      '*': {
+        boxSizing: 'border-box',
+      },
       html: {
         scrollBehavior: 'smooth',
       },
@@ -20,9 +23,6 @@ const theme = extendTheme({
         color: 'inherit',
         textDecoration: 'none',
       },
-      '*': {
-        boxSizing: 'border-box',
-      },
     },
   },
   colors: {
@@ -31,6 +31,10 @@ const theme = extendTheme({
       800: '#0d1117',
     },
   },
-} as ThemeConfig);
+  shadows: { outline: '0 0 0 3px var(--chakra-colors-teal-300)' },
+});
+
+Input.defaultProps = { ...Input.defaultProps, focusBorderColor: 'teal.300' };
+Select.defaultProps = { ...Select.defaultProps, focusBorderColor: 'teal.300' };
 
 export default theme;

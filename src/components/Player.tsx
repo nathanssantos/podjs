@@ -123,7 +123,6 @@ const Player = () => {
             aria-label='Back to the top'
             onClick={scrollToTop}
             backdropFilter='blur(10px)'
-            transition='0.2s linear'
             size='sm'
           >
             <Icon as={RiArrowUpLine} fontSize='20px' />

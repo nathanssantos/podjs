@@ -33,7 +33,7 @@ const Home: NextPage = () => {
       case 'success': {
         if (rank?.length) {
           return (
-            <Flex direction='column' gap={6} mb={12}>
+            <Flex direction='column' gap={6} pb={12}>
               {rank.map((collection, index) => (
                 <RankCollectionListItem
                   key={collection.collectionId}
@@ -98,7 +98,6 @@ const Home: NextPage = () => {
           pt={6}
           pb={36}
           gap={6}
-          mb={12}
         >
           <Flex
             borderBottomWidth='1px'
