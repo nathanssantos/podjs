@@ -58,19 +58,17 @@ const Search = ({
     if (redirectOnSearch) {
       const query = {} as { term?: string; country?: string };
 
-      query.term = term;
-      query.country = country;
+      if (term?.length) query.term = term;
+      if (country?.length) query.country = country;
 
-      if (term.trim().length) {
-        router.push(
-          {
-            pathname: '/search',
-            query,
-          },
-          undefined,
-          { shallow: true },
-        );
-      }
+      router.push(
+        {
+          pathname: '/search',
+          query,
+        },
+        undefined,
+        { shallow: true },
+      );
     }
 
     if (onChange) onChange({ term: term, country });
