@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Spinner, Text, useColorMode } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { useStore } from '../hooks';
@@ -50,7 +50,6 @@ const CollectionListItem = (props: CollectionListItemProps) => {
             </Flex>
           }
           transition='all 150ms ease-in-out'
-          _groupHover={{ filter: 'brightness(0.7) blur(5px)' }}
           cursor='pointer'
           onClick={handleClick}
         />
@@ -67,12 +66,11 @@ const CollectionListItem = (props: CollectionListItemProps) => {
         flex={1}
         cursor='pointer'
         onClick={handleClick}
+        gap={1}
       >
-        <Box flex={1} mb={3}>
-          <Text fontWeight='semibold' lineHeight='tight'>
-            {collectionName}
-          </Text>
-        </Box>
+        <Text fontWeight='semibold' lineHeight='tight'>
+          {collectionName}
+        </Text>
         <Badge borderRadius='full' px={2} colorScheme='teal'>
           {primaryGenreName}
         </Badge>
