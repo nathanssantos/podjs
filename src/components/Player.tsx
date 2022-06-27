@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { observer } from 'mobx-react';
+import { ChangeEvent, useEffect } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import {
   RiArrowUpLine,
@@ -43,9 +44,17 @@ const Player = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
-  const { currentPodcast } = playerStore;
+  const { currentPodcast, next, previous, loadPlayerData, storeCurrentTime } = playerStore;
 
   const scrollToTop = () => window.scrollTo(0, 0);
+
+  const storeTime = (event: ChangeEvent<HTMLAudioElement> | any) => {
+    if (event?.target?.currentTime) storeCurrentTime(event.target.currentTime);
+  };
+
+  useEffect(() => {
+    loadPlayerData();
+  }, []);
 
   return (
     <Flex
@@ -219,6 +228,9 @@ const Player = () => {
               loop: <RiRepeatLine />,
               loopOff: <RiOrderPlayLine />,
             }}
+            onClickPrevious={previous}
+            onClickNext={next}
+            onListen={(event) => storeTime(event)}
           />
         </Flex>
       </Container>
