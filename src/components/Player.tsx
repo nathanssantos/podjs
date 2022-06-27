@@ -5,27 +5,43 @@ import {
   Icon,
   IconButton,
   Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Text,
   useColorMode,
+  useDisclosure,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { observer } from 'mobx-react';
 import AudioPlayer from 'react-h5-audio-player';
 import {
   RiArrowUpLine,
+  RiInformationLine,
+  RiMore2Fill,
+  RiOrderPlayLine,
   RiPauseLine,
   RiPlayLine,
+  RiRepeatLine,
+  RiRepeatOneLine,
   RiRewindLine,
+  RiSkipBackLine,
+  RiSkipForwardLine,
   RiSpeedLine,
   RiVolumeMuteLine,
   RiVolumeUpLine,
 } from 'react-icons/ri';
 
 import { useStore } from '../hooks';
+import PodcastDetailModal from './PodcastDetailModal';
 
 const Player = () => {
   const { playerStore } = useStore();
   const { colorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   const { currentPodcast } = playerStore;
 
@@ -54,14 +70,11 @@ const Player = () => {
         '.rhap_time': {
           color: 'gray.500',
         },
-        '.rhap_main-controls': {
-          flex: 3,
+        '.rhap_controls-section': {
+          pr: 2,
         },
         '.rhap_main-controls-button': {
           color: 'var(--chakra-colors-chakra-body-text)',
-        },
-        '.rhap_repeat-button': {
-          display: 'none',
         },
         '.rhap_progress-indicator': {
           bg: 'var(--chakra-colors-chakra-body-text)',
@@ -79,9 +92,6 @@ const Player = () => {
         '.rhap_download-progress': {
           bgColor: 'gray.300',
         },
-        '.rhap_volume-controls': {
-          flex: 1,
-        },
         '.rhap_volume-button': {
           color: 'var(--chakra-colors-chakra-body-text)',
         },
@@ -91,10 +101,11 @@ const Player = () => {
         '.rhap_volume-bar': {
           bg: 'gray.500',
         },
-        '.rhap_additional-controls': {
-          display: 'none',
+        '.rhap_repeat-button': {
+          color: 'var(--chakra-colors-chakra-body-text)',
         },
       }}
+      w='100%'
     >
       <Container
         display='flex'
@@ -137,34 +148,76 @@ const Player = () => {
             src={currentPodcast.itunes.image}
           />
         )}
-        <Flex direction='column' py={2} pl={{ base: 0, md: 4 }} gap={2} flex='1'>
-          {!!currentPodcast?.title?.length && (
-            <Text
-              fontWeight='semibold'
-              lineHeight='tight'
-              overflow='hidden'
-              whiteSpace='nowrap'
-            >
-              {currentPodcast.title}
-            </Text>
-          )}
+        <Flex direction='column' py={2} pl={{ base: 0, md: 4 }} gap={2} flex='1' w='100%'>
+          <Flex align='center' justify='space-between' w='100%'>
+            <Flex overflow='hidden'>
+              {!!currentPodcast?.title?.length && (
+                <Text
+                  fontWeight='semibold'
+                  lineHeight='tight'
+                  overflow='hidden'
+                  whiteSpace='nowrap'
+                >
+                  {currentPodcast.title}
+                </Text>
+              )}
+            </Flex>
+            <Flex pl={{ base: 3, md: 6 }}>
+              {currentPodcast && (
+                <>
+                  <Menu placement='left'>
+                    <MenuButton
+                      as={IconButton}
+                      aria-label='Options'
+                      icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+                      variant='ghost'
+                      size='sm'
+                    />
+                    <MenuList
+                      sx={{
+                        span: {
+                          display: 'flex',
+                        },
+                      }}
+                    >
+                      <MenuItem
+                        icon={<Icon as={RiInformationLine} fontSize='20px' />}
+                        onClick={onOpen}
+                      >
+                        Information
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                  <PodcastDetailModal
+                    podcast={currentPodcast}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                  />
+                </>
+              )}
+            </Flex>
+          </Flex>
           <AudioPlayer
             autoPlayAfterSrcChange
-            layout='horizontal'
+            showSkipControls
+            layout={isLargerThan768 ? 'horizontal' : 'stacked'}
             src={currentPodcast?.enclosure?.url}
             style={{
               background: 'transparent',
               padding: 0,
             }}
             progressJumpSteps={{ backward: 30000, forward: 30000 }}
-            customAdditionalControls={[]}
             customIcons={{
               play: <RiPlayLine />,
               pause: <RiPauseLine />,
               rewind: <RiRewindLine />,
               forward: <RiSpeedLine />,
+              next: <RiSkipForwardLine />,
+              previous: <RiSkipBackLine />,
               volume: <RiVolumeUpLine />,
               volumeMute: <RiVolumeMuteLine />,
+              loop: <RiRepeatLine />,
+              loopOff: <RiOrderPlayLine />,
             }}
           />
         </Flex>
