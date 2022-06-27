@@ -13,18 +13,18 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useStore } from '../hooks';
 import PlayListItem from './PlayListItem';
 
-const reorder = (list: Podcast[], startIndex: number, endIndex: number) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
 const PlayList = () => {
   const { playerStore } = useStore();
 
   const { playList, playListIsOpen, setPlayList, closePlayList } = playerStore;
+
+  const reorder = (list: Podcast[], startIndex: number, endIndex: number) => {
+    const result = list;
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
 
   const onDragEnd = (result: any) => {
     if (!result.destination) {
