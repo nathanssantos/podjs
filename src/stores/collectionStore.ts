@@ -163,7 +163,6 @@ export default class CollectionStore {
       this.detailSearchResult = null;
 
       const { id } = payload;
-      console.log(id);
 
       const response = await axios.get(`/api/collections/${id}`);
 

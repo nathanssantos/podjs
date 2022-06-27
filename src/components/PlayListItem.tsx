@@ -45,7 +45,6 @@ const PlayListItem = (props: PlayListItemProps) => {
 
   const removeFromPlayList = () => {
     removePodcastFromPlaylist(podcast);
-    if (currentPodcast?.enclosure?.url === podcast?.enclosure?.url) setCurrentPodcast(null);
   };
 
   const menu = (
@@ -93,26 +92,24 @@ const PlayListItem = (props: PlayListItemProps) => {
         gap={4}
         direction={{ base: 'column', sm: 'row' }}
       >
-        {!!currentPodcast?.enclosure?.url?.length && (
-          <Flex
-            borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
-            borderWidth='1px'
-            borderRadius='lg'
-            overflow='hidden'
-            w={{ base: '100%', sm: '80px' }}
-            minW={'80px'}
-            h={{ h: 'initial', sm: '80px' }}
-          >
-            <Image
-              src={image}
-              alt={title}
-              w='100%'
-              h='100%'
-              objectFit='cover'
-              fallbackSrc={imageFallback}
-            />
-          </Flex>
-        )}
+        <Flex
+          borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
+          borderWidth='1px'
+          borderRadius='lg'
+          overflow='hidden'
+          w={{ base: '100%', sm: '80px' }}
+          minW={'80px'}
+          h={{ h: 'initial', sm: '80px' }}
+        >
+          <Image
+            src={image}
+            alt={title}
+            w='100%'
+            h='100%'
+            objectFit='cover'
+            fallbackSrc={imageFallback}
+          />
+        </Flex>
 
         <Flex
           direction='column'
@@ -125,8 +122,6 @@ const PlayListItem = (props: PlayListItemProps) => {
             <Text
               fontWeight='semibold'
               lineHeight='tight'
-              onClick={playPodcast}
-              cursor='pointer'
               color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
             >
               {title}
