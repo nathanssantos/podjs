@@ -23,15 +23,15 @@ export default class CollectionStore {
     this.rootStore = rootStore;
   }
 
-  setListSearchTerm = (term: string) => {
+  setListSearchTerm = (term: string): void => {
     this.searchTerm = term;
   };
 
-  setListSearchCountry = (country: string) => {
+  setListSearchCountry = (country: string): void => {
     this.searchCountry = country;
   };
 
-  setDetail = (payload: Collection | null) => {
+  setDetail = (payload: Collection | null): void => {
     this.detail = payload;
   };
 
@@ -212,7 +212,7 @@ export default class CollectionStore {
     this.detailSearchResult = this.detail.items;
   };
 
-  reset = () => {
+  reset = (): void => {
     this.list = null;
     this.rank = null;
     this.detail = null;
