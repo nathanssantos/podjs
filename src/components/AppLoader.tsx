@@ -1,7 +1,7 @@
 import { Flex, Icon, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { RiDiscLine } from 'react-icons/ri';
+import { RiHeadphoneLine } from 'react-icons/ri';
 
 import MotionBox from './MotionBox';
 
@@ -41,7 +41,7 @@ const AppLoader = () => {
         zIndex={9999}
       >
         <Flex align='center' gap={2} userSelect='none'>
-          <Icon as={RiDiscLine} fontSize='64px' color='teal.300' />
+          <Icon as={RiHeadphoneLine} fontSize='64px' color='teal.300' />
           <Text fontSize='40px' fontWeight='semibold' color='whiteAlpha.900'>
             PodJS
           </Text>
