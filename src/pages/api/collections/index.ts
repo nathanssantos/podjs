@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const params = {
       entity: 'podcast',
       media: 'podcast',
-      limit: 200,
+      limit: 50,
     } as Params;
 
     if (typeof term === 'string' && term?.length) params.term = term;

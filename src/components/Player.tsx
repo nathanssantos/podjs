@@ -60,7 +60,7 @@ const Player = () => {
     <Flex
       as={motion.div}
       position='fixed'
-      zIndex={1}
+      zIndex={99}
       bottom={0}
       left={0}
       right={0}
@@ -123,36 +123,28 @@ const Player = () => {
         px={{ base: 3, md: 6 }}
         position='relative'
       >
-        <Box
+        <IconButton
           position='absolute'
-          right={{ base: 1, md: 4 }}
+          right={{ base: 3, md: 6 }}
           zIndex={11}
-          bgColor={
-            colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
-          }
-          p={2}
-          backdropFilter='blur(10px)'
-          borderWidth='1px'
-          borderRadius='lg'
+          aria-label='Back to the top'
+          onClick={scrollToTop}
+          size='sm'
           transform={{
-            base: 'translateY(calc(-100% - 8px))',
-            md: 'translateY(calc(-100% - 16px))',
+            base: 'translateY(calc(-100% - 16px))',
+            md: 'translateY(calc(-100% - 24px))',
           }}
+          bg='teal.300'
+          _hover={{ bg: 'teal.200' }}
         >
-          <IconButton
-            aria-label='Back to the top'
-            onClick={scrollToTop}
-            backdropFilter='blur(10px)'
-            size='sm'
-          >
-            <Icon as={RiArrowUpLine} fontSize='20px' />
-          </IconButton>
-        </Box>
+          <Icon as={RiArrowUpLine} fontSize='20px' />
+        </IconButton>
+
         {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
           <Image
             display={{ base: 'none', md: 'initial' }}
-            h='92px'
-            width='92px'
+            h='96px'
+            w='96px'
             alt={currentPodcast.title}
             src={currentPodcast.itunes.image}
           />

@@ -10,11 +10,13 @@ export default class CollectionStore {
   rootStore: RootStore;
   list: Collection[] | null = null;
   rank: Collection[] | null = null;
+  favorites: Collection[] = [];
   detail: Collection | null = null;
   detailSearchResult: Podcast[] | null = null;
   listStatus: FetchStatus = 'idle';
   rankStatus: FetchStatus = 'idle';
   detailStatus: FetchStatus = 'idle';
+  favoritesStatus: FetchStatus = 'idle';
   searchTerm: string = '';
   searchCountry: string = '';
 
@@ -31,8 +33,67 @@ export default class CollectionStore {
     this.searchCountry = country;
   };
 
-  setDetail = (payload: Collection | null): void => {
-    this.detail = payload;
+  setDetail = (detail?: Collection): void => {
+    this.detail = detail || null;
+  };
+
+  setList = (list?: Collection[]): void => {
+    this.list = list || null;
+  };
+
+  setListStatus = (status?: FetchStatus): void => {
+    this.listStatus = status || 'idle';
+  };
+
+  setRankStatus = (status?: FetchStatus): void => {
+    this.rankStatus = status || 'idle';
+  };
+
+  setDetailStatus = (status?: FetchStatus): void => {
+    this.detailStatus = status || 'idle';
+  };
+
+  setFavoritesStatus = (status?: FetchStatus): void => {
+    this.favoritesStatus = status || 'idle';
+  };
+
+  setSearchTerm = (term?: string): void => {
+    this.searchTerm = term || '';
+  };
+
+  setSearchCountry = (country?: string): void => {
+    this.searchCountry = country || '';
+  };
+
+  setRank = (rank?: Collection[]): void => {
+    this.rank = rank || null;
+  };
+
+  setFavorites = (favorites?: Collection[]): void => {
+    this.favorites = favorites || [];
+    this.storeFavorites();
+  };
+
+  setDetailSearchResult = (detailSearchResult?: Podcast[]): void => {
+    this.detailSearchResult = detailSearchResult || [];
+  };
+
+  storeFavorites = (): void => {
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  };
+
+  addCollectionToFavorites = (collection: Collection): void => {
+    if (!this.favorites?.find(({ collectionId }) => collectionId === collection.collectionId)) {
+      this.setFavorites([...this.favorites, collection]);
+    }
+  };
+
+  removeCollectionFromFavorites = (collection: Collection): void => {
+    const newFavorites = this.favorites.filter(
+      ({ collectionId }) => collectionId !== collection.collectionId,
+    );
+
+    this.setFavorites(newFavorites);
   };
 
   getList = async (payload: {
@@ -46,23 +107,23 @@ export default class CollectionStore {
         return;
       }
 
-      this.listStatus = 'fetching';
-      this.list = null;
+      this.setListStatus('fetching');
+      this.setList();
 
       const params = {} as { term: string; country: string };
 
       if (term?.length) {
-        this.searchTerm = term;
+        this.setSearchTerm(term);
         params.term = term;
       } else {
-        this.searchTerm = '';
+        this.setSearchTerm();
       }
 
       if (country?.length) {
-        this.searchCountry = country;
+        this.setSearchCountry(country);
         params.country = country;
       } else {
-        this.searchCountry = '';
+        this.setSearchCountry();
       }
 
       const response = await axios.get('/api/collections', {
@@ -72,7 +133,7 @@ export default class CollectionStore {
       const { status, data } = response as { status: number; data: Collection[] };
 
       if (status === 200 && !data?.length) {
-        this.listStatus = 'empty';
+        this.setListStatus('empty');
 
         return {
           status: status || 400,
@@ -80,15 +141,15 @@ export default class CollectionStore {
       }
 
       if (status !== 200 || !data) {
-        this.listStatus = 'error';
+        this.setListStatus('error');
 
         return {
           status: status || 400,
         };
       }
 
-      this.list = data;
-      this.listStatus = 'success';
+      this.setList(data);
+      this.setListStatus('success');
 
       return { status };
     } catch (error) {
@@ -96,7 +157,7 @@ export default class CollectionStore {
 
       toast.error(ERROR_STATE);
 
-      this.listStatus = 'error';
+      this.setListStatus('error');
 
       return {
         status: 400,
@@ -112,8 +173,8 @@ export default class CollectionStore {
         return;
       }
 
-      this.rankStatus = 'fetching';
-      this.rank = null;
+      this.setRankStatus('fetching');
+      this.setRank();
 
       const params = {} as { country: string };
 
@@ -124,7 +185,7 @@ export default class CollectionStore {
       const { status, data } = response as { status: number; data: Collection[] };
 
       if (status === 200 && !data?.length) {
-        this.rankStatus = 'empty';
+        this.setRankStatus('empty');
 
         return {
           status: status || 400,
@@ -132,15 +193,15 @@ export default class CollectionStore {
       }
 
       if (status !== 200 || !data) {
-        this.rankStatus = 'error';
+        this.setRankStatus('error');
 
         return {
           status: status || 400,
         };
       }
 
-      this.rank = data;
-      this.rankStatus = 'success';
+      this.setRank(data);
+      this.setRankStatus('success');
 
       return { status };
     } catch (error) {
@@ -148,7 +209,7 @@ export default class CollectionStore {
 
       toast.error(ERROR_STATE);
 
-      this.rankStatus = 'error';
+      this.setRankStatus('error');
 
       return {
         status: 400,
@@ -158,9 +219,9 @@ export default class CollectionStore {
 
   getDetail = async (payload: { id: string | string[] }): Promise<StoreActionResponse> => {
     try {
-      this.detailStatus = 'fetching';
-      this.detail = null;
-      this.detailSearchResult = null;
+      this.setDetailStatus('fetching');
+      this.setDetail();
+      this.setDetailSearchResult();
 
       const { id } = payload;
 
@@ -169,16 +230,16 @@ export default class CollectionStore {
       const { status, data } = response;
 
       if (status !== 200 || !data) {
-        this.detailStatus = 'error';
+        this.setDetailStatus('error');
 
         return {
           status: status || 400,
         };
       }
 
-      this.detail = data;
-      this.detailSearchResult = data.items;
-      this.detailStatus = 'success';
+      this.setDetail(data);
+      this.setDetailSearchResult(data.items);
+      this.setDetailStatus('success');
 
       return { status };
     } catch (error) {
@@ -186,7 +247,7 @@ export default class CollectionStore {
 
       toast.error(ERROR_STATE);
 
-      this.detailStatus = 'error';
+      this.setDetailStatus('error');
 
       return {
         status: 400,
@@ -196,29 +257,54 @@ export default class CollectionStore {
 
   search = (payload: { term?: string }): void => {
     const { term } = payload;
-    this.detailSearchResult = null;
+    this.setDetailSearchResult();
 
     if (!this.detail?.items) return;
 
     if (term?.length) {
-      this.detailSearchResult = this.detail.items.filter((item) =>
-        normalizeString(item.title.toLowerCase()).includes(normalizeString(term.toLowerCase())),
+      this.setDetailSearchResult(
+        this.detail.items.filter((item) =>
+          normalizeString(item.title.toLowerCase()).includes(
+            normalizeString(term.toLowerCase()),
+          ),
+        ),
       );
 
       return;
     }
 
-    this.detailSearchResult = this.detail.items;
+    this.setDetailSearchResult(this.detail.items);
+  };
+
+  loadFavoritesData = (): void => {
+    this.setFavoritesStatus('fetching');
+    const storedFavorites = localStorage.getItem('favorites') || '[]';
+
+    const parsedStoredFavorites: Collection[] = JSON.parse(storedFavorites);
+
+    if (!Array.isArray(parsedStoredFavorites)) {
+      this.setFavoritesStatus('error');
+      return;
+    }
+
+    if (!parsedStoredFavorites.length) {
+      this.setFavoritesStatus('empty');
+      return;
+    }
+
+    this.setFavorites(parsedStoredFavorites);
+    this.setFavoritesStatus('success');
   };
 
   reset = (): void => {
-    this.list = null;
-    this.rank = null;
-    this.detail = null;
-    this.detailSearchResult = null;
-    this.listStatus = 'idle';
-    this.detailStatus = 'idle';
-    this.searchTerm = '';
-    this.searchCountry = '';
+    this.setList();
+    this.setRank();
+    this.setDetail();
+    this.setDetailSearchResult();
+    this.setListStatus();
+    this.setDetailStatus();
+    this.setSearchTerm();
+    this.setSearchCountry();
+    this.setRankStatus();
   };
 }

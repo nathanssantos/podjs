@@ -76,14 +76,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
 
   return (
     <Flex borderBottomWidth='1px' pb={6} position='relative' gap={4}>
-      <Flex
-        gap={4}
-        direction={{ base: 'column', md: 'row' }}
-        align={{ base: 'center', md: 'initial' }}
-        flex={1}
-        onClick={playPodcast}
-        cursor='pointer'
-      >
+      <Flex direction={{ base: 'column', md: 'row' }} flex={1} alignItems='center'>
         <Flex
           borderWidth='1px'
           borderRadius='lg'
@@ -93,6 +86,8 @@ const PodcastListItem = (props: PodcastListItemProps) => {
           minW={'180px'}
           h={{ h: 'initial', md: '180px' }}
           maxW='411px'
+          onClick={playPodcast}
+          cursor='pointer'
         >
           <Image
             src={itunes.image}
@@ -106,27 +101,40 @@ const PodcastListItem = (props: PodcastListItemProps) => {
 
         <Flex
           direction='column'
-          align={{ base: 'center', md: 'flex-start' }}
-          textAlign={{ base: 'center', md: 'left' }}
+          // textAlign={{ base: 'center', md: 'left' }}
           flex={1}
-          gap={1}
         >
-          <Flex gap={2} justify='space-between'>
+          <Flex justify='space-between' align='flex-start'>
             <Text
               fontWeight='semibold'
               lineHeight='tight'
               color={currentPodcast?.enclosure?.url === enclosure?.url ? 'teal.300' : ''}
+              onClick={playPodcast}
+              cursor='pointer'
+              flex={1}
+              pl={{ base: 0, md: 4 }}
+              pt={{ base: 4, md: 0 }}
+              pb={2}
+              pr={3}
             >
               {title}
             </Text>
-            <Flex display={{ base: 'flex', md: 'none' }}>{menu}</Flex>
+            <Flex pt={{ base: 4, md: 0 }}>{menu}</Flex>
           </Flex>
-          <Flex align='center' gap={2}>
+          <Flex
+            align='center'
+            gap={2}
+            onClick={playPodcast}
+            cursor='pointer'
+            w='100%'
+            pb={2}
+            pl={{ base: 0, md: 4 }}
+          >
             {currentPodcast?.enclosure?.url === enclosure?.url && (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                width='24px'
-                height='24px'
+                width='20px'
+                height='20px'
                 viewBox='0 0 100 100'
                 preserveAspectRatio='xMidYMid'
               >
@@ -182,13 +190,21 @@ const PodcastListItem = (props: PodcastListItemProps) => {
                 </g>
               </svg>
             )}
-            <Badge borderRadius='full' px={2} colorScheme='teal'>
-              {formatDuration(itunes.duration)}
-            </Badge>
+            {!!itunes.duration && (
+              <Badge borderRadius='full' px={2} colorScheme='teal'>
+                {formatDuration(itunes.duration)}
+              </Badge>
+            )}
             <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
           </Flex>
-          <Flex direction='column' flex={1}>
-            <Flex h='127px' overflow='hidden' w='100%'>
+          <Flex
+            direction='column'
+            flex={1}
+            onClick={playPodcast}
+            cursor='pointer'
+            pl={{ base: 0, md: 4 }}
+          >
+            <Flex h='125px' overflow='hidden' w='100%'>
               <Text
                 fontSize='14px'
                 color='gray.500'
@@ -208,7 +224,6 @@ const PodcastListItem = (props: PodcastListItemProps) => {
           </Flex>
         </Flex>
       </Flex>
-      <Flex display={{ base: 'none', md: 'flex' }}>{menu}</Flex>
       <PodcastDetailModal podcast={podcast} isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
