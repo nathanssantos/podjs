@@ -150,53 +150,17 @@ const Player = () => {
           />
         )}
         <Flex direction='column' py={2} pl={{ base: 0, md: 4 }} gap={2} flex='1' w='100%'>
-          <Flex align='center' justify='space-between' w='100%'>
-            <Flex overflow='hidden'>
-              {!!currentPodcast?.title?.length && (
-                <Text
-                  fontWeight='semibold'
-                  lineHeight='tight'
-                  overflow='hidden'
-                  whiteSpace='nowrap'
-                >
-                  {currentPodcast.title}
-                </Text>
-              )}
-            </Flex>
-            <Flex pl={{ base: 3, md: 6 }}>
-              {currentPodcast && (
-                <>
-                  <Menu placement='left'>
-                    <MenuButton
-                      as={IconButton}
-                      aria-label='Options'
-                      icon={<Icon as={RiMore2Fill} fontSize='20px' />}
-                      variant='ghost'
-                      size='sm'
-                    />
-                    <MenuList
-                      sx={{
-                        span: {
-                          display: 'flex',
-                        },
-                      }}
-                    >
-                      <MenuItem
-                        icon={<Icon as={RiInformationLine} fontSize='20px' />}
-                        onClick={onOpen}
-                      >
-                        Information
-                      </MenuItem>
-                    </MenuList>
-                  </Menu>
-                  <PodcastDetailModal
-                    podcast={currentPodcast}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                  />
-                </>
-              )}
-            </Flex>
+          <Flex overflow='hidden' w='100%'>
+            {!!currentPodcast?.title?.length && (
+              <Text
+                fontWeight='semibold'
+                lineHeight='tight'
+                overflow='hidden'
+                whiteSpace='nowrap'
+              >
+                {currentPodcast.title}
+              </Text>
+            )}
           </Flex>
           <AudioPlayer
             autoPlayAfterSrcChange
