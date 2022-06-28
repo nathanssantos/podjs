@@ -1,22 +1,61 @@
-import { Container, Flex, SimpleGrid, Text, useColorMode } from '@chakra-ui/react';
+import {
+  Button,
+  Container,
+  Flex,
+  Icon,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  SimpleGrid,
+  Text,
+  useColorMode,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { RiSettingsLine, RiStarLine, RiTrophyLine } from 'react-icons/ri';
 
 import CollectionListItem from '../components/CollectionListItem';
 import EmptyState from '../components/EmptyState';
 import Loader from '../components/Loader';
 import RankCollectionListItem from '../components/RankCollectionListItem';
 import Search from '../components/Search';
+import countries from '../constants/countries';
 import { useStore } from '../hooks';
 
 const Home: NextPage = () => {
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef(null);
 
-  const { rank, favorites, rankStatus, favoritesStatus, getRank, getList, loadFavoritesData } =
-    collectionStore;
+  const {
+    rank,
+    favorites,
+    rankStatus,
+    rankCountry,
+    getRank,
+    getList,
+    loadStoredData,
+    setRankCountry,
+  } = collectionStore;
+
+  const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setRankCountry(event.target.value);
+    getRank();
+  };
 
   const renderFavorites = () => {
     if (!favorites?.length) return null;
@@ -34,9 +73,12 @@ const Home: NextPage = () => {
           }
           zIndex={98}
         >
-          <Text fontSize='xl' lineHeight={1}>
-            Favorites
-          </Text>
+          <Flex gap={2}>
+            <Icon as={RiStarLine} fontSize='20px' />
+            <Text fontSize='xl' lineHeight={1}>
+              Favorites
+            </Text>
+          </Flex>
         </Flex>
         <SimpleGrid minChildWidth='154px' gap={3} pb={12} justifyContent='flex-start'>
           {favorites.map((collection) => (
@@ -84,8 +126,8 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    loadFavoritesData();
-    if (!rank?.length) getRank({ country: '' });
+    loadStoredData();
+    if (!rank?.length) getRank();
   }, []);
 
   return (
@@ -143,7 +185,7 @@ const Home: NextPage = () => {
             >
               <Flex
                 borderBottomWidth='1px'
-                py={2}
+                pt={1}
                 position='sticky'
                 top={12}
                 backdropFilter='blur(10px)'
@@ -151,10 +193,54 @@ const Home: NextPage = () => {
                   colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
                 }
                 zIndex={98}
+                align='center'
+                justifyContent='space-between'
               >
-                <Text fontSize='xl' lineHeight={1}>
-                  Ranking
-                </Text>
+                <Flex gap={2}>
+                  <Icon as={RiTrophyLine} fontSize='20px' />
+                  <Text fontSize='xl' lineHeight={1}>
+                    Ranking
+                  </Text>
+                </Flex>
+                <IconButton
+                  aria-label='Options'
+                  icon={<Icon as={RiSettingsLine} fontSize='20px' />}
+                  size='sm'
+                  variant='ghost'
+                  onClick={onOpen}
+                />
+                <Modal
+                  onClose={onClose}
+                  finalFocusRef={btnRef}
+                  isOpen={isOpen}
+                  scrollBehavior='outside'
+                  size='sm'
+                >
+                  <ModalOverlay backdropFilter='auto' backdropBlur='10px' />
+                  <ModalContent>
+                    <ModalHeader>Ranking settings</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <Flex maxW={32} flex={1}>
+                        <Select
+                          value={rankCountry}
+                          placeholder='Country'
+                          onChange={handleCountryChange}
+                          size='sm'
+                        >
+                          {countries.map(({ name, code }) => (
+                            <option value={code.toLowerCase()} key={code}>
+                              {name}
+                            </option>
+                          ))}
+                        </Select>
+                      </Flex>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
               </Flex>
               {renderRank()}
             </Flex>
