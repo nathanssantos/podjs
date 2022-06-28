@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
-import { RiInformationLine, RiMore2Fill } from 'react-icons/ri';
+import { RiInformationLine, RiMore2Fill, RiStarFill, RiStarLine } from 'react-icons/ri';
 
 import { useStore } from '../hooks';
 
@@ -23,26 +23,38 @@ type RankCollectionListItemProps = {
 };
 
 const RankCollectionListItem = (props: RankCollectionListItemProps) => {
-  const {
-    collection: {
-      collectionId,
-      collectionName,
-      artworkUrl600,
-      artworkUrl100,
-      primaryGenreName,
-      genres,
-    },
-    index,
-  } = props;
+  const { collection, index } = props;
   const router = useRouter();
   const { collectionStore, uiStore } = useStore();
 
-  const { detail, setDetail } = collectionStore;
+  const {
+    collectionId,
+    collectionName,
+    artworkUrl600,
+    artworkUrl100,
+    primaryGenreName,
+    genres,
+  } = collection;
+  const {
+    detail,
+    favorites,
+    setDetail,
+    addCollectionToFavorites,
+    removeCollectionFromFavorites,
+  } = collectionStore;
   const { toggleCollectionModal } = uiStore;
 
   const handleClick = () => {
-    if (detail?.collectionId !== collectionId) setDetail(null);
+    if (detail?.collectionId !== collectionId) setDetail();
     router.push(`/collections/${collectionId}`);
+  };
+
+  const addToFavorites = () => {
+    addCollectionToFavorites(collection);
+  };
+
+  const removeFromFavorites = () => {
+    removeCollectionFromFavorites(collection);
   };
 
   return (
@@ -58,8 +70,8 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
           {index + 1}
         </Text>
       </Flex>
-      <Flex flex={1} gap={4} borderBottomWidth='1px' pb={6}>
-        <Flex flex={1} onClick={handleClick} cursor='pointer' gap={{ base: 2, md: 4 }}>
+      <Flex flex={1} borderBottomWidth='1px' pb={6}>
+        <Flex flex={1}>
           <Flex
             w={{ base: '60px', md: '100px' }}
             h={{ base: '60px', md: '100px' }}
@@ -68,6 +80,8 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
             borderRadius='lg'
             overflow='hidden'
             position='relative'
+            onClick={handleClick}
+            cursor='pointer'
           >
             <Image
               w='100%'
@@ -83,39 +97,77 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
             />
           </Flex>
 
-          <Flex align='flex-start' direction='column' flex={1} gap={1}>
-            <Text fontWeight='semibold' lineHeight='tight'>
-              {collectionName}
-            </Text>
-            <Badge borderRadius='full' px={2} colorScheme='teal'>
-              {primaryGenreName}
-            </Badge>
+          <Flex align='flex-start' direction='column' flex={1}>
+            <Flex w='100%'>
+              <Text
+                fontWeight='semibold'
+                lineHeight='tight'
+                flex={1}
+                onClick={handleClick}
+                cursor='pointer'
+                pl={{ base: 2, md: 4 }}
+                pr={3}
+                pb={2}
+              >
+                {collectionName}
+              </Text>
+              <Flex>
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label='Options'
+                    icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+                    size='sm'
+                    variant='ghost'
+                  />
+                  <MenuList
+                    sx={{
+                      span: {
+                        display: 'flex',
+                      },
+                    }}
+                  >
+                    <MenuItem
+                      icon={<Icon as={RiInformationLine} fontSize='20px' />}
+                      onClick={() =>
+                        toggleCollectionModal({ id: String(collectionId), open: true })
+                      }
+                    >
+                      Information
+                    </MenuItem>
+                    {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
+                      <MenuItem
+                        icon={<Icon as={RiStarFill} fontSize='20px' />}
+                        onClick={removeFromFavorites}
+                      >
+                        Remove from favorites
+                      </MenuItem>
+                    ) : (
+                      <MenuItem
+                        icon={<Icon as={RiStarLine} fontSize='20px' />}
+                        onClick={addToFavorites}
+                      >
+                        Add to favorites
+                      </MenuItem>
+                    )}
+                  </MenuList>
+                </Menu>
+              </Flex>
+            </Flex>
+            <Flex
+              w='100%'
+              onClick={handleClick}
+              cursor='pointer'
+              flex={1}
+              pl={{ base: 2, md: 4 }}
+              align='flex-start'
+            >
+              <Badge borderRadius='full' px={2} colorScheme='teal'>
+                {primaryGenreName}
+              </Badge>
+            </Flex>
           </Flex>
         </Flex>
-
-        <Menu>
-          <MenuButton
-            as={IconButton}
-            aria-label='Options'
-            icon={<Icon as={RiMore2Fill} fontSize='20px' />}
-            size='sm'
-            variant='ghost'
-          />
-          <MenuList
-            sx={{
-              span: {
-                display: 'flex',
-              },
-            }}
-          >
-            <MenuItem
-              icon={<Icon as={RiInformationLine} fontSize='20px' />}
-              onClick={() => toggleCollectionModal({ id: String(collectionId), open: true })}
-            >
-              Information
-            </MenuItem>
-          </MenuList>
-        </Menu>
       </Flex>
     </Flex>
   );

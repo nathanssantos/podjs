@@ -119,7 +119,7 @@ const SearchScreen: NextPage = () => {
             </Text>
           </Flex>
         )}
-        <SimpleGrid minChildWidth={200} gap={3}>
+        <SimpleGrid minChildWidth='240px' gap={3}>
           {listContent}
         </SimpleGrid>
       </Flex>
@@ -200,7 +200,7 @@ const SearchScreen: NextPage = () => {
           maxW='container.xl'
           flexDirection='column'
           px={{ base: 3, md: 6 }}
-          pt={6}
+          pt={10}
           pb={36}
         >
           {renderList()}

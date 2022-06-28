@@ -1,45 +1,65 @@
-import { Badge, Box, Flex, Image, Spinner, Text, useColorMode } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Flex,
+  Icon,
+  IconButton,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
+import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
+import { RiInformationLine, RiMore2Fill, RiStarFill, RiStarLine } from 'react-icons/ri';
 
 import { useStore } from '../hooks';
-import ListItemActions from './ListItemActions';
 
 type CollectionListItemProps = {
   collection: Collection;
 };
 
 const CollectionListItem = (props: CollectionListItemProps) => {
-  const {
-    collection: {
-      collectionId,
-      collectionName,
-      artworkUrl600,
-      artworkUrl100,
-      primaryGenreName,
-      genres,
-    },
-  } = props;
+  const { collection } = props;
   const router = useRouter();
   const { collectionStore, uiStore } = useStore();
 
-  const { detail, setDetail } = collectionStore;
+  const {
+    collectionId,
+    collectionName,
+    artworkUrl600,
+    artworkUrl100,
+    primaryGenreName,
+    genres,
+  } = collection;
+  const {
+    detail,
+    favorites,
+    setDetail,
+    addCollectionToFavorites,
+    removeCollectionFromFavorites,
+  } = collectionStore;
   const { toggleCollectionModal } = uiStore;
 
   const handleClick = () => {
-    if (detail?.collectionId !== collectionId) setDetail(null);
+    if (detail?.collectionId !== collectionId) setDetail();
     router.push(`/collections/${collectionId}`);
   };
 
+  const addToFavorites = () => {
+    addCollectionToFavorites(collection);
+  };
+
+  const removeFromFavorites = () => {
+    removeCollectionFromFavorites(collection);
+  };
+
   return (
-    <Flex
-      direction='column'
-      borderWidth='1px'
-      borderRadius='lg'
-      overflow='hidden'
-      maxW='411px'
-      role='group'
-    >
-      <Flex position='relative'>
+    <Flex direction='column' borderWidth='1px' borderRadius='lg' overflow='hidden' role='group'>
+      <Flex cursor='pointer' onClick={handleClick}>
         <Image
           src={artworkUrl600 || artworkUrl100}
           alt={collectionName}
@@ -50,33 +70,74 @@ const CollectionListItem = (props: CollectionListItemProps) => {
             </Flex>
           }
           transition='all 150ms ease-in-out'
-          cursor='pointer'
-          onClick={handleClick}
-        />
-        <ListItemActions
-          showBtInfo
-          onClickInfo={() => toggleCollectionModal({ id: String(collectionId), open: true })}
         />
       </Flex>
 
-      <Flex
-        align='flex-start'
-        direction='column'
-        p={3}
-        flex={1}
-        cursor='pointer'
-        onClick={handleClick}
-        gap={1}
-      >
-        <Text fontWeight='semibold' lineHeight='tight'>
-          {collectionName}
-        </Text>
-        <Badge borderRadius='full' px={2} colorScheme='teal'>
-          {primaryGenreName}
-        </Badge>
+      <Flex flex={1}>
+        <Flex
+          align='flex-start'
+          direction='column'
+          flex={1}
+          cursor='pointer'
+          onClick={handleClick}
+          pl={3}
+          pt={3}
+          pb={3}
+        >
+          <Flex w='100%'>
+            <Text fontWeight='semibold' lineHeight='tight' flex={1} pb={2} pr={3}>
+              {collectionName}
+            </Text>
+            <Flex pr={3}>
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label='Options'
+                  icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+                  size='sm'
+                  variant='ghost'
+                />
+                <MenuList
+                  sx={{
+                    span: {
+                      display: 'flex',
+                    },
+                  }}
+                >
+                  <MenuItem
+                    icon={<Icon as={RiInformationLine} fontSize='20px' />}
+                    onClick={() =>
+                      toggleCollectionModal({ id: String(collectionId), open: true })
+                    }
+                  >
+                    Information
+                  </MenuItem>
+                  {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
+                    <MenuItem
+                      icon={<Icon as={RiStarFill} fontSize='20px' />}
+                      onClick={removeFromFavorites}
+                    >
+                      Remove from favorites
+                    </MenuItem>
+                  ) : (
+                    <MenuItem
+                      icon={<Icon as={RiStarLine} fontSize='20px' />}
+                      onClick={addToFavorites}
+                    >
+                      Add to favorites
+                    </MenuItem>
+                  )}
+                </MenuList>
+              </Menu>
+            </Flex>
+          </Flex>
+          <Badge borderRadius='full' px={2} colorScheme='teal'>
+            {primaryGenreName}
+          </Badge>
+        </Flex>
       </Flex>
     </Flex>
   );
 };
 
-export default CollectionListItem;
+export default observer(CollectionListItem);

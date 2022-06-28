@@ -116,25 +116,26 @@ const PlayListItem = (props: PlayListItemProps) => {
           align={{ base: 'center', sm: 'flex-start', justify: 'center' }}
           textAlign='left'
           w='100%'
-          gap={1}
         >
           <Flex gap={2} justify='space-between'>
             <Text
               fontWeight='semibold'
               lineHeight='tight'
               color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
+              pb={2}
+              pr={3}
             >
               {title}
             </Text>
-            <Flex display={{ base: 'flex', sm: 'none' }}>{menu}</Flex>
+            <Flex>{menu}</Flex>
           </Flex>
 
           <Flex w='100%' align='center' gap={2}>
             {currentPodcast?.enclosure?.url === url && (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                width='24px'
-                height='24px'
+                width='20px'
+                height='20px'
                 viewBox='0 0 100 100'
                 preserveAspectRatio='xMidYMid'
               >
@@ -197,7 +198,6 @@ const PlayListItem = (props: PlayListItemProps) => {
           </Flex>
         </Flex>
       </Flex>
-      <Flex display={{ base: 'none', sm: 'flex' }}>{menu}</Flex>
       <PodcastDetailModal podcast={podcast} isOpen={isOpen} onClose={onClose} />
     </Flex>
   );

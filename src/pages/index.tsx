@@ -1,9 +1,10 @@
-import { Container, Flex, Text, useColorMode } from '@chakra-ui/react';
+import { Container, Flex, SimpleGrid, Text, useColorMode } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect } from 'react';
 
+import CollectionListItem from '../components/CollectionListItem';
 import EmptyState from '../components/EmptyState';
 import Loader from '../components/Loader';
 import RankCollectionListItem from '../components/RankCollectionListItem';
@@ -14,7 +15,37 @@ const Home: NextPage = () => {
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
-  const { rank, rankStatus, getRank, getList } = collectionStore;
+  const { rank, favorites, rankStatus, favoritesStatus, getRank, getList, loadFavoritesData } =
+    collectionStore;
+
+  const renderFavorites = () => {
+    if (!favorites?.length) return null;
+
+    return (
+      <Flex direction='column' gap={6} flex={3}>
+        <Flex
+          borderBottomWidth='1px'
+          py={2}
+          position='sticky'
+          top={12}
+          backdropFilter='blur(10px)'
+          bgColor={
+            colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
+          }
+          zIndex={98}
+        >
+          <Text fontSize='xl' lineHeight={1}>
+            Favorites
+          </Text>
+        </Flex>
+        <SimpleGrid minChildWidth='240px' gap={3} pb={12}>
+          {favorites.map((collection) => (
+            <CollectionListItem key={collection.collectionId} collection={collection} />
+          ))}
+        </SimpleGrid>
+      </Flex>
+    );
+  };
 
   const renderRank = () => {
     switch (rankStatus) {
@@ -33,7 +64,7 @@ const Home: NextPage = () => {
       case 'success': {
         if (rank?.length) {
           return (
-            <Flex direction='column' gap={6} pb={12}>
+            <Flex direction='column' gap={6} pb={12} flex={1}>
               {rank.map((collection, index) => (
                 <RankCollectionListItem
                   key={collection.collectionId}
@@ -53,6 +84,7 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
+    loadFavoritesData();
     if (!rank?.length) getRank({ country: '' });
   }, []);
 
@@ -66,7 +98,6 @@ const Home: NextPage = () => {
       </Head>
 
       <Flex
-        justifyContent='flex-end'
         position='sticky'
         top={0}
         right={0}
@@ -78,7 +109,7 @@ const Home: NextPage = () => {
         <Container
           display='flex'
           alignItems='center'
-          justifyContent='flex-end'
+          justifyContent={{ md: 'flex-end' }}
           py={2}
           px={{ base: 3, md: 6 }}
           w='100%'
@@ -95,27 +126,30 @@ const Home: NextPage = () => {
           maxW='container.xl'
           flexDirection='column'
           px={{ base: 3, md: 6 }}
-          pt={6}
+          pt={10}
           pb={36}
-          gap={6}
         >
-          <Flex
-            borderBottomWidth='1px'
-            py={2}
-            position='sticky'
-            top={12}
-            backdropFilter='blur(10px)'
-            bgColor={
-              colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
-            }
-            zIndex={1}
-          >
-            <Text fontSize='xl' lineHeight={1}>
-              Ranking
-            </Text>
+          <Flex direction='column' gap={6}>
+            {renderFavorites()}
+            <Flex direction='column' gap={6} flex={2}>
+              <Flex
+                borderBottomWidth='1px'
+                py={2}
+                position='sticky'
+                top={12}
+                backdropFilter='blur(10px)'
+                bgColor={
+                  colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
+                }
+                zIndex={98}
+              >
+                <Text fontSize='xl' lineHeight={1}>
+                  Ranking
+                </Text>
+              </Flex>
+              {renderRank()}
+            </Flex>
           </Flex>
-
-          {renderRank()}
         </Container>
       </Flex>
     </div>
