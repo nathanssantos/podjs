@@ -15,9 +15,10 @@ import { useStore } from '../hooks';
 import PlayListItem from './PlayListItem';
 
 const PlayList = () => {
-  const { playerStore } = useStore();
+  const { playerStore, uiStore } = useStore();
 
-  const { playList, playListIsOpen, setPlayList, closePlayList } = playerStore;
+  const { playListIsOpen, closePlayList } = uiStore;
+  const { playList, setPlayList } = playerStore;
 
   const reorder = (list: Podcast[], startIndex: number, endIndex: number) => {
     const result = list;

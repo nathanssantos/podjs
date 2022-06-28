@@ -31,7 +31,7 @@ const Search = ({
   redirectOnSearch = true,
 }: SearchProps) => {
   const router = useRouter();
-  const { playerStore, collectionStore } = useStore();
+  const { playerStore, collectionStore, uiStore } = useStore();
   const [mounted, setMounted] = useState(false);
   const [term, setTerm] = useState(initialValue?.term || '');
   const [country, setCountry] = useState(initialValue?.country || '');
@@ -39,7 +39,8 @@ const Search = ({
 
   const { term: termParam, country: countryParam } = router.query;
 
-  const { playList, openPlayList } = playerStore;
+  const { openPlayList } = uiStore;
+  const { playList } = playerStore;
   const { setListSearchTerm, setListSearchCountry } = collectionStore;
 
   const handleTermChange = (event: ChangeEvent<HTMLInputElement>) => {

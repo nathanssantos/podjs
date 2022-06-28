@@ -6,7 +6,6 @@ export default class PlayerStore {
   rootStore: RootStore;
   currentPodcast: Podcast | null = null;
   playList: Podcast[] = [];
-  playListIsOpen: boolean = false;
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this, { rootStore: false });
@@ -16,14 +15,6 @@ export default class PlayerStore {
   setCurrentPodcast = (podcast?: Podcast): void => {
     this.currentPodcast = podcast || null;
     this.storeCurrentPodcast();
-  };
-
-  openPlayList = (): void => {
-    this.playListIsOpen = true;
-  };
-
-  closePlayList = (): void => {
-    this.playListIsOpen = false;
   };
 
   setPlayList = (playlist?: Podcast[]): void => {
@@ -123,6 +114,5 @@ export default class PlayerStore {
   reset = (): void => {
     this.setCurrentPodcast();
     this.setPlayList();
-    this.closePlayList();
   };
 }
