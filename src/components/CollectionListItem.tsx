@@ -64,7 +64,7 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       borderRadius='lg'
       overflow='hidden'
       role='group'
-      maxW='320px'
+      maxW='308px'
     >
       <Flex cursor='pointer' onClick={handleClick}>
         <Image

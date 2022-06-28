@@ -38,7 +38,7 @@ const Home: NextPage = () => {
             Favorites
           </Text>
         </Flex>
-        <SimpleGrid minChildWidth='200px' gap={3} pb={12} justifyContent='flex-start'>
+        <SimpleGrid minChildWidth='154px' gap={3} pb={12} justifyContent='flex-start'>
           {favorites.map((collection) => (
             <CollectionListItem key={collection.collectionId} collection={collection} />
           ))}
