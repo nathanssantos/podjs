@@ -42,7 +42,7 @@ const AppLoader = () => {
       >
         <Flex align='center' gap={2} userSelect='none'>
           <Icon as={RiDiscLine} fontSize='64px' color='teal.300' />
-          <Text fontSize='40px' fontWeight='semibold' color='gray.800'>
+          <Text fontSize='40px' fontWeight='semibold' color='whiteAlpha.900'>
             PodJS
           </Text>
         </Flex>
