@@ -74,21 +74,22 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       </Flex>
 
       <Flex flex={1}>
-        <Flex
-          align='flex-start'
-          direction='column'
-          flex={1}
-          cursor='pointer'
-          onClick={handleClick}
-          pl={3}
-          pt={3}
-          pb={3}
-        >
+        <Flex align='flex-start' direction='column' flex={1}>
           <Flex w='100%'>
-            <Text fontWeight='semibold' lineHeight='tight' flex={1} pb={2} pr={3}>
+            <Text
+              fontWeight='semibold'
+              lineHeight='tight'
+              flex={1}
+              pb={2}
+              cursor='pointer'
+              onClick={handleClick}
+              pl={3}
+              pt={3}
+              pr={3}
+            >
               {collectionName}
             </Text>
-            <Flex pr={3}>
+            <Flex pr={3} pt={3}>
               <Menu>
                 <MenuButton
                   as={IconButton}
@@ -131,9 +132,18 @@ const CollectionListItem = (props: CollectionListItemProps) => {
               </Menu>
             </Flex>
           </Flex>
-          <Badge borderRadius='full' px={2} colorScheme='teal'>
-            {primaryGenreName}
-          </Badge>
+          <Flex
+            flex={1}
+            align='flex-start'
+            cursor='pointer'
+            onClick={handleClick}
+            pb={3}
+            pl={3}
+          >
+            <Badge borderRadius='full' px={2} colorScheme='teal'>
+              {primaryGenreName}
+            </Badge>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
