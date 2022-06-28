@@ -101,7 +101,7 @@ const Home: NextPage = () => {
         position='sticky'
         top={0}
         right={0}
-        zIndex={1000}
+        zIndex={99}
         backdropFilter='blur(10px)'
         borderBottomWidth='1px'
         bgColor={colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'}
