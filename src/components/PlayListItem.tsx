@@ -141,76 +141,77 @@ const PlayListItem = (props: PlayListItemProps) => {
           <Flex
             w='100%'
             align='flex-start'
-            gap={2}
             onClick={playPodcast}
             cursor='pointer'
             pl={{ base: 0, sm: 4 }}
             flex={1}
           >
-            {currentPodcast?.enclosure?.url === url && (
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='20px'
-                height='20px'
-                viewBox='0 0 100 100'
-                preserveAspectRatio='xMidYMid'
-              >
-                <g transform='rotate(180 50 50)'>
-                  <rect x='15' y='15' width='10' height='40' fill='#4fd1c5'>
-                    <animate
-                      attributeName='height'
-                      values='50;70;30;50'
-                      keyTimes='0;0.33;0.66;1'
-                      dur='1s'
-                      repeatCount='indefinite'
-                      calcMode='spline'
-                      keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
-                      begin='-0.4s'
-                    ></animate>
-                  </rect>
-                  <rect x='35' y='15' width='10' height='40' fill='#4fd1c5'>
-                    <animate
-                      attributeName='height'
-                      values='50;70;30;50'
-                      keyTimes='0;0.33;0.66;1'
-                      dur='1s'
-                      repeatCount='indefinite'
-                      calcMode='spline'
-                      keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
-                      begin='-0.2s'
-                    ></animate>
-                  </rect>
-                  <rect x='55' y='15' width='10' height='40' fill='#4fd1c5'>
-                    <animate
-                      attributeName='height'
-                      values='50;70;30;50'
-                      keyTimes='0;0.33;0.66;1'
-                      dur='1s'
-                      repeatCount='indefinite'
-                      calcMode='spline'
-                      keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
-                      begin='-0.6s'
-                    ></animate>
-                  </rect>
-                  <rect x='75' y='15' width='10' height='40' fill='#4fd1c5'>
-                    <animate
-                      attributeName='height'
-                      values='50;70;30;50'
-                      keyTimes='0;0.33;0.66;1'
-                      dur='1s'
-                      repeatCount='indefinite'
-                      calcMode='spline'
-                      keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
-                      begin='-1s'
-                    ></animate>
-                  </rect>
-                </g>
-              </svg>
-            )}
-            <Badge borderRadius='full' px={2} colorScheme='teal'>
-              {formatDuration(duration)}
-            </Badge>
-            <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
+            <Flex align='center' gap={2}>
+              {currentPodcast?.enclosure?.url === url && (
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='20px'
+                  height='20px'
+                  viewBox='0 0 100 100'
+                  preserveAspectRatio='xMidYMid'
+                >
+                  <g transform='rotate(180 50 50)'>
+                    <rect x='15' y='15' width='10' height='40' fill='#4fd1c5'>
+                      <animate
+                        attributeName='height'
+                        values='50;70;30;50'
+                        keyTimes='0;0.33;0.66;1'
+                        dur='1s'
+                        repeatCount='indefinite'
+                        calcMode='spline'
+                        keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
+                        begin='-0.4s'
+                      ></animate>
+                    </rect>
+                    <rect x='35' y='15' width='10' height='40' fill='#4fd1c5'>
+                      <animate
+                        attributeName='height'
+                        values='50;70;30;50'
+                        keyTimes='0;0.33;0.66;1'
+                        dur='1s'
+                        repeatCount='indefinite'
+                        calcMode='spline'
+                        keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
+                        begin='-0.2s'
+                      ></animate>
+                    </rect>
+                    <rect x='55' y='15' width='10' height='40' fill='#4fd1c5'>
+                      <animate
+                        attributeName='height'
+                        values='50;70;30;50'
+                        keyTimes='0;0.33;0.66;1'
+                        dur='1s'
+                        repeatCount='indefinite'
+                        calcMode='spline'
+                        keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
+                        begin='-0.6s'
+                      ></animate>
+                    </rect>
+                    <rect x='75' y='15' width='10' height='40' fill='#4fd1c5'>
+                      <animate
+                        attributeName='height'
+                        values='50;70;30;50'
+                        keyTimes='0;0.33;0.66;1'
+                        dur='1s'
+                        repeatCount='indefinite'
+                        calcMode='spline'
+                        keySplines='0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1'
+                        begin='-1s'
+                      ></animate>
+                    </rect>
+                  </g>
+                </svg>
+              )}
+              <Badge borderRadius='full' px={2} colorScheme='teal'>
+                {formatDuration(duration)}
+              </Badge>
+              <Text fontSize='14px'>{new Date(isoDate).toLocaleDateString('pt-BR')}</Text>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>

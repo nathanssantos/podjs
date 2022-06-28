@@ -12,16 +12,15 @@ import {
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 
-type DrawerProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
+import { useStore } from '../hooks';
 
-const Drawer = ({ isOpen, onClose }: DrawerProps) => {
+const Drawer = () => {
+  const { uiStore } = useStore();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { drawerIsOpen, closeDrawer } = uiStore;
 
   return (
-    <CharkraDrawer isOpen={isOpen} placement='left' onClose={onClose}>
+    <CharkraDrawer isOpen={drawerIsOpen} placement='left' onClose={closeDrawer}>
       <DrawerOverlay backdropFilter='auto' backdropBlur='10px' />
       <DrawerContent>
         <DrawerCloseButton />

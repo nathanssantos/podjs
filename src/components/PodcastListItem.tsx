@@ -116,6 +116,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
           maxW='320px'
           onClick={playPodcast}
           cursor='pointer'
+          alignSelf={{ md: 'flex-start' }}
         >
           <Image
             src={itunes.image}

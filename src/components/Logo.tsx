@@ -6,13 +6,13 @@ type LogoProps = {
 };
 
 const Logo = ({ size = 'sm' }: LogoProps) => {
-  let iconSize = '32px';
+  let iconSize = '28px';
   let textSize = '20px';
   let gap = 1;
 
   switch (size) {
     case 'lg': {
-      iconSize = '64px';
+      iconSize = '56px';
       textSize = '40px';
       gap = 2;
       break;

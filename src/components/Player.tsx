@@ -1,17 +1,11 @@
 import {
-  Box,
   Container,
   Flex,
   Icon,
   IconButton,
   Image,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Text,
   useColorMode,
-  useDisclosure,
   useMediaQuery,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
@@ -20,13 +14,10 @@ import { ChangeEvent, useEffect } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import {
   RiArrowUpLine,
-  RiInformationLine,
-  RiMore2Fill,
   RiOrderPlayLine,
   RiPauseLine,
   RiPlayLine,
   RiRepeatLine,
-  RiRepeatOneLine,
   RiRewindLine,
   RiSkipBackLine,
   RiSkipForwardLine,
@@ -36,15 +27,14 @@ import {
 } from 'react-icons/ri';
 
 import { useStore } from '../hooks';
-import PodcastDetailModal from './PodcastDetailModal';
 
 const Player = () => {
-  const { playerStore } = useStore();
+  const { playerStore, uiStore } = useStore();
   const { colorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   const { currentPodcast, next, previous, loadPlayerData, storeCurrentTime } = playerStore;
+  const { playListIsOpen, drawerIsOpen } = uiStore;
 
   const scrollToTop = () => window.scrollTo(0, 0);
 
@@ -60,7 +50,7 @@ const Player = () => {
     <Flex
       as={motion.div}
       position='fixed'
-      zIndex={99}
+      zIndex={9999}
       bottom={0}
       left={0}
       right={0}
@@ -93,13 +83,13 @@ const Player = () => {
           marginLeft: -2,
         },
         '.rhap_progress-bar-show-download': {
-          bgColor: 'gray.50',
+          bgColor: 'gray.600',
         },
         '.rhap_progress-filled': {
-          bgColor: 'gray.500',
+          bgColor: 'gray.200',
         },
         '.rhap_download-progress': {
-          bgColor: 'gray.300',
+          bgColor: 'gray.500',
         },
         '.rhap_volume-button': {
           color: 'var(--chakra-colors-chakra-body-text)',
@@ -123,22 +113,24 @@ const Player = () => {
         px={{ base: 3, md: 6 }}
         position='relative'
       >
-        <IconButton
-          position='absolute'
-          right={{ base: 3, md: 6 }}
-          zIndex={11}
-          aria-label='Back to the top'
-          onClick={scrollToTop}
-          size='sm'
-          transform={{
-            base: 'translateY(calc(-100% - 16px))',
-            md: 'translateY(calc(-100% - 24px))',
-          }}
-          bg='teal.300'
-          _hover={{ bg: 'teal.200' }}
-        >
-          <Icon as={RiArrowUpLine} fontSize='20px' />
-        </IconButton>
+        {!playListIsOpen && !drawerIsOpen && (
+          <IconButton
+            position='absolute'
+            right={{ base: 3, md: 6 }}
+            zIndex={11}
+            aria-label='Back to the top'
+            onClick={scrollToTop}
+            size='sm'
+            transform={{
+              base: 'translateY(calc(-100% - 16px))',
+              md: 'translateY(calc(-100% - 24px))',
+            }}
+            bg='teal.300'
+            _hover={{ bg: 'teal.200' }}
+          >
+            <Icon as={RiArrowUpLine} fontSize='20px' />
+          </IconButton>
+        )}
 
         {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
           <Image
@@ -186,7 +178,8 @@ const Player = () => {
             }}
             onClickPrevious={previous}
             onClickNext={next}
-            onListen={(event) => storeTime(event)}
+            onListen={storeTime}
+            onEnded={next}
           />
         </Flex>
       </Container>
