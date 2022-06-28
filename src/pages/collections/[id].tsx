@@ -179,7 +179,7 @@ const CollectionDetail: NextPage = () => {
           position='sticky'
           top={0}
           right={4}
-          zIndex={1000}
+          zIndex={99}
           backdropFilter='blur(10px)'
           borderBottomWidth='1px'
           bgColor={
