@@ -105,7 +105,7 @@ const Search = ({
           </Select>
         </Flex>
       )}
-      <Flex flex={1}>
+      <Flex flex={1} maxW={{ md: '268px' }}>
         <InputGroup size='sm'>
           <InputRightElement pointerEvents='none'>
             <Icon as={RiSearchLine} />

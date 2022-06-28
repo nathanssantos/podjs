@@ -1,5 +1,5 @@
 import { Flex, Icon, Text } from '@chakra-ui/react';
-import { RiDiscLine } from 'react-icons/ri';
+import { RiHeadphoneLine } from 'react-icons/ri';
 
 type LogoProps = {
   size?: 'sm' | 'md' | 'lg';
@@ -25,7 +25,7 @@ const Logo = ({ size = 'sm' }: LogoProps) => {
 
   return (
     <Flex align='center' gap={gap} userSelect='none'>
-      <Icon as={RiDiscLine} fontSize={iconSize} color='teal.300' />
+      <Icon as={RiHeadphoneLine} fontSize={iconSize} color='teal.300' />
       <Text fontSize={textSize} fontWeight='semibold'>
         PodJS
       </Text>
