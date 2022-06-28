@@ -25,14 +25,6 @@ export default class CollectionStore {
     this.rootStore = rootStore;
   }
 
-  setListSearchTerm = (term: string): void => {
-    this.searchTerm = term;
-  };
-
-  setListSearchCountry = (country: string): void => {
-    this.searchCountry = country;
-  };
-
   setDetail = (detail?: Collection): void => {
     this.detail = detail || null;
   };

@@ -41,7 +41,7 @@ const Search = ({
 
   const { openPlayList } = uiStore;
   const { playList } = playerStore;
-  const { setListSearchTerm, setListSearchCountry } = collectionStore;
+  const { setSearchTerm, setSearchCountry } = collectionStore;
 
   const handleTermChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTerm(event.target.value);
@@ -78,11 +78,11 @@ const Search = ({
   useEffect(() => {
     if (termParam?.length) {
       setTerm(termParam as string);
-      setListSearchTerm(termParam as string);
+      setSearchTerm(termParam as string);
     }
     if (countryParam?.length) {
       setCountry(countryParam as string);
-      setListSearchCountry(countryParam as string);
+      setSearchCountry(countryParam as string);
     }
 
     setMounted(true);
