@@ -81,17 +81,17 @@ const PodcastListItem = (props: PodcastListItemProps) => {
         </MenuItem>
         {playList.find((podcast) => podcast.enclosure.url === enclosure.url) ? (
           <MenuItem
-            icon={<Icon as={RiPlayListAddLine} fontSize='20px' />}
-            onClick={addToPlayList}
+            icon={<Icon as={RiDeleteBinLine} fontSize='20px' />}
+            onClick={removeFromPlayList}
           >
             Remove from playlist
           </MenuItem>
         ) : (
           <MenuItem
-            icon={<Icon as={RiDeleteBinLine} fontSize='20px' />}
-            onClick={removeFromPlayList}
+            icon={<Icon as={RiPlayListAddLine} fontSize='20px' />}
+            onClick={addToPlayList}
           >
-            Remove from playlist
+            Add to playlist
           </MenuItem>
         )}
       </MenuList>
