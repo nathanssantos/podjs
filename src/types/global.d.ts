@@ -31,6 +31,7 @@ type Podcast = {
     duration: string;
     image: string;
   };
+  imageFallback?: string;
 };
 
 type Collection = {

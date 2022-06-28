@@ -20,11 +20,10 @@ import PodcastDetailModal from './PodcastDetailModal';
 
 type PlayListItemProps = {
   podcast: Podcast;
-  imageFallback: string;
 };
 
 const PlayListItem = (props: PlayListItemProps) => {
-  const { podcast, imageFallback } = props;
+  const { podcast } = props;
   const { playerStore } = useStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -37,10 +36,11 @@ const PlayListItem = (props: PlayListItemProps) => {
     enclosure: { url, length, type },
     content,
     itunes: { summary, duration, image },
+    imageFallback,
   } = podcast;
 
   const playPodcast = () => {
-    setCurrentPodcast(podcast);
+    setCurrentPodcast({ ...podcast, imageFallback });
   };
 
   const removeFromPlayList = () => {
