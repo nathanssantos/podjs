@@ -239,7 +239,7 @@ const CollectionDetail: NextPage = () => {
           <Container
             display='flex'
             px={{ base: 3, md: 6 }}
-            pt={6}
+            pt={12}
             pb={36}
             w='100%'
             maxW='container.xl'
