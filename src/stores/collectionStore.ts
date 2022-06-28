@@ -16,22 +16,14 @@ export default class CollectionStore {
   listStatus: FetchStatus = 'idle';
   rankStatus: FetchStatus = 'idle';
   detailStatus: FetchStatus = 'idle';
-  favoritesStatus: FetchStatus = 'idle';
   searchTerm: string = '';
   searchCountry: string = '';
+  rankCountry: string = '';
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this, { rootStore: false });
     this.rootStore = rootStore;
   }
-
-  setListSearchTerm = (term: string): void => {
-    this.searchTerm = term;
-  };
-
-  setListSearchCountry = (country: string): void => {
-    this.searchCountry = country;
-  };
 
   setDetail = (detail?: Collection): void => {
     this.detail = detail || null;
@@ -53,16 +45,17 @@ export default class CollectionStore {
     this.detailStatus = status || 'idle';
   };
 
-  setFavoritesStatus = (status?: FetchStatus): void => {
-    this.favoritesStatus = status || 'idle';
-  };
-
   setSearchTerm = (term?: string): void => {
     this.searchTerm = term || '';
   };
 
   setSearchCountry = (country?: string): void => {
     this.searchCountry = country || '';
+  };
+
+  setRankCountry = (country?: string): void => {
+    this.rankCountry = country || '';
+    this.storeRankCountry();
   };
 
   setRank = (rank?: Collection[]): void => {
@@ -80,6 +73,10 @@ export default class CollectionStore {
 
   storeFavorites = (): void => {
     localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  };
+
+  storeRankCountry = (): void => {
+    localStorage.setItem('rankCountry', JSON.stringify(this.rankCountry));
   };
 
   addCollectionToFavorites = (collection: Collection): void => {
@@ -165,18 +162,14 @@ export default class CollectionStore {
     }
   };
 
-  getRank = async (payload: { country: string }): Promise<StoreActionResponse> => {
+  getRank = async (): Promise<StoreActionResponse> => {
     try {
-      const { country } = payload;
-
-      if (this.rank?.length && country === this.searchCountry) {
-        return;
-      }
-
       this.setRankStatus('fetching');
       this.setRank();
 
-      const params = {} as { country: string };
+      const params = {
+        country: this.rankCountry,
+      } as { country: string };
 
       const response = await axios.get('/api/collections/rank', {
         params,
@@ -276,24 +269,17 @@ export default class CollectionStore {
     this.setDetailSearchResult(this.detail.items);
   };
 
-  loadFavoritesData = (): void => {
-    this.setFavoritesStatus('fetching');
+  loadStoredData = (): void => {
     const storedFavorites = localStorage.getItem('favorites') || '[]';
-
     const parsedStoredFavorites: Collection[] = JSON.parse(storedFavorites);
 
-    if (!Array.isArray(parsedStoredFavorites)) {
-      this.setFavoritesStatus('error');
-      return;
-    }
+    const storedRankCountry = localStorage.getItem('rankCountry') || 'br';
+    const parsedStoredRankCountry: string = JSON.parse(storedRankCountry);
 
-    if (!parsedStoredFavorites.length) {
-      this.setFavoritesStatus('empty');
-      return;
-    }
+    console.log(parsedStoredRankCountry);
 
-    this.setFavorites(parsedStoredFavorites);
-    this.setFavoritesStatus('success');
+    if (parsedStoredFavorites?.length) this.setFavorites(parsedStoredFavorites);
+    if (parsedStoredRankCountry?.length) this.setRankCountry(parsedStoredRankCountry);
   };
 
   reset = (): void => {

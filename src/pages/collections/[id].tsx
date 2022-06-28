@@ -27,10 +27,17 @@ import { useStore } from '../../hooks';
 const CollectionDetail: NextPage = () => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const { collectionStore } = useStore();
   const { colorMode } = useColorMode();
 
   const { detail, detailStatus, detailSearchResult, getDetail, search } = collectionStore;
+
+  const searchEpisodes = (params: { term: string }) => {
+    const { term } = params;
+    search(params);
+    setSearchTerm(term);
+  };
 
   const renderDetail = () => {
     switch (detailStatus) {
@@ -122,7 +129,7 @@ const CollectionDetail: NextPage = () => {
                 </Flex>
               </Flex>
               <Flex direction='column' gap={{ base: 12, md: 6 }} flex={1}>
-                {detailSearchResult &&
+                {detailSearchResult?.length ? (
                   detailSearchResult.map((podcast) => (
                     <LazyLoad
                       key={`${podcast.title}${podcast.isoDate}`}
@@ -133,7 +140,13 @@ const CollectionDetail: NextPage = () => {
                     >
                       <PodcastListItem podcast={podcast} imageFallback={artworkUrl600} />
                     </LazyLoad>
-                  ))}
+                  ))
+                ) : (
+                  <EmptyState
+                    variant='not-found'
+                    text={`No search results found for "${searchTerm}". Please try a different term.`}
+                  />
+                )}
               </Flex>
             </>
           );
@@ -231,7 +244,11 @@ const CollectionDetail: NextPage = () => {
                 </Flex>
               )}
             </Flex>
-            <Search onChange={search} placeholder='Filter episodes' redirectOnSearch={false} />
+            <Search
+              onChange={searchEpisodes}
+              placeholder='Filter episodes'
+              redirectOnSearch={false}
+            />
           </Container>
         </Flex>
 

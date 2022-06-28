@@ -137,7 +137,7 @@ const Player = () => {
           h='96px'
           w='96px'
           alt={currentPodcast?.title}
-          src={currentPodcast?.itunes.image}
+          src={currentPodcast?.itunes?.image}
           fallbackSrc={currentPodcast?.imageFallback}
         />
         <Flex direction='column' py={2} pl={{ base: 0, md: 4 }} gap={2} flex='1' w='100%'>

@@ -64,7 +64,7 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       borderRadius='lg'
       overflow='hidden'
       role='group'
-      maxW='320px'
+      maxW={{ sm: '308px' }}
     >
       <Flex cursor='pointer' onClick={handleClick}>
         <Image
@@ -124,14 +124,14 @@ const CollectionListItem = (props: CollectionListItemProps) => {
                     </MenuItem>
                     {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
                       <MenuItem
-                        icon={<Icon as={RiStarFill} fontSize='20px' />}
+                        icon={<Icon as={RiStarLine} fontSize='20px' />}
                         onClick={removeFromFavorites}
                       >
                         Remove from favorites
                       </MenuItem>
                     ) : (
                       <MenuItem
-                        icon={<Icon as={RiStarLine} fontSize='20px' />}
+                        icon={<Icon as={RiStarFill} fontSize='20px' />}
                         onClick={addToFavorites}
                       >
                         Add to favorites

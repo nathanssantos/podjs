@@ -137,14 +137,14 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
                     </MenuItem>
                     {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
                       <MenuItem
-                        icon={<Icon as={RiStarFill} fontSize='20px' />}
+                        icon={<Icon as={RiStarLine} fontSize='20px' />}
                         onClick={removeFromFavorites}
                       >
                         Remove from favorites
                       </MenuItem>
                     ) : (
                       <MenuItem
-                        icon={<Icon as={RiStarLine} fontSize='20px' />}
+                        icon={<Icon as={RiStarFill} fontSize='20px' />}
                         onClick={addToFavorites}
                       >
                         Add to favorites
