@@ -132,15 +132,14 @@ const Player = () => {
           </IconButton>
         )}
 
-        {!!currentPodcast?.itunes?.image?.length && !!currentPodcast?.title?.length && (
-          <Image
-            display={{ base: 'none', md: 'initial' }}
-            h='96px'
-            w='96px'
-            alt={currentPodcast.title}
-            src={currentPodcast.itunes.image}
-          />
-        )}
+        <Image
+          display={{ base: 'none', md: 'initial' }}
+          h='96px'
+          w='96px'
+          alt={currentPodcast?.title}
+          src={currentPodcast?.itunes.image}
+          fallbackSrc={currentPodcast?.imageFallback}
+        />
         <Flex direction='column' py={2} pl={{ base: 0, md: 4 }} gap={2} flex='1' w='100%'>
           <Flex overflow='hidden' w='100%'>
             {!!currentPodcast?.title?.length && (

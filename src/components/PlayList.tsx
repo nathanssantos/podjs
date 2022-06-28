@@ -63,7 +63,7 @@ const PlayList = () => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <PlayListItem podcast={podcast} imageFallback='' />
+                          <PlayListItem podcast={podcast} />
                         </div>
                       )}
                     </Draggable>

@@ -48,12 +48,12 @@ const PodcastListItem = (props: PodcastListItemProps) => {
   const { title, link, isoDate, enclosure, content, itunes } = podcast;
 
   const playPodcast = () => {
-    setCurrentPodcast(podcast);
-    addPodcastToPlayList(podcast);
+    setCurrentPodcast({ ...podcast, imageFallback });
+    addPodcastToPlayList({ ...podcast, imageFallback });
   };
 
   const addToPlayList = () => {
-    addPodcastToPlayList(podcast);
+    addPodcastToPlayList({ ...podcast, imageFallback });
     if (!currentPodcast?.enclosure?.url) playPodcast();
   };
 
