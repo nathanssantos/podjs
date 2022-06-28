@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const { status, data } = await api.get(
       `https://rss.applemarketingtools.com/api/v2/${
         country?.length ? country : 'br'
-      }/podcasts/top/50/podcasts.json`,
+      }/podcasts/top/10/podcasts.json`,
     );
 
     res.status(status).json(

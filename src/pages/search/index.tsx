@@ -119,7 +119,7 @@ const SearchScreen: NextPage = () => {
             </Text>
           </Flex>
         )}
-        <SimpleGrid minChildWidth='240px' gap={3}>
+        <SimpleGrid minChildWidth='200px' gap={3} justifyContent='flex-start'>
           {listContent}
         </SimpleGrid>
       </Flex>

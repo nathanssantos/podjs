@@ -70,7 +70,7 @@ const CollectionDetailModal = () => {
                   overflow='hidden'
                   w='100%'
                   minW={240}
-                  maxW='411px'
+                  maxW='320px'
                 >
                   <Image
                     src={artworkUrl600}

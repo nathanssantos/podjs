@@ -73,9 +73,9 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
       <Flex flex={1} borderBottomWidth='1px' pb={6}>
         <Flex flex={1}>
           <Flex
-            w={{ base: '60px', md: '100px' }}
-            h={{ base: '60px', md: '100px' }}
-            maxW={{ base: '60px', md: '100px' }}
+            w={{ base: '60px', md: '102px' }}
+            h={{ base: '60px', md: '102px' }}
+            maxW={{ base: '60px', md: '102px' }}
             borderWidth='1px'
             borderRadius='lg'
             overflow='hidden'
@@ -106,12 +106,12 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
                 onClick={handleClick}
                 cursor='pointer'
                 pl={{ base: 2, md: 4 }}
-                pr={3}
+                pr={4}
                 pb={2}
               >
                 {collectionName}
               </Text>
-              <Flex>
+              <Flex direction='column'>
                 <Menu>
                   <MenuButton
                     as={IconButton}
@@ -152,6 +152,7 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
                     )}
                   </MenuList>
                 </Menu>
+                <Flex onClick={handleClick} cursor='pointer' flex={1} />
               </Flex>
             </Flex>
             <Flex

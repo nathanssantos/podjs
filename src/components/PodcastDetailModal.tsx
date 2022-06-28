@@ -48,14 +48,7 @@ const PodcastDetailModal = ({ podcast, isOpen, onClose }: PodcastDetailModal) =>
         <ModalCloseButton />
         <ModalBody>
           <Flex gap={4} direction='column' alignSelf='center' align='center'>
-            <Flex
-              borderWidth='1px'
-              borderRadius='lg'
-              overflow='hidden'
-              w='100%'
-              minW={240}
-              maxW='411px'
-            >
+            <Flex borderWidth='1px' borderRadius='lg' overflow='hidden' w='100%' maxW='320px'>
               <Image src={itunes.image} alt={title} objectFit='cover' w='100%' h='100%' />
             </Flex>
 

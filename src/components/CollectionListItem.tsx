@@ -58,7 +58,14 @@ const CollectionListItem = (props: CollectionListItemProps) => {
   };
 
   return (
-    <Flex direction='column' borderWidth='1px' borderRadius='lg' overflow='hidden' role='group'>
+    <Flex
+      direction='column'
+      borderWidth='1px'
+      borderRadius='lg'
+      overflow='hidden'
+      role='group'
+      maxW='320px'
+    >
       <Flex cursor='pointer' onClick={handleClick}>
         <Image
           src={artworkUrl600 || artworkUrl100}
@@ -89,47 +96,52 @@ const CollectionListItem = (props: CollectionListItemProps) => {
             >
               {collectionName}
             </Text>
-            <Flex pr={3} pt={3}>
-              <Menu>
-                <MenuButton
-                  as={IconButton}
-                  aria-label='Options'
-                  icon={<Icon as={RiMore2Fill} fontSize='20px' />}
-                  size='sm'
-                  variant='ghost'
-                />
-                <MenuList
-                  sx={{
-                    span: {
-                      display: 'flex',
-                    },
-                  }}
-                >
-                  <MenuItem
-                    icon={<Icon as={RiInformationLine} fontSize='20px' />}
-                    onClick={() =>
-                      toggleCollectionModal({ id: String(collectionId), open: true })
-                    }
+            <Flex direction='column'>
+              <Flex cursor='pointer' onClick={handleClick} h={3} />
+              <Flex>
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label='Options'
+                    icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+                    size='sm'
+                    variant='ghost'
+                  />
+                  <MenuList
+                    sx={{
+                      span: {
+                        display: 'flex',
+                      },
+                    }}
                   >
-                    Information
-                  </MenuItem>
-                  {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
                     <MenuItem
-                      icon={<Icon as={RiStarFill} fontSize='20px' />}
-                      onClick={removeFromFavorites}
+                      icon={<Icon as={RiInformationLine} fontSize='20px' />}
+                      onClick={() =>
+                        toggleCollectionModal({ id: String(collectionId), open: true })
+                      }
                     >
-                      Remove from favorites
+                      Information
                     </MenuItem>
-                  ) : (
-                    <MenuItem
-                      icon={<Icon as={RiStarLine} fontSize='20px' />}
-                      onClick={addToFavorites}
-                    >
-                      Add to favorites
-                    </MenuItem>
-                  )}
-                </MenuList>
-              </Menu>
+                    {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
+                      <MenuItem
+                        icon={<Icon as={RiStarFill} fontSize='20px' />}
+                        onClick={removeFromFavorites}
+                      >
+                        Remove from favorites
+                      </MenuItem>
+                    ) : (
+                      <MenuItem
+                        icon={<Icon as={RiStarLine} fontSize='20px' />}
+                        onClick={addToFavorites}
+                      >
+                        Add to favorites
+                      </MenuItem>
+                    )}
+                  </MenuList>
+                </Menu>
+                <Flex cursor='pointer' onClick={handleClick} w={3} />
+              </Flex>
+              <Flex cursor='pointer' onClick={handleClick} flex={1} />
             </Flex>
           </Flex>
           <Flex
@@ -139,6 +151,8 @@ const CollectionListItem = (props: CollectionListItemProps) => {
             onClick={handleClick}
             pb={3}
             pl={3}
+            pr={3}
+            w='100%'
           >
             <Badge borderRadius='full' px={2} colorScheme='teal'>
               {primaryGenreName}
