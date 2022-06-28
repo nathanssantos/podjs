@@ -6,6 +6,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -47,12 +48,12 @@ const PlayList = () => {
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId='dropable'>
               {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
+                <Flex {...provided.droppableProps} ref={provided.innerRef} direction='column'>
                   {playList.map((podcast, index) => (
                     <Draggable
-                      key={podcast.enclosure.url}
                       draggableId={podcast.enclosure.url}
                       index={index}
+                      key={podcast.enclosure.url}
                     >
                       {(provided) => (
                         <div
@@ -67,7 +68,7 @@ const PlayList = () => {
                     </Draggable>
                   ))}
                   {provided.placeholder}
-                </div>
+                </Flex>
               )}
             </Droppable>
           </DragDropContext>

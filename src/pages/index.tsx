@@ -22,7 +22,7 @@ const Home: NextPage = () => {
     if (!favorites?.length) return null;
 
     return (
-      <Flex direction='column' gap={6} flex={3}>
+      <Flex direction='column' gap={6} flex={1}>
         <Flex
           borderBottomWidth='1px'
           py={2}
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
             Favorites
           </Text>
         </Flex>
-        <SimpleGrid minChildWidth='240px' gap={3} pb={12}>
+        <SimpleGrid minChildWidth='200px' gap={3} pb={12} justifyContent='flex-start'>
           {favorites.map((collection) => (
             <CollectionListItem key={collection.collectionId} collection={collection} />
           ))}
@@ -129,9 +129,18 @@ const Home: NextPage = () => {
           pt={10}
           pb={36}
         >
-          <Flex direction='column' gap={6}>
+          <Flex
+            direction={{ base: 'column', md: 'row' }}
+            align={{ base: 'initial', md: 'flex-start' }}
+            gap={12}
+          >
             {renderFavorites()}
-            <Flex direction='column' gap={6} flex={2}>
+            <Flex
+              direction='column'
+              gap={6}
+              flex={1}
+              maxW={{ md: favorites?.length ? '460px' : 'initial' }}
+            >
               <Flex
                 borderBottomWidth='1px'
                 py={2}

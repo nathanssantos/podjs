@@ -47,59 +47,30 @@ const PlayListItem = (props: PlayListItemProps) => {
     removePodcastFromPlaylist(podcast);
   };
 
-  const menu = (
-    <Menu>
-      <MenuButton
-        as={IconButton}
-        aria-label='Options'
-        icon={<Icon as={RiMore2Fill} fontSize='20px' />}
-        variant='ghost'
-        size='sm'
-      />
-      <MenuList
-        sx={{
-          span: {
-            display: 'flex',
-          },
-        }}
-      >
-        <MenuItem icon={<Icon as={RiInformationLine} fontSize='20px' />} onClick={onOpen}>
-          Information
-        </MenuItem>
-        <MenuItem
-          icon={<Icon as={RiDeleteBinLine} fontSize='20px' />}
-          onClick={removeFromPlayList}
-        >
-          Remove from playlist
-        </MenuItem>
-      </MenuList>
-    </Menu>
-  );
-
   return (
     <Flex
       overflow='hidden'
       align={{ base: 'center', sm: 'flex-start' }}
-      borderBottomWidth='1px'
-      pb={6}
       gap={4}
-      _last={{ borderBottomWidth: 0 }}
+      w='100%'
+      pb={6}
     >
       <Flex
-        onClick={playPodcast}
-        cursor='pointer'
         flex={1}
-        gap={4}
         direction={{ base: 'column', sm: 'row' }}
+        align={{ base: 'center', sm: 'initial' }}
       >
         <Flex
           borderColor={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
           borderWidth='1px'
           borderRadius='lg'
           overflow='hidden'
-          w={{ base: '100%', sm: '80px' }}
-          minW={'80px'}
-          h={{ h: 'initial', sm: '80px' }}
+          w={{ base: '100%', sm: '82px' }}
+          minW='82px'
+          h={{ base: 'initial', sm: '82px' }}
+          maxW='240px'
+          onClick={playPodcast}
+          cursor='pointer'
         >
           <Image
             src={image}
@@ -115,22 +86,67 @@ const PlayListItem = (props: PlayListItemProps) => {
           direction='column'
           align={{ base: 'center', sm: 'flex-start', justify: 'center' }}
           textAlign='left'
-          w='100%'
+          flex={1}
         >
-          <Flex gap={2} justify='space-between'>
+          <Flex justify='space-between'>
             <Text
               fontWeight='semibold'
               lineHeight='tight'
               color={currentPodcast?.enclosure?.url === url ? 'teal.300' : ''}
               pb={2}
-              pr={3}
+              pr={4}
+              onClick={playPodcast}
+              cursor='pointer'
+              pt={{ base: 4, sm: 0 }}
+              pl={{ base: 0, sm: 4 }}
+              flex={1}
             >
               {title}
             </Text>
-            <Flex>{menu}</Flex>
+            <Flex direction='column'>
+              <Flex h={{ base: 3, sm: 0 }} onClick={playPodcast} />
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label='Options'
+                  icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+                  variant='ghost'
+                  size='sm'
+                />
+                <MenuList
+                  sx={{
+                    span: {
+                      display: 'flex',
+                    },
+                  }}
+                >
+                  <MenuItem
+                    icon={<Icon as={RiInformationLine} fontSize='20px' />}
+                    onClick={onOpen}
+                  >
+                    Information
+                  </MenuItem>
+                  <MenuItem
+                    icon={<Icon as={RiDeleteBinLine} fontSize='20px' />}
+                    onClick={removeFromPlayList}
+                  >
+                    Remove from playlist
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+              <Flex flex={1} cursor='pointer' />
+            </Flex>
           </Flex>
 
-          <Flex w='100%' align='center' gap={2}>
+          <Flex
+            w='100%'
+            align='flex-start'
+            gap={2}
+            onClick={playPodcast}
+            cursor='pointer'
+            pl={{ base: 0, sm: 4 }}
+            flex={1}
+          >
             {currentPodcast?.enclosure?.url === url && (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
