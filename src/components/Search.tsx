@@ -88,7 +88,13 @@ const Search = ({
   }, [termParam, countryParam]);
 
   return (
-    <Flex alignSelf={{ md: 'flex-end' }} gap={4} flex={1} maxW={{ md: '460px' }}>
+    <Flex
+      alignSelf={{ md: 'flex-end' }}
+      gap={4}
+      flex={1}
+      maxW={{ md: '460px' }}
+      justifyContent='flex-end'
+    >
       {showCountry && (
         <Flex maxW={32} flex={1}>
           <Select
