@@ -2,6 +2,7 @@ import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import 'react-h5-audio-player/lib/styles.css';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from '../components/Layout';
 import RootStore, { RootStoreProvider } from '../stores/rootStore';
@@ -15,7 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       <ColorModeProvider>
         <Layout>
           <Component {...pageProps} />
-          <ToastContainer />
+          <ToastContainer position='bottom-right' />
         </Layout>
       </ColorModeProvider>
     </ChakraProvider>

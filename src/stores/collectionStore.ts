@@ -76,7 +76,7 @@ export default class CollectionStore {
   };
 
   storeRankCountry = (): void => {
-    localStorage.setItem('rankCountry', JSON.stringify(this.rankCountry));
+    localStorage.setItem('rankCountry', this.rankCountry);
   };
 
   addCollectionToFavorites = (collection: Collection): void => {
@@ -274,7 +274,7 @@ export default class CollectionStore {
     const parsedStoredFavorites: Collection[] = JSON.parse(storedFavorites);
 
     const storedRankCountry = localStorage.getItem('rankCountry') || 'br';
-    const parsedStoredRankCountry: string = JSON.parse(storedRankCountry);
+    const parsedStoredRankCountry: string = storedRankCountry;
 
     if (parsedStoredFavorites?.length) this.setFavorites(parsedStoredFavorites);
     if (parsedStoredRankCountry?.length) this.setRankCountry(parsedStoredRankCountry);
