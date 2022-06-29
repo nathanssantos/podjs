@@ -50,7 +50,7 @@ const Player = () => {
     <Flex
       as={motion.div}
       position='fixed'
-      zIndex={9999}
+      zIndex={999}
       bottom={0}
       left={0}
       right={0}
