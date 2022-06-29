@@ -276,8 +276,6 @@ export default class CollectionStore {
     const storedRankCountry = localStorage.getItem('rankCountry') || 'br';
     const parsedStoredRankCountry: string = JSON.parse(storedRankCountry);
 
-    console.log(parsedStoredRankCountry);
-
     if (parsedStoredFavorites?.length) this.setFavorites(parsedStoredFavorites);
     if (parsedStoredRankCountry?.length) this.setRankCountry(parsedStoredRankCountry);
   };

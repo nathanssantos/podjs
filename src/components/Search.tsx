@@ -93,7 +93,7 @@ const Search = ({
       alignSelf={{ md: 'flex-end' }}
       gap={4}
       flex={1}
-      maxW={{ md: '460px' }}
+      maxW={{ md: '400px' }}
       justifyContent='flex-end'
     >
       {showCountry && (
@@ -112,7 +112,7 @@ const Search = ({
           </Select>
         </Flex>
       )}
-      <Flex flex={1} maxW={{ md: '268px' }}>
+      <Flex flex={1} maxW={{ md: '208px' }}>
         <InputGroup size='sm'>
           <InputRightElement pointerEvents='none'>
             <Icon as={RiSearchLine} />

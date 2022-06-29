@@ -80,7 +80,7 @@ const Home: NextPage = () => {
             </Text>
           </Flex>
         </Flex>
-        <SimpleGrid minChildWidth='154px' gap={3} pb={12} justifyContent='flex-start'>
+        <SimpleGrid minChildWidth='163px' gap={3} pb={12} justifyContent='flex-start'>
           {favorites.map((collection) => (
             <CollectionListItem key={collection.collectionId} collection={collection} />
           ))}
@@ -174,14 +174,14 @@ const Home: NextPage = () => {
           <Flex
             direction={{ base: 'column', md: 'row' }}
             align={{ base: 'initial', md: 'flex-start' }}
-            gap={12}
+            gap={6}
           >
             {renderFavorites()}
             <Flex
               direction='column'
               gap={6}
               flex={1}
-              maxW={{ md: favorites?.length ? '460px' : 'initial' }}
+              maxW={{ md: favorites?.length ? '400px' : 'initial' }}
             >
               <Flex
                 borderBottomWidth='1px'
