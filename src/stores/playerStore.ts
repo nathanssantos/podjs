@@ -95,7 +95,6 @@ export default class PlayerStore {
 
     const parsedStoredPlayList: Podcast[] = JSON.parse(storedPlayList);
     const parsedStoredCurrentPodcast: Podcast = JSON.parse(storedCurrentPodcast);
-    const parsedStoredCurrentTime: number = JSON.parse(storedCurrentTime);
 
     if (Array.isArray(parsedStoredPlayList) && parsedStoredPlayList.length) {
       this.setPlayList(parsedStoredPlayList);
@@ -105,9 +104,9 @@ export default class PlayerStore {
       this.setCurrentPodcast(parsedStoredCurrentPodcast);
     }
 
-    if (parsedStoredCurrentTime) {
+    if (storedCurrentTime) {
       const audio = document.querySelector('audio');
-      if (audio) audio.currentTime = parsedStoredCurrentTime;
+      if (audio) audio.currentTime = Number(storedCurrentTime);
     }
   };
 

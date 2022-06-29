@@ -13,7 +13,7 @@ import { observer } from 'mobx-react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { RiArrowLeftSLine, RiHomeLine } from 'react-icons/ri';
+import { RiArrowLeftSLine, RiHomeLine, RiSearchLine } from 'react-icons/ri';
 
 import CollectionListItem from '../../components/CollectionListItem';
 import EmptyState from '../../components/EmptyState';
@@ -112,7 +112,9 @@ const SearchScreen: NextPage = () => {
               colorMode === 'light' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(13, 17, 23, 0.85)'
             }
             zIndex={98}
+            gap={2}
           >
+            <Icon as={RiSearchLine} fontSize='20px' />
             <Text fontSize='xl' lineHeight={1}>
               {`${!!list?.length ? `${list.length} ` : ''}Search results for "${searchTerm}"${
                 country ? ` in ${country.name}` : ''
