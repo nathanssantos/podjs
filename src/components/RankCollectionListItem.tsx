@@ -108,6 +108,7 @@ const RankCollectionListItem = (props: RankCollectionListItemProps) => {
                 pl={{ base: 2, md: 4 }}
                 pr={4}
                 pb={2}
+                pt={1}
               >
                 {collectionName}
               </Text>

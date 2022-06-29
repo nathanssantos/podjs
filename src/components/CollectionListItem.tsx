@@ -64,7 +64,7 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       borderRadius='lg'
       overflow='hidden'
       role='group'
-      maxW={{ sm: '308px' }}
+      maxW={{ sm: '326px' }}
     >
       <Flex cursor='pointer' onClick={handleClick}>
         <Image
@@ -81,23 +81,25 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       </Flex>
 
       <Flex flex={1}>
-        <Flex align='flex-start' direction='column' flex={1}>
+        <Flex align='flex-start' direction='column' w='100%'>
           <Flex w='100%'>
-            <Text
-              fontWeight='semibold'
-              lineHeight='tight'
-              flex={1}
-              pb={2}
-              cursor='pointer'
-              onClick={handleClick}
-              pl={3}
-              pt={3}
-              pr={3}
-            >
-              {collectionName}
-            </Text>
+            <Flex overflow='hidden' flex={1}>
+              <Text
+                fontWeight='semibold'
+                lineHeight='tight'
+                flex={1}
+                pb={2}
+                cursor='pointer'
+                onClick={handleClick}
+                pl={3}
+                pt={3}
+                pr={3}
+              >
+                {collectionName}
+              </Text>
+            </Flex>
             <Flex direction='column'>
-              <Flex cursor='pointer' onClick={handleClick} h={3} />
+              <Flex cursor='pointer' onClick={handleClick} h={2} />
               <Flex>
                 <Menu>
                   <MenuButton

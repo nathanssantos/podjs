@@ -138,7 +138,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
               cursor='pointer'
               flex={1}
               pl={{ base: 0, md: 4 }}
-              pt={{ base: 4, md: 0 }}
+              pt={{ base: 4, md: 1 }}
               pb={2}
               pr={4}
             >
@@ -232,7 +232,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
             cursor='pointer'
             pl={{ base: 0, md: 4 }}
           >
-            <Flex overflow='hidden' w='100%' h='119px'>
+            <Flex overflow='hidden' w='100%' h='115px'>
               <Text
                 fontSize='14px'
                 color='gray.500'
