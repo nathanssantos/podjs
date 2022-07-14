@@ -136,7 +136,7 @@ const PodcastListItem = (props: PodcastListItemProps) => {
           />
         </Flex>
 
-        <Flex direction='column' flex={1}>
+        <Flex direction='column' flex={1} w={{ base: '100%', md: 'initial' }}>
           <Flex justify='space-between' gap={4}>
             <Text
               fontWeight='semibold'

@@ -107,7 +107,6 @@ const CollectionDetail: NextPage = () => {
                     flex={1}
                     direction='column'
                     align={{ base: 'center', md: 'flex-start' }}
-                    pt={{ md: 1 }}
                   >
                     <Text fontSize='2xl' lineHeight={1} mb={1} fontWeight='semibold'>
                       {collectionName}
