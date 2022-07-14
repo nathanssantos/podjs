@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
+import { MouseEvent } from 'react';
 import { RiInformationLine, RiMore2Fill, RiStarFill, RiStarLine } from 'react-icons/ri';
 
 import { useStore } from '../hooks';
@@ -65,8 +66,10 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       overflow='hidden'
       role='group'
       maxW={{ sm: '326px' }}
+      cursor='pointer'
+      onClick={handleClick}
     >
-      <Flex cursor='pointer' onClick={handleClick}>
+      <Flex>
         <Image
           src={artworkUrl600 || artworkUrl100}
           alt={collectionName}
@@ -81,85 +84,62 @@ const CollectionListItem = (props: CollectionListItemProps) => {
       </Flex>
 
       <Flex flex={1}>
-        <Flex align='flex-start' direction='column' w='100%'>
+        <Flex align='flex-start' direction='column' w='100%' gap={2}>
           <Flex w='100%'>
             <Flex overflow='hidden' flex={1}>
-              <Text
-                fontWeight='semibold'
-                lineHeight='tight'
-                flex={1}
-                pb={2}
-                cursor='pointer'
-                onClick={handleClick}
-                pl={3}
-                pt={3}
-                pr={3}
-              >
+              <Text fontWeight='semibold' lineHeight='tight' flex={1} pl={3} pt={3} pr={3}>
                 {collectionName}
               </Text>
             </Flex>
-            <Flex direction='column'>
-              <Flex cursor='pointer' onClick={handleClick} h={2} />
-              <Flex>
-                <Menu>
-                  <MenuButton
-                    as={IconButton}
-                    aria-label='Options'
-                    icon={<Icon as={RiMore2Fill} fontSize='20px' />}
-                    size='sm'
-                    variant='ghost'
-                  />
-                  <MenuList
-                    sx={{
-                      span: {
-                        display: 'flex',
-                      },
-                    }}
-                  >
-                    <MenuItem
-                      icon={<Icon as={RiInformationLine} fontSize='20px' />}
-                      onClick={() =>
-                        toggleCollectionModal({ id: String(collectionId), open: true })
-                      }
-                    >
-                      Information
-                    </MenuItem>
-                    {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
-                      <MenuItem
-                        icon={<Icon as={RiStarLine} fontSize='20px' />}
-                        onClick={removeFromFavorites}
-                      >
-                        Remove from favorites
-                      </MenuItem>
-                    ) : (
-                      <MenuItem
-                        icon={<Icon as={RiStarFill} fontSize='20px' />}
-                        onClick={addToFavorites}
-                      >
-                        Add to favorites
-                      </MenuItem>
-                    )}
-                  </MenuList>
-                </Menu>
-                <Flex cursor='pointer' onClick={handleClick} w={3} />
-              </Flex>
-              <Flex cursor='pointer' onClick={handleClick} flex={1} />
-            </Flex>
           </Flex>
-          <Flex
-            flex={1}
-            align='flex-start'
-            cursor='pointer'
-            onClick={handleClick}
-            pb={3}
-            pl={3}
-            pr={3}
-            w='100%'
-          >
+          <Flex flex={1} align='flex-start' pl={3} pr={3} w='100%'>
             <Badge borderRadius='full' px={2} colorScheme='teal'>
               {primaryGenreName}
             </Badge>
           </Flex>
+        </Flex>
+      </Flex>
+
+      <Flex alignSelf='flex-end' pr={1} pb={1}>
+        <Flex onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label='Options'
+              icon={<Icon as={RiMore2Fill} fontSize='20px' />}
+              size='sm'
+              variant='ghost'
+            />
+            <MenuList
+              sx={{
+                span: {
+                  display: 'flex',
+                },
+              }}
+            >
+              <MenuItem
+                icon={<Icon as={RiInformationLine} fontSize='20px' />}
+                onClick={() => toggleCollectionModal({ id: String(collectionId), open: true })}
+              >
+                Information
+              </MenuItem>
+              {favorites.find((favorite) => favorite.collectionId === collectionId) ? (
+                <MenuItem
+                  icon={<Icon as={RiStarLine} fontSize='20px' />}
+                  onClick={removeFromFavorites}
+                >
+                  Remove from favorites
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  icon={<Icon as={RiStarFill} fontSize='20px' />}
+                  onClick={addToFavorites}
+                >
+                  Add to favorites
+                </MenuItem>
+              )}
+            </MenuList>
+          </Menu>
         </Flex>
       </Flex>
     </Flex>

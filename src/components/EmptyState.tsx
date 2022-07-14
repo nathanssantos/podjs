@@ -37,7 +37,7 @@ const EmptyState = (props: EmptyStateProps) => {
   return (
     <Flex
       direction='column'
-      width='100%'
+      w='100%'
       align='center'
       justify='center'
       py={16}
